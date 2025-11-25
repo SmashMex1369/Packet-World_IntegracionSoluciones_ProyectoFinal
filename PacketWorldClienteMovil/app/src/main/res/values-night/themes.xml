@@ -3,10 +3,13 @@
     <style name="Base.Theme.PacketWorldClienteMovil" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:textColor">@color/black</item>
+        <item name="android:colorBackground">@color/azul_claro</item>
     </style>
 
     <style name="EstiloTextoFlotante" parent="TextAppearance.Design.Hint">
         <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>
