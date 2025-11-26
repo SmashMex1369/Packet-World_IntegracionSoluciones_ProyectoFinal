@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Packet-World</string>
+    <string name="icono_envio">\uf48b</string>
+    <string name="icono_grupo_usuarios">\uf500</string>
+    <string name="icono_unidad">\uf0d1</string>
+    <string name="icono_sucursal">\uf54f</string>
+    <string name="icono_logout">\uf08b</string>
+    <string name="icono_contacto">\uf2b9</string>
+    <string name="icono_editar">\uf044</string>
 </resources>

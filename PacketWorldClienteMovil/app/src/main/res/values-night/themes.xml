@@ -5,6 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="android:textColor">@color/black</item>
         <item name="android:colorBackground">@color/azul_claro</item>
+        <item name="android:fontFamily">@font/anta</item>
     </style>
 
     <style name="EstiloTextoFlotante" parent="TextAppearance.Design.Hint">

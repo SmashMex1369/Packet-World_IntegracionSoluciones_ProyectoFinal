@@ -13,18 +13,21 @@
         android:theme="@style/Theme.PacketWorldClienteMovil"
         tools:targetApi="31">
         <activity
+            android:name=".DetallesActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".PerfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".EnviosActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
