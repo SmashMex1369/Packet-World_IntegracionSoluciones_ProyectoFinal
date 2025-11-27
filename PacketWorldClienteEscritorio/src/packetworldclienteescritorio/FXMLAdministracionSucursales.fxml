@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="742.0" prefWidth="1095.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="packetworldclienteescritorio.FXMLAdministracionSucursalesController">
+   <children>
+      <TableView fx:id="tvSucursales" layoutX="35.0" layoutY="192.0" prefHeight="516.0" prefWidth="1025.0">
+         <columns>
+            <TableColumn fx:id="colCodigo" prefWidth="161.0" text="Codigo" />
+            <TableColumn fx:id="colNombre" prefWidth="178.0" text="Nombre" />
+            <TableColumn fx:id="colEstatus" prefWidth="208.0" text="Estatus" />
+            <TableColumn fx:id="colDireccion" prefWidth="477.0" text="Direccion" />
+         </columns>
+         <effect>
+            <DropShadow />
+         </effect>
+      </TableView>
+      <Button layoutX="493.0" layoutY="113.0" mnemonicParsing="false" onAction="#clicIrRegistrarSucursal" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Registrar" />
+      <Button layoutX="694.0" layoutY="113.0" mnemonicParsing="false" onAction="#clicIrEditarSucursal" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Editar" />
+      <Button layoutX="894.0" layoutY="113.0" mnemonicParsing="false" onAction="#clicBajaSucursal" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Dar de baja" />
+      <TextField fx:id="tfBusqueda" layoutX="68.0" layoutY="113.0" prefHeight="43.0" prefWidth="330.0" promptText="Buscar Sucursal" style="-fx-background-radius: 18px;" />
+      <Pane prefHeight="73.0" prefWidth="1095.0" style="-fx-background-color: #e9967a;" AnchorPane.leftAnchor="0.0">
+         <children>
+            <Label layoutX="467.0" layoutY="11.0" text="Sucursales">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <Button layoutX="26.0" layoutY="21.0" mnemonicParsing="false" text="&lt;----" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
