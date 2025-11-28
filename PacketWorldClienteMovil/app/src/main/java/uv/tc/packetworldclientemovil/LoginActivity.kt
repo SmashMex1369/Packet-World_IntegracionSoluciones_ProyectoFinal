@@ -1,13 +1,19 @@
 package uv.tc.packetworldclientemovil
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Rect
 import android.os.Bundle
+import android.text.TextUtils.isEmpty
+import android.util.Log
 import android.view.MotionEvent
+import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import uv.tc.packetworldclientemovil.databinding.ActivityLoginBinding
 
 
@@ -21,6 +27,12 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        binding.btnIngresar.setOnClickListener {
+            val intent= Intent(this, EnviosActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
@@ -39,3 +51,4 @@ class LoginActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(event)
     }
 }
+

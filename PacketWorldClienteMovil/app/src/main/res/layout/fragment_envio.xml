@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".EnvioFragment">
+
+    <TextView
+        android:id="@+id/tv_envio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Envio"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        app:layout_constraintBottom_toTopOf="@id/ll_guia"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_guia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tv_envio"
+        app:layout_constraintBottom_toTopOf="@id/ll_estatus">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No. de Guia:"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_no_guia_valor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="[No. de Guia]"
+            android:textColor="@color/grisOscuro"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_estatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/ll_guia"
+        app:layout_constraintBottom_toTopOf="@id/ll_motivo">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estatus:"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+        <TextView
+            android:id="@+id/tv_estatus_valor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="[Estatus]"
+            android:textColor="@color/grisOscuro"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_motivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/ll_estatus"
+        app:layout_constraintBottom_toTopOf="@id/btn_actualizar_estatus">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Motivo:"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+        <TextView
+            android:id="@+id/tv_motivo_valor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="[Motivo]"
+            android:textColor="@color/grisOscuro"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_actualizar_estatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="0dp"
+        android:text="Actualizar\nEstatus"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_motivo"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

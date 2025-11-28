@@ -36,6 +36,15 @@ class DetallesActivity : AppCompatActivity() {
                 1 -> {
                     customView.text= ContextCompat.getString(this, R.string.icono_sucursal)
                 }
+                2 -> {
+                    customView.text= ContextCompat.getString(this, R.string.icono_destinatario)
+                }
+                3 -> {
+                    customView.text= ContextCompat.getString(this, R.string.icono_paquete)
+                }
+                4 -> {
+                    customView.text= ContextCompat.getString(this, R.string.icono_contacto)
+                }
             }
             tab.customView = customView
         }.attach() // ¡Importante llamar a attach() al final!

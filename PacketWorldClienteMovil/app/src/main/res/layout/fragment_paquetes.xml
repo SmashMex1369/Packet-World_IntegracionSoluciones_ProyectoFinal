@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".EnvioFragment">
+
+    <TextView
+        android:id="@+id/tv_paquetes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Paquetes"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_no_paquetes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cantidad de paquetes: "
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:paddingVertical="50dp"
+        app:layout_constraintEnd_toStartOf="@id/tv_no_paquetes_valor"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@id/tv_paquetes"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:id="@+id/tv_no_paquetes_valor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:hint="#"
+        android:textColor="@color/grisOscuro"
+        app:layout_constraintStart_toEndOf="@id/tv_no_paquetes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_paquetes"
+        app:layout_constraintTop_toTopOf="@id/tv_no_paquetes"
+        app:layout_constraintBottom_toBottomOf="@id/tv_no_paquetes"/>
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_descripcion"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_no_paquetes"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

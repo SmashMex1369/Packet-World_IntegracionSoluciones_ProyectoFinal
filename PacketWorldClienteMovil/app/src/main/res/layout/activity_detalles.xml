@@ -16,12 +16,11 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/tv_nombre_app"
+        android:id="@+id/tv_detalles"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fontFamily="@font/aldrich"
         android:text="Detalles del Envio"
-        android:textAlignment="center"
+        android:gravity="center"
         android:textColor="@color/black"
         android:textSize="42sp"
         android:textStyle="bold"
@@ -31,13 +30,11 @@
         app:layout_constraintTop_toTopOf="@id/v_header" />
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tl_secciones"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabMode="fixed"
         app:tabRippleColor="@android:color/transparent"
         android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:tabIndicatorColor="@color/verde"
         app:tabIndicatorFullWidth="true"
         app:tabIndicatorHeight="5dp"
