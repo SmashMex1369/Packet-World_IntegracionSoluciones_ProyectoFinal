@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_packet_world_background">@color/azulClaro</color>
+    <color name="ic_packet_world_background">@color/azulFondoApp</color>
 </resources>

@@ -37,7 +37,7 @@
             android:id="@+id/tv_no_guia_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="[No. de Guia]"
+            android:text="[No. de Guia]"
             android:textColor="@color/grisOscuro"
             android:textAlignment="center"
             android:textSize="24sp"/>
@@ -100,7 +100,8 @@
         android:text="Actualizar\nEstatus"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/grisFondo"
+        android:backgroundTint="@color/azul"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
