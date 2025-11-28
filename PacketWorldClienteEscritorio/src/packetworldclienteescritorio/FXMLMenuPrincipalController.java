@@ -25,10 +25,6 @@ public class FXMLMenuPrincipalController implements Initializable {
     private ImageView ivFoto;
     @FXML
     private Label lbTipoRol;
-    @FXML
-    private ImageView ivSalir;
-    @FXML
-    private ImageView ivUnidades;
 
     /**
      * Initializes the controller class.
@@ -75,6 +71,10 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnSucursales(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnRegresar(ActionEvent event) {
     }
     
 }

@@ -144,7 +144,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <ImageView fx:id="ivUnidades" disable="true" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView disable="true" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <StackPane.margin>
                         <Insets bottom="20.0" />
                      </StackPane.margin>
@@ -172,8 +172,8 @@
       </GridPane>
       <StackPane layoutX="885.0" layoutY="15.0" prefHeight="50.0" prefWidth="50.0">
          <children>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 10; -fx-background-color: #00000000;" />
-            <ImageView fx:id="ivSalir" disable="true" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnRegresar" style="-fx-background-radius: 10; -fx-background-color: #00000000;" />
+            <ImageView disable="true" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../recursos/arrow-right-from-bracket-solid.png" />
                </image>
