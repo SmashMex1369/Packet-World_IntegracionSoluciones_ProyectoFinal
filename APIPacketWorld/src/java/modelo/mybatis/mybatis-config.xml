@@ -19,10 +19,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         </environment>
     </environments>
 
-    <mappers> 
-
-       
-
+    <mappers>
+        <mapper resource="modelo/mybatis/mapper/AutenticacionMapper.xml"/>
     </mappers>
 
 </configuration>
