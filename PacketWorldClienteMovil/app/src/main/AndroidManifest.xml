@@ -13,6 +13,13 @@
         android:theme="@style/Theme.PacketWorldClienteMovil"
         tools:targetApi="31">
         <activity
+            android:name=".ActualizarEstatusActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|adjustResize">
+
+        </activity>
+        <activity
             android:name=".DetallesActivity"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -20,7 +27,9 @@
         </activity>
         <activity
             android:name=".PerfilActivity"
-            android:exported="false" />
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".EnviosActivity"
             android:exported="false"

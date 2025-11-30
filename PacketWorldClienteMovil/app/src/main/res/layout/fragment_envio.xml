@@ -40,7 +40,7 @@
             android:text="[No. de Guia]"
             android:textColor="@color/grisOscuro"
             android:textAlignment="center"
-            android:textSize="24sp"/>
+            android:textSize="22sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -61,10 +61,10 @@
             android:id="@+id/tv_estatus_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="[Estatus]"
+            android:text="[Estatus]"
             android:textColor="@color/grisOscuro"
             android:textAlignment="center"
-            android:textSize="24sp"/>
+            android:textSize="22sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -85,10 +85,10 @@
             android:id="@+id/tv_motivo_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="[Motivo]"
+            android:text="[Motivo]"
             android:textColor="@color/grisOscuro"
             android:textAlignment="center"
-            android:textSize="24sp"/>
+            android:textSize="22sp"/>
     </LinearLayout>
 
     <Button

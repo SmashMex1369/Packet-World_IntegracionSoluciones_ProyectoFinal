@@ -37,10 +37,10 @@
             android:id="@+id/tv_no_guia_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="[Nombre Completo]"
+            android:text="[Nombre Completo]"
             android:textColor="@color/grisOscuro"
             android:textAlignment="center"
-            android:textSize="24sp"/>
+            android:textSize="22sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -61,10 +61,10 @@
             android:id="@+id/tv_estatus_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="[Correo]"
+            android:text="[Correo]"
             android:textColor="@color/grisOscuro"
             android:textAlignment="center"
-            android:textSize="24sp"/>
+            android:textSize="22sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -85,10 +85,10 @@
             android:id="@+id/tv_motivo_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="[Telefono]"
+            android:text="[Telefono]"
             android:textColor="@color/grisOscuro"
             android:textAlignment="center"
-            android:textSize="24sp"/>
+            android:textSize="22sp"/>
     </LinearLayout>
 
     <View

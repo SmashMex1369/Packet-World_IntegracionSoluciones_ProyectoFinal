@@ -9,4 +9,10 @@
     <string name="icono_logout">\uf08b</string>
     <string name="icono_contacto">\uf2b9</string>
     <string name="icono_editar">\uf044</string>
+    <string-array name="spn_estatus">
+        <item>En tránsito</item>
+        <item>Entregado</item>
+        <item>Detenido</item>
+        <item>Cancelado</item>
+    </string-array>
 </resources>

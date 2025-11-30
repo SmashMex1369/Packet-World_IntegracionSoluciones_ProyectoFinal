@@ -17,7 +17,7 @@
         android:id="@+id/tv_descripcion_valor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="[Descripcion del paquete]"
+        android:text="[Descripcion del paquete]"
         android:textColor="@color/grisOscuro"
-        android:textSize="24sp"/>
+        android:textSize="22sp"/>
 </LinearLayout>

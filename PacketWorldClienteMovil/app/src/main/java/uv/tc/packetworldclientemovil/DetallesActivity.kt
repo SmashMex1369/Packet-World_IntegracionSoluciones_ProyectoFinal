@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import uv.tc.packetworldclientemovil.adaptadores.DetallesAdapter
 import uv.tc.packetworldclientemovil.databinding.ActivityDetallesBinding
+import uv.tc.packetworldclientemovil.utilidades.ajustarAInsets
 
 class DetallesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetallesBinding
@@ -18,7 +19,8 @@ class DetallesActivity : AppCompatActivity() {
         binding = ActivityDetallesBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        enableEdgeToEdge()
+        binding.root.ajustarAInsets()
         // 1. Asignamos el adaptador
         val adapter = DetallesAdapter(this)
         binding.vpContenido.adapter = adapter

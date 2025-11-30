@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".EnvioFragment">
 
@@ -14,6 +13,9 @@
         android:text="Destinatario"
         android:textSize="40sp"
         android:textStyle="bold"
+        android:paddingTop="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,10 +42,11 @@
             android:id="@+id/tv_sucursal_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="[Nombre Completo]"
+            android:text="[Nombre Completo]"
+            android:paddingHorizontal="5dp"
             android:textColor="@color/grisOscuro"
             android:textAlignment="center"
-            android:textSize="24sp"/>
+            android:textSize="22sp"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/ll_2"
@@ -69,10 +72,11 @@
                 android:id="@+id/tv_estado_valor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="[Estado]"
+                android:text="[Estado]"
+                android:paddingHorizontal="3dp"
                 android:textColor="@color/grisOscuro"
                 android:textAlignment="center"
-                android:textSize="24sp"/>
+                android:textSize="22sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -90,10 +94,11 @@
                 android:id="@+id/tv_estatus_valor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
+                android:textSize="22sp"
+                android:paddingHorizontal="3dp"
                 android:textColor="@color/grisOscuro"
                 android:textAlignment="center"
-                android:hint="[Ciudad]"/>
+                android:text="[Ciudad]"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -119,10 +124,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="[Colonia]:"
+                android:text="[Colonia]:"
+                android:paddingHorizontal="3dp"
                 android:textColor="@color/grisOscuro"
                 android:textAlignment="center"
-                android:textSize="24sp"/>
+                android:textSize="22sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -139,10 +145,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textColor="@color/grisOscuro"
                 android:textAlignment="center"
-                android:hint="[Codigo Postal]"/>
+                android:paddingHorizontal="3dp"
+                android:text="[Codigo Postal]"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -168,10 +175,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="[Calle]"
+                android:text="[Calle]"
+                android:paddingHorizontal="3dp"
                 android:textColor="@color/grisOscuro"
                 android:textAlignment="center"
-                android:textSize="24sp"/>
+                android:textSize="22sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -183,15 +191,16 @@
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:text="Número exterior:"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
+                android:textSize="22sp"
+                android:paddingHorizontal="3dp"
                 android:textColor="@color/grisOscuro"
                 android:textAlignment="center"
-                android:hint="[Numero]"/>
+                android:text="[Numero]"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -201,5 +210,15 @@
         android:layout_height="0.1dp"
         app:layout_constraintTop_toBottomOf="@id/ll_4"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/ll_2"
+        app:layout_constraintBottom_toBottomOf="@id/ll_4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/black"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

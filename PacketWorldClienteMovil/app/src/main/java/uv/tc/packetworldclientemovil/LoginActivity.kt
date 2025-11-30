@@ -15,6 +15,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import uv.tc.packetworldclientemovil.databinding.ActivityLoginBinding
+import uv.tc.packetworldclientemovil.utilidades.ajustarAInsets
 
 
 class LoginActivity : AppCompatActivity() {
@@ -25,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding.root.ajustarAInsets()
         val view = binding.root
         setContentView(view)
 
