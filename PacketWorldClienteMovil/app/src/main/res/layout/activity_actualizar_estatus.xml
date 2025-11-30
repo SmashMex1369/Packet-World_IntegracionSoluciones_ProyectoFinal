@@ -104,6 +104,7 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_motivo"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -118,12 +119,14 @@
                 app:hintTextAppearance="@style/EstiloTextoFlotante"
                 app:boxStrokeErrorColor="@color/rojoClaro"
                 app:boxStrokeWidth="2dp"
+                android:hint="Opcional"
                 app:boxStrokeWidthFocused="4dp">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:gravity="start"
+                    android:id="@+id/et_motivo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Opcional"
+                    android:gravity="start"
                     android:textColor="@color/grisOscuro"
                     android:textSize="22sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -139,10 +142,11 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <Button
+                android:id="@+id/btn_cancelar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="20dp"
-                android:textSize="20sp"
+                android:paddingVertical="18dp"
+                android:textSize="24sp"
                 android:textColor="@color/grisFondo"
                 android:backgroundTint="@color/rojo"
                 android:layout_weight="1"
@@ -151,10 +155,11 @@
                 android:text="Cancelar" />
 
             <Button
+                android:id="@+id/btn_actualizar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="20dp"
-                android:textSize="20sp"
+                android:paddingVertical="18dp"
+                android:textSize="24sp"
                 android:backgroundTint="@color/azul"
                 android:textColor="@color/grisFondo"
                 android:textStyle="bold"

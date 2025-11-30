@@ -44,12 +44,15 @@
         app:layout_constraintTop_toTopOf="@id/v_header"
         app:layout_constraintBottom_toBottomOf="@id/v_header"/>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgv_perfil"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:contentDescription="Imagen de Perfil"
         android:src="@drawable/baseline_account_circle_24"
+        app:civ_border_width="10dp"
+        app:civ_border_color="@color/azulOscuro"
+        app:civ_border_overlay="true"
         app:layout_constraintBottom_toTopOf="@id/ll_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

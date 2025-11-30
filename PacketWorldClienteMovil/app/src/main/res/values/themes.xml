@@ -10,4 +10,8 @@
     </style>
 
     <style name="Theme.PacketWorldClienteMovil" parent="Base.Theme.PacketWorldClienteMovil" />
+
+    <style name="EstiloTextoFlotante" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>

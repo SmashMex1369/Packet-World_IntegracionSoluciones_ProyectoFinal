@@ -1,26 +1,27 @@
 package uv.tc.packetworldclientemovil
 
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import uv.tc.packetworldclientemovil.databinding.ActivityActualizarEstatusBinding
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import uv.tc.packetworldclientemovil.databinding.ActivityActualizarPerfilBinding
+import uv.tc.packetworldclientemovil.databinding.ActivityPerfilBinding
 import uv.tc.packetworldclientemovil.utilidades.ajustarAInsets
 
-class ActualizarEstatusActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityActualizarEstatusBinding
+class ActualizarPerfilActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityActualizarPerfilBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityActualizarEstatusBinding.inflate(layoutInflater)
+        binding = ActivityActualizarPerfilBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
         enableEdgeToEdge()
         binding.root.ajustarAInsets()
+
         window.statusBarColor = ContextCompat.getColor(this, R.color.rojoOscuro)
         window.navigationBarColor = ContextCompat.getColor(this, R.color.azulOscuro)
-        binding.spnEstatus.setAdapter(ArrayAdapter(this,R.layout.item_custom_spinner,resources.getStringArray(R.array.spn_estatus)))
-        binding.tilMotivo.hint = "Obligatorio"
     }
 }

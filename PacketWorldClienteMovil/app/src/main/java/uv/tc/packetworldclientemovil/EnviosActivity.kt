@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import uv.tc.packetworldclientemovil.databinding.ActivityEnviosBinding
 import uv.tc.packetworldclientemovil.utilidades.ajustarAInsets
 
@@ -17,6 +18,8 @@ class EnviosActivity : AppCompatActivity() {
         setContentView(view)
         enableEdgeToEdge()
         binding.root.ajustarAInsets()
+        window.statusBarColor = ContextCompat.getColor(this, R.color.rojoOscuro)
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.azulOscuro)
         binding.srlRecargar.setOnRefreshListener {
             //Aqui se llamara a la funcion que se encarge de recargar los envios
             binding.srlRecargar.isRefreshing = false

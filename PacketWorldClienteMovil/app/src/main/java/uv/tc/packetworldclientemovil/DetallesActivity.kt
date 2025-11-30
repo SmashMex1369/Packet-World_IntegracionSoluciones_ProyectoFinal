@@ -21,6 +21,8 @@ class DetallesActivity : AppCompatActivity() {
         setContentView(view)
         enableEdgeToEdge()
         binding.root.ajustarAInsets()
+        window.statusBarColor = ContextCompat.getColor(this, R.color.rojoOscuro)
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.azulOscuro)
         // 1. Asignamos el adaptador
         val adapter = DetallesAdapter(this)
         binding.vpContenido.adapter = adapter

@@ -27,6 +27,8 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityLoginBinding.inflate(layoutInflater)
         binding.root.ajustarAInsets()
+        window.statusBarColor = ContextCompat.getColor(this, R.color.rojoOscuro)
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.azulOscuro)
         val view = binding.root
         setContentView(view)
 
