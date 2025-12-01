@@ -33,20 +33,6 @@ public class FXMLMenuPrincipalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
-    public void irAdmUnidades(){
-        try {
-            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLAdministracionUnidades.fxml"));
-            Parent vista= cargador.load();
-            FXMLAdministracionUnidadesController controlador= cargador.getController();
-            Scene escena= new Scene(vista);
-            Stage escenario= (Stage) lbSaludo.getScene().getWindow();
-            escenario.setScene(escena);
-            escenario.setTitle("Administración Unidades");
-            escenario.show();
-        } catch (Exception e) {
-        }
-    }
 
     @FXML
     private void btnEnvios(ActionEvent event) {
@@ -54,6 +40,7 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnPaquetes(ActionEvent event) {
+        irAdmPaquetes();
     }
 
     @FXML
@@ -75,6 +62,33 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnRegresar(ActionEvent event) {
+    }
+    
+    public void irAdmUnidades(){
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLAdministracionUnidades.fxml"));
+            Parent vista= cargador.load();
+            //FXMLAdministracionUnidadesController controlador= cargador.getController();
+            Scene escena= new Scene(vista);
+            Stage escenario= (Stage) lbSaludo.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Administración Unidades");
+            escenario.show();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void irAdmPaquetes(){
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLAdministracionPaquetes.fxml"));
+            Parent vista= cargador.load();
+            Scene escena= new Scene(vista);
+            Stage escenario= (Stage) lbSaludo.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Administración Paquetes");
+            escenario.show();
+        } catch (Exception e) {
+        }
     }
     
 }
