@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         
     </insert>
     
-    <update id="editar-cliente" parameterType="pojo.Sucursal">
+    <update id="editar-sucursal" parameterType="pojo.Sucursal">
 
         
     </update>
