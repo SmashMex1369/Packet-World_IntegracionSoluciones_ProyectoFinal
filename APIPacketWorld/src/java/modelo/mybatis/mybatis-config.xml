@@ -21,6 +21,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
     <mappers>
         <mapper resource="modelo/mybatis/mapper/AutenticacionMapper.xml"/>
+        <mapper resource="modelo/mybatis/mapper/UnidadMapper.xml"/>
+        <mapper resource="modelo/mybatis/mapper/PaqueteMapper.xml"/>
+        <mapper resource="modelo/mybatis/mapper/HistorialMapper.xml"/>
     </mappers>
 
 </configuration>
