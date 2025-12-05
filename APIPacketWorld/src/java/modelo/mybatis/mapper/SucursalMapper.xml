@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper id="sucursal">
+    
+    <select id="buscar-sucursal" resultType="pojo.Sucursal">
+        
+    </select>
+    
+    <insert id = "registrar-sucursal" parameterType="pojo.Sucursal">
+        
+        
+    </insert>
+    
+    <update id="editar-cliente" parameterType="pojo.Sucursal">
+
+        
+    </update>
+    
+    <update id = "baja-sucursal" parameterType="pojo.Sucursal">
+        
+        
+    </update>
+
+</mapper>
