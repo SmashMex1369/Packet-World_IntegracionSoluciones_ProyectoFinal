@@ -7,8 +7,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="obtener-clientes" resultType="pojo.Cliente">
         
-        SELECT idCliente, telefono, nombre, apellidoPaterno, apellidoMaterno, correo, calle, numero, 
-        cliente.idColonia FROM cliente INNER JOIN colonia ON colonia.idColonia = cliente.idColonia
+        SELECT 
+    c.idCliente,
+    c.telefono,
+    c.nombre,
+    c.apellidoPaterno,
+    c.apellidoMaterno,
+    c.correo,
+    c.calle,
+    c.numero,
+    c.idColonia as idColonia,
+    co.colonia,
+    co.codigoPostal,
+
+    ci.ciudad,
+    e.estado
+
+FROM cliente c
+INNER JOIN colonia co       ON co.idColonia = c.idColonia
+INNER JOIN ciudad ci        ON ci.idCiudad = co.idCiudad
+INNER JOIN estado e         ON e.idEstado = ci.idEstado;
         
     </select>
     

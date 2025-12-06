@@ -3,19 +3,44 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper id="sucursal">
+<mapper namespace ="sucursal">
     
-    <select id="buscar-sucursal" resultType="pojo.Sucursal">
+    <select id="obtener-sucursales" resultType="pojo.Sucursal">
+        SELECT 
+    s.idSucursal,
+    s.CUS,
+    s.nombre,
+    s.estatus,
+    s.calle,
+    s.numero,
+
+    s.idColonia AS idColonia,
+
+    c.colonia,
+    c.codigoPostal,
+
+    ci.ciudad,
+    e.estado
+
+FROM sucursal s
+INNER JOIN colonia c ON c.idColonia = s.idColonia
+INNER JOIN ciudad ci ON ci.idCiudad = c.idCiudad
+INNER JOIN estado e  ON e.idEstado = ci.idEstado;
+        
         
     </select>
     
     <insert id = "registrar-sucursal" parameterType="pojo.Sucursal">
         
+        INSERT INTO sucursal(CUS, nombre, estatus, calle, numero, idColonia) 
+        VALUES(#{CUS}, #{nombre}, #{estatus}, #{calle}, #{numero}, #{idColonia});
         
     </insert>
     
     <update id="editar-sucursal" parameterType="pojo.Sucursal">
-
+        
+        UPDATE sucursal 
+        SET nombre = #{nombre}, calle = #{calle}, numero = #{numero}, idColonia = #{idColonia} WHERE idSucursal = #{idSucursal}
         
     </update>
     
