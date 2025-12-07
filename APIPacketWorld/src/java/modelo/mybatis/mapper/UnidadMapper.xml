@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="unidad">
+
+    <select id="obtener-unidades" resultType="pojo.Unidad">
+        SELECT u.idUnidad, VIN, NII, año, modelo, marca, u.idTipoUnidad, u.idConductor, noLicencia, tipo,
+        estatus, motivo, tiempo, heu.idColaborador, nombre, apellidoPaterno, apellidoMaterno
+        FROM unidad u
+        INNER JOIN tipounidad tu ON tu.idTipoUnidad= u.idTipoUnidad
+        LEFT JOIN historialestatusunidad heu ON heu.idUnidad= u.idUnidad
+        LEFT JOIN colaborador c ON c.idColaborador=heu.idColaborador
+        LEFT JOIN conductor con ON con.idConductor=u.idConductor;
+    </select>
+    
+    <insert id="registrar" parameterType="pojo.Unidad">
+        INSERT INTO unidad (VIN, NII, año, modelo, marca, idTipoUnidad)
+        VALUES (#{VIN}, #{NII}, #{año}, #{modelo}, #{marca}, #{idTipoUnidad});
+    </insert>
+    
+    <update id="editar" parameterType="pojo.Unidad">
+        UPDATE unidad
+        SET NII= #{NII}, año= #{año}, modelo= #{modelo}, marca= #{marca}, idTipoUnidad= #{idTipoUnidad}, VIN=#{VIN}
+        WHERE idUnidad= #{idUnidad};
+    </update>
+    
+    <select id="buscar-unidad" parameterType="String" resultType="pojo.Unidad">
+        SELECT VIN, NII, año, modelo, marca, tipo
+        FROM unidad u
+        INNER JOIN tipounidad tu ON tu.idTipoUnidad= u.idTipoUnidad
+        WHERE VIN LIKE CONCAT('%', #{busqueda}, '%')
+        OR marca LIKE CONCAT('%', #{busqueda}, '%')
+        OR NII LIKE CONCAT('%', #{busqueda}, '%');
+    </select>
+    
+</mapper>
