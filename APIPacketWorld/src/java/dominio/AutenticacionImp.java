@@ -30,7 +30,8 @@ public class AutenticacionImp {
                     respuesta.setColaborador(colaborador);
                 }else{
                     respuesta.setMensaje("Credenciales incorrectas");
-                }       
+                }    
+                conexionBD.close();
             } catch (Exception e) {
                 respuesta.setMensaje(e.getMessage());
             }

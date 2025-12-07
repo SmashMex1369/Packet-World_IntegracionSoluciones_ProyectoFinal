@@ -6,18 +6,18 @@ package pojo;
  */
 public class Paquete {
     
-    private int idPaquete;
+    private Integer idPaquete;
     private String descripcion;
     private float peso;
     private float alto;
     private float ancho;
     private float profundidad;
-    private int idEnvio;
+    private Integer idEnvio;
 
     public Paquete() {
     }
 
-    public Paquete(int idPaquete, String descripcion, float peso, float alto, float ancho, float profundidad, int idEnvio) {
+    public Paquete(Integer idPaquete, String descripcion, float peso, float alto, float ancho, float profundidad, Integer idEnvio) {
         this.idPaquete = idPaquete;
         this.descripcion = descripcion;
         this.peso = peso;
@@ -27,11 +27,11 @@ public class Paquete {
         this.idEnvio = idEnvio;
     }
 
-    public int getIdPaquete() {
+    public Integer getIdPaquete() {
         return idPaquete;
     }
 
-    public void setIdPaquete(int idPaquete) {
+    public void setIdPaquete(Integer idPaquete) {
         this.idPaquete = idPaquete;
     }
 
@@ -75,11 +75,11 @@ public class Paquete {
         this.profundidad = profundidad;
     }
 
-    public int getIdEnvio() {
+    public Integer getIdEnvio() {
         return idEnvio;
     }
 
-    public void setIdEnvio(int idEnvio) {
+    public void setIdEnvio(Integer idEnvio) {
         this.idEnvio = idEnvio;
     }
       

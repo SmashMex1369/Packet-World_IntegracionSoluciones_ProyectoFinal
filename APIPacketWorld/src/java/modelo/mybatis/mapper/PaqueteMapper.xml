@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="paquete">
     
     <select id="obtener-paquetes" resultType="pojo.Paquete">
-        SELECT descripcion, peso, alto, ancho, profundidad 
+        SELECT descripcion, peso, alto, ancho, profundidad, idPaquete, idEnvio
         FROM paquete;
     </select>
     
