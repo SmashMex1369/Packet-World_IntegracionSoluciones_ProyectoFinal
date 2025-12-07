@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="cliente">
+    
+    <select id="obtener-clientes" resultType="pojo.Cliente">
+        
+        SELECT idCliente, telefono, nombre, apellidoPaterno, apellidoMaterno, correo, calle, numero, 
+        cliente.idColonia FROM cliente INNER JOIN colonia ON colonia.idColonia = cliente.idColonia
+        
+    </select>
+    
+    <insert id = "registrar-cliente" parameterType="pojo.Cliente">
+        
+        INSERT INTO cliente(telefono, nombre, apellidoPaterno, 
+        apellidoMaterno, correo, calle, numero, idColonia) 
+        VALUES(#{telefono}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{correo}, #{calle}, #{numero}, #{idColonia});
+        
+    </insert>
+    
+    <update id="editar-cliente" parameterType="pojo.Cliente">
+        
+        UPDATE cliente 
+        SET telefono = #{telefono}, nombre = #{nombre}, apellidoPaterno = #{apellidoPaterno}, apellidoMaterno = #{apellidoMaterno}, 
+        correo = #{correo}, calle = #{calle}, numero = #{numero}, idColonia = #{idColonia} WHERE idCliente = #{idCliente}
+        
+    </update>
+    
+    <delete id = "eliminar-cliente" parameterType="int">
+        
+        DELETE FROM cliente WHERE idCliente = #{idCliente}
+        
+    </delete>
+    
+</mapper>
