@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLAsignarEnvioController">
+   <children>
+      <AnchorPane layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Asignar conductor" textFill="#e1e1e1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <StackPane AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="6.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1" />
+                  <ImageView disable="true" fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/angle-left-solid.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+         </children>
+      </AnchorPane>
+      <Button layoutX="456.0" layoutY="74.0" mnemonicParsing="false" onAction="#btnAsignar" prefHeight="31.0" prefWidth="100.0" style="-fx-background-radius: 30px;" text="Asignar">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <TableView fx:id="tvConductores" layoutX="118.0" layoutY="142.0" prefHeight="277.0" prefWidth="568.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="123.0">
+        <columns>
+          <TableColumn fx:id="colNoPersonal" prefWidth="75.0" text="No. de Personal" />
+          <TableColumn fx:id="colNoLicencia" prefWidth="75.0" text="No. de Licencia" />
+            <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
+            <TableColumn fx:id="colApellidoPaterno" prefWidth="75.0" text="Apellido&#10;Paterno" />
+            <TableColumn fx:id="colApellidoMaterno" prefWidth="75.0" text="Apellido&#10;Materno" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <StackPane alignment="CENTER_LEFT" layoutX="14.0" layoutY="72.0" AnchorPane.leftAnchor="14.0">
+         <children>
+            <TextField fx:id="tfBuscar" prefHeight="36.0" prefWidth="392.0" promptText="Buscar conductor" style="-fx-background-radius: 18px;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="40.0" />
+               </padding>
+            </TextField>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/magnifying-glass-solid.png" />
+               </image>
+               <StackPane.margin>
+                  <Insets left="12.0" />
+               </StackPane.margin>
+            </ImageView>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

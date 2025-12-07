@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="950.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLFormularioColaboradoresController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Registrar colaborador" textFill="#e1e1e1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <StackPane AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="13.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1" />
+                  <ImageView disable="true" fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/angle-left-solid.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER" layoutX="279.0" layoutY="72.0" text="Favor de rellenar todos los campos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="88.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutY="123.0" text="Para el rol CONDUCTOR agregar No. de Licencia" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <GridPane hgap="30.0" prefHeight="475.0" prefWidth="918.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="159.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox maxHeight="-Infinity" minHeight="-Infinity">
+               <children>
+                  <Label text="Nombre(s)">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfNombre">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" minHeight="-Infinity" GridPane.columnIndex="1">
+               <children>
+                  <Label text="Apellido Paterno">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfApellidoPaterno">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" minHeight="-Infinity" GridPane.columnIndex="2">
+               <children>
+                  <Label text="Apellido Materno">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfApellidoMaterno">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" minHeight="-Infinity" GridPane.rowIndex="1">
+               <children>
+                  <Label text="CURP">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfCURP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" minHeight="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Label text="Correo Electrónico">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfCorreo">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" minHeight="-Infinity" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <Label text="No. de Personal">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfNoPersonal">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" minHeight="-Infinity" GridPane.rowIndex="2">
+               <children>
+                  <Label text="Sucursal">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbSucursal" maxWidth="1.7976931348623157E308" prefWidth="150.0" style="-fx-font-size: 21;" />
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" minHeight="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Label text="Rol">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbRol" maxWidth="1.7976931348623157E308" prefWidth="150.0" style="-fx-font-size: 21;" />
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" minHeight="-Infinity" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <children>
+                  <Label text="Contraseña">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfContraseña">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" minHeight="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Label text="No. de Licencia">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfNoLicencia" disable="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </VBox>
+            <Button alignment="CENTER" contentDisplay="TEXT_ONLY" mnemonicParsing="false" onAction="#btnRegistrar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Registrar" textFill="#e1e1e1" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="18.0" />
+               </GridPane.margin></Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

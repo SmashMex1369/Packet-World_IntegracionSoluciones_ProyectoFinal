@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1100.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLDetallesEnvioController">
+   <children>
+      <AnchorPane layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Detalles del envio" textFill="#e1e1e1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <StackPane AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="13.0">
+               <children>
+                  <Button cancelButton="true" mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1" />
+                  <ImageView disable="true" fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/angle-left-solid.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <Button fx:id="btnActualizar" alignment="CENTER" contentDisplay="TEXT_ONLY" ellipsisString="" graphicTextGap="0.0" layoutX="936.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnActualizar" prefWidth="150.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Actualizar Estatus" textAlignment="CENTER" textFill="#e1e1e1" wrapText="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="-5.0" top="-5.0" />
+               </padding>
+            </Button>
+         </children>
+      </AnchorPane>
+      <HBox alignment="CENTER" layoutY="72.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0">
+         <children>
+            <Button fx:id="btnEnvio" alignment="CENTER" graphicTextGap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnEnvio" prefHeight="70.0" prefWidth="230.0" style="-fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;" text="Envio" textFill="#e1e1e1" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <graphic>
+                  <SVGPath fx:id="imgvEnvio" content="M 7.95 0 C 6.07 0 4.55 1.53 4.55 3.41 V 6.82 H 1.14 c -0.63 0 -1.14 0.51 -1.14 1.14 s 0.51 1.14 1.14 1.14 H 4.55 H 19.32 c 0.63 0 1.14 0.51 1.14 1.14 s -0.51 1.14 -1.14 1.14 H 4.55 H 3.41 c -0.63 0 -1.14 0.51 -1.14 1.14 s 0.51 1.14 1.14 1.14 H 4.55 H 17.05 c 0.63 0 1.14 0.51 1.14 1.14 s -0.51 1.14 -1.14 1.14 H 4.55 H 1.14 c -0.63 0 -1.14 0.51 -1.14 1.14 s 0.51 1.14 1.14 1.14 H 4.55 H 14.77 c 0.63 0 1.14 0.51 1.14 1.14 s -0.51 1.14 -1.14 1.14 H 4.55 V 29.55 c 0 3.76 3.05 6.82 6.82 6.82 s 6.82 -3.05 6.82 -6.82 H 27.27 c 0 3.76 3.05 6.82 6.82 6.82 s 6.82 -3.05 6.82 -6.82 h 2.27 c 1.26 0 2.27 -1.02 2.27 -2.27 s -1.02 -2.27 -2.27 -2.27 V 20.45 V 18.18 V 16.85 c 0 -1.21 -0.48 -2.37 -1.33 -3.22 L 36.36 8.15 c -0.85 -0.85 -2.01 -1.33 -3.22 -1.33 H 29.55 V 3.41 c 0 -1.88 -1.53 -3.41 -3.41 -3.41 H 7.95 z M 38.64 16.85 V 18.18 H 29.55 V 11.36 h 3.6 L 38.64 16.85 z M 11.36 26.14 a 3.41 3.41 0 1 1 0 6.82 a 3.41 3.41 0 1 1 0 -6.82 z m 19.32 3.41 a 3.41 3.41 0 1 1 6.82 0 a 3.41 3.41 0 1 1 -6.82 0 z" fill="#e1e1e1" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnRemitente" alignment="CENTER" graphicTextGap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnRemitente" prefHeight="70.0" prefWidth="230.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-radius: 10; -fx-border-width: 4; -fx-border-insets: -1;" text="Remitente" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets bottom="16.0" top="16.0" />
+               </HBox.margin>
+               <graphic>
+                  <SVGPath fx:id="imgvRemitente" content="M 5.68 6.82 A 3.41 3.41 0 1 0 5.68 0 a 3.41 3.41 0 1 0 0 6.82 z M 6.82 21.78 V 17.17 l 1.18 1.77 c 0.63 0.95 1.7 1.52 2.83 1.52 H 15.91 H 25 c 1.26 0 2.27 -1.02 2.27 -2.27 V 9.09 c 0 -1.26 -1.02 -2.27 -2.27 -2.27 H 15.91 c -1.26 0 -2.27 1.02 -2.27 2.27 v 6.82 H 11.44 l -3.03 -4.55 c -0.94 -1.42 -2.54 -2.27 -4.25 -2.27 C 1.86 9.09 0 10.95 0 13.25 v 6.26 c 0 1.21 0.48 2.37 1.33 3.22 l 5.64 5.64 l 1.02 6.1 c 0.21 1.24 1.38 2.07 2.61 1.87 s 2.07 -1.38 1.87 -2.61 l -1.08 -6.46 c -0.11 -0.7 -0.45 -1.35 -0.95 -1.85 l -3.62 -3.62 z M 0 24.61 L 0 34.09 c 0 1.26 1.02 2.27 2.27 2.27 s 2.27 -1.02 2.27 -2.27 v 0 V 29.15 l -4.55 -4.55 z" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDestinatario" alignment="CENTER" ellipsisString="" graphicTextGap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnDestinatario" prefHeight="70.0" prefWidth="230.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-radius: 10; -fx-border-width: 4; -fx-border-insets: -1;" text="Destinatario" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="23.7" />
+               </font>
+               <graphic>
+                  <SVGPath fx:id="imgvDestinatario" content="M 5.68 3.41 a 3.41 3.41 0 1 1 6.82 0 A 3.41 3.41 0 1 1 5.68 3.41 z m 4.55 13.76 v 4.62 l 3.62 3.62 c 0.5 0.5 0.84 1.15 0.95 1.85 l 1.08 6.46 c 0.21 1.24 -0.63 2.41 -1.87 2.61 s -2.41 -0.63 -2.61 -1.87 l -1.02 -6.1 L 4.74 22.73 C 3.89 21.88 3.41 20.72 3.41 19.51 V 13.25 c 0 -2.3 1.86 -4.16 4.16 -4.16 c 1.71 0 3.3 0.85 4.25 2.27 l 3.37 5.05 l 0.72 0.36 V 11.36 c 0 -1.26 1.02 -2.27 2.27 -2.27 H 27.27 c 1.26 0 2.27 1.02 2.27 2.27 v 5.41 l 0.72 -0.36 L 33.63 11.36 c 0.94 -1.42 2.54 -2.27 4.25 -2.27 c 2.3 0 4.16 1.86 4.16 4.16 v 6.26 c 0 1.21 -0.48 2.37 -1.33 3.22 l -5.64 5.64 l -1.02 6.1 c -0.21 1.24 -1.38 2.07 -2.61 1.87 s -2.07 -1.38 -1.87 -2.61 l 1.08 -6.46 c 0.11 -0.7 0.45 -1.35 0.95 -1.85 l 3.62 -3.62 V 17.17 l -1.35 2.02 c -0.33 0.5 -0.78 0.89 -1.31 1.16 l -4.23 2.12 c -0.17 0.09 -0.35 0.16 -0.54 0.2 c -0.18 0.04 -0.38 0.06 -0.56 0.06 H 18.23 c -0.18 0.01 -0.36 -0.01 -0.53 -0.05 c -0.21 -0.04 -0.4 -0.11 -0.58 -0.21 l -4.23 -2.12 c -0.53 -0.26 -0.98 -0.67 -1.31 -1.16 l -1.35 -2.02 z M 0.16 33.25 L 3.56 24.76 l 3.49 3.49 l -2.67 6.68 c -0.47 1.16 -1.79 1.73 -2.95 1.26 S -0.31 34.41 0.16 33.25 z M 36.36 0 a 3.41 3.41 0 1 1 0 6.82 a 3.41 3.41 0 1 1 0 -6.82 z m 5.53 24.76 l 3.39 8.49 c 0.47 1.16 -0.1 2.49 -1.26 2.95 s -2.49 -0.1 -2.95 -1.26 l -2.67 -6.68 l 3.49 -3.49 z" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnSucursal" alignment="CENTER" graphicTextGap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSucursal" prefHeight="70.0" prefWidth="230.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-radius: 10; -fx-border-width: 4; -fx-border-insets: -1;" text="Sucursal" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <graphic>
+                  <SVGPath fx:id="imgvSucursal" content="M 2.61 13.64 H 42.84 c 1.44 0 2.61 -1.17 2.61 -2.61 c 0 -0.52 -0.16 -1.02 -0.44 -1.45 L 39.65 1.52 C 39.01 0.57 37.95 0 36.81 0 H 8.64 c -1.14 0 -2.2 0.57 -2.83 1.52 L 0.44 9.57 c -0.28 0.43 -0.44 0.94 -0.44 1.45 C 0 12.46 1.17 13.64 2.61 13.64 z M 4.55 15.91 V 27.27 v 5.68 c 0 1.88 1.53 3.41 3.41 3.41 H 23.86 c 1.88 0 3.41 -1.53 3.41 -3.41 V 27.27 V 15.91 H 22.73 V 27.27 H 9.09 V 15.91 H 4.55 z m 31.82 0 V 34.09 c 0 1.26 1.02 2.27 2.27 2.27 s 2.27 -1.02 2.27 -2.27 V 15.91 H 36.36 z" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+      <GridPane fx:id="grdpEnvio" layoutX="16.0" layoutY="176.0" prefHeight="475.0" prefWidth="1068.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="176.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" percentHeight="25.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <GridPane hgap="20.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="No. de Guía:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Conductor asignado:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="No. de Licencia:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNoGuia" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[No. de Guia]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNombreConductor" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Nombre Completo Conductor]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNoLicencia" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[No. de Licencia Conductor]" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <GridPane hgap="20.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+               <children>
+                  <Label text="Estatus actual:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Fecha y hora del ultimo cambio:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbEstatus" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Estatus Envio]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbTiempo" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Tiempo Envio]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane alignment="CENTER" hgap="20.0" maxWidth="1.7976931348623157E308" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <children>
+                  <Label text="Colaborador que realizo el cambio de estatus:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNombreColaborador" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Nombre Completo Colaborador]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="80.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane alignment="CENTER" hgap="20.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="3">
+               <children>
+                  <Label text="Detalles / Motivo:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbMotivo" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Motivo Envio]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="80.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </GridPane>
+      <GridPane fx:id="grdpRemitente" layoutX="26.0" layoutY="186.0" prefHeight="475.0" prefWidth="1068.0" visible="false" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="176.0">
+         <children>
+            <GridPane alignment="CENTER" hgap="20.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label text="Nombre:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNombreCliente" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Nombre Completo Cliente]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="80.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane hgap="20.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+               <children>
+                  <Label text="Teléfono:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Correo:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbTelefonoCliente" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Telefono Cliente]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbCorreoCliente" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Correo Cliente]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane hgap="20.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
+               <children>
+                  <Label text="Colonia:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Codigo Postal:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbColoniaCliente" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Colonia Cliente]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbCodigoPostal" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Codigo Postal Cliente]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane hgap="20.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="3">
+               <children>
+                  <Label text="Calle:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Número exterior:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbCalleCliente" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Calle Cliente]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNumeroCliente" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Numero Cliente]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" percentHeight="25.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="grdpDestinatario" layoutX="36.0" layoutY="196.0" prefHeight="475.0" prefWidth="1068.0" visible="false" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="176.0">
+         <children>
+            <GridPane alignment="CENTER" hgap="20.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label text="Nombre:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNombreDestinatario" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Nombre Completo Destinatario]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="80.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="85.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane hgap="20.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+               <children>
+                  <Label text="Estado:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbEstadoDestinatario" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Estado Destinatario]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Ciudad:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbCiudadDestinatario" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Ciudad Destinatario]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Colonia:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbColoniaDestinatario" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Colonia Destinatario]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="85.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane hgap="20.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
+               <children>
+                  <Label text="Codigo Postal:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Calle:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbCodigoPostalDestinatario" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Codigo Postal Destinatario]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbCalleDestinatario" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Calle Destinatario]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Número exterior:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNumeroDestinatario" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Numero Destinatario]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="85.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" percentHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="grdpSucursal" layoutX="46.0" layoutY="206.0" prefHeight="475.0" prefWidth="1068.0" visible="false" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="176.0">
+         <children>
+            <GridPane alignment="CENTER" hgap="20.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label text="Nombre:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNombreSucursal" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Nombre Sucursal]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Codigo Unico de Sucursal:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbCUS" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[CUS Sucursal]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="85.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane hgap="20.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+               <children>
+                  <Label text="Estado:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbEstadoSucursal" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Estado Sucursal]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Ciudad:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbCiudadSucursal" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Ciudad Sucursal]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Colonia:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbColoniaSucursal" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Colonia Sucursal]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="85.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane hgap="20.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
+               <children>
+                  <Label text="Codigo Postal:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Calle:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbCodigoPostalSuursal" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Codigo Postal Sucursal]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbCalleSucursal" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Calle Sucursal]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Número exterior:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNumeroSucursal" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Numero Sucursal]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="85.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" percentHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>
