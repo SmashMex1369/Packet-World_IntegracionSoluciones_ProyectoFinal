@@ -309,7 +309,7 @@ DROP TABLE IF EXISTS `historialEstatusEnvio` ;
 
 CREATE TABLE IF NOT EXISTS `historialEstatusEnvio` (
   `idHistorialEstatusEnvio` INT NOT NULL AUTO_INCREMENT,
-  `idEstatus` INT NOT NULL,
+  `idEstatusEnvio` INT NOT NULL,
   `motivo` VARCHAR(100) NULL,
   `tiempo` DATETIME NOT NULL,
   `idEnvio` INT NOT NULL,
@@ -325,8 +325,8 @@ CREATE TABLE IF NOT EXISTS `historialEstatusEnvio` (
     REFERENCES `colaborador` (`idColaborador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_historialEstatusEnvio_idEstatus`
-    FOREIGN KEY (`idEstatus`)
+  CONSTRAINT `fk_historialEstatusEnvio_idEstatusEnvio`
+    FOREIGN KEY (`idEstatusEnvio`)
     REFERENCES `estatusEnvio` (`idEstatusEnvio`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

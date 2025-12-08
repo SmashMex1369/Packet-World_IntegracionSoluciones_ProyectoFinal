@@ -36,6 +36,7 @@ public class ApplicationConfig extends Application {
         resources.add(ws.EnvioWS.class);
         resources.add(ws.PaqueteWS.class);
         resources.add(ws.SucursalesWS.class);
+        resources.add(ws.UnidadWS.class);
     }
     
 }
