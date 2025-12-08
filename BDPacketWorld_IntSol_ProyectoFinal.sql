@@ -203,13 +203,13 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `historialEstatusUnidad` ;
 
 CREATE TABLE IF NOT EXISTS `historialEstatusUnidad` (
-  `idEstatusUnidad` INT NOT NULL AUTO_INCREMENT,
+  `idHistorialEstatusUnidad` INT NOT NULL AUTO_INCREMENT,
   `estatus` INT NOT NULL DEFAULT 1,
   `motivo` VARCHAR(100) NULL,
   `tiempo` DATETIME NOT NULL,
   `idUnidad` INT NOT NULL,
   `idColaborador` INT NOT NULL,
-  PRIMARY KEY (`idEstatusUnidad`),
+  PRIMARY KEY (`idHistorialEstatusUnidad`),
   CONSTRAINT `fk_estatusUnidad_idUnidad`
     FOREIGN KEY (`idUnidad`)
     REFERENCES `unidad` (`idUnidad`)
@@ -308,13 +308,13 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `historialEstatusEnvio` ;
 
 CREATE TABLE IF NOT EXISTS `historialEstatusEnvio` (
-  `idEstatusEnvio` INT NOT NULL AUTO_INCREMENT,
+  `idHistorialEstatusEnvio` INT NOT NULL AUTO_INCREMENT,
   `idEstatus` INT NOT NULL,
   `motivo` VARCHAR(100) NULL,
   `tiempo` DATETIME NOT NULL,
   `idEnvio` INT NOT NULL,
   `idColaborador` INT NOT NULL,
-  PRIMARY KEY (`idEstatusEnvio`),
+  PRIMARY KEY (`idHistorialEstatusEnvio`),
   CONSTRAINT `fk_historialEstatusEnvio_idEnvio`
     FOREIGN KEY (`idEnvio`)
     REFERENCES `envio` (`idEnvio`)

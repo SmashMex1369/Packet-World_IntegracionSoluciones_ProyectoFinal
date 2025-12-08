@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="catalogo">
+    <select id="obtener-noguia-disponibles" resultType="pojo.NoGuia">
+        WITH EnviosDisponibles AS (
+            SELECT 
+                idEnvio,
+                idHistorialEstatusEnvio,
+                ROW_NUMBER() OVER(
+                    PARTITION BY idEnvio
+                    order by tiempo desc
+                ) as FilaNumero
+            FROM historialestatusenvio hee
+        )
+        select hee.idEnvio, noGuia
+        from envio e
+        INNER JOIN EnviosDisponibles u ON e.idEnvio = u.idEnvio AND u.FilaNumero = 1
+        INNER JOIN historialestatusenvio hee ON u.idHistorialEstatusEnvio = hee.idHistorialEstatusEnvio
+        inner join estatusenvio ee on hee.idestatusenvio=ee.idestatusenvio
+        where ee.idEstatusEnvio=1;
+    </select>
+</mapper>

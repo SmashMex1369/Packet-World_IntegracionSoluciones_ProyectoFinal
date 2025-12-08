@@ -30,11 +30,12 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(ws.AutenticacionWS.class);
+        resources.add(ws.CatalogoWS.class);
         resources.add(ws.ClientesWS.class);
         resources.add(ws.ColaboradoresWS.class);
+        resources.add(ws.EnvioWS.class);
         resources.add(ws.PaqueteWS.class);
         resources.add(ws.SucursalesWS.class);
-        resources.add(ws.UnidadWS.class);
     }
     
 }
