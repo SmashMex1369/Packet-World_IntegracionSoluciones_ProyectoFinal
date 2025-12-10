@@ -6,7 +6,7 @@ package pojo;
  */
 public class Colaborador {
    
-    private int idColaborador;
+    private Integer idColaborador;
     private String noPersonal;
     private String nombre;
     private String apellidoPaterno;
@@ -14,17 +14,18 @@ public class Colaborador {
     private String correo;
     private String contraseña;
     private String CURP;
+    private Integer estatus;
     private String fotoBase64;
     private byte[] fotografia;
-    private int idRol;
+    private Integer idRol;
     private String rol;
-    private int idSucursal;
+    private Integer idSucursal;
     private String CUS;
 
     public Colaborador() {
-    }
+    }   
 
-    public Colaborador(int idColaborador, String noPersonal, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña, String CURP, String fotoBase64, byte[] fotografia, int idRol, String rol, int idSucursal, String CUS) {
+    public Colaborador(Integer idColaborador, String noPersonal, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña, String CURP, Integer estatus, String fotoBase64, byte[] fotografia, Integer idRol, String rol, Integer idSucursal, String CUS) {
         this.idColaborador = idColaborador;
         this.noPersonal = noPersonal;
         this.nombre = nombre;
@@ -33,6 +34,7 @@ public class Colaborador {
         this.correo = correo;
         this.contraseña = contraseña;
         this.CURP = CURP;
+        this.estatus = estatus;
         this.fotoBase64 = fotoBase64;
         this.fotografia = fotografia;
         this.idRol = idRol;
@@ -41,13 +43,11 @@ public class Colaborador {
         this.CUS = CUS;
     }
 
-    
-
-    public int getIdColaborador() {
+    public Integer getIdColaborador() {
         return idColaborador;
     }
 
-    public void setIdColaborador(int idColaborador) {
+    public void setIdColaborador(Integer idColaborador) {
         this.idColaborador = idColaborador;
     }
 
@@ -107,6 +107,14 @@ public class Colaborador {
         this.CURP = CURP;
     }
 
+    public Integer getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(Integer estatus) {
+        this.estatus = estatus;
+    }
+
     public String getFotoBase64() {
         return fotoBase64;
     }
@@ -123,20 +131,12 @@ public class Colaborador {
         this.fotografia = fotografia;
     }
 
-    public int getIdRol() {
+    public Integer getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(int idRol) {
+    public void setIdRol(Integer idRol) {
         this.idRol = idRol;
-    }
-
-    public int getIdSucursal() {
-        return idSucursal;
-    }
-
-    public void setIdSucursal(int idSucursal) {
-        this.idSucursal = idSucursal;
     }
 
     public String getRol() {
@@ -147,13 +147,20 @@ public class Colaborador {
         this.rol = rol;
     }
 
-    public String getCus() {
+    public Integer getIdSucursal() {
+        return idSucursal;
+    }
+
+    public void setIdSucursal(Integer idSucursal) {
+        this.idSucursal = idSucursal;
+    }
+
+    public String getCUS() {
         return CUS;
     }
 
-    public void setCus(String CUS) {
+    public void setCUS(String CUS) {
         this.CUS = CUS;
     }
-    
     
 }

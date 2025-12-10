@@ -25,8 +25,7 @@ CREATE TABLE IF NOT EXISTS `rol` (
   `rol` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`idRol`),
   UNIQUE INDEX `rol_UNIQUE` (`rol` ASC) VISIBLE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -111,11 +110,12 @@ CREATE TABLE IF NOT EXISTS `colaborador` (
   `noPersonal` VARCHAR(20) NOT NULL,
   `nombre` VARCHAR(100) NOT NULL,
   `apellidoPaterno` VARCHAR(100) NOT NULL,
-  `apellidoMaterno` VARCHAR(100) NULL,
+  `apellidoMaterno` VARCHAR(100) NULL DEFAULT '',
   `correo` VARCHAR(50) NOT NULL,
   `contraseña` VARCHAR(20) NOT NULL,
   `CURP` VARCHAR(18) NOT NULL,
   `fotografia` LONGBLOB NULL,
+  `estatus` INT NOT NULL DEFAULT 1,
   `idRol` INT NOT NULL,
   `idSucursal` INT NOT NULL,
   PRIMARY KEY (`idColaborador`),
@@ -140,7 +140,7 @@ DROP TABLE IF EXISTS `conductor` ;
 
 CREATE TABLE IF NOT EXISTS `conductor` (
   `idConductor` INT NOT NULL AUTO_INCREMENT,
-  `noLicencia` VARCHAR(45) NOT NULL,
+  `noLicencia` VARCHAR(45) NOT NULL DEFAULT '',
   `noPersonal` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`idConductor`),
   UNIQUE INDEX `noLicencia_UNIQUE` (`noLicencia` ASC) VISIBLE,
@@ -163,8 +163,7 @@ CREATE TABLE IF NOT EXISTS `tipoUnidad` (
   `tipo` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`idTipoUnidad`),
   UNIQUE INDEX `tipo_UNIQUE` (`tipo` ASC) VISIBLE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -205,7 +204,7 @@ DROP TABLE IF EXISTS `historialEstatusUnidad` ;
 CREATE TABLE IF NOT EXISTS `historialEstatusUnidad` (
   `idHistorialEstatusUnidad` INT NOT NULL AUTO_INCREMENT,
   `estatus` INT NOT NULL DEFAULT 1,
-  `motivo` VARCHAR(100) NULL,
+  `motivo` VARCHAR(100) NULL DEFAULT '',
   `tiempo` DATETIME NOT NULL,
   `idUnidad` INT NOT NULL,
   `idColaborador` INT NOT NULL,
@@ -233,7 +232,8 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `telefono` VARCHAR(10) NOT NULL,
   `nombre` VARCHAR(100) NOT NULL,
   `apellidoPaterno` VARCHAR(100) NOT NULL,
-  `apellidoMaterno` VARCHAR(100) NULL,
+  `apellidoMaterno` VARCHAR(100) NULL DEFAULT '',
+  `estatus` INT NOT NULL DEFAULT 1,
   `correo` VARCHAR(50) NOT NULL,
   `calle` VARCHAR(100) NOT NULL,
   `numero` INT NOT NULL,
@@ -257,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `envio` (
   `noGuia` VARCHAR(50) NOT NULL,
   `nombreDest` VARCHAR(100) NOT NULL,
   `apellidoPatDest` VARCHAR(100) NOT NULL,
-  `apellidoMatDest` VARCHAR(100) NOT NULL,
+  `apellidoMatDest` VARCHAR(100) NULL DEFAULT '',
   `calleDest` VARCHAR(100) NOT NULL,
   `numDest` INT NOT NULL,
   `idCliente` INT NOT NULL,
@@ -310,7 +310,7 @@ DROP TABLE IF EXISTS `historialEstatusEnvio` ;
 CREATE TABLE IF NOT EXISTS `historialEstatusEnvio` (
   `idHistorialEstatusEnvio` INT NOT NULL AUTO_INCREMENT,
   `idEstatusEnvio` INT NOT NULL,
-  `motivo` VARCHAR(100) NULL,
+  `motivo` VARCHAR(100) NULL DEFAULT '',
   `tiempo` DATETIME NOT NULL,
   `idEnvio` INT NOT NULL,
   `idColaborador` INT NOT NULL,

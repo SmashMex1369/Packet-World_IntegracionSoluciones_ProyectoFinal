@@ -1,0 +1,199 @@
+package dominio;
+
+import dto.Respuesta;
+import java.util.List;
+import modelo.mybatis.MyBatisUtil;
+import org.apache.ibatis.session.SqlSession;
+import pojo.Colaborador;
+import pojo.Conductor;
+import utilidades.Constantes;
+
+
+/**
+ *
+ * @author alex4
+ */
+
+public class ColaboradorImp {
+    
+    public static List<Conductor> obtenerColaboradores(){
+        List<Conductor> colaboradores = null;
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD != null) {
+            try {
+                colaboradores = conexionBD.selectList("colaborador.obtener-colaboradores");
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return colaboradores;
+    }
+    public static List<Colaborador> obtenerAdministradores(){
+        List<Colaborador> administradores = null;
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD != null) {
+            try {
+                administradores = conexionBD.selectList("colaborador.obtener-administradores");
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return administradores;
+    }
+    public static List<Colaborador> obtenerEjecutivos(){
+        List<Colaborador> ejecutivos = null;
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD != null) {
+            try {
+                ejecutivos = conexionBD.selectList("colaborador.obtener-ejecutivos");
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return ejecutivos;
+    }
+    public static List<Conductor> obtenerConductores(){
+        List<Conductor> conductores = null;
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD != null) {
+            try {
+                conductores = conexionBD.selectList("colaborador.obtener-conductores");
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return conductores;
+    }
+    
+    public static Respuesta registrarColaborador(Conductor colaborador){
+        Respuesta respuesta = new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if(conexionBD!=null){
+            try {
+                int filasAfectadas = conexionBD.insert("colaborador.registrar-colaborador", colaborador);
+                if(filasAfectadas==1){
+                    if (colaborador.getIdRol()==3) {
+                        filasAfectadas = conexionBD.insert("colaborador.registrar-conductor", colaborador);
+                        if (filasAfectadas ==1) {
+                            conexionBD.commit();
+                            respuesta.setError(false);
+                            respuesta.setMensaje("Se ha registrado el conductor con número de personal: "+colaborador.getNoPersonal());
+                        }else{
+                            conexionBD.rollback();
+                            respuesta.setMensaje("Lo sentimos, el conductor no pudo ser registrado.");
+                        }
+                    } else {
+                        conexionBD.commit();
+                        respuesta.setError(false);
+                        respuesta.setMensaje("Se ha registrado el colaborador con número de personal: "+colaborador.getNoPersonal());
+                    }
+                }else{
+                    respuesta.setMensaje("Lo sentimos, el colaborador no pudo ser registrado.");
+                }
+                conexionBD.close();
+            } catch (Exception e) {
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
+    }
+    
+    public static Respuesta actualizarColaborador(Conductor colaborador) {
+        Respuesta respuesta = new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if(conexionBD!=null){
+            try {
+                int filasAfectadas = conexionBD.update("colaborador.actualizar-colaborador", colaborador);
+                if(filasAfectadas==1){
+                    if (colaborador.getNoLicencia() != null) {
+                        filasAfectadas=conexionBD.update("colaborador.actualizar-conductor", colaborador);
+                        if (filasAfectadas == 1) {
+                            conexionBD.commit();
+                            respuesta.setError(false);
+                            respuesta.setMensaje("El conductor ha sido actualizado correctamente");
+                        }else{
+                            conexionBD.rollback();
+                            respuesta.setMensaje("Lo sentimos, el conductor no pudo ser actualizado.");
+                        }
+                    }else{
+                        conexionBD.commit();
+                        respuesta.setError(false);
+                        respuesta.setMensaje("El colaborador ha sido actualizado corectamente.");
+                    }
+                }else{
+                    respuesta.setMensaje("Lo sentimos, el colaborador no pudo ser actualizado.");
+                }
+                conexionBD.close();
+            } catch (Exception e) {
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
+    }
+    
+    public static Colaborador obtenerFoto(int idColaborador){
+        Colaborador colaborador = null;
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD!= null) {
+            try {
+                colaborador = conexionBD.selectOne("colaborador.obtener-foto", idColaborador);
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return colaborador;                
+    }
+    
+    public static Respuesta subirFoto(int idColaborador, byte[] fotografia){
+        Respuesta respuesta = new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if(conexionBD!=null){
+            try {
+                Colaborador colaborador = new Colaborador();
+                colaborador.setIdColaborador(idColaborador);
+                colaborador.setFotografia(fotografia);
+                int filasAfectadas = conexionBD.update("colaborador.subir-foto",colaborador);
+                conexionBD.commit();
+                if(filasAfectadas == 1){
+                    respuesta.setError(false);
+                    respuesta.setMensaje("La fotografia ha sido cambiada");
+                }else{
+                    respuesta.setMensaje("Lo sentimos, la fotografia no puedo ser cambiada");
+                }
+                conexionBD.close();
+            } catch (Exception e) {
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
+    }
+    
+    public static List<Conductor> buscarColaborador(String busqueda){
+        List<Conductor> colaboradores = null;
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD != null) {
+            try {
+                colaboradores = conexionBD.selectList("colaborador.buscar-colaborador",busqueda);
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return colaboradores;
+    }
+    
+}

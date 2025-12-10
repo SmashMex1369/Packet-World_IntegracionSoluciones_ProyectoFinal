@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import pojo.NoGuia;
+import pojo.Rol;
 
 
 /**
@@ -21,5 +22,12 @@ public class CatalogoWS {
     @Produces(MediaType.APPLICATION_JSON)
     public List<NoGuia> obtenerNoGuiaDisponibles(){
         return CatalogoImp.obtenerNoGuiaDisponibles();
+    }
+    
+    @Path("obtener-roles")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Rol> obtenerRoles(){
+        return CatalogoImp.obtenerRoles();
     }
 }

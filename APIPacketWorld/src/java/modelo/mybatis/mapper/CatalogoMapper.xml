@@ -22,4 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         inner join estatusenvio ee on hee.idestatusenvio=ee.idestatusenvio
         where ee.idEstatusEnvio=1;
     </select>
+    
+    <select id="obtener-roles" resultType="pojo.Rol">
+        SELECT * from rol;
+    </select>
 </mapper>

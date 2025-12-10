@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="colaborador">
+    <select id="obtener-colaboradores" resultType="pojo.Conductor">
+        SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, noLicencia, r.idRol, r.rol, s.idSucursal, s.CUS
+        FROM colaborador c
+        INNER JOIN rol r ON c.idRol=r.idRol
+        INNER JOIN sucursal s ON c.idSucursal=s.idSucursal
+        LEFT JOIN conductor con ON c.noPersonal=con.noPersonal
+        WHERE c.estatus = 1;
+    </select>
+    
+    <select id="obtener-administradores" resultType="pojo.Colaborador">
+        SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, r.idRol, r.rol, s.idSucursal, s.CUS
+        FROM colaborador c
+        INNER JOIN rol r ON c.idRol=r.idRol
+        INNER JOIN sucursal s ON c.idSucursal=s.idSucursal
+        WHERE c.idRol=1 AND c.estatus=1;
+    </select>
+    
+    <select id="obtener-ejecutivos" resultType="pojo.Colaborador">
+        SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, r.idRol, r.rol, s.idSucursal, s.CUS
+        FROM colaborador c
+        INNER JOIN rol r ON c.idRol=r.idRol
+        INNER JOIN sucursal s ON c.idSucursal=s.idSucursal
+        WHERE c.idRol=2 AND c.estatus=1;
+    </select>
+    
+    <select id="obtener-conductores" resultType="pojo.Conductor">
+        SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, noLicencia, r.idRol, r.rol, s.idSucursal, s.CUS
+        FROM colaborador c
+        INNER JOIN rol r ON c.idRol=r.idRol
+        INNER JOIN sucursal s ON c.idSucursal=s.idSucursal
+        LEFT JOIN conductor con ON c.noPersonal=con.noPersonal
+        WHERE c.idRol=3 and c.estatus=1;
+    </select>
+    
+    
+    <insert id="registrar-colaborador" parameterType="pojo.Colaborador">
+        INSERT INTO colaborador (noPersonal, nombre, apellidoPaterno, apellidoMaterno, correo, contraseña, CURP, idRol, idSucursal)
+        VALUES (#{noPersonal}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{correo}, #{contraseña}, #{CURP}, #{idRol}, #{idSucursal})
+    </insert> 
+    <insert id="registrar-conductor" parameterType="pojo.Conductor">
+        INSERT INTO conductor (noPersonal, noLicencia)
+        VALUES (#{noPersonal}, #{noLicencia});
+    </insert>     
+    
+    <update id="actualizar-colaborador" parameterType="pojo.Conductor">
+        UPDATE colaborador
+        SET nombre =#{nombre},
+        apellidoPaterno = #{apellidoPaterno},
+        apellidoMaterno = #{apellidoMaterno},
+        correo = #{correo},
+        CURP = #{CURP},
+        idSucursal = #{idSucursal}
+        WHERE idColaborador = #{idColaborador};
+    </update>
+    
+    <update id="actualizar-conductor" parameterType="pojo.Conductor">
+        UPDATE conductor
+        SET noLicencia = #{noLicencia}
+        WHERE noPersonal = #{noPersonal};
+    </update>
+    
+    <select id="obtener-foto" parameterType="int" resultType="pojo.Colaborador">
+        SELECT idColaborador, to_base64(fotografia) as fotoBase64
+        from colaborador
+        where idColaborador = #{idColaborador};
+    </select>
+    
+    <update id="subir-foto" parameterType="pojo.Colaborador">
+        UPDATE colaborador 
+        SET fotografia = #{fotografia}
+        WHERE idColaborador = #{idColaborador};
+    </update>
+    
+    <select id="buscar-colaborador" parameterType="String" resultType="pojo.Conductor">
+        SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, noLicencia, r.idRol, r.rol, s.idSucursal, s.CUS
+        FROM colaborador c
+        INNER JOIN rol r ON c.idRol=r.idRol
+        INNER JOIN sucursal s ON c.idSucursal=s.idSucursal
+        LEFT JOIN conductor con ON c.noPersonal=con.noPersonal
+        WHERE c.noPersonal LIKE CONCAT('%', #{busqueda}, '%')
+        OR c.nombre LIKE CONCAT('%', #{busqueda}, '%')
+        OR apellidoPaterno LIKE CONCAT('%', #{busqueda}, '%')
+        OR apellidoMaterno LIKE CONCAT('%', #{busqueda}, '%');
+    </select>
+    
+    
+    
+</mapper>
