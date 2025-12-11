@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
@@ -8,20 +9,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="751.0" prefWidth="1125.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="packetworldclienteescritorio.FXMLFormularioClientesController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="950.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLFormularioClientesController">
    <children>
-      <Pane prefHeight="63.0" prefWidth="1129.0" style="-fx-background-color: #e9967a;">
+      <Pane prefHeight="63.0" prefWidth="1129.0" style="-fx-background-color: #630505;">
          <effect>
             <DropShadow />
          </effect>
          <children>
-            <Label layoutX="455.0" layoutY="10.0" text="Registrar cliente">
+            <Label layoutX="411.0" layoutY="4.0" text="Registrar cliente" textFill="#e1e1e1">
                <font>
-                  <Font size="31.0" />
+                  <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <Button layoutX="14.0" layoutY="17.0" mnemonicParsing="false" text="&lt;----" />
+            <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1" />
+            <ImageView disable="true" fitHeight="32.0" fitWidth="50.0" layoutX="44.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/angle-left-solid.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Label layoutX="360.0" layoutY="83.0" text="Favor de rellenar todos los campos">
@@ -34,112 +39,84 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <Label layoutX="828.0" layoutY="169.0" text="Apellido Materno">
+      <Label layoutX="807.0" layoutY="155.0" text="Apellido Materno">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfApellidoMaterno" layoutX="828.0" layoutY="203.0" prefHeight="44.0" prefWidth="257.0" promptText="Ortíz">
+      <Label layoutX="427.0" layoutY="158.0" text="Apellido Paterno">
          <font>
-            <Font size="20.0" />
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="159.0" text="Nombre">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfNombre" layoutX="50.0" layoutY="193.0" prefHeight="36.0" prefWidth="288.0" promptText="Luis" />
+      <TextField fx:id="tfCorreo" layoutX="285.0" layoutY="297.0" prefHeight="34.0" prefWidth="257.0" promptText="\@gmail/yahoo/hotmail...">
+         <font>
+            <Font size="16.0" />
          </font>
       </TextField>
-      <Label layoutX="433.0" layoutY="169.0" text="Apellido Paterno">
+      <Label layoutX="285.0" layoutY="262.0" text="Correo electrónico">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfApellidoPaterno" layoutX="433.0" layoutY="203.0" prefHeight="44.0" prefWidth="257.0" promptText="Méndez">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Label layoutX="44.0" layoutY="168.0" text="Nombre">
+      <TextField fx:id="tfTelefono" layoutX="671.0" layoutY="296.0" prefHeight="34.0" prefWidth="257.0" />
+      <Label layoutX="671.0" layoutY="262.0" text="Teléfono">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfNombre" layoutX="44.0" layoutY="203.0" prefHeight="44.0" prefWidth="257.0" promptText="Luis">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="tfCorreo" layoutX="232.0" layoutY="321.0" prefHeight="44.0" prefWidth="257.0" promptText="\@gmail/yahoo/hotmail...">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Label layoutX="232.0" layoutY="286.0" text="Correo electrónico">
+      <Label layoutX="880.0" layoutY="381.0" text="Código postal">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfTelefono" layoutX="668.0" layoutY="321.0" prefHeight="44.0" prefWidth="257.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Label layoutX="668.0" layoutY="287.0" text="Teléfono">
+      <TextField fx:id="tfCodigoPostal" layoutX="881.0" layoutY="418.0" prefHeight="37.0" prefWidth="220.0" />
+      <Label layoutX="449.0" layoutY="497.0" text="Estado">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Label layoutX="64.0" layoutY="413.0" text="Código postal">
+      <Label layoutX="138.0" layoutY="498.0" text="Ciudad">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfCodigoPostal" layoutX="65.0" layoutY="450.0" prefHeight="44.0" prefWidth="257.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Label layoutX="438.0" layoutY="416.0" text="Estado">
+      <TextField fx:id="tfNumeroExterior" layoutX="321.0" layoutY="419.0" prefHeight="37.0" prefWidth="220.0" />
+      <Label layoutX="322.0" layoutY="385.0" text="Número exterior">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Label layoutX="810.0" layoutY="416.0" text="Ciudad">
+      <TextField fx:id="tfCalle" layoutX="28.0" layoutY="418.0" prefHeight="36.0" prefWidth="220.0" />
+      <Label layoutX="29.0" layoutY="384.0" text="Calle">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfNumeroExterior" layoutX="810.0" layoutY="554.0" prefHeight="44.0" prefWidth="257.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Label layoutX="811.0" layoutY="520.0" text="Número exterior">
+      <Label layoutX="608.0" layoutY="385.0" text="Colonia">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfCalle" layoutX="438.0" layoutY="554.0" prefHeight="44.0" prefWidth="257.0">
+      <ComboBox fx:id="cbEstado" layoutX="449.0" layoutY="531.0" prefHeight="37.0" prefWidth="257.0" />
+      <ComboBox fx:id="cbCiudad" layoutX="138.0" layoutY="532.0" prefHeight="32.0" prefWidth="257.0" />
+      <ComboBox fx:id="cbColonia" layoutX="605.0" layoutY="419.0" prefHeight="34.0" prefWidth="220.0" />
+      <Button alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="776.0" layoutY="537.0" mnemonicParsing="false" onAction="#clicBtnGuardar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Guardar" textFill="#e1e1e1">
          <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Label layoutX="439.0" layoutY="520.0" text="Calle">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="68.0" layoutY="517.0" text="Colonia">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="cbEstado" layoutX="438.0" layoutY="450.0" prefHeight="44.0" prefWidth="257.0" />
-      <ComboBox fx:id="cbCiudad" layoutX="810.0" layoutY="450.0" prefHeight="44.0" prefWidth="257.0" />
-      <ComboBox fx:id="cbColonia" layoutX="65.0" layoutY="551.0" prefHeight="44.0" prefWidth="257.0" />
-      <Button fx:id="btnGuardar" layoutX="739.0" layoutY="647.0" mnemonicParsing="false" onAction="#clicBtnGuardar" prefHeight="63.0" prefWidth="152.0" style="-fx-background-radius: 25px;" text="Guardar">
-         <font>
-            <Font size="25.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="btnCancelar" layoutX="930.0" layoutY="647.0" mnemonicParsing="false" onAction="#clicBtnCancelar" prefHeight="63.0" prefWidth="152.0" style="-fx-background-radius: 25px;" text="Cancelar">
+      <TextField fx:id="tfApellidoPaterno" layoutX="427.0" layoutY="192.0" prefHeight="36.0" prefWidth="288.0" promptText="López" />
+      <TextField fx:id="tfApellidoMaterno" layoutX="807.0" layoutY="193.0" prefHeight="36.0" prefWidth="288.0" promptText="Morales" />
+      <Button alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="953.0" layoutY="537.0" mnemonicParsing="false" onAction="#clicBtnCancelar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #000000; -fx-border-width: 3; -fx-border-insets: -1; -fx-background-color: #630505;" text="Cancelar" textFill="#e1e1e1">
          <font>
-            <Font size="25.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
    </children>

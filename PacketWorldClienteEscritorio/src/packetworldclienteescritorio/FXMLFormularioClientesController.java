@@ -38,10 +38,6 @@ public class FXMLFormularioClientesController implements Initializable {
     private ComboBox<?> cbCiudad;
     @FXML
     private ComboBox<?> cbColonia;
-    @FXML
-    private Button btnGuardar;
-    @FXML
-    private Button btnCancelar;
 
     /**
      * Initializes the controller class.
@@ -57,6 +53,10 @@ public class FXMLFormularioClientesController implements Initializable {
 
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnRegresar(ActionEvent event) {
     }
     
 }

@@ -52,5 +52,9 @@ public class FXMLAdministracionClientesController implements Initializable {
     @FXML
     private void clicIrRegistrar(ActionEvent event) {
     }
+
+    @FXML
+    private void btnRegresar(ActionEvent event) {
+    }
     
 }
