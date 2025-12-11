@@ -26,4 +26,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="obtener-roles" resultType="pojo.Rol">
         SELECT * from rol;
     </select>
+    
+    <select id="obtener-sucursal-disponibles" resultType="pojo.CUS">
+        SELECT idSucursal, CUS FROM sucursal WHERE estatus = 1;
+    </select>
+    
+    <select id="obtener-ciudad-estado" parameterType="String" resultType="pojo.Direccion">
+        SELECT DISTINCT ciudad, estado
+        FROM colonia c
+        INNER JOIN ciudad ci ON c.idCiudad=ci.idCiudad
+        INNER JOIN estado e ON ci.idEstado=e.idEstado
+        WHERE codigoPostal = #{codigoPostal};
+    </select>
+    
+    <select id="obtener-colonias" parameterType="String" resultType="pojo.Direccion">
+        SELECT idColonia, colonia
+        FROM colonia
+        WHERE codigoPostal = #{codigoPostal}
+    </select>
 </mapper>

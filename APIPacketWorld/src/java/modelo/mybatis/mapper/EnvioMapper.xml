@@ -110,4 +110,82 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INSERT INTO historialestatusenvio (idEstatusEnvio, motivo, tiempo, idEnvio, idColaborador)
         VALUES (#{idEstatusEnvio}, #{motivo}, NOW(), #{idEnvio}, #{idColaborador});
     </insert>    
+    
+    <select id="buscar-envio" parameterType="String" resultType="pojo.Envio">
+        WITH UltimoEstatusID AS (
+            SELECT 
+                idEnvio,
+                idHistorialEstatusEnvio,
+                ROW_NUMBER() OVER(
+                    PARTITION BY idEnvio
+                    ORDER BY tiempo DESC
+                ) as FilaNumero
+            FROM historialestatusenvio
+        )
+        SELECT 
+            e.idEnvio, 
+            e.noGuia, 
+            e.nombreDest, 
+            e.apellidoPatDest, 
+            e.apellidoMatDest, 
+            e.numDest, 
+            e.calleDest, 
+            c.idColonia AS idColoniaDest,
+            c.codigoPostal AS codigoPostalDest,
+            c.colonia AS coloniaDest,
+            ci.ciudad AS ciudadDest,
+            es.estado AS estadoDest,
+            cli.idCliente, 
+            cli.nombre AS nombreCliente,
+            cli.apellidoPaterno AS apellidoPatCliente,
+            cli.apellidoMaterno AS apellidoMatCliente,
+            cli.correo AS correoCliente,
+            cli.telefono AS telefonoCliente,
+            cli.numero AS numeroCliente,
+            cli.calle AS calleCliente,
+            cli.idColonia AS idColoniaCliente,
+            ccli.codigoPostal AS codigoPostalCliente,
+            ccli.colonia AS coloniaCliente,
+            s.idSucursal,
+            s.nombre AS nombreSucursal,
+            s.CUS AS CUSSucursal,
+            s.numero AS numeroSucursal,
+            s.calle AS calleSucursal,
+            s.idColonia AS idColoniaSucursal,
+            cs.codigoPostal AS codigoPostalSucursal,
+            cs.colonia AS coloniaSucursal,
+            cis.ciudad AS ciudadSucursal,
+            ess.estado AS estadoSucursal,
+            con.idConductor,
+            con.noLicencia AS noLicenciaConductor,
+            colcon.nombre AS nombreConductor,
+            colcon.apellidoPaterno AS apellidoPatConductor,
+            colcon.apellidoMaterno AS apellidoMatConductor,
+            hee.idHistorialEstatusEnvio,
+            ee.idEstatusEnvio,
+            ee.estatus,
+            hee.motivo,
+            hee.tiempo,
+            col.idColaborador,
+            col.nombre AS nombreColaborador,
+            col.apellidoPaterno AS apellidoPatColaborador,
+            col.apellidoMaterno AS apellidoMatColaborador
+        FROM envio e
+        INNER JOIN UltimoEstatusID u ON e.idEnvio = u.idEnvio AND u.FilaNumero = 1
+        INNER JOIN historialestatusenvio hee ON u.idHistorialEstatusEnvio = hee.idHistorialEstatusEnvio
+        INNER JOIN estatusenvio ee ON hee.idEstatusEnvio = ee.idEstatusEnvio
+        INNER JOIN colaborador col ON hee.idColaborador = col.idColaborador
+        INNER JOIN colonia c ON e.idColonia = c.idColonia
+        INNER JOIN ciudad ci ON c.idCiudad = ci.idCiudad
+        INNER JOIN estado es ON ci.idEstado = es.idEstado
+        INNER JOIN cliente cli ON e.idCliente = cli.idCliente
+        INNER JOIN colonia ccli ON cli.idColonia = ccli.idColonia
+        INNER JOIN sucursal s ON s.idSucursal = e.idSucursal
+        INNER JOIN colonia cs ON s.idColonia = cs.idColonia
+        INNER JOIN ciudad cis ON cs.idCiudad = cis.idCiudad
+        INNER JOIN estado ess ON cis.idEstado = ess.idEstado
+        LEFT JOIN conductor con ON e.idConductor = con.idConductor
+        LEFT JOIN colaborador colcon ON con.noPersonal = colcon.noPersonal
+        WHERE e.noGuia LIKE CONCAT('%', #{noGuia}, '%') ORDER BY e.idEnvio ASC;
+    </select>
 </mapper>

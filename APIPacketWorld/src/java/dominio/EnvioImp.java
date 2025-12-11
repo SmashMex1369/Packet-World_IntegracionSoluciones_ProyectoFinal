@@ -107,4 +107,18 @@ public class EnvioImp {
         return respuesta;
     }
     
+    public static List<Envio> buscarEnvio(String noGuia){
+        List<Envio> envios = null;  
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if(conexionBD != null){
+            try{
+                envios = conexionBD.selectList("envio.buscar-envio", noGuia);
+                conexionBD.close();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        return envios;
+    }
+    
 }

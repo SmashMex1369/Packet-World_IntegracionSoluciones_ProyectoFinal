@@ -150,7 +150,8 @@ CREATE TABLE IF NOT EXISTS `conductor` (
     REFERENCES `colaborador` (`noPersonal`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
@@ -193,7 +194,8 @@ CREATE TABLE IF NOT EXISTS `unidad` (
     REFERENCES `conductor` (`idConductor`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
@@ -219,7 +221,8 @@ CREATE TABLE IF NOT EXISTS `historialEstatusUnidad` (
     REFERENCES `colaborador` (`idColaborador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
@@ -244,7 +247,8 @@ CREATE TABLE IF NOT EXISTS `cliente` (
     REFERENCES `colonia` (`idColonia`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
@@ -286,7 +290,8 @@ CREATE TABLE IF NOT EXISTS `envio` (
     REFERENCES `colonia` (`idColonia`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
@@ -330,7 +335,8 @@ CREATE TABLE IF NOT EXISTS `historialEstatusEnvio` (
     REFERENCES `estatusEnvio` (`idEstatusEnvio`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
@@ -352,7 +358,8 @@ CREATE TABLE IF NOT EXISTS `paquete` (
     REFERENCES `envio` (`idEnvio`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 SET SQL_MODE = '';
 DROP USER IF EXISTS PacketWorldAdmin;

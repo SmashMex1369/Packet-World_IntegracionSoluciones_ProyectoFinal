@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import pojo.Envio;
@@ -69,5 +70,15 @@ public class EnvioWS {
         } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
         }
+    }
+    
+    @Path("buscar-envio/{noGuia}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio> buscarEnvio(@PathParam ("noGuia") String noGuia){
+        if (noGuia!=null && !noGuia.isEmpty()) {
+            return EnvioImp.buscarEnvio(noGuia);
+        }
+        throw new BadRequestException();
     }
 }
