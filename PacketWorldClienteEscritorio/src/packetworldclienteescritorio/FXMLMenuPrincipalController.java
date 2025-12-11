@@ -75,6 +75,7 @@ public class FXMLMenuPrincipalController implements Initializable {
             escenario.setTitle("Administración Unidades");
             escenario.show();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
@@ -88,6 +89,7 @@ public class FXMLMenuPrincipalController implements Initializable {
             escenario.setTitle("Administración Paquetes");
             escenario.show();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     

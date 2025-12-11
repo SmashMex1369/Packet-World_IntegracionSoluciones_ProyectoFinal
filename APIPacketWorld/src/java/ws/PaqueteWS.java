@@ -58,7 +58,7 @@ public class PaqueteWS {
         }
     }
     
-    @Path("eliminar/#{idPaquete}")
+    @Path("eliminar/{idPaquete}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     public Respuesta eliminarPaquete(@PathParam("idPaquete") Integer idPaquete){
@@ -67,5 +67,12 @@ public class PaqueteWS {
         } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
         }
+    }
+    
+    @Path("buscar-paquetes-noGuia/{noGuia}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Paquete> buscarPaquetePorNoGuia(@PathParam("noGuia") String noGuia){
+        return PaqueteImp.obtenerPaquetePorNoGuia(noGuia);
     }
 }

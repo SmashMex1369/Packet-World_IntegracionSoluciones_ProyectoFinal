@@ -6,8 +6,9 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLAdministracionPaquetesController">
@@ -20,7 +21,7 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <TextField fx:id="tfBuscar" layoutX="27.0" layoutY="106.0" prefHeight="36.0" prefWidth="392.0" promptText="Buscar paquete" style="-fx-background-radius: 18px;" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="96.0">
+      <TextField fx:id="tfBuscar" layoutX="27.0" layoutY="106.0" onKeyReleased="#buscarPaquete" prefHeight="36.0" prefWidth="392.0" promptText="Buscar paquete" style="-fx-background-radius: 18px;" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="96.0">
          <font>
             <Font size="20.0" />
          </font>
@@ -53,10 +54,17 @@
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <Button layoutX="27.0" layoutY="21.0" mnemonicParsing="false" onAction="#btnRegresar" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="21.0">
+            <Button layoutX="14.0" layoutY="10.0" maxHeight="-Infinity" mnemonicParsing="false" onAction="#btnRegresar" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1">
                <graphic>
-                  <SVGPath content="M 2.5405 12.9189 c -0.5081 0.5081 -0.5081 1.3297 0 1.8324 L 11.1892 23.4054 c 0.5081 0.5081 1.3297 0.5081 1.8324 0 s 0.5081 -1.3297 0 -1.8324 L 5.2919 13.8378 L 13.027 6.1081 c 0.5081 -0.5081 0.5081 -1.3297 0 -1.8324 s -1.3297 -0.5081 -1.8324 0 L 2.5405 12.9189 z" fill="#a60d0d" />
+                  <ImageView fitHeight="47.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/angle-left-solid.png" />
+                     </image>
+                  </ImageView>
                </graphic>
+               <padding>
+                  <Insets bottom="0.1" top="0.1" />
+               </padding>
             </Button>
          </children>
       </AnchorPane>

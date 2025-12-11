@@ -97,4 +97,18 @@ public class PaqueteImp {
         }
         return respuesta;
     }
+    
+    public static List<Paquete> obtenerPaquetePorNoGuia(String noGuia){
+        List<Paquete> paquetes=null;
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if(conexionBD!=null){
+            try {
+                 paquetes= conexionBD.selectList("paquete.buscar-paquete", noGuia);
+                 conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }          
+        }
+        return paquetes;
+    }
 }

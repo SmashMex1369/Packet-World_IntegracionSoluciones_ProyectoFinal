@@ -6,8 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="paquete">
     
     <select id="obtener-paquetes" resultType="pojo.Paquete">
-        SELECT descripcion, peso, alto, ancho, profundidad, idPaquete, idEnvio
-        FROM paquete;
+        SELECT descripcion, peso, alto, ancho, profundidad, idPaquete, noGuia, p.idEnvio
+        FROM paquete p
+        INNER JOIN envio e ON e.idEnvio= p.idEnvio;
     </select>
     
     <insert id="registrar" parameterType="pojo.Paquete">
@@ -24,5 +25,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="eliminar" parameterType="int">
         DELETE FROM paquete WHERE idPaquete= #{idPaquete};
     </delete>
+    
+    <select id="buscar-paquete" resultType="pojo.Paquete">
+        SELECT idPaquete, descripcion, peso, alto, ancho, profundidad, p.idEnvio, noGuia
+        FROM paquete p
+        INNER JOIN envio e ON e.idEnvio= p.idEnvio
+        WHERE noGuia LIKE CONCAT('%', #{noGuia}, '%');     
+    </select>
     
 </mapper>

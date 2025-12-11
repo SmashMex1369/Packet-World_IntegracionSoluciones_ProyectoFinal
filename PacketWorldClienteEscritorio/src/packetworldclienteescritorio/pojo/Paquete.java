@@ -8,17 +8,17 @@ public class Paquete {
     
     private Integer idPaquete;
     private String descripcion;
-    private float peso;
-    private float alto;
-    private float ancho;
-    private float profundidad;
+    private Float peso;
+    private Float alto;
+    private Float ancho;
+    private Float profundidad;
     private Integer idEnvio;
     private String noGuia;
 
     public Paquete() {
     }
 
-    public Paquete(Integer idPaquete, String descripcion, float peso, float alto, float ancho, float profundidad, Integer idEnvio, String noGuia) {
+    public Paquete(Integer idPaquete, String descripcion, Float peso, Float alto, Float ancho, Float profundidad, Integer idEnvio, String noGuia) {
         this.idPaquete = idPaquete;
         this.descripcion = descripcion;
         this.peso = peso;
@@ -45,35 +45,35 @@ public class Paquete {
         this.descripcion = descripcion;
     }
 
-    public float getPeso() {
+    public Float getPeso() {
         return peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(Float peso) {
         this.peso = peso;
     }
 
-    public float getAlto() {
+    public Float getAlto() {
         return alto;
     }
 
-    public void setAlto(float alto) {
+    public void setAlto(Float alto) {
         this.alto = alto;
     }
 
-    public float getAncho() {
+    public Float getAncho() {
         return ancho;
     }
 
-    public void setAncho(float ancho) {
+    public void setAncho(Float ancho) {
         this.ancho = ancho;
     }
 
-    public float getProfundidad() {
+    public Float getProfundidad() {
         return profundidad;
     }
 
-    public void setProfundidad(float profundidad) {
+    public void setProfundidad(Float profundidad) {
         this.profundidad = profundidad;
     }
 

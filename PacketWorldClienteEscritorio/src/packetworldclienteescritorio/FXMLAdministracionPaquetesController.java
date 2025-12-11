@@ -19,9 +19,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.PaqueteImp;
+import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Paquete;
 import packetworldclienteescritorio.utilidad.Utilidades;
@@ -67,6 +70,7 @@ public class FXMLAdministracionPaquetesController implements Initializable, INot
         tcAlto.setCellValueFactory(new PropertyValueFactory("alto"));
         tcAncho.setCellValueFactory(new PropertyValueFactory("ancho"));
         tcProfundidad.setCellValueFactory(new PropertyValueFactory("profundidad"));
+        tcNoGuia.setCellValueFactory(new PropertyValueFactory("noGuia"));
     }
     
     private void cargarInformacionPaquetes(){
@@ -100,6 +104,17 @@ public class FXMLAdministracionPaquetesController implements Initializable, INot
 
     @FXML
     private void btnRegresar(ActionEvent event) {
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLMenuPrincipal.fxml"));
+            Parent vista= cargador.load();
+            Scene escena= new Scene(vista);
+            Stage escenario= (Stage) tfBuscar.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Menú principal");
+            escenario.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     private void irFormularioPaquetes(Paquete paquete){
@@ -109,9 +124,10 @@ public class FXMLAdministracionPaquetesController implements Initializable, INot
             FXMLFormularioPaquetesController controlador= cargador.getController();
             controlador.inicializarDatos(paquete, this);
             Scene escena= new Scene(vista);
-            Stage escenario= new Stage();
+            Stage escenario= (Stage) tvPaquete.getScene().getWindow();
             escenario.setScene(escena);
-            escenario.setTitle("Formulario paquetes");            
+            escenario.setTitle("Formulario paquetes");  
+            //escenario.initModality(Modality.APPLICATION_MODAL);            
             escenario.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,5 +142,45 @@ public class FXMLAdministracionPaquetesController implements Initializable, INot
 
     @FXML
     private void btnEliminar(ActionEvent event) {
+        Paquete paquete= tvPaquete.getSelectionModel().getSelectedItem();
+        if(paquete!=null){
+            boolean confirmarOperacion= Utilidades.mostrarAlertaConfirmacion("Eliminar paquete", "¿Estás seguro de eliminar el paquete?");
+            if(confirmarOperacion){
+                eliminarPaquete(paquete.getIdPaquete());
+            }
+        }else{
+             Utilidades.mostrarAlertaSimple("Seleccione un paquete", "Seleccione un paquete para poder eliminarlo.", Alert.AlertType.WARNING);
+        }
     }
+    
+    private void eliminarPaquete(int idPaquete){
+        Respuesta respuesta= PaqueteImp.eliminar(idPaquete);
+        System.out.println("funcion elim"+idPaquete);
+        if(!respuesta.isError()){
+            Utilidades.mostrarAlertaSimple("Paquete eliminado", "El registro del paquete fue eliminado correctamente.", Alert.AlertType.WARNING);
+            cargarInformacionPaquetes();
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al eliminar", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void buscarPaquete(KeyEvent event) {
+        HashMap<String, Object> respuesta;
+        if(tfBuscar.getText().isEmpty()){
+            respuesta= PaqueteImp.obtenerTodos();
+        }else{
+            respuesta= PaqueteImp.obtenerPaquetePorNoGuia(tfBuscar.getText());
+        }      
+        boolean esError= (boolean) respuesta.get("error");
+        if(!esError){
+            List<Paquete> paqueteAPI= (List<Paquete>) respuesta.get("paquetes");
+            paquetes= FXCollections.observableArrayList();
+            paquetes.addAll(paqueteAPI);
+            tvPaquete.setItems(paquetes);
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al cargar", ""+respuesta.get("mensaje"), Alert.AlertType.ERROR);
+        }
+    }
+    
 }

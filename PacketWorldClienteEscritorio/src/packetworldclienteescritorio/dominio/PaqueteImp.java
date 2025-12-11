@@ -124,4 +124,30 @@ public class PaqueteImp {
         }
         return respuesta;
     }
+    
+    public static HashMap<String, Object> obtenerPaquetePorNoGuia(String noGuia){
+        HashMap <String, Object> respuesta= new LinkedHashMap<>();
+        String URL= Constantes.URL_WS + "paquete/buscar-paquetes-noGuia/" + noGuia;
+        Gson gson= new Gson();
+        RespuestaHTTP respuestaAPI= ConexionAPI.peticionGET(URL);
+        if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
+            Type tipoLista= new TypeToken <List<Paquete>>(){}.getType();
+            List <Paquete> paquetes= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put("error", false);
+            respuesta.put("paquetes", paquetes);
+        }else{
+            respuesta.put("error", true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.put("mensaje",Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put("mensaje",Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put("mensaje","Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
+            } 
+        }
+        return respuesta;
+    }
 }
