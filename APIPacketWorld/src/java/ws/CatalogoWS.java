@@ -12,6 +12,7 @@ import pojo.CUS;
 import pojo.Direccion;
 import pojo.NoGuia;
 import pojo.Rol;
+import pojo.TipoUnidad;
 
 
 /**
@@ -50,5 +51,12 @@ public class CatalogoWS {
             return CatalogoImp.obtenerDireccion(codigoPostal);
         }
         throw new BadRequestException();
+    }
+    
+    @Path("obtener-tipo-unidades")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<TipoUnidad> obtenerTiposUnidad(){
+        return CatalogoImp.obtenerTiposUnidad();
     }
 }

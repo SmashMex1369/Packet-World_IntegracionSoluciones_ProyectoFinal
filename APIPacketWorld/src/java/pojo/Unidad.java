@@ -22,13 +22,13 @@ public class Unidad {
     private String tiempo;
     private Integer idColaborador;
     private String nombre;
-    private String apelidoPaterno;
+    private String apellidoPaterno;
     private String apellidoMaterno;
 
     public Unidad() {
     }
 
-    public Unidad(Integer idUnidad, String VIN, String NII, Integer año, String modelo, String marca, Integer idTipoUnidad, int idConductor, String noLicencia, String tipo, Integer idEstatusUnidad, Integer estatus, String motivo, String tiempo, Integer idColaborador, String nombre, String apelidoPaterno, String apellidoMaterno) {
+    public Unidad(Integer idUnidad, String VIN, String NII, Integer año, String modelo, String marca, Integer idTipoUnidad, int idConductor, String noLicencia, String tipo, Integer idEstatusUnidad, Integer estatus, String motivo, String tiempo, Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno) {
         this.idUnidad = idUnidad;
         this.VIN = VIN;
         this.NII = NII;
@@ -45,7 +45,7 @@ public class Unidad {
         this.tiempo = tiempo;
         this.idColaborador = idColaborador;
         this.nombre = nombre;
-        this.apelidoPaterno = apelidoPaterno;
+        this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
     }
 
@@ -177,12 +177,12 @@ public class Unidad {
         this.nombre = nombre;
     }
 
-    public String getApelidoPaterno() {
-        return apelidoPaterno;
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
     }
 
-    public void setApelidoPaterno(String apelidoPaterno) {
-        this.apelidoPaterno = apelidoPaterno;
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
     }
 
     public String getApellidoMaterno() {
@@ -191,6 +191,6 @@ public class Unidad {
 
     public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
-    }
+    }      
       
 }

@@ -7,6 +7,7 @@ import pojo.CUS;
 import pojo.Direccion;
 import pojo.NoGuia;
 import pojo.Rol;
+import pojo.TipoUnidad;
 
 
 /**
@@ -71,6 +72,19 @@ public class CatalogoImp {
         }
         return direccion;
     }
-    
+       
+    public static List<TipoUnidad> obtenerTiposUnidad(){
+        List<TipoUnidad> tiposUnidad= null;
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if (conexionBD!=null){
+            try {
+                tiposUnidad= conexionBD.selectList("catalogo.obtener-tipos-unidad");
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return tiposUnidad;
+    }
     
 }

@@ -8,6 +8,7 @@ import javax.ws.rs.BadRequestException;
 import modelo.mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.Unidad;
+import utilidades.Constantes;
 
 /**
  *
@@ -15,12 +16,26 @@ import pojo.Unidad;
  */
 public class UnidadImp {
     
-    public static List<Unidad> obtenerUnidades(){
+    public static List<Unidad> obtenerUnidadesDisponibles(){
         List<Unidad> unidades=null;
         SqlSession conexionBD= MyBatisUtil.getSession();
         if(conexionBD!=null){
             try {
-                unidades= conexionBD.selectList("unidad.obtener-unidades");
+                unidades= conexionBD.selectList("unidad.obtener-unidades-disponibles");
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return unidades;
+    }
+    
+    public static List<Unidad> obtenerUnidadesInactivas(){
+        List<Unidad> unidades=null;
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if(conexionBD!=null){
+            try {
+                unidades= conexionBD.selectList("unidad.obtener-unidades-inactivas");
                 conexionBD.close();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -35,11 +50,20 @@ public class UnidadImp {
         SqlSession conexionBD= MyBatisUtil.getSession();
         if (conexionBD!=null){
             try {
-                int filasAfectadas= conexionBD.insert("unidad.registrar", unidad);
-                conexionBD.commit();
+                int filasAfectadas= conexionBD.insert("unidad.registrar", unidad);          
                 if (filasAfectadas>0){
-                    respuesta.setError(false);
-                    respuesta.setMensaje("La unidad ha sido registrada correctamente.");
+                    Unidad historialUnidad= new Unidad();
+                    historialUnidad.setIdUnidad(unidad.getIdUnidad());
+                    historialUnidad.setIdColaborador(unidad.getIdColaborador());
+                    filasAfectadas= conexionBD.insert("unidad.registrar-estatus", historialUnidad);
+                    if(filasAfectadas>0){
+                        conexionBD.commit();
+                        respuesta.setError(false);
+                        respuesta.setMensaje("La unidad ha sido registrada correctamente.");
+                    }else{
+                       conexionBD.rollback();
+                       respuesta.setMensaje("Lo sentimos, fallo el registro del historial, por lo tanto, no se creo la unidad.");
+                    }             
                 }else{
                     respuesta.setMensaje("Lo sentimos, la unidad no pudo ser registrada.");
                 }
@@ -48,7 +72,7 @@ public class UnidadImp {
                 respuesta.setMensaje(e.getMessage());
             }
         }else{
-            respuesta.setMensaje("Lo sentimos, por el momento no hay conexión a la BD.");
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
         }
         return respuesta;
     }
@@ -82,19 +106,37 @@ public class UnidadImp {
         SqlSession conexionBD= MyBatisUtil.getSession();
         if(conexionBD!=null){
             try {              
-                unidades= conexionBD.selectList("unidad.buscar-unidad", busqueda);
-                if(unidades!=null){
-                    return unidades;
-                }
+                unidades= conexionBD.selectList("unidad.buscar-unidad", busqueda);               
                 conexionBD.close();
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-            
-        }else{
-            throw new RuntimeException();
+            }           
         }
         return unidades;
+    }
+    
+    public static Respuesta darBajaUnidad(Unidad unidad){
+        Respuesta respuesta= new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if (conexionBD!=null){
+            try {
+                int filasAfectadas= conexionBD.insert("unidad.dar-baja", unidad);
+                if(filasAfectadas>0){
+                conexionBD.commit();
+                respuesta.setError(false);
+                respuesta.setMensaje("La unidad ha sido de baja correctamente.");
+                }else{
+                    respuesta.setMensaje("Lo sentimos, la unidad no pudo ser dada de baja.");
+                }
+                conexionBD.close();
+            }catch (Exception e) {
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
     }
     
     //metodo

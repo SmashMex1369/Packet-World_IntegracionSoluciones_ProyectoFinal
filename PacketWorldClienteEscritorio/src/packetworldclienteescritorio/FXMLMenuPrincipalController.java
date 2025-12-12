@@ -68,7 +68,6 @@ public class FXMLMenuPrincipalController implements Initializable {
         try {
             FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLAdministracionUnidades.fxml"));
             Parent vista= cargador.load();
-            //FXMLAdministracionUnidadesController controlador= cargador.getController();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) lbSaludo.getScene().getWindow();
             escenario.setScene(escena);

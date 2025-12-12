@@ -44,4 +44,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM colonia
         WHERE codigoPostal = #{codigoPostal}
     </select>
+    
+    <select id="obtener-tipos-unidad" resultType="pojo.TipoUnidad">
+        SELECT tipo FROM tipounidad;
+    </select>
+    
 </mapper>

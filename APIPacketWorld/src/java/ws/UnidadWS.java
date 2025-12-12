@@ -26,11 +26,18 @@ import pojo.Unidad;
 @Path("unidad")
 public class UnidadWS {
     
-    @Path("obtener-unidades")
+    @Path("obtener-unidades-disponibles")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Unidad> obtenerUnidades(){
-        return UnidadImp.obtenerUnidades();
+    public List<Unidad> obtenerUnidadesDisponibles(){
+        return UnidadImp.obtenerUnidadesDisponibles();
+    }
+    
+    @Path("obtener-unidades-inactivas")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad> obtenerUnidadesInacctivas(){
+        return UnidadImp.obtenerUnidadesInactivas();
     }
     
     @Path("registrar")
@@ -69,6 +76,20 @@ public class UnidadWS {
             return UnidadImp.buscarUnidad(busqueda);
         }
         throw new BadRequestException();
+    }
+    
+    @Path("dar-baja")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Respuesta darBajaUnidad(String json){
+        Gson gson= new Gson();
+        try {
+            Unidad unidad= gson.fromJson(json, Unidad.class);
+            return UnidadImp.darBajaUnidad(unidad);
+        } catch (Exception e) {
+            throw new BadRequestException();
+        }               
     }
     
 }
