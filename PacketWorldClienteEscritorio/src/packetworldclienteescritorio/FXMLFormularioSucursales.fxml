@@ -97,7 +97,7 @@
       </TextField>
       <Label layoutX="236.0" layoutY="162.0" text="Código Único">
          <font>
-            <Font size="23.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
       <TextField fx:id="tfNombreCorto" layoutX="625.0" layoutY="197.0" prefHeight="44.0" prefWidth="257.0" promptText="Ánimas">
@@ -107,7 +107,7 @@
       </TextField>
       <Label layoutX="625.0" layoutY="163.0" text="Nombre (Corto)">
          <font>
-            <Font size="23.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
       <Button alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="945.0" layoutY="552.0" mnemonicParsing="false" onAction="#clicBtnCancelar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #000000; -fx-border-width: 3; -fx-border-insets: -1; -fx-background-color: #630505;" text="Cancelar" textFill="#e1e1e1">

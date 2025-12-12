@@ -45,6 +45,17 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnClientes(ActionEvent event) {
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLAdministracionClientes.fxml"));
+            Parent vista= cargador.load();
+            Scene escena= new Scene(vista);
+            Stage escenario= (Stage) lbSaludo.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Administración Clientes");
+            escenario.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

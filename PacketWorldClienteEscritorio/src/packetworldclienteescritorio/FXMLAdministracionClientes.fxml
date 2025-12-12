@@ -29,7 +29,7 @@
             </Button>
          </children>
       </Pane>
-      <TextField fx:id="tfBusqueda" layoutX="59.0" layoutY="111.0" prefHeight="43.0" prefWidth="330.0" promptText="    Buscar Profesor" style="-fx-background-radius: 18px;">
+      <TextField fx:id="tfBusqueda" layoutX="59.0" layoutY="111.0" prefHeight="43.0" prefWidth="330.0" promptText="    Buscar Cliente" style="-fx-background-radius: 18px;">
          <font>
             <Font size="20.0" />
          </font></TextField>
