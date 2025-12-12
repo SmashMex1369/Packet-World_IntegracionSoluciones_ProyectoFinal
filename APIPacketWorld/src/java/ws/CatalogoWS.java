@@ -12,6 +12,7 @@ import pojo.CUS;
 import pojo.Direccion;
 import pojo.NoGuia;
 import pojo.Rol;
+import pojo.TipoUnidad;
 
 
 /**
@@ -45,10 +46,17 @@ public class CatalogoWS {
     @Path("obtener-direccion/{codigoPostal}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Direccion> obtenerDireccion(@PathParam ("codigoPostal") String codigoPostal){
-        if (codigoPostal!=null && !codigoPostal.isEmpty()) {
+    public List<Direccion> obtenerDireccion(@PathParam ("codigoPostal") Integer codigoPostal){
+        if (codigoPostal!=null && codigoPostal>999) {
             return CatalogoImp.obtenerDireccion(codigoPostal);
         }
         throw new BadRequestException();
+    }
+    
+    @Path("obtener-tipo-unidades")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<TipoUnidad> obtenerTiposUnidad(){
+        return CatalogoImp.obtenerTiposUnidad();
     }
 }

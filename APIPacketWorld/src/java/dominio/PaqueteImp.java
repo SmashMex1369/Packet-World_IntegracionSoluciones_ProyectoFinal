@@ -5,6 +5,7 @@ import java.util.List;
 import modelo.mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.Paquete;
+import utilidades.Constantes;
 
 /**
  *
@@ -45,7 +46,7 @@ public class PaqueteImp {
                 respuesta.setMensaje(e.getMessage());
             }
         }else{
-            respuesta.setMensaje("Lo sentimos, por el momento no hay conexión a la BD.");
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
         }
         return respuesta;
     }
@@ -69,7 +70,7 @@ public class PaqueteImp {
                 respuesta.setMensaje(e.getMessage());
             }
         }else{
-            respuesta.setMensaje("Lo sentimos, por el momento no hay conexión a la BD.");
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
         }
         return respuesta;
     }
@@ -93,7 +94,7 @@ public class PaqueteImp {
                 respuesta.setMensaje(e.getMessage());
             }
         }else{
-            respuesta.setMensaje("Lo sentimos, por el momento no hay conexión a la BD.");
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
         }
         return respuesta;
     }

@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT idSucursal, CUS FROM sucursal WHERE estatus = 1;
     </select>
     
-    <select id="obtener-ciudad-estado" parameterType="String" resultType="pojo.Direccion">
+    <select id="obtener-ciudad-estado" parameterType="int" resultType="pojo.Direccion">
         SELECT DISTINCT ciudad, estado
         FROM colonia c
         INNER JOIN ciudad ci ON c.idCiudad=ci.idCiudad
@@ -39,9 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE codigoPostal = #{codigoPostal};
     </select>
     
-    <select id="obtener-colonias" parameterType="String" resultType="pojo.Direccion">
+    <select id="obtener-colonias" parameterType="int" resultType="pojo.Direccion">
         SELECT idColonia, colonia
         FROM colonia
         WHERE codigoPostal = #{codigoPostal}
     </select>
+    
+    <select id="obtener-tipos-unidad" resultType="pojo.TipoUnidad">
+        SELECT tipo FROM tipounidad;
+    </select>
+    
 </mapper>

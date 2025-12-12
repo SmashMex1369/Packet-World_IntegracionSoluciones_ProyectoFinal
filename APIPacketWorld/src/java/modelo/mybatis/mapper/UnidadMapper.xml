@@ -5,19 +5,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="unidad">
 
-    <select id="obtener-unidades" resultType="pojo.Unidad">
+    <select id="obtener-unidades-disponibles" resultType="pojo.Unidad">
+        WITH UltimoEstatusID AS (
+            SELECT 
+                idUnidad,
+                idHistorialEstatusUnidad,
+                ROW_NUMBER() OVER(
+                    PARTITION BY idUnidad
+                    ORDER BY tiempo DESC
+                ) as FilaNumero
+            FROM historialestatusunidad
+        )
         SELECT u.idUnidad, VIN, NII, año, modelo, marca, u.idTipoUnidad, u.idConductor, noLicencia, tipo,
         estatus, motivo, tiempo, heu.idColaborador, nombre, apellidoPaterno, apellidoMaterno
         FROM unidad u
+        INNER JOIN UltimoEstatusID uei ON uei.idUnidad = u.idUnidad AND uei.FilaNumero = 1
+        INNER JOIN historialestatusunidad heu ON uei.idHistorialEstatusUnidad = heu.idHistorialEstatusUnidad 
         INNER JOIN tipounidad tu ON tu.idTipoUnidad= u.idTipoUnidad
-        LEFT JOIN historialestatusunidad heu ON heu.idUnidad= u.idUnidad
         LEFT JOIN colaborador c ON c.idColaborador=heu.idColaborador
-        LEFT JOIN conductor con ON con.idConductor=u.idConductor;
+        LEFT JOIN conductor con ON con.idConductor=u.idConductor
+        WHERE estatus=1;
     </select>
     
-    <insert id="registrar" parameterType="pojo.Unidad">
+    <select id="obtener-unidades-inactivas" resultType="pojo.Unidad">
+        WITH UltimoEstatusID AS (
+            SELECT 
+                idUnidad,
+                idHistorialEstatusUnidad,
+                ROW_NUMBER() OVER(
+                    PARTITION BY idUnidad
+                    ORDER BY tiempo DESC
+                ) as FilaNumero
+            FROM historialestatusunidad
+        )
+        SELECT u.idUnidad, VIN, NII, año, modelo, marca, u.idTipoUnidad, u.idConductor, noLicencia, tipo,
+        estatus, motivo, tiempo, heu.idColaborador, nombre, apellidoPaterno, apellidoMaterno
+        FROM unidad u
+        INNER JOIN UltimoEstatusID uei ON uei.idUnidad = u.idUnidad AND uei.FilaNumero = 1
+        INNER JOIN historialestatusunidad heu ON uei.idHistorialEstatusUnidad = heu.idHistorialEstatusUnidad 
+        INNER JOIN tipounidad tu ON tu.idTipoUnidad= u.idTipoUnidad
+        LEFT JOIN colaborador c ON c.idColaborador=heu.idColaborador
+        LEFT JOIN conductor con ON con.idConductor=u.idConductor
+        WHERE estatus=0;
+    </select>
+    
+    <insert id="registrar" parameterType="pojo.Unidad" useGeneratedKeys="true" keyProperty="idUnidad">
         INSERT INTO unidad (VIN, NII, año, modelo, marca, idTipoUnidad)
         VALUES (#{VIN}, #{NII}, #{año}, #{modelo}, #{marca}, #{idTipoUnidad});
+    </insert>
+    
+    <insert id="registrar-estatus" parameterType="pojo.Unidad">
+        INSERT INTO historialestatusunidad (estatus, motivo, tiempo, idUnidad, idColaborador)
+        VALUES (1, '', now(), #{idUnidad}, #{idColaborador});
     </insert>
     
     <update id="editar" parameterType="pojo.Unidad">
@@ -27,12 +66,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     <select id="buscar-unidad" parameterType="String" resultType="pojo.Unidad">
-        SELECT VIN, NII, año, modelo, marca, tipo
+        WITH UltimoEstatusID AS (
+            SELECT 
+                idUnidad,
+                idHistorialEstatusUnidad,
+                ROW_NUMBER() OVER(
+                    PARTITION BY idUnidad
+                    ORDER BY tiempo DESC
+                ) as FilaNumero
+            FROM historialestatusunidad
+        )
+        SELECT u.idUnidad, VIN, NII, año, modelo, marca, u.idTipoUnidad, u.idConductor, noLicencia, tipo,
+        estatus, motivo, tiempo, heu.idColaborador, nombre, apellidoPaterno, apellidoMaterno
         FROM unidad u
+        INNER JOIN UltimoEstatusID uei ON uei.idUnidad = u.idUnidad AND uei.FilaNumero = 1
+        INNER JOIN historialestatusunidad heu ON uei.idHistorialEstatusUnidad = heu.idHistorialEstatusUnidad 
         INNER JOIN tipounidad tu ON tu.idTipoUnidad= u.idTipoUnidad
-        WHERE VIN LIKE CONCAT('%', #{busqueda}, '%')
+        LEFT JOIN colaborador c ON c.idColaborador=heu.idColaborador
+        LEFT JOIN conductor con ON con.idConductor=u.idConductor
+        WHERE estatus=1 AND
+        (VIN LIKE CONCAT('%', #{busqueda}, '%')
         OR marca LIKE CONCAT('%', #{busqueda}, '%')
-        OR NII LIKE CONCAT('%', #{busqueda}, '%');
+        OR NII LIKE CONCAT('%', #{busqueda}, '%'));
     </select>
+    
+    <insert id="dar-baja" parameterType="pojo.Unidad">
+        INSERT INTO historialestatusunidad (estatus, motivo, tiempo, idUnidad, idColaborador)
+        VALUES (0, #{motivo}, now(), #{idUnidad}, #{idColaborador});
+    </insert>
     
 </mapper>

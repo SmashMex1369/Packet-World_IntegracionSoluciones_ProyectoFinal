@@ -92,10 +92,5 @@ public class Paquete {
     public void setNoGuia(String noGuia) {
         this.noGuia = noGuia;
     }
-    
-    @Override
-    public String toString() {
-        return noGuia;
-    }
       
 }
