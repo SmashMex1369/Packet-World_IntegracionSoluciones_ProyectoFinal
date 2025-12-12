@@ -53,5 +53,9 @@ public class FXMLAdministracionSucursalesController implements Initializable {
     @FXML
     private void clicBajaSucursal(ActionEvent event) {
     }
+
+    @FXML
+    private void btnRegresar(ActionEvent event) {
+    }
     
 }

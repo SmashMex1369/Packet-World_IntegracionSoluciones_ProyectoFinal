@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
@@ -8,24 +9,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="742.0" prefWidth="1095.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="packetworldclienteescritorio.FXMLAdministracionClientesController">
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLAdministracionClientesController">
    <children>
-      <Pane prefHeight="73.0" prefWidth="1095.0" style="-fx-background-color: #e9967a;">
+      <Pane prefHeight="73.0" prefWidth="1095.0" style="-fx-background-color: #630505;">
          <children>
-            <Label layoutX="487.0" layoutY="11.0" text="Clientes">
+            <Label layoutX="473.0" layoutY="8.0" text="Clientes" textFill="#e1e1e1">
                <font>
-                  <Font size="35.0" />
+                  <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <Button layoutX="26.0" layoutY="21.0" mnemonicParsing="false" text="&lt;----" />
+            <Button layoutX="23.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1">
+               <graphic>
+                  <ImageView disable="true" fitHeight="32.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/angle-left-solid.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </Pane>
-      <TextField fx:id="tfBusqueda" layoutX="59.0" layoutY="110.0" prefHeight="43.0" prefWidth="330.0" promptText="Buscar Profesor" style="-fx-background-radius: 18px;" />
-      <Button layoutX="885.0" layoutY="110.0" mnemonicParsing="false" onAction="#clicEliminar" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Eliminar" />
-      <Button layoutX="685.0" layoutY="110.0" mnemonicParsing="false" onAction="#clicIrEditar" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Editar" />
-      <Button layoutX="484.0" layoutY="110.0" mnemonicParsing="false" onAction="#clicIrRegistrar" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Registrar" />
-      <TableView fx:id="tvClientes" layoutX="37.0" layoutY="184.0" prefHeight="536.0" prefWidth="1025.0">
+      <TextField fx:id="tfBusqueda" layoutX="59.0" layoutY="111.0" prefHeight="43.0" prefWidth="330.0" promptText="    Buscar Profesor" style="-fx-background-radius: 18px;">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <Button layoutX="885.0" layoutY="110.0" mnemonicParsing="false" onAction="#clicEliminar" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Eliminar">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Button layoutX="685.0" layoutY="110.0" mnemonicParsing="false" onAction="#clicIrEditar" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Editar">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Button layoutX="484.0" layoutY="110.0" mnemonicParsing="false" onAction="#clicIrRegistrar" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Registrar">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <TableView fx:id="tvClientes" layoutX="35.0" layoutY="181.0" prefHeight="421.0" prefWidth="1025.0">
          <columns>
             <TableColumn fx:id="colNombre" prefWidth="144.0" text="Nombre" />
             <TableColumn fx:id="colApellidoPaterno" prefWidth="153.0" text="Apellido Paterno" />
@@ -38,5 +58,10 @@
             <DropShadow />
          </effect>
       </TableView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="67.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../recursos/magnifying-glass-solid.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

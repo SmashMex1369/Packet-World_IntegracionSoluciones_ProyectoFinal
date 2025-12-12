@@ -58,7 +58,7 @@ public class CatalogoImp {
         return sucursales;
     }
     
-    public static List<Direccion> obtenerDireccion(String codigoPostal){
+    public static List<Direccion> obtenerDireccion(Integer codigoPostal){
         List<Direccion> direccion = null;
         SqlSession conexionBD = MyBatisUtil.getSession();
         if (conexionBD!=null){
