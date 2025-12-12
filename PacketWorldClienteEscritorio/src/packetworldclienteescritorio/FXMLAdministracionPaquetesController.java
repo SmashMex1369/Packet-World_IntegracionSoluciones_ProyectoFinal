@@ -27,6 +27,7 @@ import packetworldclienteescritorio.dominio.PaqueteImp;
 import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Paquete;
+import packetworldclienteescritorio.utilidad.Constantes;
 import packetworldclienteescritorio.utilidad.Utilidades;
 
 /**
@@ -75,14 +76,14 @@ public class FXMLAdministracionPaquetesController implements Initializable, INot
     
     private void cargarInformacionPaquetes(){
         HashMap<String, Object> respuesta= PaqueteImp.obtenerTodos();
-        boolean esError= (boolean) respuesta.get("error");
+        boolean esError= (boolean) respuesta.get(Constantes.KEY_ERROR);
         if (!esError){
-            List<Paquete> paquetesAPI= (List<Paquete>)respuesta.get("paquetes");
+            List<Paquete> paquetesAPI= (List<Paquete>)respuesta.get(Constantes.KEY_LISTA);
             paquetes= FXCollections.observableArrayList();
             paquetes.addAll(paquetesAPI);
             tvPaquete.setItems(paquetes);
         }else{
-            Utilidades.mostrarAlertaSimple("Error al cargar", ""+respuesta.get("mensaje"), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error al cargar", ""+respuesta.get(Constantes.KEY_MENSAJE), Alert.AlertType.ERROR);
         }
     }
 

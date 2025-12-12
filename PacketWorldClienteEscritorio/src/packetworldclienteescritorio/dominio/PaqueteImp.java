@@ -27,19 +27,19 @@ public class PaqueteImp {
             Gson gson= new Gson();
             Type tipoLista= new TypeToken<List<Paquete>>(){}.getType();
             List <Paquete> paquetes= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
-            respuesta.put("error", false);
-            respuesta.put("paquetes", paquetes);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, paquetes);
         }else{
-            respuesta.put("error", true);
+            respuesta.put(Constantes.KEY_ERROR, true);
             switch(respuestaAPI.getCodigo()){
                 case Constantes.ERROR_URL:
-                    respuesta.put("mensaje",Constantes.MSJ_ERROR_URL);
+                    respuesta.put(Constantes.KEY_MENSAJE,Constantes.MSJ_ERROR_URL);
                     break;
                 case Constantes.ERROR_PETICION:
-                    respuesta.put("mensaje",Constantes.MSJ_ERROR_PETICION);
+                    respuesta.put(Constantes.KEY_MENSAJE,Constantes.MSJ_ERROR_PETICION);
                     break;
                 default:
-                    respuesta.put("mensaje","Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
+                    respuesta.put(Constantes.KEY_MENSAJE,"Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
             }  
         }
         return respuesta;
@@ -133,19 +133,19 @@ public class PaqueteImp {
         if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
             Type tipoLista= new TypeToken <List<Paquete>>(){}.getType();
             List <Paquete> paquetes= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
-            respuesta.put("error", false);
-            respuesta.put("paquetes", paquetes);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, paquetes);
         }else{
-            respuesta.put("error", true);
+            respuesta.put(Constantes.KEY_ERROR, true);
             switch(respuestaAPI.getCodigo()){
                 case Constantes.ERROR_URL:
-                    respuesta.put("mensaje",Constantes.MSJ_ERROR_URL);
+                    respuesta.put(Constantes.KEY_MENSAJE,Constantes.MSJ_ERROR_URL);
                     break;
                 case Constantes.ERROR_PETICION:
-                    respuesta.put("mensaje",Constantes.MSJ_ERROR_PETICION);
+                    respuesta.put(Constantes.KEY_MENSAJE,Constantes.MSJ_ERROR_PETICION);
                     break;
                 default:
-                    respuesta.put("mensaje","Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
+                    respuesta.put(Constantes.KEY_MENSAJE,"Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
             } 
         }
         return respuesta;
