@@ -22,10 +22,6 @@ import javafx.scene.control.TextField;
 public class FXMLFormularioSucursalesController implements Initializable {
 
     @FXML
-    private Button btnCancelar;
-    @FXML
-    private Button btnGuardar;
-    @FXML
     private ComboBox<?> cbColonia;
     @FXML
     private ComboBox<?> cbCiudad;
@@ -56,6 +52,10 @@ public class FXMLFormularioSucursalesController implements Initializable {
 
     @FXML
     private void clicBtnGuardar(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnRegresar(ActionEvent event) {
     }
     
 }
