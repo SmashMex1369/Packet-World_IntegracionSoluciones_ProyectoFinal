@@ -36,6 +36,7 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnEnvios(ActionEvent event) {
+        irAdmEnvios();
     }
 
     @FXML
@@ -49,6 +50,7 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnColaboradores(ActionEvent event) {
+        irAdmColaboradores();
     }
 
     @FXML
@@ -87,6 +89,34 @@ public class FXMLMenuPrincipalController implements Initializable {
             Stage escenario= (Stage) lbSaludo.getScene().getWindow();
             escenario.setScene(escena);
             escenario.setTitle("Administración Paquetes");
+            escenario.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void irAdmEnvios(){
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLAdministracionEnvios.fxml"));
+            Parent vista = cargador.load();
+            Scene escena = new Scene(vista);
+            Stage escenario = (Stage) lbSaludo.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Administracion Envios");
+            escenario.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void irAdmColaboradores(){
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLAdministracionColaboradores.fxml"));
+            Parent vista = cargador.load();
+            Scene escena = new Scene(vista);
+            Stage escenario = (Stage) lbSaludo.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Administracion Colaboradores");
             escenario.show();
         } catch (Exception e) {
             e.printStackTrace();

@@ -8,26 +8,26 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import packetworldclienteescritorio.conexion.ConexionAPI;
-import packetworldclienteescritorio.dto.Respuesta;
-import packetworldclienteescritorio.pojo.Direccion;
-import packetworldclienteescritorio.pojo.NoGuia;
+import packetworldclienteescritorio.pojo.Envio;
 import packetworldclienteescritorio.pojo.RespuestaHTTP;
 import packetworldclienteescritorio.utilidad.Constantes;
 
+
 /**
  *
- * @author citla
+ * @author alex4
  */
-public class CatalogoImp {
-    
-    public static HashMap<String, Object> obtenerEnviosDisponibles(){
-        HashMap<String, Object> respuesta= new LinkedHashMap<>();
-        String URL= Constantes.URL_WS + "catalogo/obtener-noguia-disponibles";
-        RespuestaHTTP respuestaAPI= ConexionAPI.peticionGET(URL);
-        if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
-            Gson gson= new Gson();
-            Type tipoLista= new TypeToken<List<NoGuia>>(){}.getType();
-            List<NoGuia> envios= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+
+public class EnvioImp {
+
+    public static HashMap<String, Object> obtenerEnvios(){
+        HashMap<String, Object> respuesta = new LinkedHashMap<>();
+        String URL = Constantes.URL_WS + "envio/obtener-envios";
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+        if (respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            Type tipoLista = new TypeToken<List<Envio>>(){}.getType();
+            List<Envio> envios = gson.fromJson(respuestaAPI.getContenido(), tipoLista);
             respuesta.put(Constantes.KEY_ERROR, false);
             respuesta.put(Constantes.KEY_LISTA, envios);
         }else{
@@ -41,21 +41,21 @@ public class CatalogoImp {
                     break;
                 default:
                     respuesta.put(Constantes.KEY_MENSAJE,"Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
-            } 
+            }  
         }
         return respuesta;
     }
     
-    public static HashMap<String, Object> obtenerColonias(int codigoPostal){
+    public static HashMap<String, Object> buscarEnvio(String noGuia){
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
-        String URL = Constantes.URL_WS+"catalogo/obtener-direccion/"+codigoPostal;
+        String URL = Constantes.URL_WS + "envio/buscar-envio/" +noGuia;
         RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
-        if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
-            Gson gson= new Gson();
-            Type tipoLista= new TypeToken<List<Direccion>>(){}.getType();
-            List<Direccion> colonias= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+        Gson gson = new Gson();
+        if (respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK) {
+            Type tipoLista = new TypeToken<List<Envio>>(){}.getType();
+            List<Envio> envios = gson.fromJson(respuestaAPI.getContenido(), tipoLista);
             respuesta.put(Constantes.KEY_ERROR, false);
-            respuesta.put(Constantes.KEY_LISTA, colonias);
+            respuesta.put(Constantes.KEY_LISTA, envios);
         }else{
             respuesta.put(Constantes.KEY_ERROR, true);
             switch(respuestaAPI.getCodigo()){
@@ -67,7 +67,7 @@ public class CatalogoImp {
                     break;
                 default:
                     respuesta.put(Constantes.KEY_MENSAJE,"Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
-            } 
+            }  
         }
         return respuesta;
     }
