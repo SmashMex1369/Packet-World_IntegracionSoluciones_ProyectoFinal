@@ -47,7 +47,7 @@ public class CatalogoWS {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Direccion> obtenerDireccion(@PathParam ("codigoPostal") Integer codigoPostal){
-        if (codigoPostal!=null && codigoPostal>999) {
+        if (codigoPostal!=null && codigoPostal>0) {
             return CatalogoImp.obtenerDireccion(codigoPostal);
         }
         throw new BadRequestException();
