@@ -121,4 +121,18 @@ public class EnvioImp {
         return envios;
     }
     
+    public static Envio buscarEnvioWeb(String noGuia){
+        Envio envio = null;  
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if(conexionBD != null){
+            try{
+                envio = conexionBD.selectOne("envio.buscar-envio-web", noGuia);
+                conexionBD.close();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        return envio;
+    }
+    
 }

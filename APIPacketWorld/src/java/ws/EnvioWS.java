@@ -81,4 +81,14 @@ public class EnvioWS {
         }
         throw new BadRequestException();
     }
+    
+    @Path("buscar-envio-web/{noGuia}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Envio buscarEnvioWeb(@PathParam ("noGuia") String noGuia){
+        if (noGuia!=null && !noGuia.isEmpty()) {
+            return EnvioImp.buscarEnvioWeb(noGuia);
+        }
+        throw new BadRequestException();
+    }
 }
