@@ -46,17 +46,7 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnClientes(ActionEvent event) {
-        try {
-            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLAdministracionClientes.fxml"));
-            Parent vista= cargador.load();
-            Scene escena= new Scene(vista);
-            Stage escenario= (Stage) lbSaludo.getScene().getWindow();
-            escenario.setScene(escena);
-            escenario.setTitle("Administración Clientes");
-            escenario.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        irAdminClientes();
     }
 
     @FXML
@@ -71,6 +61,7 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnSucursales(ActionEvent event) {
+        irAdminSucursales();
     }
 
     @FXML
@@ -85,6 +76,34 @@ public class FXMLMenuPrincipalController implements Initializable {
             Stage escenario= (Stage) lbSaludo.getScene().getWindow();
             escenario.setScene(escena);
             escenario.setTitle("Administración Unidades");
+            escenario.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void irAdminClientes(){
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLAdministracionClientes.fxml"));
+            Parent vista= cargador.load();
+            Scene escena= new Scene(vista);
+            Stage escenario= (Stage) lbSaludo.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Administración Clientes");
+            escenario.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void irAdminSucursales(){
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLAdministracionSucursales.fxml"));
+            Parent vista= cargador.load();
+            Scene escena= new Scene(vista);
+            Stage escenario= (Stage) lbSaludo.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Administración Sucursales");
             escenario.show();
         } catch (Exception e) {
             e.printStackTrace();
