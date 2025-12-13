@@ -9,6 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import pojo.CUS;
+import pojo.Cliente;
 import pojo.Direccion;
 import pojo.NoGuia;
 import pojo.Rol;
@@ -58,5 +59,12 @@ public class CatalogoWS {
     @Produces(MediaType.APPLICATION_JSON)
     public List<TipoUnidad> obtenerTiposUnidad(){
         return CatalogoImp.obtenerTiposUnidad();
+    }
+    
+    @Path("obtener-nombres-clientes")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Cliente> obtenerNombresClientes(){
+        return CatalogoImp.obtenerNombresClientes();
     }
 }

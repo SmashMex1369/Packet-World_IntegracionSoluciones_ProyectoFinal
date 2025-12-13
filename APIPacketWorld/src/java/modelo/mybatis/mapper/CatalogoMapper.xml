@@ -49,4 +49,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT tipo FROM tipounidad;
     </select>
     
+    <select id="obtener-nombres-clientes" resultType="pojo.Cliente">
+        SELECT idCliente, nombre, apellidoPaterno, apellidoMaterno FROM cliente;
+    </select>
+    
 </mapper>

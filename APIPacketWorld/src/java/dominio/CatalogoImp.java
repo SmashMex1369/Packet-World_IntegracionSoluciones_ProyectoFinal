@@ -4,6 +4,7 @@ import java.util.List;
 import modelo.mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.CUS;
+import pojo.Cliente;
 import pojo.Direccion;
 import pojo.NoGuia;
 import pojo.Rol;
@@ -85,6 +86,20 @@ public class CatalogoImp {
             }
         }
         return tiposUnidad;
+    }
+    
+    public static List<Cliente> obtenerNombresClientes(){
+        List<Cliente> nombresCliente= null;
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if (conexionBD!=null){
+            try {
+                nombresCliente= conexionBD.selectList("catalogo.obtener-nombres-clientes");
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return nombresCliente;
     }
     
 }
