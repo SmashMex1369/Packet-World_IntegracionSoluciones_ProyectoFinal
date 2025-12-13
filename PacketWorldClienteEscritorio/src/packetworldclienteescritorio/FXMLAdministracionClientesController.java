@@ -18,11 +18,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.ClienteImp;
 import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Cliente;
+import packetworldclienteescritorio.utilidad.FiltradoTablas;
 import packetworldclienteescritorio.utilidad.Utilidades;
 
 /**
@@ -31,9 +33,9 @@ import packetworldclienteescritorio.utilidad.Utilidades;
  * @author OmarVX
  */
 public class FXMLAdministracionClientesController implements Initializable, INotificador {
-
+    
     @FXML
-    private TextField tfBuscar;
+    private TextField tfBusqueda;
     @FXML
     private TableView<Cliente> tvClientes;
     @FXML
@@ -59,6 +61,7 @@ public class FXMLAdministracionClientesController implements Initializable, INot
         // TODO
         configurarTabla();
         cargarInfoClientes();
+        configurarFiltrado();
     }    
     
     private void configurarTabla(){
@@ -67,13 +70,29 @@ public class FXMLAdministracionClientesController implements Initializable, INot
         colApellidoMaterno.setCellValueFactory(new PropertyValueFactory("ApellidoMaterno"));
         colDireccion.setCellValueFactory(cellData -> {
         Cliente c = cellData.getValue();
-        String combinado = "Calle: " + c.getCalle() + " No." + c.getNumero() + " Colonia: " + c.getColonia();
+        String combinado = "Calle " + c.getCalle() + " No." + c.getNumero() + " Colonia " + c.getColonia();
         return new ReadOnlyStringWrapper(combinado);
         });
         colTelefono.setCellValueFactory(new PropertyValueFactory("Telefono"));
         colCorreo.setCellValueFactory(new PropertyValueFactory("Correo"));
     }
     
+     private void configurarFiltrado() {
+        FiltradoTablas.configurarFiltradoGenerico(
+            tfBusqueda,
+            tvClientes,
+            clientes,
+            (cliente, filtro) -> {
+                Cliente c = (Cliente) cliente;
+                return c.getNombre().toLowerCase().contains(filtro) ||
+                       c.getApellidoPaterno().toLowerCase().contains(filtro) ||
+                       c.getApellidoMaterno().toLowerCase().contains(filtro) ||
+                       c.getCorreo().toLowerCase().contains(filtro) ||
+                       c.getTelefono().toLowerCase().contains(filtro);
+            }
+        );
+    }
+     
     private void cargarInfoClientes(){
         
         HashMap<String, Object> respuesta= ClienteImp.obtenerTodos();
@@ -88,7 +107,7 @@ public class FXMLAdministracionClientesController implements Initializable, INot
         }
         
     }
-
+    
     @FXML
     private void clicEliminar(ActionEvent event) {
         Cliente cliente= tvClientes.getSelectionModel().getSelectedItem();
@@ -106,7 +125,7 @@ public class FXMLAdministracionClientesController implements Initializable, INot
         Respuesta respuesta= ClienteImp.eliminarCliente(idCliente);
         System.out.println("funcion elim"+idCliente);
         if(!respuesta.isError()){
-            Utilidades.mostrarAlertaSimple("Cliente eliminado", "El registro del cliente fue eliminado correctamente.", Alert.AlertType.WARNING);
+            Utilidades.mostrarAlertaSimple("Cliente eliminado", "El registro del cliente fue eliminado correctamente.", Alert.AlertType.INFORMATION);
             cargarInfoClientes();
         }else{
             Utilidades.mostrarAlertaSimple("Error al eliminar", respuesta.getMensaje(), Alert.AlertType.ERROR);
@@ -165,5 +184,5 @@ public class FXMLAdministracionClientesController implements Initializable, INot
         System.out.println("Operacion: "+operacion+", descripcion del profesor: "+descripcion);
         cargarInfoClientes();
     }
-    
+       
 }

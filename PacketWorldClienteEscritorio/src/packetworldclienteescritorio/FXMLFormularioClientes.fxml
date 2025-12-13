@@ -16,7 +16,7 @@
             <DropShadow />
          </effect>
          <children>
-            <Label layoutX="411.0" layoutY="4.0" text="Registrar cliente" textFill="#e1e1e1">
+            <Label fx:id="lblTitulo" layoutX="411.0" layoutY="4.0" text="Registrar cliente" textFill="#e1e1e1">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
@@ -54,10 +54,13 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfNombre" layoutX="50.0" layoutY="193.0" prefHeight="36.0" prefWidth="288.0" promptText="Luis" />
-      <TextField fx:id="tfCorreo" layoutX="285.0" layoutY="297.0" prefHeight="34.0" prefWidth="257.0" promptText="\@gmail/yahoo/hotmail...">
+      <TextField fx:id="tfNombre" layoutX="50.0" layoutY="193.0" prefHeight="47.0" prefWidth="288.0" promptText="Luis">
          <font>
-            <Font size="16.0" />
+            <Font size="20.0" />
+         </font></TextField>
+      <TextField fx:id="tfCorreo" layoutX="285.0" layoutY="297.0" prefHeight="47.0" prefWidth="257.0" promptText="\@gmail/yahoo/hotmail...">
+         <font>
+            <Font size="20.0" />
          </font>
       </TextField>
       <Label layoutX="285.0" layoutY="262.0" text="Correo electrónico">
@@ -65,18 +68,24 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfTelefono" layoutX="671.0" layoutY="296.0" prefHeight="34.0" prefWidth="257.0" />
+      <TextField fx:id="tfTelefono" layoutX="671.0" layoutY="296.0" prefHeight="47.0" prefWidth="257.0">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
       <Label layoutX="671.0" layoutY="262.0" text="Teléfono">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Label layoutX="880.0" layoutY="381.0" text="Código postal">
+      <Label layoutX="855.0" layoutY="381.0" text="Código postal">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfCodigoPostal" layoutX="881.0" layoutY="418.0" prefHeight="37.0" prefWidth="220.0" />
+      <TextField fx:id="tfCodigoPostal" layoutX="856.0" layoutY="418.0" prefHeight="47.0" prefWidth="188.0">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
       <Label layoutX="449.0" layoutY="497.0" text="Estado">
          <font>
             <Font size="23.0" />
@@ -87,37 +96,58 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfNumeroExterior" layoutX="321.0" layoutY="419.0" prefHeight="37.0" prefWidth="220.0" />
+      <TextField fx:id="tfNumeroExterior" layoutX="321.0" layoutY="419.0" prefHeight="47.0" prefWidth="220.0">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
       <Label layoutX="322.0" layoutY="385.0" text="Número exterior">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfCalle" layoutX="28.0" layoutY="418.0" prefHeight="36.0" prefWidth="220.0" />
+      <TextField fx:id="tfCalle" layoutX="28.0" layoutY="418.0" prefHeight="47.0" prefWidth="220.0">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
       <Label layoutX="29.0" layoutY="384.0" text="Calle">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Label layoutX="608.0" layoutY="385.0" text="Colonia">
+      <Label layoutX="599.0" layoutY="385.0" text="Colonia">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cbEstado" layoutX="449.0" layoutY="531.0" prefHeight="37.0" prefWidth="257.0" />
-      <ComboBox fx:id="cbCiudad" layoutX="138.0" layoutY="532.0" prefHeight="32.0" prefWidth="257.0" />
-      <ComboBox fx:id="cbColonia" layoutX="605.0" layoutY="419.0" prefHeight="34.0" prefWidth="220.0" />
-      <Button alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="776.0" layoutY="537.0" mnemonicParsing="false" onAction="#clicBtnGuardar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Guardar" textFill="#e1e1e1">
+      <ComboBox fx:id="cbEstado" layoutX="449.0" layoutY="531.0" prefHeight="47.0" prefWidth="257.0" />
+      <ComboBox fx:id="cbCiudad" layoutX="138.0" layoutY="532.0" prefHeight="47.0" prefWidth="257.0" />
+      <ComboBox fx:id="cbColonia" layoutX="596.0" layoutY="419.0" prefHeight="47.0" prefWidth="220.0" />
+      <Button fx:id="btnGuardar" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="776.0" layoutY="537.0" mnemonicParsing="false" onAction="#clicBtnGuardar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Guardar" textFill="#e1e1e1">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <TextField fx:id="tfApellidoPaterno" layoutX="427.0" layoutY="192.0" prefHeight="36.0" prefWidth="288.0" promptText="López" />
-      <TextField fx:id="tfApellidoMaterno" layoutX="807.0" layoutY="193.0" prefHeight="36.0" prefWidth="288.0" promptText="Morales" />
+      <TextField fx:id="tfApellidoPaterno" layoutX="427.0" layoutY="192.0" prefHeight="47.0" prefWidth="288.0" promptText="López">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <TextField fx:id="tfApellidoMaterno" layoutX="807.0" layoutY="193.0" prefHeight="47.0" prefWidth="288.0" promptText="Morales">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
       <Button alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="953.0" layoutY="537.0" mnemonicParsing="false" onAction="#clicBtnCancelar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #000000; -fx-border-width: 3; -fx-border-insets: -1; -fx-background-color: #630505;" text="Cancelar" textFill="#e1e1e1">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
+      </Button>
+      <Button layoutX="1050.0" layoutY="418.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnBuscarCodigoPostal" prefHeight="47.0" prefWidth="45.0">
+         <graphic>
+            <ImageView disable="true" fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/magnifying-glass-solid.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
    </children>
 </AnchorPane>
