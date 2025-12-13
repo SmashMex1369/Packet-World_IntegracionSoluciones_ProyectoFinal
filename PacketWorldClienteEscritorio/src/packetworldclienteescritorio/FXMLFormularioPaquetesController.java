@@ -187,7 +187,7 @@ public class FXMLFormularioPaquetesController implements Initializable {
             envios.addAll(enviosAPI);
             cbNoGuia.setItems(envios);
         }else{
-            Utilidades.mostrarAlertaSimple("Error", respuesta.get(Constantes.KEY_MENSAJE).toString(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple(Constantes.KEY_ERROR, respuesta.get(Constantes.KEY_MENSAJE).toString(), Alert.AlertType.ERROR);
             regresarVentana();
         }
     }
