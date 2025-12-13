@@ -42,7 +42,7 @@ INNER JOIN estado e         ON e.idEstado = ci.idEstado ;
         
         UPDATE cliente 
         SET telefono = #{telefono}, nombre = #{nombre}, apellidoPaterno = #{apellidoPaterno}, apellidoMaterno = #{apellidoMaterno}, 
-        correo = #{correo}, calle = #{calle}, numero = #{numero} WHERE idCliente = #{idCliente}
+        correo = #{correo}, calle = #{calle}, numero = #{numero}, idColonia = #{idColonia} WHERE idCliente = #{idCliente}
         
     </update>
     
