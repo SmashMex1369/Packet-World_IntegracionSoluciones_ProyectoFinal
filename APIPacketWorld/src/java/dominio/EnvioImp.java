@@ -1,5 +1,6 @@
 package dominio;
 
+import dto.RSBuscarEnvioWeb;
 import dto.Respuesta;
 import java.util.List;
 import modelo.mybatis.MyBatisUtil;
@@ -121,18 +122,42 @@ public class EnvioImp {
         return envios;
     }
     
-    public static Envio buscarEnvioWeb(String noGuia){
-        Envio envio = null;  
+    public static RSBuscarEnvioWeb buscarEnvioWeb(String noGuia){
+        RSBuscarEnvioWeb respuesta = new RSBuscarEnvioWeb();  
+        respuesta.setError(true);
         SqlSession conexionBD = MyBatisUtil.getSession();
         if(conexionBD != null){
             try{
-                envio = conexionBD.selectOne("envio.buscar-envio-web", noGuia);
+                Envio envio = conexionBD.selectOne("envio.buscar-envio-web", noGuia);
+                if (envio != null) {
+                    respuesta.setError(false);
+                    respuesta.setMensaje("El envio fue encontrado");
+                    respuesta.setEnvio(envio);
+                }else{
+                    respuesta.setMensaje("El número de guia ingresado no existe, favor de verificarlo");
+                }
+                conexionBD.close();
+            }catch(Exception e){
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
+    }
+    
+    public static List<Envio> historialEstatusEnvio(String noGuia){
+        List<Envio> envios = null;  
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if(conexionBD != null){
+            try{
+                envios = conexionBD.selectList("envio.historial-estatus-envio", noGuia);
                 conexionBD.close();
             }catch(Exception e){
                 e.printStackTrace();
             }
         }
-        return envio;
+        return envios;
     }
     
 }

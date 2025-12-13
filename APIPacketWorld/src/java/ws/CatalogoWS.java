@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import pojo.CUS;
 import pojo.Cliente;
 import pojo.Direccion;
+import pojo.EstatusEnvio;
 import pojo.NoGuia;
 import pojo.Rol;
 import pojo.TipoUnidad;
@@ -66,5 +67,12 @@ public class CatalogoWS {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Cliente> obtenerNombresClientes(){
         return CatalogoImp.obtenerNombresClientes();
+    }
+    
+    @Path("obtener-estatus-envio")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<EstatusEnvio> obtenerEstatusEnvio(){
+        return CatalogoImp.obtenerEstatusEnvio();
     }
 }

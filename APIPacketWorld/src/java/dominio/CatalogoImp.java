@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import pojo.CUS;
 import pojo.Cliente;
 import pojo.Direccion;
+import pojo.EstatusEnvio;
 import pojo.NoGuia;
 import pojo.Rol;
 import pojo.TipoUnidad;
@@ -100,6 +101,20 @@ public class CatalogoImp {
             }
         }
         return nombresCliente;
+    }
+    
+    public static List<EstatusEnvio> obtenerEstatusEnvio(){
+        List<EstatusEnvio> estatus = null;
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if (conexionBD!=null){
+            try {
+                estatus = conexionBD.selectList("catalogo.obtener-estatus-envio");
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return estatus;
     }
     
 }

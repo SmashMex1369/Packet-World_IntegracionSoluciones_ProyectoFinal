@@ -265,4 +265,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         LEFT JOIN colaborador colcon ON con.noPersonal = colcon.noPersonal
         WHERE e.noGuia = #{noGuia};
     </select>
+    
+    <select id="historial-estatus-envio" parameterType="String" resultType="pojo.Envio">
+        SELECT noguia, estatus, motivo, tiempo
+        FROM historialestatusenvio hee
+        INNER JOIN estatusenvio ee ON hee.idEstatusEnvio=ee.idEstatusEnvio
+        INNER JOIN envio e ON hee.idEnvio=e.idEnvio
+        WHERE noGuia=#{noGuia} ORDER BY tiempo DESC;
+    </select>
 </mapper>

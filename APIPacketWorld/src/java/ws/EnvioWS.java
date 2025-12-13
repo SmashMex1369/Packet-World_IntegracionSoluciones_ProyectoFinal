@@ -2,6 +2,7 @@ package ws;
 
 import com.google.gson.Gson;
 import dominio.EnvioImp;
+import dto.RSBuscarEnvioWeb;
 import dto.Respuesta;
 import java.util.List;
 import javax.ws.rs.BadRequestException;
@@ -85,9 +86,19 @@ public class EnvioWS {
     @Path("buscar-envio-web/{noGuia}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Envio buscarEnvioWeb(@PathParam ("noGuia") String noGuia){
+    public RSBuscarEnvioWeb buscarEnvioWeb(@PathParam ("noGuia") String noGuia){
         if (noGuia!=null && !noGuia.isEmpty()) {
             return EnvioImp.buscarEnvioWeb(noGuia);
+        }
+        throw new BadRequestException();
+    }
+    
+    @Path("historial-estatus-envio/{noGuia}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio> historialEstatusEnvio(@PathParam ("noGuia") String noGuia){
+        if (noGuia!=null && !noGuia.isEmpty()) {
+            return EnvioImp.historialEstatusEnvio(noGuia);
         }
         throw new BadRequestException();
     }
