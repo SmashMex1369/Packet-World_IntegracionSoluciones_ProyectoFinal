@@ -112,7 +112,7 @@ public class FXMLAdministracionClientesController implements Initializable, INot
     private void clicEliminar(ActionEvent event) {
         Cliente cliente= tvClientes.getSelectionModel().getSelectedItem();
         if(cliente!=null){
-            boolean confirmarOperacion= Utilidades.mostrarAlertaConfirmacion("Eliminar cliente", "¿Estás seguro de eliminar el cliente?");
+            boolean confirmarOperacion= Utilidades.mostrarAlertaConfirmacion("Eliminar cliente", "¿Estás seguro de eliminar al cliente " + cliente.getNombre() + " " + cliente.getApellidoPaterno() + "?");
             if(confirmarOperacion){
                 eliminarCliente(cliente.getIdCliente());
             }
