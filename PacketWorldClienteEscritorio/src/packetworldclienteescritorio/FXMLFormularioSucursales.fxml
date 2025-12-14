@@ -13,7 +13,7 @@
    <children>
       <Pane prefHeight="69.0" prefWidth="1127.0" style="-fx-background-color: #630505;">
          <children>
-            <Label layoutX="397.0" layoutY="5.0" text="Registrar sucursal" textFill="#e1e1e1">
+            <Label fx:id="lblTitulo" layoutX="397.0" layoutY="5.0" text="Registrar sucursal" textFill="#e1e1e1">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
@@ -115,10 +115,19 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="768.0" layoutY="552.0" mnemonicParsing="false" onAction="#clicBtnGuardar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Guardar" textFill="#e1e1e1">
+      <Button fx:id="btnGuardar" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="768.0" layoutY="552.0" mnemonicParsing="false" onAction="#clicBtnGuardar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Guardar" textFill="#e1e1e1">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
+      </Button>
+      <Button layoutX="320.0" layoutY="324.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnBuscarCodigoPostal" prefHeight="47.0" prefWidth="45.0">
+         <graphic>
+            <ImageView disable="true" fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/magnifying-glass-solid.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
    </children>
 </AnchorPane>

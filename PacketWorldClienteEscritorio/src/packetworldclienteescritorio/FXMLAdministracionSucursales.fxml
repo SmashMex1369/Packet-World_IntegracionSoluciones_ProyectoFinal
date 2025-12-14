@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
@@ -22,22 +23,18 @@
             <DropShadow />
          </effect>
       </TableView>
-      <Button layoutX="493.0" layoutY="113.0" mnemonicParsing="false" onAction="#clicIrRegistrarSucursal" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Registrar">
+      <Button layoutX="285.0" layoutY="104.0" mnemonicParsing="false" onAction="#clicIrRegistrarSucursal" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Registrar">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button layoutX="694.0" layoutY="113.0" mnemonicParsing="false" onAction="#clicIrEditarSucursal" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Editar">
+      <Button layoutX="486.0" layoutY="104.0" mnemonicParsing="false" onAction="#clicIrEditarSucursal" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Editar">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button layoutX="894.0" layoutY="113.0" mnemonicParsing="false" onAction="#clicBajaSucursal" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Dar de baja">
+      <Button layoutX="686.0" layoutY="104.0" mnemonicParsing="false" onAction="#clicBajaSucursal" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Dar de baja">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <TextField fx:id="tfBusqueda" layoutX="68.0" layoutY="113.0" prefHeight="43.0" prefWidth="330.0" promptText="    Buscar Sucursal" style="-fx-background-radius: 18px;">
-         <font>
-            <Font size="20.0" />
-         </font></TextField>
       <Pane prefHeight="73.0" prefWidth="1095.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0">
          <children>
             <Label layoutX="450.0" layoutY="8.0" text="Sucursales" textFill="#e1e1e1">
@@ -56,10 +53,5 @@
             </Button>
          </children>
       </Pane>
-      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="77.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../recursos/magnifying-glass-solid.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
