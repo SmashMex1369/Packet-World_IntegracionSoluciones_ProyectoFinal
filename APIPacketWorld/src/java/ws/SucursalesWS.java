@@ -56,5 +56,19 @@ public Respuesta editarSucursal(String json){
             throw new BadRequestException(e.getMessage());
         }
     }
+
+@Path("dar-baja-sucursal")
+@POST
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public Respuesta darBajaSucursal(String json){
+        Gson gson= new Gson();
+        try {
+            Sucursal sucursal= gson.fromJson(json, Sucursal.class);
+            return SucursalImp.bajaSucursal(sucursal);
+        } catch (Exception e) {
+            throw new BadRequestException();
+        }               
+    }
     
 }

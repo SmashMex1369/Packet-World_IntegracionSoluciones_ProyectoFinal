@@ -86,4 +86,36 @@ public class SucursalImp {
         return respuesta;
     }
     
+    public static Respuesta bajaSucursal(Sucursal sucursal){
+        Respuesta respuesta = new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if(conexionBD != null){
+            try{
+                int filasAfectadas = conexionBD.update("sucursal.baja-sucursal", sucursal);
+                
+                    if(filasAfectadas > 0){
+                        conexionBD.commit();
+                        respuesta.setError(false);
+                        respuesta.setMensaje("Sucursal " + sucursal.getNombre() + " dada de baja con éxito");
+                    }else{
+                        conexionBD.rollback();
+                        respuesta.setError(true);
+                        respuesta.setMensaje("No se pudo dar de baja la sucursal, intente más tarde");
+                    }
+                    
+            }catch(Exception e){
+                conexionBD.rollback();
+                respuesta.setError(true);
+                respuesta.setMensaje(e.getMessage());
+            }finally{
+                conexionBD.close();
+            }
+        }else{
+            respuesta.setError(true);
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
+    }
+    
 }

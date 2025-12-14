@@ -21,12 +21,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     co.codigoPostal,
 
     ci.ciudad,
-    e.estado
+    e.estado,
+    c.estatus
 
 FROM cliente c
 INNER JOIN colonia co       ON co.idColonia = c.idColonia
 INNER JOIN ciudad ci        ON ci.idCiudad = co.idCiudad
-INNER JOIN estado e         ON e.idEstado = ci.idEstado ;
+INNER JOIN estado e         ON e.idEstado = ci.idEstado WHERE estatus = 1;
         
     </select>
     

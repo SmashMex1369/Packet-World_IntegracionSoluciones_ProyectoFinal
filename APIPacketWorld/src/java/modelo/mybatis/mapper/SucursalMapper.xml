@@ -44,9 +44,9 @@ INNER JOIN estado e  ON e.idEstado = ci.idEstado;
         
     </update>
     
-    <update id = "baja-sucursal" parameterType="pojo.Sucursal">
-        
-        
-    </update>
+    <insert id = "baja-sucursal" parameterType="pojo.Sucursal">
+        INSERT INTO sucursal (idSucursal, estatus)
+        VALUES (idSucursal = #{idSucursal}, 0);
+    </insert>
 
 </mapper>
