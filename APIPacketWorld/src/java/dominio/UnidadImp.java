@@ -139,10 +139,4 @@ public class UnidadImp {
         return respuesta;
     }
     
-    //metodo
-    /*public static String generarNII(int año, String VIN){
-        String NII;
-        NII= año+VIN.substring(0, 4);
-        return NII;
-    }*/
 }

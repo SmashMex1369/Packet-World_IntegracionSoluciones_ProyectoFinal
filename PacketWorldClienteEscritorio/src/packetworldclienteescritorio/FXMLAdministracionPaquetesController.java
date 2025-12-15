@@ -173,11 +173,11 @@ public class FXMLAdministracionPaquetesController implements Initializable, INot
         }else{
             respuesta= PaqueteImp.obtenerPaquetePorNoGuia(tfBuscar.getText());
         }      
-        boolean esError= (boolean) respuesta.get("error");
+        boolean esError= (boolean) respuesta.get(Constantes.KEY_ERROR);
         if(!esError){
-            List<Paquete> paqueteAPI= (List<Paquete>) respuesta.get("paquetes");
+            List<Paquete> paquetesAPI= (List<Paquete>) respuesta.get(Constantes.KEY_LISTA);
             paquetes= FXCollections.observableArrayList();
-            paquetes.addAll(paqueteAPI);
+            paquetes.addAll(paquetesAPI);
             tvPaquete.setItems(paquetes);
         }else{
             Utilidades.mostrarAlertaSimple("Error al cargar", ""+respuesta.get("mensaje"), Alert.AlertType.ERROR);
