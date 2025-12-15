@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.SucursalImp;
+import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Sucursal;
 import packetworldclienteescritorio.utilidad.Utilidades;
@@ -109,6 +110,26 @@ public class FXMLAdministracionSucursalesController implements Initializable, IN
 
     @FXML
     private void clicBajaSucursal(ActionEvent event) {
+        Sucursal sucursal = tvSucursales.getSelectionModel().getSelectedItem();
+        if(sucursal != null){
+            boolean confirmarOperacion= Utilidades.mostrarAlertaConfirmacion("Dar de baja sucursal", "¿Estás seguro de dar de baja a la sucursal seleccionada?");
+            if(confirmarOperacion){
+                bajaSucursal(sucursal.getIdSucursal());
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccione una sucursal", "Para dar de baja una sucursal debes seleccionar una de la tabla", Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void bajaSucursal(int idSucursal){
+        Respuesta respuesta= SucursalImp.darBajaSucursal(idSucursal);
+        System.out.println("funcion baja"+idSucursal);
+        if(!respuesta.isError()){
+            Utilidades.mostrarAlertaSimple("Sucursal dada de baja", "Baja de sucursal exitosa.", Alert.AlertType.INFORMATION);
+            cargarInfoSucursales();
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al eliminar", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
