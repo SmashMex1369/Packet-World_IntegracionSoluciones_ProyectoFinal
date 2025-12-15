@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="obtener-nombres-clientes" resultType="pojo.Cliente">
-        SELECT idCliente, nombre, apellidoPaterno, apellidoMaterno FROM cliente;
+        SELECT idCliente, nombre, apellidoPaterno, apellidoMaterno FROM cliente WHERE estatus = 1;
     </select>
     
     <select id="obtener-estatus-envio" resultType="pojo.EstatusEnvio">
