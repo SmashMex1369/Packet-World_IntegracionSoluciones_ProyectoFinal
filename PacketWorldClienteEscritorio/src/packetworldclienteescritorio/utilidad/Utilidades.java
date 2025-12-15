@@ -47,40 +47,30 @@ public class Utilidades {
         return (btnSeleccion.get() == ButtonType.OK);
     }
     
-    public static void configurarComboBoxMostrarCampo(ComboBox<Direccion> combo,
-                                           Function<Direccion, String> getter,
-                                           ObservableList<Direccion> items) {
-        // Asignar items
-        combo.setItems(items);
+    public static <T> void configurarComboBoxMostrarCampo(
+        ComboBox<T> combo,
+        Function<T, String> getter,
+        ObservableList<T> items) {
 
-        // 1) CellFactory -> controla cada fila de la lista desplegable
-        combo.setCellFactory(listView -> new ListCell<Direccion>() {
-            @Override
-            protected void updateItem(Direccion item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    String text = getter.apply(item);
-                    setText(text == null ? "" : text);
-                    // setGraphic(...) si quieres íconos u otros nodos
-                }
-            }
-        });
+    combo.setItems(items);
 
-        // 2) ButtonCell -> controla la "celda" que se muestra cuando el ComboBox está cerrado
-        combo.setButtonCell(new ListCell<Direccion>() {
-            @Override
-            protected void updateItem(Direccion item, boolean empty) {
-                super.updateItem(item, empty);
-                setText((empty || item == null) ? "" : getter.apply(item));
-                setGraphic(null);
-            }
-        });
+    combo.setCellFactory(lv -> new ListCell<T>() {
+        @Override
+        protected void updateItem(T item, boolean empty) {
+            super.updateItem(item, empty);
+            setText(empty || item == null ? null : getter.apply(item));
+        }
+    });
 
+    combo.setButtonCell(new ListCell<T>() {
+        @Override
+        protected void updateItem(T item, boolean empty) {
+            super.updateItem(item, empty);
+            setText(empty || item == null ? null : getter.apply(item));
+        }
+    });
+}
 
-    }
 
     
 }

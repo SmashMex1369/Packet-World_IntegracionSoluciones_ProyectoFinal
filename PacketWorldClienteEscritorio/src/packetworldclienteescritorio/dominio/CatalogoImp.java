@@ -10,7 +10,9 @@ import java.util.List;
 import packetworldclienteescritorio.conexion.ConexionAPI;
 import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.pojo.Direccion;
+import packetworldclienteescritorio.pojo.EstatusEnvio;
 import packetworldclienteescritorio.pojo.NoGuia;
+import packetworldclienteescritorio.pojo.NombreCliente;
 import packetworldclienteescritorio.pojo.RespuestaHTTP;
 import packetworldclienteescritorio.pojo.TipoUnidad;
 import packetworldclienteescritorio.utilidad.Constantes;
@@ -83,6 +85,58 @@ public class CatalogoImp {
             List<Direccion> colonias= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
             respuesta.put(Constantes.KEY_ERROR, false);
             respuesta.put(Constantes.KEY_LISTA, colonias);
+        }else{
+            respuesta.put(Constantes.KEY_ERROR, true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.put(Constantes.KEY_MENSAJE,Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put(Constantes.KEY_MENSAJE,Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put(Constantes.KEY_MENSAJE,"Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
+            }
+        }
+        return respuesta;
+    }
+    
+    public static HashMap<String, Object> obtenerEstatusEnvio(){
+        HashMap <String, Object> respuesta= new LinkedHashMap<>();
+        String URL= Constantes.URL_WS + "catalogo/obtener-estatus-envio";
+        RespuestaHTTP respuestaAPI= ConexionAPI.peticionGET(URL);
+        if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
+            Gson gson= new Gson();
+            Type tipoLista= new TypeToken<List<EstatusEnvio>>(){}.getType();
+            List<EstatusEnvio> estatus= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, estatus);
+        }else{
+            respuesta.put(Constantes.KEY_ERROR, true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.put(Constantes.KEY_MENSAJE,Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put(Constantes.KEY_MENSAJE,Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put(Constantes.KEY_MENSAJE,"Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
+            }
+        }
+        return respuesta;
+    }
+    
+    public static HashMap<String, Object> obtenerNombresClientes(){
+        HashMap<String, Object> respuesta = new LinkedHashMap<>();
+        String URL = Constantes.URL_WS+"catalogo/obtener-nombres-clientes";
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+        if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
+            Gson gson = new Gson();
+            Type tipoLista = new TypeToken<List<NombreCliente>>(){}.getType();
+            List<NombreCliente> nombres = gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, nombres);
         }else{
             respuesta.put(Constantes.KEY_ERROR, true);
             switch(respuestaAPI.getCodigo()){

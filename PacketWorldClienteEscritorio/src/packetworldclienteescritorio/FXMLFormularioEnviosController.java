@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,9 +26,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.CatalogoImp;
 import packetworldclienteescritorio.interfaz.INotificador;
+import packetworldclienteescritorio.pojo.Colaborador;
 import packetworldclienteescritorio.pojo.Direccion;
 import packetworldclienteescritorio.pojo.Envio;
+import packetworldclienteescritorio.pojo.NombreCliente;
 import packetworldclienteescritorio.utilidad.Constantes;
+import packetworldclienteescritorio.utilidad.Sesion;
 import packetworldclienteescritorio.utilidad.Utilidades;
 
 /**
@@ -38,7 +42,7 @@ import packetworldclienteescritorio.utilidad.Utilidades;
 public class FXMLFormularioEnviosController implements Initializable{
 
     @FXML
-    private ComboBox<?> cbCliente;
+    private ComboBox<NombreCliente> cbCliente;
     @FXML
     private TextField tfNombreDestinatario;
     @FXML
@@ -64,8 +68,9 @@ public class FXMLFormularioEnviosController implements Initializable{
     
     private Envio envioEdicion;
     private INotificador observador;
+    private Colaborador c;
     
-    //private ObservableList<NombreClientes> clientes;
+    private ObservableList<NombreCliente> clientes;
     private ObservableList<Direccion> colonias;
     private ObservableList<Direccion> ciudad;
     private ObservableList<Direccion> estado;
@@ -75,19 +80,42 @@ public class FXMLFormularioEnviosController implements Initializable{
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        c=Sesion.getColaborador();
         tfCodigoPostalFocusListener();
+        cargarClientes();
     }    
     
     public void inicializarDatos(Envio envioEdicion, INotificador observador){
         this.envioEdicion = envioEdicion;
         this.observador=observador;
         if (envioEdicion != null){
-            //cbCliente
+            cbCliente.getSelectionModel().select(obtenerPosicionCliente(envioEdicion.getIdCliente()));
+            tfNombreDestinatario.setText(envioEdicion.getNombreDest());
+            tfApellidoPaternoDestinatario.setText(envioEdicion.getApellidoPatDest());
+            tfApellidoMaternoDestinatario.setText(envioEdicion.getApellidoMatDest());
+            tfCodigoPostalDestinatario.setText(String.valueOf(envioEdicion.getCodigoPostalDest()));
+            buscarCodigoPostal();
+            cbColoniaDestinatario.getSelectionModel().select(obtenerPosicionColonia(envioEdicion.getIdColoniaDest()));
+            tfCalleDestinatario.setText(envioEdicion.getCalleDest());
+            tfNumeroDestinatario.setText(String.valueOf(envioEdicion.getNumDest()));
+            
         }
     }
     
     private void cargarClientes(){
-        
+        HashMap<String, Object> respuesta = CatalogoImp.obtenerNombresClientes();
+        if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
+            List<NombreCliente> nombresAPI = (List<NombreCliente>) respuesta.get(Constantes.KEY_LISTA);
+            clientes = FXCollections.observableArrayList(nombresAPI);
+            Utilidades.configurarComboBoxMostrarCampo(
+                cbCliente,
+                c -> Stream.of(c.getNombre(), c.getApellidoPaterno(), c.getApellidoMaterno())
+                           .filter(s -> s != null && !s.isEmpty())
+                           .collect(Collectors.joining(" ")),
+                clientes
+            );
+
+        }
     }
     
     private void cargarColonias(int codigoPostal){
@@ -236,14 +264,19 @@ public class FXMLFormularioEnviosController implements Initializable{
         try {
             FXMLLoader cargador;
             String titulo;
+            Parent vista;
             if (envioEdicion==null) {
                 cargador= new FXMLLoader(getClass().getResource("FXMLAdministracionEnvios.fxml"));
+                vista= cargador.load();
                 titulo = "Administracion Envios";
             }else{
-                 cargador= new FXMLLoader(getClass().getResource("FXMLDetallesEnviosEnvios.fxml"));
+                cargador= new FXMLLoader(getClass().getResource("FXMLDetallesEnvio.fxml"));
+                vista= cargador.load();
                 titulo = "Detalles Envios";
+                FXMLDetallesEnvioController controlador = cargador.getController();
+                controlador.inicializarDatos(envioEdicion, observador);
             }
-            Parent vista= cargador.load();
+            
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) cbColoniaDestinatario.getScene().getWindow();
             escenario.setScene(escena);
@@ -314,9 +347,23 @@ public class FXMLFormularioEnviosController implements Initializable{
         });
     }
     
-    /*private int obtenerPosicionCliente(int idCliente){
-        //for int i=0;i<cl
-    }*/
+    private int obtenerPosicionCliente(int idCliente){
+        for (int i=0;i<clientes.size();i++){
+            if (clientes.get(i).getIdCliente()==idCliente) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    private int obtenerPosicionColonia(int idColonia){
+        for (int i=0;i<colonias.size();i++){
+            if (colonias.get(i).getIdColonia()==idColonia) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     @FXML
     private void cbClienteSeleccion(Event event) {
@@ -376,6 +423,7 @@ public class FXMLFormularioEnviosController implements Initializable{
     @FXML
     private void tfCodigoPostalEnter(ActionEvent event) {
         buscarCodigoPostal();
+        lbTitulo.getParent().requestFocus();
     }
     
     
