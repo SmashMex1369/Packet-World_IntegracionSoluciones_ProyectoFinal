@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="obtener-tipos-unidad" resultType="pojo.TipoUnidad">
-        SELECT tipo FROM tipounidad;
+        SELECT idTipoUnidad, tipo FROM tipounidad ORDER BY idTipoUnidad;
     </select>
     
     <select id="obtener-nombres-clientes" resultType="pojo.Cliente">
