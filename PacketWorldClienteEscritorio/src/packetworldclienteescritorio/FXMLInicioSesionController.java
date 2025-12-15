@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.InicioSesionImp;
 import packetworldclienteescritorio.dto.RSAutenticacionColaborador;
 import packetworldclienteescritorio.pojo.Colaborador;
+import packetworldclienteescritorio.utilidad.Sesion;
 import packetworldclienteescritorio.utilidad.Utilidades;
 
 public class FXMLInicioSesionController implements Initializable {
@@ -50,7 +51,8 @@ public class FXMLInicioSesionController implements Initializable {
         RSAutenticacionColaborador respuesta= InicioSesionImp.verificarCredenciales(noPersonal, contraseña);
         if(!respuesta.isError()){
             Utilidades.mostrarAlertaSimple("Credenciales correctas", "Bienvenido(a) colaborador(a) "+respuesta.getColaborador().getNombre()+" al sistema", Alert.AlertType.INFORMATION);
-            irMenuPrincipal(respuesta.getColaborador());
+            Sesion.iniciarSesion(respuesta.getColaborador());
+            irMenuPrincipal(Sesion.getColaborador());
         }else{
             System.out.println("error VC");
            Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);

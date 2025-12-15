@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.pojo.Colaborador;
+import packetworldclienteescritorio.utilidad.Sesion;
 import packetworldclienteescritorio.utilidad.Utilidades;
 
 /**
@@ -39,7 +40,7 @@ public class FXMLMenuPrincipalController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        cargarInformacion(Sesion.getColaborador());
     }
     
     private void irPantallaLogin(){
@@ -57,13 +58,15 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void clickCerrarSesion(javafx.scene.input.MouseEvent event) {
+        //Utilidades.mostrarAlertaConfirmacion(titulo, contenido);
+        Sesion.cerrarSesion();
         irPantallaLogin();
     }
     
     public void cargarInformacion(Colaborador colaborador){
         colaboradorSesion = colaborador;
-        lbSaludo.setText(colaborador.getNombre() + " " + colaborador.getApellidoPaterno() + " " + colaborador.getApellidoMaterno() + " ");
-        lbTipoRol.setText("Rol: " + colaborador.getRol());
+        lbSaludo.setText(colaboradorSesion.getNombre() + " " + colaboradorSesion.getApellidoPaterno() + " " + colaboradorSesion.getApellidoMaterno());
+        lbTipoRol.setText("Rol: " + colaboradorSesion.getRol());
     }
 
     @FXML
