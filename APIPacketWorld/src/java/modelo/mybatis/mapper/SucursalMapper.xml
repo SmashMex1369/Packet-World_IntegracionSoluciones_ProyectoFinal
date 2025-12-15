@@ -32,8 +32,8 @@ INNER JOIN estado e  ON e.idEstado = ci.idEstado;
     
     <insert id = "registrar-sucursal" parameterType="pojo.Sucursal">
         
-        INSERT INTO sucursal(CUS, nombre, estatus, calle, numero, idColonia) 
-        VALUES(#{CUS}, #{nombre}, #{estatus}, #{calle}, #{numero}, #{idColonia});
+        INSERT INTO sucursal(CUS, nombre, calle, numero, idColonia) 
+        VALUES(#{CUS}, #{nombre}, #{calle}, #{numero}, #{idColonia});
         
     </insert>
     
@@ -44,9 +44,10 @@ INNER JOIN estado e  ON e.idEstado = ci.idEstado;
         
     </update>
     
-    <insert id = "baja-sucursal" parameterType="pojo.Sucursal">
-        INSERT INTO sucursal (idSucursal, estatus)
-        VALUES (idSucursal = #{idSucursal}, 0);
-    </insert>
+    <update id = "baja-sucursal" parameterType="int">
+        UPDATE sucursal
+        SET estatus = 0
+        WHERE idSucursal = #{idSucursal}
+    </update>
 
 </mapper>
