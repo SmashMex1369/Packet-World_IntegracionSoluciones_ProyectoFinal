@@ -4,8 +4,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
@@ -14,13 +17,17 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import packetworldclienteescritorio.interfaz.INotificador;
+import packetworldclienteescritorio.pojo.Envio;
 
 /**
  * FXML Controller class
  *
  * @author alex4
  */
-public class FXMLDetallesEnvioController implements Initializable {
+public class FXMLDetallesEnvioController implements Initializable, INotificador{
 
     @FXML
     private Button btnActualizar;
@@ -67,7 +74,7 @@ public class FXMLDetallesEnvioController implements Initializable {
     @FXML
     private Label lbColoniaCliente;
     @FXML
-    private Label lbCodigoPostal;
+    private Label lbCodigoPostalCliente;
     @FXML
     private Label lbCalleCliente;
     @FXML
@@ -101,11 +108,15 @@ public class FXMLDetallesEnvioController implements Initializable {
     @FXML
     private Label lbColoniaSucursal;
     @FXML
-    private Label lbCodigoPostalSuursal;
+    private Label lbCodigoPostalSucursal;
     @FXML
     private Label lbCalleSucursal;
     @FXML
     private Label lbNumeroSucursal;
+    
+    private Envio envio;
+    private INotificador observador;
+    
 
     /**
      * Initializes the controller class.
@@ -114,13 +125,72 @@ public class FXMLDetallesEnvioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    public void inicializarDatos(Envio envio, INotificador observador){
+        this.envio = envio;
+        this.observador = observador;
+        lbNoGuia.setText(envio.getNoGuia());
+        if(envio.getIdConductor()==0){
+            lbNombreConductor.setText("Sin Asignar");
+            lbNoLicencia.setText("No aplica");
+        }else{
+            lbNombreConductor.setText(
+                    envio.getNombreConductor()+" "+envio.getApellidoPatConductor()+" "+envio.getApellidoMatConductor());
+            lbNoLicencia.setText(envio.getNoLicenciaConductor());
+        }
+        lbEstatus.setText(envio.getEstatus());
+        lbTiempo.setText(envio.getTiempo());
+        lbNombreColaborador.setText(
+                envio.getNombreColaborador()+" "+envio.getApellidoPatColaborador()+" "+envio.getApellidoMatColaborador());
+        lbMotivo.setText(envio.getMotivo());
+        lbNombreCliente.setText(
+                envio.getNombreCliente()+" "+envio.getApellidoPatCliente()+" "+envio.getApellidoMatCliente());
+        lbTelefonoCliente.setText(envio.getTelefonoCliente());
+        lbCorreoCliente.setText(envio.getCorreoCliente());
+        lbColoniaCliente.setText(envio.getColoniaCliente());
+        lbCodigoPostalCliente.setText(String.valueOf(envio.getCodigoPostalCliente()));
+        lbCalleCliente.setText(envio.getCalleCliente());
+        lbNumeroCliente.setText(String.valueOf(envio.getNumeroCliente()));
+        lbNombreDestinatario.setText(envio.getNombreDest()+" "+envio.getApellidoPatDest()+" "+envio.getApellidoMatDest());
+        lbEstadoDestinatario.setText(envio.getEstadoDest());
+        lbCiudadDestinatario.setText(envio.getCiudadDest());
+        lbColoniaDestinatario.setText(envio.getColoniaDest());
+        lbCodigoPostalDestinatario.setText(String.valueOf(envio.getCodigoPostalDest()));
+        lbCalleDestinatario.setText(envio.getCalleDest());
+        lbNumeroDestinatario.setText(String.valueOf(envio.getNumDest()));
+        lbNombreSucursal.setText(envio.getNombreSucursal());
+        lbCUS.setText(envio.getCUSSucursal());
+        lbEstadoSucursal.setText(envio.getEstadoDest());
+        lbCiudadSucursal.setText(envio.getCiudadSucursal());
+        lbColoniaSucursal.setText(envio.getColoniaSucursal());
+        lbCodigoPostalSucursal.setText(String.valueOf(envio.getCodigoPostalSucursal()));
+        lbCalleSucursal.setText(envio.getCalleSucursal());
+        lbNumeroSucursal.setText(String.valueOf(envio.getNumeroSucursal()));
+    }
 
     @FXML
     private void btnRegresar(ActionEvent event) {
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLAdministracionEnvios.fxml"));
+            Parent vista= cargador.load();
+            Scene escena= new Scene(vista);
+            Stage escenario= (Stage) grdpEnvio.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Administracion Envios");          
+            escenario.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void btnActualizar(ActionEvent event) {
+        if (btnEnvio.getStyle().contains("-fx-base")) {
+            irActualizarEstatus(envio);
+        }else{
+            irEditarEnvio(envio);
+        }
+        
     }
 
     @FXML
@@ -133,6 +203,13 @@ public class FXMLDetallesEnvioController implements Initializable {
         imgvEnvio.setFill(Color.web("e1e1e1"));
         btnRemitente.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
         imgvRemitente.setFill(Color.web("000"));
+        btnDestinatario.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
+        imgvDestinatario.setFill(Color.web("000"));
+        btnSucursal.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
+        imgvSucursal.setFill(Color.web("000"));
+        
+        btnActualizar.setText("Actualizar\nEstatus");
+        btnActualizar.setVisible(true);
     }
 
     @FXML
@@ -145,14 +222,89 @@ public class FXMLDetallesEnvioController implements Initializable {
         imgvRemitente.setFill(Color.web("e1e1e1"));
         btnEnvio.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
         imgvEnvio.setFill(Color.web("000"));
+        btnDestinatario.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
+        imgvDestinatario.setFill(Color.web("000"));
+        btnSucursal.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
+        imgvSucursal.setFill(Color.web("000"));
+        
+        btnActualizar.setText("Actualizar\nDatos");
+        btnActualizar.setVisible(true);
     }
 
     @FXML
     private void btnDestinatario(ActionEvent event) {
+        grdpEnvio.setVisible(false);
+        grdpRemitente.setVisible(false);
+        grdpDestinatario.setVisible(true);
+        grdpSucursal.setVisible(false);
+        btnDestinatario.setStyle("-fx-base: #03658c; -fx-border-color: #02354a; -fx-text-fill: #e1e1e1; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
+        imgvDestinatario.setFill(Color.web("e1e1e1"));
+        btnEnvio.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
+        imgvEnvio.setFill(Color.web("000"));
+        btnRemitente.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
+        imgvRemitente.setFill(Color.web("000"));
+        btnSucursal.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
+        imgvSucursal.setFill(Color.web("000"));
+        
+        btnActualizar.setText("Actualizar\nDatos");
+        btnActualizar.setVisible(true);
     }
 
     @FXML
     private void btnSucursal(ActionEvent event) {
+        grdpEnvio.setVisible(false);
+        grdpRemitente.setVisible(false);
+        grdpDestinatario.setVisible(false);
+        grdpSucursal.setVisible(true);
+        btnSucursal.setStyle("-fx-base: #03658c; -fx-border-color: #02354a; -fx-text-fill: #e1e1e1; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
+        imgvSucursal.setFill(Color.web("e1e1e1"));
+        btnEnvio.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
+        imgvEnvio.setFill(Color.web("000"));
+        btnDestinatario.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
+        imgvDestinatario.setFill(Color.web("000"));
+        btnRemitente.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
+        imgvRemitente.setFill(Color.web("000"));
+        
+        btnActualizar.setVisible(false);
+    }
+    
+    private void irActualizarEstatus(Envio envio){
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLActualizarEstatus.fxml"));
+            Parent vista= cargador.load();
+            FXMLActualizarEstatusController controlador= cargador.getController();
+            controlador.cargarIdEnvio(envio, this);
+            Scene escena= new Scene(vista);
+            Stage escenario= new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Actualizar Estatus");    
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.setResizable(false);
+            escenario.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void irEditarEnvio(Envio envio){
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLFormularioEnvios.fxml"));
+            Parent vista= cargador.load();
+            FXMLFormularioEnviosController controlador= cargador.getController();
+            controlador.inicializarDatos(envio, this);
+            Scene escena= new Scene(vista);
+            Stage escenario= (Stage )grdpDestinatario.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Actualizar Estatus");
+            escenario.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void notificarOperacionExitosa(String operacion, String nombre) {
+        System.out.println("Operacion: "+operacion+", Estatus: "+nombre);
     }
     
 }

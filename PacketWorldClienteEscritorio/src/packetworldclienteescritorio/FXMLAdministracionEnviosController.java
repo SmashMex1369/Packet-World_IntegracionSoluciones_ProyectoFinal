@@ -90,6 +90,16 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
         boolean esError = (boolean) respuesta.get(Constantes.KEY_ERROR);
         if (!esError) {
             List<Envio> enviosAPI = (List<Envio>) respuesta.get(Constantes.KEY_LISTA);
+            for(int i=0;i<enviosAPI.size();i++){
+                if(enviosAPI.get(i).getIdConductor()==0){
+                    enviosAPI.get(i).setNombreConductor("N/A");
+                    enviosAPI.get(i).setApellidoPatConductor("");
+                    enviosAPI.get(i).setApellidoMatConductor("");
+                }
+                if(enviosAPI.get(i).getApellidoMatDest()==null){
+                    enviosAPI.get(i).setApellidoMatDest("");
+                }
+            }
             envios = FXCollections.observableArrayList();
             envios.addAll(enviosAPI);
             tvEnvios.setItems(envios);
@@ -115,7 +125,7 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
 
     @FXML
     private void btnCrear(ActionEvent event) {
-        irFormularioPaquetes(null);
+        irFormularioEnvios();
     }
 
     @FXML
@@ -124,6 +134,12 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
 
     @FXML
     private void btnConsultarDetalles(ActionEvent event) {
+        Envio envio = tvEnvios.getSelectionModel().getSelectedItem();
+        if(envio!=null){
+            irDetallesEnvio(envio);
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccione un envio", "Para consultar los detalles, debes seleccionar un envio.", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
@@ -136,16 +152,29 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
         tvEnvios.getParent().requestFocus();
     }
     
-    private void irFormularioPaquetes(Envio envio){
+    private void irFormularioEnvios(){
         try {
-            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLFormularioEnvios.fxml"));
-            Parent vista= cargador.load();
-            FXMLFormularioEnviosController controlador = cargador.getController();
-            controlador.inicializarDatos(envio, this);
+            Parent vista= FXMLLoader.load(getClass().getResource("FXMLFormularioEnvios.fxml"));
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tvEnvios.getScene().getWindow();
             escenario.setScene(escena);
             escenario.setTitle("Crear Envio");
+            escenario.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void irDetallesEnvio(Envio envio){
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLDetallesEnvio.fxml"));
+            Parent vista = cargador.load();
+            FXMLDetallesEnvioController controlador = cargador.getController();
+            controlador.inicializarDatos(envio, this);
+            Scene escena = new Scene(vista);
+            Stage escenario = (Stage) tvEnvios.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Detalles Envio");
             escenario.show();
         } catch (Exception e) {
             e.printStackTrace();

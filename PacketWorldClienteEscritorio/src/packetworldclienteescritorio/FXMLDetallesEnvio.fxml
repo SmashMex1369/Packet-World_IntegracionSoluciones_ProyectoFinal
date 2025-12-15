@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -15,7 +22,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1100.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLDetallesEnvioController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1100.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLDetallesEnvioController">
    <children>
       <AnchorPane layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -36,7 +43,7 @@
                      </graphic></Button>
                </children>
             </StackPane>
-            <Button fx:id="btnActualizar" alignment="CENTER" contentDisplay="TEXT_ONLY" ellipsisString="" graphicTextGap="0.0" layoutX="936.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnActualizar" prefWidth="150.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Actualizar Estatus" textAlignment="CENTER" textFill="#e1e1e1" wrapText="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+            <Button fx:id="btnActualizar" alignment="CENTER" contentDisplay="TEXT_ONLY" ellipsisString="" graphicTextGap="0.0" layoutX="936.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnActualizar" prefWidth="150.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Actualizar&#10;Estatus" textAlignment="CENTER" textFill="#e1e1e1" wrapText="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -287,7 +294,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbCodigoPostal" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Codigo Postal Cliente]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Label fx:id="lbCodigoPostalCliente" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Codigo Postal Cliente]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -553,7 +560,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbCodigoPostalSuursal" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Codigo Postal Sucursal]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Label fx:id="lbCodigoPostalSucursal" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Codigo Postal Sucursal]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font size="24.0" />
                      </font>
