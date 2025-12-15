@@ -13,9 +13,9 @@ import packetworldclienteescritorio.utilidad.Constantes;
  */
 public class InicioSesionImp {
     
-    public static RSAutenticacionColaborador verificarCredenciales(String noPersonal, String password){
+    public static RSAutenticacionColaborador verificarCredenciales(String noPersonal, String contraseña){
         RSAutenticacionColaborador respuesta= new RSAutenticacionColaborador();
-        String parametros= "noPersonal="+noPersonal+"&password="+password;
+        String parametros= "noPersonal="+noPersonal+"&contraseña="+contraseña;
         String URL= Constantes.URL_WS + "autenticacion/colaborador";
         RespuestaHTTP respuestaAPI= ConexionAPI.peticionBody(URL, Constantes.PETICION_POST, parametros, Constantes.APPLICATION_FORM);
         if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){

@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.InicioSesionImp;
 import packetworldclienteescritorio.dto.RSAutenticacionColaborador;
+import packetworldclienteescritorio.pojo.Colaborador;
 import packetworldclienteescritorio.utilidad.Utilidades;
 
 public class FXMLInicioSesionController implements Initializable {
@@ -36,31 +37,33 @@ public class FXMLInicioSesionController implements Initializable {
     private void btnIniciar(ActionEvent event) {
         
         String noPersonal= tfNoPersonal.getText();
-        String password= tfPassword.getText();
+        String contraseña= tfPassword.getText();
         
-        if(!noPersonal.isEmpty() && !password.isEmpty()){
-            verificarCredenciales(noPersonal, password);
+        if(!noPersonal.isEmpty() && !contraseña.isEmpty()){
+            verificarCredenciales(noPersonal, contraseña);
         }else{        
             Utilidades.mostrarAlertaSimple("Campos requeridos", "El no. Personal y/o contraseña son obligatorios", Alert.AlertType.WARNING);
         }
     }
     
-    private void verificarCredenciales(String noPersonal, String password){
-        RSAutenticacionColaborador respuesta= InicioSesionImp.verificarCredenciales(noPersonal, password);
+    private void verificarCredenciales(String noPersonal, String contraseña){
+        RSAutenticacionColaborador respuesta= InicioSesionImp.verificarCredenciales(noPersonal, contraseña);
         if(!respuesta.isError()){
             Utilidades.mostrarAlertaSimple("Credenciales correctas", "Bienvenido(a) colaborador(a) "+respuesta.getColaborador().getNombre()+" al sistema", Alert.AlertType.INFORMATION);
-            irMenuPrincipal();
+            irMenuPrincipal(respuesta.getColaborador());
         }else{
             System.out.println("error VC");
            Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+           //irMenuPrincipal();
         }           
     }
     
-    private void irMenuPrincipal(){
+    private void irMenuPrincipal(Colaborador colaborador){
         try {
             FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLMenuPrincipal.fxml"));
             Parent vista= cargador.load();
-            //FXMLMenuPrincipalController controlador= cargador.getController();
+            FXMLMenuPrincipalController controlador= cargador.getController();
+            controlador.cargarInformacion(colaborador);
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tfNoPersonal.getScene().getWindow();
             escenario.setScene(escena);

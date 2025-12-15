@@ -1,5 +1,6 @@
 package packetworldclienteescritorio;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -8,9 +9,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import packetworldclienteescritorio.pojo.Colaborador;
+import packetworldclienteescritorio.utilidad.Utilidades;
 
 /**
  * FXML Controller class
@@ -25,6 +29,10 @@ public class FXMLMenuPrincipalController implements Initializable {
     private ImageView ivFoto;
     @FXML
     private Label lbTipoRol;
+    
+    private Colaborador colaboradorSesion;
+    @FXML
+    private ImageView imgCerrarSesion;
 
     /**
      * Initializes the controller class.
@@ -32,6 +40,30 @@ public class FXMLMenuPrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }
+    
+    private void irPantallaLogin(){
+        try {
+            Stage escenarioBase = (Stage) imgCerrarSesion.getScene().getWindow();
+            Parent login = FXMLLoader.load(getClass().getResource("FXMLInicioSesion.fxml"));
+            Scene escenaLogin = new Scene(login);
+            escenarioBase.setScene(escenaLogin);
+            escenarioBase.setTitle("Login");
+            escenarioBase.show();
+        } catch (IOException ex) {
+           Utilidades.mostrarAlertaSimple("Error", "Por el momento no se puede mostrar la pantalla principal", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void clickCerrarSesion(javafx.scene.input.MouseEvent event) {
+        irPantallaLogin();
+    }
+    
+    public void cargarInformacion(Colaborador colaborador){
+        colaboradorSesion = colaborador;
+        lbSaludo.setText(colaborador.getNombre() + " " + colaborador.getApellidoPaterno() + " " + colaborador.getApellidoMaterno() + " ");
+        lbTipoRol.setText("Rol: " + colaborador.getRol());
     }
 
     @FXML
