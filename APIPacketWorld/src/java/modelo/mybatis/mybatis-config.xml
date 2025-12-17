@@ -13,7 +13,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
                 <property name="url" value="jdbc:mysql://localhost:3306/PacketWorld?serverTimezone=UTC"/>   
                 <property name="username" value="PacketWorldAdmin"/>    
                 <property name="password" value="pass1100"/>
-                <property name="poolMaximumActiveConnections" value="50"/>
+                <property name="poolMaximumIdleConnections" value="2"/>
+                <property name="poolMaximumActiveConnections" value="5"/>
+                <property name="poolTimeToWait" value="10000"/>
             </dataSource>
 
         </environment>

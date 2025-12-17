@@ -273,4 +273,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INNER JOIN envio e ON hee.idEnvio=e.idEnvio
         WHERE noGuia=#{noGuia} ORDER BY tiempo DESC;
     </select>
+    
+    <select id="verificar-no-guia" parameterType="String" resultType="String">
+        SELECT noGuia FROM envio WHERE noGuia=#{noGuia};
+    </select>
 </mapper>

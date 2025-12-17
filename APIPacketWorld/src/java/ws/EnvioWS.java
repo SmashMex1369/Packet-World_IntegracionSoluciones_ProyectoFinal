@@ -102,4 +102,13 @@ public class EnvioWS {
         }
         throw new BadRequestException();
     }
+    
+    @Path("verificar-no-guia/{noGuia}")
+    @GET
+    public Respuesta verificar(@PathParam("noGuia") String noGuia){
+        if(noGuia!=null && !noGuia.isEmpty()){
+            return EnvioImp.verificarNoGuia(noGuia);
+        }
+        throw new BadRequestException();
+    }
 }

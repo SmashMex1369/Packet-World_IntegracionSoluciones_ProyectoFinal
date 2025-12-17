@@ -1,4 +1,4 @@
-package packetworldclienteescritorio;
+ package packetworldclienteescritorio;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -25,6 +25,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.CatalogoImp;
+import packetworldclienteescritorio.dominio.EnvioImp;
+import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Colaborador;
 import packetworldclienteescritorio.pojo.Direccion;
@@ -98,7 +100,8 @@ public class FXMLFormularioEnviosController implements Initializable{
             cbColoniaDestinatario.getSelectionModel().select(obtenerPosicionColonia(envioEdicion.getIdColoniaDest()));
             tfCalleDestinatario.setText(envioEdicion.getCalleDest());
             tfNumeroDestinatario.setText(String.valueOf(envioEdicion.getNumDest()));
-            
+            lbTitulo.setText("Actualizar datos del envio");
+            btnCompletar.setText("Actualizar");
         }
     }
     
@@ -169,23 +172,33 @@ public class FXMLFormularioEnviosController implements Initializable{
     private void btnCrear(ActionEvent event) {
         if (sonCamposValidos()) {
             Envio envio = new Envio();
-            String noGuia = generarNoGuia();
-            envio.setNoGuia(noGuia);
             envio.setNombreDest(tfNombreDestinatario.getText());
             envio.setApellidoPatDest(tfApellidoPaternoDestinatario.getText());
             envio.setApellidoMatDest(tfApellidoMaternoDestinatario.getText());
             envio.setNumDest(Integer.parseInt(tfNumeroDestinatario.getText()));
             envio.setCalleDest(tfCalleDestinatario.getText());
-            //envio.setIdCliente(Integer.SIZE);
-            //envio.setIdSucursal(Integer.SIZE);
+            NombreCliente idClienteSeleccionado = cbCliente.getSelectionModel().getSelectedItem();
+            envio.setIdCliente(idClienteSeleccionado.getIdCliente());
+            envio.setIdSucursal(c.getIdSucursal());
             Direccion idColoniaSeleccionado = cbColoniaDestinatario.getSelectionModel().getSelectedItem();
             envio.setIdColoniaDest(idColoniaSeleccionado.getIdColonia());
+            envio.setIdColaborador(c.getIdColaborador());
+            if (envioEdicion == null) {
+                String noGuia = generarNoGuia();
+                while(verificarNoGuia(noGuia)){
+                    noGuia = generarNoGuia();
+                }
+                envio.setNoGuia(noGuia);
+                crearEnvio(envio);
+            }else{
+                actualizarEnvio(envio);
+            }
         }
     }
 
     @FXML
     private void btnRegresar(ActionEvent event) {
-        regresarVentana();
+        regresarVentana(false);
     }
     
     private boolean sonCamposValidos(){
@@ -260,7 +273,7 @@ public class FXMLFormularioEnviosController implements Initializable{
         return camposValidos;
     }
     
-    private void regresarVentana(){
+    private void regresarVentana(boolean actualizo){
         try {
             FXMLLoader cargador;
             String titulo;
@@ -274,7 +287,12 @@ public class FXMLFormularioEnviosController implements Initializable{
                 vista= cargador.load();
                 titulo = "Detalles Envios";
                 FXMLDetallesEnvioController controlador = cargador.getController();
-                controlador.inicializarDatos(envioEdicion, observador);
+                if(!actualizo){
+                    controlador.inicializarDatos(envioEdicion, observador);
+                }else{
+                    controlador.notificarOperacionExitosa("Actualizado", envioEdicion.getNoGuia());
+                }
+                
             }
             
             Scene escena= new Scene(vista);
@@ -363,6 +381,32 @@ public class FXMLFormularioEnviosController implements Initializable{
             }
         }
         return -1;
+    }
+    
+    private void crearEnvio(Envio envio){
+        Respuesta respuesta = EnvioImp.crearEnvio(envio);
+        if(!respuesta.isError()){
+            Utilidades.mostrarAlertaSimple("Envio creado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            observador.notificarOperacionExitosa("Creacion", envio.getNoGuia());
+            regresarVentana(false);
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al crear", respuesta.getMensaje(), Alert.AlertType.NONE);
+        }
+    } 
+    
+    private void actualizarEnvio(Envio envio){
+        envio.setIdEnvio(envioEdicion.getIdEnvio());
+        Respuesta respuesta = EnvioImp.actualizarEnvio(envio);
+        if(!respuesta.isError()){
+            Utilidades.mostrarAlertaSimple("Envio editado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            regresarVentana(true);
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al actualizar", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
+    }
+    
+    private boolean verificarNoGuia(String noGuia){
+        return EnvioImp.verificarNoGuia(noGuia).isError();
     }
 
     @FXML

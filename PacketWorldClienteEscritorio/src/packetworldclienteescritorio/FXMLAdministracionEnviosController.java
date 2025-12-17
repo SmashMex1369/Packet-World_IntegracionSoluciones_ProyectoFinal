@@ -154,7 +154,10 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
     
     private void irFormularioEnvios(){
         try {
-            Parent vista= FXMLLoader.load(getClass().getResource("FXMLFormularioEnvios.fxml"));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioEnvios.fxml"));
+            Parent vista = cargador.load();
+            FXMLFormularioEnviosController controlador = cargador.getController();
+            controlador.inicializarDatos(null, this);
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tvEnvios.getScene().getWindow();
             escenario.setScene(escena);
@@ -176,6 +179,7 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
             escenario.setScene(escena);
             escenario.setTitle("Detalles Envio");
             escenario.show();
+            escenario.centerOnScreen();
         } catch (Exception e) {
             e.printStackTrace();
         }

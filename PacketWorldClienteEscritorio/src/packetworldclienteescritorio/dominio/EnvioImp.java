@@ -99,4 +99,84 @@ public class EnvioImp {
         }
         return respuesta;
     }
+    
+    public static Respuesta verificarNoGuia(String noGuia){
+        Respuesta respuesta = new Respuesta();
+        String URL = Constantes.URL_WS + "envio/verificar-no-guia/" + noGuia;
+        RespuestaHTTP respuestaAPI= ConexionAPI.peticionGET(URL);
+        if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
+            Gson gson = new Gson();
+            respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        }else{
+            respuesta.setError(true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
+            }  
+        }
+        return respuesta;
+        
+    }
+    
+    public static Respuesta crearEnvio(Envio envio){
+        Respuesta respuesta= new Respuesta();
+        String URL= Constantes.URL_WS + "envio/crear-envio";
+        Gson gson= new Gson();
+        String parametrosJson= gson.toJson(envio);
+        RespuestaHTTP respuestaAPI= ConexionAPI.peticionBody(URL, Constantes.PETICION_POST, parametrosJson, Constantes.APPLICATION_JSON);
+        if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
+            respuesta= gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        }else{
+            respuesta.setError(true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case HttpURLConnection.HTTP_BAD_REQUEST:
+                    respuesta.setMensaje("Campos en formato incorrecto, verifique la información");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para obtener la información, porfavor inténtelo más tarde.");
+            } 
+        }
+        return respuesta;
+    }
+    
+    public static Respuesta actualizarEnvio(Envio envio){
+        Respuesta respuesta= new Respuesta();
+        String URL = Constantes.URL_WS + "envio/actualizar-envio";
+        Gson gson= new Gson();
+        String parametrosJson= gson.toJson(envio);
+        RespuestaHTTP respuestaAPI= ConexionAPI.peticionBody(URL, Constantes.PETICION_PUT, parametrosJson, Constantes.APPLICATION_JSON);
+        if(respuestaAPI.getCodigo()== HttpURLConnection.HTTP_OK){
+            respuesta= gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        }else{
+            respuesta.setError(true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case HttpURLConnection.HTTP_BAD_REQUEST:
+                    respuesta.setMensaje("Campos en formato incorrecto, verifique la información");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para editar la información, porfavor inténtelo más tarde.");
+            }
+        }
+        return respuesta;
+    }
+    
+   
 }

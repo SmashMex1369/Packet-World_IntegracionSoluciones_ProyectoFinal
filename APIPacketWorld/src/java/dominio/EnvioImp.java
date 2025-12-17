@@ -160,4 +160,26 @@ public class EnvioImp {
         return envios;
     }
     
+    public static Respuesta verificarNoGuia(String noGuia){
+        Respuesta respuesta = new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD!=null) {
+            try {
+                if(conexionBD.selectOne("envio.verificar-no-guia", noGuia)==null){            
+                    respuesta.setError(false);  
+                    respuesta.setMensaje("Numero de guia no existe");
+                }else{
+                    respuesta.setMensaje("Numero de guia existe");
+                }
+                conexionBD.close() ;         
+            } catch (Exception e) {
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
+    }
+    
 }

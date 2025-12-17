@@ -94,7 +94,7 @@ public class FXMLActualizarEstatusController implements Initializable {
         Respuesta respuesta = EnvioImp.actualizarEstatusEnvio(envio);
         if (!respuesta.isError()) {
             Utilidades.mostrarAlertaSimple("Estatus actualizado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
-            observador.notificarOperacionExitosa("Actualizacion", envio.getIdEstatusEnvio().toString());
+            observador.notificarOperacionExitosa("Actualizacion", envioEdicion.getNoGuia());
             Stage escenario = (Stage) cbEstatus.getScene().getWindow();
             escenario.close();
         }else{
@@ -112,6 +112,7 @@ public class FXMLActualizarEstatusController implements Initializable {
         if ((cbEstatus.getSelectionModel().getSelectedIndex()==3 || 
                 cbEstatus.getSelectionModel().getSelectedIndex()==5)&&
                 (taMotivo.getText()==null || taMotivo.getText().isEmpty())) {
+            camposValidos = false;
             taMotivo.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
         if(!camposValidos){

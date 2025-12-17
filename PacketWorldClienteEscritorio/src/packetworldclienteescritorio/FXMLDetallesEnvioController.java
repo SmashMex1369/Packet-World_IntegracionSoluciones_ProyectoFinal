@@ -1,6 +1,8 @@
 package packetworldclienteescritorio;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
@@ -19,8 +22,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import packetworldclienteescritorio.dominio.EnvioImp;
 import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Envio;
+import packetworldclienteescritorio.utilidad.Constantes;
+import packetworldclienteescritorio.utilidad.Utilidades;
 
 /**
  * FXML Controller class
@@ -170,17 +176,7 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
 
     @FXML
     private void btnRegresar(ActionEvent event) {
-        try {
-            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLAdministracionEnvios.fxml"));
-            Parent vista= cargador.load();
-            Scene escena= new Scene(vista);
-            Stage escenario= (Stage) grdpEnvio.getScene().getWindow();
-            escenario.setScene(escena);
-            escenario.setTitle("Administracion Envios");          
-            escenario.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        regresarVentana();
     }
 
     @FXML
@@ -295,7 +291,7 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
             Scene escena= new Scene(vista);
             Stage escenario= (Stage )grdpDestinatario.getScene().getWindow();
             escenario.setScene(escena);
-            escenario.setTitle("Actualizar Estatus");
+            escenario.setTitle("Actualizar Envio");
             escenario.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -303,8 +299,40 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
     }
 
     @Override
-    public void notificarOperacionExitosa(String operacion, String nombre) {
-        System.out.println("Operacion: "+operacion+", Estatus: "+nombre);
+    public void notificarOperacionExitosa(String operacion, String noGuia) {
+        System.out.println("Operacion: "+operacion+", NoGuia: "+noGuia);
+        inicializarDatos(mostrarInformacionActualizada(noGuia), this);
+    }
+    
+    private void regresarVentana(){
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLAdministracionEnvios.fxml"));
+            Parent vista= cargador.load();
+            Scene escena= new Scene(vista);
+            Stage escenario= (Stage) grdpEnvio.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Administracion Envios");          
+            escenario.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private Envio mostrarInformacionActualizada(String noGuia){
+        List<Envio> envioEncontrado = null;
+        Envio envioActualizado = null;
+        HashMap<String, Object> respuesta = EnvioImp.buscarEnvio(noGuia);
+        if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
+            envioEncontrado = (List<Envio>) respuesta.get(Constantes.KEY_LISTA);
+            if (envioEncontrado.size()==1) {
+                envioActualizado = envioEncontrado.get(0);
+            }
+            return envioActualizado;
+        }else{
+            Utilidades.mostrarAlertaSimple("Error", ""+respuesta.get(Constantes.KEY_MENSAJE), Alert.AlertType.ERROR);
+            regresarVentana();
+            return null;
+        }
     }
     
 }
