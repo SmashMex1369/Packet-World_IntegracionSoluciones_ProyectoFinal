@@ -22,7 +22,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import packetworldclienteescritorio.dominio.EnvioImp;
 import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Envio;
@@ -92,7 +94,7 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
             List<Envio> enviosAPI = (List<Envio>) respuesta.get(Constantes.KEY_LISTA);
             for(int i=0;i<enviosAPI.size();i++){
                 if(enviosAPI.get(i).getIdConductor()==0){
-                    enviosAPI.get(i).setNombreConductor("N/A");
+                    enviosAPI.get(i).setNombreConductor("");
                     enviosAPI.get(i).setApellidoPatConductor("");
                     enviosAPI.get(i).setApellidoMatConductor("");
                 }
@@ -130,6 +132,16 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
 
     @FXML
     private void btnAsignarConductor(ActionEvent event) {
+        Envio envio = tvEnvios.getSelectionModel().getSelectedItem();
+        if (envio!=null) {
+            if (envio.getIdConductor()==0) {
+                irAsignacionConductor(envio);    
+            }else{
+                Utilidades.mostrarAlertaSimple("No es posible asignar", "El envio seleccionado ya cuenta con un conductor asignado, seleccione en envio diferente", Alert.AlertType.WARNING);
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccione un envio", "Para asignar un conductor, debe seleccionar un envio sin conductor asignado", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
@@ -150,6 +162,7 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
     @FXML
     private void perderFoco(MouseEvent event) {
         tvEnvios.getParent().requestFocus();
+        tvEnvios.getSelectionModel().clearSelection();
     }
     
     private void irFormularioEnvios(){
@@ -180,6 +193,25 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
             escenario.setTitle("Detalles Envio");
             escenario.show();
             escenario.centerOnScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void irAsignacionConductor(Envio envio){
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLAsignarConductorEnvio.fxml"));
+            Parent vista = cargador.load();
+            FXMLAsignarConductorEnvioController controlador = cargador.getController();
+            controlador.cargarInformacionConductores(envio, this);
+            Scene escena = new Scene(vista);
+            Stage escenario = new Stage();
+            escenario.setScene(escena);
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.setResizable(false);
+            escenario.setTitle("Asignacion Conductor");
+            escenario.initStyle(StageStyle.DECORATED);
+            escenario.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLAsignarEnvioController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLAsignarConductorEnvioController">
    <children>
       <AnchorPane layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -21,17 +21,19 @@
             </Label>
             <StackPane AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="6.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1" />
-                  <ImageView disable="true" fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../recursos/angle-left-solid.png" />
-                     </image>
-                  </ImageView>
+                  <Button mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../recursos/angle-left-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </StackPane>
          </children>
       </AnchorPane>
-      <Button layoutX="456.0" layoutY="74.0" mnemonicParsing="false" onAction="#btnAsignar" prefHeight="31.0" prefWidth="100.0" style="-fx-background-radius: 30px;" text="Asignar">
+      <Button layoutX="456.0" layoutY="74.0" mnemonicParsing="false" onAction="#btnAsignar" prefHeight="31.0" prefWidth="100.0" style="-fx-background-radius: 30px;" text="Asignar" AnchorPane.leftAnchor="456.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -50,7 +52,7 @@
       </TableView>
       <StackPane alignment="CENTER_LEFT" layoutX="14.0" layoutY="72.0" AnchorPane.leftAnchor="14.0">
          <children>
-            <TextField fx:id="tfBuscar" prefHeight="36.0" prefWidth="392.0" promptText="Buscar conductor" style="-fx-background-radius: 18px;">
+            <TextField fx:id="tfBuscar" onKeyReleased="#tfBuscarTexto" prefHeight="36.0" prefWidth="392.0" promptText="Buscar conductor" style="-fx-background-radius: 18px;">
                <font>
                   <Font size="20.0" />
                </font>

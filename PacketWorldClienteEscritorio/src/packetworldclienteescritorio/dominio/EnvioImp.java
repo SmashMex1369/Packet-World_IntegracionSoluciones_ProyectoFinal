@@ -145,7 +145,7 @@ public class EnvioImp {
                     respuesta.setMensaje("Campos en formato incorrecto, verifique la información");
                     break;
                 default:
-                    respuesta.setMensaje("Lo sentimos hay problemas para obtener la información, porfavor inténtelo más tarde.");
+                    respuesta.setMensaje("Lo sentimos hay problemas para editar la información, porfavor inténtelo más tarde.");
             } 
         }
         return respuesta;
@@ -159,6 +159,33 @@ public class EnvioImp {
         RespuestaHTTP respuestaAPI= ConexionAPI.peticionBody(URL, Constantes.PETICION_PUT, parametrosJson, Constantes.APPLICATION_JSON);
         if(respuestaAPI.getCodigo()== HttpURLConnection.HTTP_OK){
             respuesta= gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        }else{
+            respuesta.setError(true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case HttpURLConnection.HTTP_BAD_REQUEST:
+                    respuesta.setMensaje("Campos en formato incorrecto, verifique la información");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para editar la información, porfavor inténtelo más tarde.");
+            }
+        }
+        return respuesta;
+    }
+    
+    public static Respuesta asignarConductor(Integer idConductor, Integer idEnvio){
+        Respuesta respuesta = new Respuesta();
+        String parametros = "idConductor="+idConductor+"&idEnvio="+idEnvio;
+        String URL = Constantes.URL_WS + "envio/asignar-conductor";
+        Gson gson = new Gson();
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, Constantes.PETICION_POST, parametros, Constantes.APPLICATION_FORM);
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
         }else{
             respuesta.setError(true);
             switch(respuestaAPI.getCodigo()){
