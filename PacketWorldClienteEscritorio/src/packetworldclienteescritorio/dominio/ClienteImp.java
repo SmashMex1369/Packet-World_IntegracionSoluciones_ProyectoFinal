@@ -101,10 +101,15 @@ public class ClienteImp {
     
     public static Respuesta eliminarCliente(int idCliente){
         Respuesta respuesta= new Respuesta();
-        String URL= Constantes.URL_WS + "cliente/eliminar-cliente/" + idCliente;
-        RespuestaHTTP respuestaAPI= ConexionAPI.peticionSinBody(URL, Constantes.PETICION_DELETE);
-        if (respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
-            Gson gson= new Gson();
+        String URL= Constantes.URL_WS + "cliente/eliminar-cliente";
+        Gson gson= new Gson();
+        //
+        Cliente cliente = new Cliente();
+        cliente.setIdCliente(idCliente);
+        //
+        String parametrosJson= gson.toJson(cliente);
+        RespuestaHTTP respuestaAPI= ConexionAPI.peticionBody(URL, Constantes.PETICION_POST, parametrosJson, Constantes.APPLICATION_JSON);
+        if (respuestaAPI.getCodigo()== HttpURLConnection.HTTP_OK){
             respuesta= gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
         }else{
             respuesta.setError(true);
@@ -119,7 +124,7 @@ public class ClienteImp {
                     respuesta.setMensaje("Campos en formato incorrecto, verifique la información");
                     break;
                 default:
-                    respuesta.setMensaje("Lo sentimos hay problemas para eliminar la información, porfavor inténtelo más tarde.");
+                    respuesta.setMensaje("Lo sentimos hay problemas para eliminar, porfavor inténtelo más tarde.");
             }
         }
         return respuesta;
