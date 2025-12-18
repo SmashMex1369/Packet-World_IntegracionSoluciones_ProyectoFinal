@@ -7,6 +7,7 @@ import dto.Respuesta;
 import java.util.List;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -105,10 +106,25 @@ public class EnvioWS {
     
     @Path("verificar-no-guia/{noGuia}")
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Respuesta verificar(@PathParam("noGuia") String noGuia){
         if(noGuia!=null && !noGuia.isEmpty()){
             return EnvioImp.verificarNoGuia(noGuia);
         }
         throw new BadRequestException();
     }
+    
+    @Path("asignar-conductor")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta asignarConductor(
+            @FormParam("idConductor") Integer idConductor,
+            @FormParam("idEnvio") Integer idEnvio
+    ){
+        if ((idConductor != null &&idConductor>0)&&(idEnvio !=null&&idEnvio>0)) {
+            return EnvioImp.asignarConductor(idConductor, idEnvio);
+        }
+        throw new BadRequestException();
+    }
+    
 }

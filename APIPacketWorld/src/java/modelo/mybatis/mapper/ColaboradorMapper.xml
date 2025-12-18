@@ -89,6 +89,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         OR apellidoMaterno LIKE CONCAT('%', #{busqueda}, '%');
     </select>
     
+    <select id="obtener-conductores-sucursal" parameterType="int" resultType="pojo.Conductor">
+        SELECT idConductor, col.noPersonal, noLicencia, nombre, apellidoPaterno, apellidoMaterno
+        FROM conductor con
+        INNER JOIN colaborador col ON con.noPersonal=col.noPersonal
+        WHERE estatus = 1 AND idSucursal=#{idSucursal};
+    </select>
+    
+    <select id="buscar-conductores-sucursal" parameterType="map" resultType="pojo.Conductor">
+        SELECT idConductor, col.noPersonal, noLicencia, nombre, apellidoPaterno, apellidoMaterno
+        FROM conductor con
+        INNER JOIN colaborador col ON con.noPersonal=col.noPersonal
+        WHERE estatus = 1 AND idSucursal=#{idSucursal}
+        AND (col.noPersonal LIKE CONCAT('%', #{busqueda}, '%')
+        OR noLicencia LIKE CONCAT ('%', #{busqueda}, '%')
+        OR nombre LIKE CONCAT('%', #{busqueda}, '%')
+        OR apellidoPaterno LIKE CONCAT('%', #{busqueda}, '%')
+        OR apellidoMaterno LIKE CONCAT('%', #{busqueda}, '%'));
+    </select>
+    
     
     
 </mapper>

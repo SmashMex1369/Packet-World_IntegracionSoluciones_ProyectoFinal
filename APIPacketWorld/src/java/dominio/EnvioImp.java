@@ -2,6 +2,8 @@ package dominio;
 
 import dto.RSBuscarEnvioWeb;
 import dto.Respuesta;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import modelo.mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -174,6 +176,35 @@ public class EnvioImp {
                 }
                 conexionBD.close() ;         
             } catch (Exception e) {
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
+    }
+    
+    public static Respuesta asignarConductor(Integer idConductor, Integer idEnvio){
+        Respuesta respuesta = new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD!=null) {
+            try {
+                HashMap<String, Integer> parametros = new LinkedHashMap<>();
+                parametros.put("idConductor", idConductor);
+                parametros.put("idEnvio", idEnvio);
+                int filasAfectadas = conexionBD.update("envio.asignar-conductor", parametros);
+                if (filasAfectadas == 1) {
+                    conexionBD.commit();
+                    respuesta.setError(false);
+                    respuesta.setMensaje("El conductor seleccionado ha sido asignado");
+                }else{
+                    conexionBD.rollback();
+                    respuesta.setMensaje("Lo sentimos, el conductor no pudo ser asignado");
+                }
+                conexionBD.close();
+            } catch (Exception e) {
+                conexionBD.rollback();
                 respuesta.setMensaje(e.getMessage());
             }
         }else{

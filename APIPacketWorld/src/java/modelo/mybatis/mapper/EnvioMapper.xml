@@ -277,4 +277,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="verificar-no-guia" parameterType="String" resultType="String">
         SELECT noGuia FROM envio WHERE noGuia=#{noGuia};
     </select>
+    
+    <update id="asignar-conductor" parameterType="map">
+        UPDATE envio
+        SET idConductor = #{idConductor}
+        WHERE idEnvio = #{idEnvio};
+    </update>
 </mapper>

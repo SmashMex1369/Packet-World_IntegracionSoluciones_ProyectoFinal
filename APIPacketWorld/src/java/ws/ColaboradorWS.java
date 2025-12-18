@@ -111,4 +111,27 @@ public class ColaboradorWS {
         throw new BadRequestException();
     }
     
+    @Path("obtener-conductores-sucursal/{idSucursal}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Conductor> obtenerConductoresSucursal(@PathParam ("idSucursal") Integer idSucursal){
+        if (idSucursal != null && idSucursal > 0) {
+            return ColaboradorImp.obtenerConductoresSucursal(idSucursal);
+        }
+        throw new BadRequestException();
+    }
+    
+    @Path("buscar-conductores-sucursal/{idSucursal}/{busqueda}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Conductor> buscarConductoresSucursal(
+            @PathParam ("idSucursal") Integer idSucursal,
+            @PathParam ("busqueda") String busqueda
+            ){
+        if ((idSucursal != null && idSucursal > 0)&&(busqueda != null && !busqueda.isEmpty())) {
+            return ColaboradorImp.buscarConductorSucursal(idSucursal, busqueda);
+        }
+        throw new BadRequestException();
+    }
+    
 }

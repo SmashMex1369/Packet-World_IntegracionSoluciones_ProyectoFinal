@@ -1,6 +1,8 @@
 package dominio;
 
 import dto.Respuesta;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import modelo.mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -194,6 +196,37 @@ public class ColaboradorImp {
             }
         }
         return colaboradores;
+    }
+    
+    public static List<Conductor> obtenerConductoresSucursal(Integer idSucursal){
+        List<Conductor> conductores = null;
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD!=null) {
+            try {
+                conductores = conexionBD.selectList("colaborador.obtener-conductores-sucursal", idSucursal);
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return conductores;
+    }
+    
+    public static List<Conductor> buscarConductorSucursal(Integer idSucursal, String busqueda){
+        List<Conductor> conductores = null;
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if(conexionBD!=null){
+            try {
+                HashMap<String, Object> parametros = new LinkedHashMap<>();
+                parametros.put("idSucursal", idSucursal);
+                parametros.put("busqueda", busqueda);
+                conductores = conexionBD.selectList("colaborador.buscar-conductores-sucursal", parametros);
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return conductores;
     }
     
 }
