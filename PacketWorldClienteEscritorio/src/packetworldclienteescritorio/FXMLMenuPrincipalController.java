@@ -50,6 +50,7 @@ public class FXMLMenuPrincipalController implements Initializable {
             Scene escenaLogin = new Scene(login);
             escenarioBase.setScene(escenaLogin);
             escenarioBase.setTitle("Login");
+            escenarioBase.setResizable(false);
             escenarioBase.show();
         } catch (IOException ex) {
            Utilidades.mostrarAlertaSimple("Error", "Por el momento no se puede mostrar la pantalla principal", Alert.AlertType.ERROR);

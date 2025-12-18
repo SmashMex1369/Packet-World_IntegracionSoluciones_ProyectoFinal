@@ -115,19 +115,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" prefHeight="35.0" prefWidth="477.0" text="Número de Identificación Interno (NII):" wrapText="true" GridPane.halignment="CENTER">
+                  <Button alignment="CENTER" contentDisplay="TEXT_ONLY" defaultButton="true" mnemonicParsing="false" onAction="#btnGuardar" prefWidth="150.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Crear" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="tfNII" disable="true" prefHeight="31.0" prefWidth="445.0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="23.0" />
-                     </font>
-                  </TextField>
-                  <Button mnemonicParsing="false" onAction="#btnGuardar" prefHeight="39.0" prefWidth="101.0" text="Guardar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                   </Button>
                </children>

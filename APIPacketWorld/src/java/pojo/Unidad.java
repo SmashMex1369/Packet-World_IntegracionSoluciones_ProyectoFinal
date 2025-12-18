@@ -21,14 +21,18 @@ public class Unidad {
     private String motivo;
     private String tiempo;
     private Integer idColaborador;
-    private String nombre;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
+    private String nombreColaborador;
+    private String apellidoPatColaborador;
+    private String apellidoMatColaborador;
+    private String nombreConductor;
+    private String apellidoPatConductor;
+    private String apellidoMatConductor;
+    
 
     public Unidad() {
     }
 
-    public Unidad(Integer idUnidad, String VIN, String NII, Integer año, String modelo, String marca, Integer idTipoUnidad, int idConductor, String noLicencia, String tipo, Integer idEstatusUnidad, Integer estatus, String motivo, String tiempo, Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno) {
+    public Unidad(Integer idUnidad, String VIN, String NII, Integer año, String modelo, String marca, Integer idTipoUnidad, int idConductor, String noLicencia, String tipo, Integer idEstatusUnidad, Integer estatus, String motivo, String tiempo, Integer idColaborador, String nombreColaborador, String apellidoPatColaborador, String apellidoMatColaborador, String nombreConductor, String apellidoPatConductor, String apellidoMatConductor) {
         this.idUnidad = idUnidad;
         this.VIN = VIN;
         this.NII = NII;
@@ -44,9 +48,12 @@ public class Unidad {
         this.motivo = motivo;
         this.tiempo = tiempo;
         this.idColaborador = idColaborador;
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
+        this.nombreColaborador = nombreColaborador;
+        this.apellidoPatColaborador = apellidoPatColaborador;
+        this.apellidoMatColaborador = apellidoMatColaborador;
+        this.nombreConductor = nombreConductor;
+        this.apellidoPatConductor = apellidoPatConductor;
+        this.apellidoMatConductor = apellidoMatConductor;
     }
 
     public Integer getIdUnidad() {
@@ -169,28 +176,53 @@ public class Unidad {
         this.idColaborador = idColaborador;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreColaborador() {
+        return nombreColaborador;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreColaborador(String nombreColaborador) {
+        this.nombreColaborador = nombreColaborador;
     }
 
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
+    public String getApellidoPatColaborador() {
+        return apellidoPatColaborador;
     }
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
+    public void setApellidoPatColaborador(String apellidoPatColaborador) {
+        this.apellidoPatColaborador = apellidoPatColaborador;
     }
 
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
+    public String getApellidoMatColaborador() {
+        return apellidoMatColaborador;
     }
 
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
-    }      
-      
+    public void setApellidoMatColaborador(String apellidoMatColaborador) {
+        this.apellidoMatColaborador = apellidoMatColaborador;
+    }
+
+    public String getNombreConductor() {
+        return nombreConductor;
+    }
+
+    public void setNombreConductor(String nombreConductor) {
+        this.nombreConductor = nombreConductor;
+    }
+
+    public String getApellidoPatConductor() {
+        return apellidoPatConductor;
+    }
+
+    public void setApellidoPatConductor(String apellidoPatConductor) {
+        this.apellidoPatConductor = apellidoPatConductor;
+    }
+
+    public String getApellidoMatConductor() {
+        return apellidoMatConductor;
+    }
+
+    public void setApellidoMatConductor(String apellidoMatConductor) {
+        this.apellidoMatConductor = apellidoMatConductor;
+    }
+    
+    
 }

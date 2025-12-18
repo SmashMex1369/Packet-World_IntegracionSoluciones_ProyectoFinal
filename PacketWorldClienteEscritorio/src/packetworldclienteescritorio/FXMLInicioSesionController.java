@@ -56,7 +56,6 @@ public class FXMLInicioSesionController implements Initializable {
         }else{
             System.out.println("error VC");
            Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
-           //irMenuPrincipal();
         }           
     }
     
@@ -69,6 +68,7 @@ public class FXMLInicioSesionController implements Initializable {
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tfNoPersonal.getScene().getWindow();
             escenario.setScene(escena);
+            escenario.setResizable(true);
             escenario.setTitle("Menú Principal");
             escenario.show();
         } catch (Exception e) {

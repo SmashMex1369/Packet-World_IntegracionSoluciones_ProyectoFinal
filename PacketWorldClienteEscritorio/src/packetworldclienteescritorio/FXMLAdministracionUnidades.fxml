@@ -23,7 +23,7 @@
             <TableColumn fx:id="tcAnio" prefWidth="95.0" text="Año" />
             <TableColumn fx:id="tcTipoUnidad" prefWidth="115.0" text="Tipo de unidad" />
             <TableColumn fx:id="tcNII" prefWidth="150.0" text="NII" />
-            <TableColumn fx:id="tcConductorAsignado" prefWidth="185.0" text="Conductor asignado" />
+            <TableColumn fx:id="tcConductorAsignado" prefWidth="185.0" text="Conductor&#10;asignado" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -25,9 +25,11 @@ import packetworldclienteescritorio.dominio.PaqueteImp;
 import packetworldclienteescritorio.dominio.UnidadImp;
 import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.interfaz.INotificador;
+import packetworldclienteescritorio.pojo.Colaborador;
 import packetworldclienteescritorio.pojo.TipoUnidad;
 import packetworldclienteescritorio.pojo.Unidad;
 import packetworldclienteescritorio.utilidad.Constantes;
+import packetworldclienteescritorio.utilidad.Sesion;
 import packetworldclienteescritorio.utilidad.Utilidades;
 
 /**
@@ -47,8 +49,8 @@ public class FXMLFormularioUnidadesController implements Initializable {
     private TextField tfAnio;
     @FXML
     private TextField tfVIN;
-    @FXML
-    private TextField tfNII;
+    
+    private Colaborador c;
     
     private Unidad unidadEdicion;
     private INotificador observador;
@@ -60,6 +62,7 @@ public class FXMLFormularioUnidadesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarTiposUnidad();
+        c=Sesion.getColaborador();
     }
 
     public void iniciarDatos(Unidad unidadEdicion, INotificador observador){
@@ -70,7 +73,6 @@ public class FXMLFormularioUnidadesController implements Initializable {
             tfMarca.setText(unidadEdicion.getMarca());
             tfAnio.setText(String.valueOf(unidadEdicion.getAño()));
             tfVIN.setText(unidadEdicion.getVIN());
-            tfNII.setText(unidadEdicion.getNII());
             int posicionTipoUnidad= obtenerPosicionTipoUnidad(unidadEdicion.getIdTipoUnidad());
             cbTipoUnidad.getSelectionModel().select(posicionTipoUnidad);
         }
@@ -133,6 +135,7 @@ public class FXMLFormularioUnidadesController implements Initializable {
             System.out.println(unidad.getNII());
             TipoUnidad tipoUnidadSeleccionado= cbTipoUnidad.getSelectionModel().getSelectedItem();
             unidad.setIdTipoUnidad(tipoUnidadSeleccionado.getIdTipoUnidad());
+            unidad.setIdColaborador(c.getIdColaborador());
             if(unidadEdicion==null){
                 registrarUnidad(unidad);
             }else{
@@ -159,7 +162,7 @@ public class FXMLFormularioUnidadesController implements Initializable {
         }
         if(tfAnio.getText()!=null || !tfAnio.getText().isEmpty()){
             try {
-                if(Integer.parseInt(tfAnio.getText())<1800 || Integer.parseInt(tfAnio.getText())>2027){
+                if(Integer.parseInt(tfAnio.getText())<1800 || Integer.parseInt(tfAnio.getText())>2026){
                     camposValidos=false;
                     tfAnio.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
                 }

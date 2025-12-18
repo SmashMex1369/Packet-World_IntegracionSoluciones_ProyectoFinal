@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.UnidadImp;
 import packetworldclienteescritorio.interfaz.INotificador;
+import packetworldclienteescritorio.pojo.Colaborador;
 import packetworldclienteescritorio.pojo.Unidad;
 import packetworldclienteescritorio.utilidad.Constantes;
 import packetworldclienteescritorio.utilidad.Utilidades;
@@ -50,7 +52,7 @@ public class FXMLAdministracionUnidadesController implements Initializable, INot
     @FXML
     private TableColumn tcNII;
     @FXML
-    private TableColumn tcConductorAsignado;
+    private TableColumn<Unidad, String> tcConductorAsignado;
     @FXML
     private TextField tfBuscar;
     
@@ -72,14 +74,30 @@ public class FXMLAdministracionUnidadesController implements Initializable, INot
         tcModelo.setCellValueFactory(new PropertyValueFactory("modelo"));
         tcAnio.setCellValueFactory(new PropertyValueFactory("año"));
         tcTipoUnidad.setCellValueFactory(new PropertyValueFactory("tipo"));
-        tcConductorAsignado.setCellValueFactory(new PropertyValueFactory("nombre"));
+        tcConductorAsignado.setCellValueFactory(cellData ->{
+            Unidad u = cellData.getValue();
+            String datos = u.getNombreConductor()+ " " + u.getApellidoPatConductor()+ " " + u.getApellidoMatConductor();
+            return new ReadOnlyStringWrapper(datos);
+        });
     }
     
     private void cargarInformacionUnidades(){
-        HashMap<String, Object> respuesta= UnidadImp.obtenerUnidadesDisponibles();
+        HashMap<String, Object> respuesta;
+        if(tfBuscar.getText().isEmpty()){
+            respuesta= UnidadImp.obtenerUnidadesDisponibles();
+        }else{
+            respuesta= UnidadImp.buscarUnidad(tfBuscar.getText());
+        }
         boolean esError= (boolean)respuesta.get(Constantes.KEY_ERROR);
         if(!esError){
             List<Unidad> unidadesAPI= (List<Unidad>) respuesta.get(Constantes.KEY_LISTA);
+            for(int i=0;i<unidadesAPI.size();i++){
+                if(unidadesAPI.get(i).getIdConductor()==0){
+                    unidadesAPI.get(i).setNombreConductor("");
+                    unidadesAPI.get(i).setApellidoPatConductor("");
+                    unidadesAPI.get(i).setApellidoMatConductor("");
+                }
+            }
             unidades= FXCollections.observableArrayList();
             unidades.addAll(unidadesAPI);
             tvUnidad.setItems(unidades);
@@ -147,28 +165,53 @@ public class FXMLAdministracionUnidadesController implements Initializable, INot
 
     @FXML
     private void itmHistorialBajas(ActionEvent event) {
+        try {     
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLHistorialBajasUnidad.fxml"));
+            Parent vista= cargador.load();
+            Scene escena= new Scene(vista);
+            Stage escenario= new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Historial de bajas de unidades");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+    
+    
 
     @FXML
     private void itmBaja(ActionEvent event) {
+        Unidad unidad = tvUnidad.getSelectionModel().getSelectedItem();
+        if (unidad!=null) {
+            irBajaUnidad(unidad);
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccione una unidad", "Para dar de baja una unidad, debe seleccionar una", Alert.AlertType.WARNING);
+        }
+        
+    }
+    
+    private void irBajaUnidad(Unidad unidad){
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLBajaUnidad.fxml"));
+            Parent vista= cargador.load();
+            FXMLBajaUnidadController controlador= cargador.getController();
+            controlador.cargarIdUnidad(unidad, this);
+            Scene escena= new Scene(vista);
+            Stage escenario= new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Dar baja unidades");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.setResizable(false);
+            escenario.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void buscarUnidad(KeyEvent event) {
-        HashMap<String, Object> respuesta;
-        if(tfBuscar.getText().isEmpty()){
-            respuesta= UnidadImp.obtenerUnidadesDisponibles();
-        }else{
-            respuesta= UnidadImp.buscarUnidad(tfBuscar.getText());
-        }
-        boolean esError= (boolean) respuesta.get(Constantes.KEY_ERROR);
-        if(!esError){
-            List<Unidad> unidadesAPI= (List<Unidad>) respuesta.get(Constantes.KEY_LISTA);
-            unidades= FXCollections.observableArrayList();
-            unidades.addAll(unidadesAPI);
-            tvUnidad.setItems(unidades);
-        }else{
-            Utilidades.mostrarAlertaSimple("Error al cargar", ""+respuesta.get("mensaje"), Alert.AlertType.ERROR);
-        }
+        cargarInformacionUnidades();
     }
 }
