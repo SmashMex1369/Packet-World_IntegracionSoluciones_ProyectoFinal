@@ -59,11 +59,18 @@ public Respuesta editar(String json){
         }
     }
 
-@Path("eliminar-cliente/{idCliente}")
-@DELETE
+@Path("eliminar-cliente")
+@POST
 @Produces(MediaType.APPLICATION_JSON)
-public Respuesta eliminar(@PathParam("idCliente") Integer idCliente){
-        return ClienteImp.eliminarCliente(idCliente);
+@Consumes(MediaType.APPLICATION_JSON)
+public Respuesta eliminar(String json){
+        Gson gson= new Gson();
+        try {
+            Cliente cliente= gson.fromJson(json, Cliente.class);
+            return ClienteImp.eliminarCliente(cliente);
+        } catch (Exception e) {
+            throw new BadRequestException();
+        } 
     }
     
 }

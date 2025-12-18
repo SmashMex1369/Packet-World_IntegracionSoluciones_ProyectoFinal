@@ -80,13 +80,13 @@ public class ClienteImp {
         return respuesta;
     }
     
-    public static Respuesta eliminarCliente(int  idCliente){
+    public static Respuesta eliminarCliente(Cliente  cliente){
         Respuesta respuesta = new Respuesta();
         respuesta.setError(true);
         SqlSession conexionBD = MyBatisUtil.getSession();
         if(conexionBD != null){
             try{
-                int filasAfectadas = conexionBD.delete("cliente.eliminar-cliente", idCliente);
+                int filasAfectadas = conexionBD.delete("cliente.eliminar-cliente", cliente);
                 conexionBD.commit();
                 if(filasAfectadas > 0){
                     respuesta.setError(false);

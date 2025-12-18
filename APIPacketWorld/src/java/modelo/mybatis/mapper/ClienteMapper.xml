@@ -47,10 +47,12 @@ INNER JOIN estado e         ON e.idEstado = ci.idEstado WHERE estatus = 1;
         
     </update>
     
-    <delete id = "eliminar-cliente" parameterType="int">
+    <update id = "eliminar-cliente" parameterType="int">
         
-        DELETE FROM cliente WHERE idCliente = #{idCliente}
+        UPDATE cliente
+        SET estatus = 0
+        WHERE idCliente = #{idCliente}
         
-    </delete>
+    </update>
     
 </mapper>
