@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Packet-World - Detalles</title>
+<link rel="stylesheet" href="./css/estilos.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">
+        <span class="icon">☰</span>
+        <h1>Packet-World</h1>
+    </div>
+
+    <div class="search-box">
+        <input type="text" placeholder="No. de Guía">
+        <button class="search-btn">🔍</button>
+    </div>
+</header>
+
+<div class="layout">
+
+    <!-- Barra lateral izquierda -->
+    <aside class="side"></aside>
+
+    <main class="content">
+
+        <h2 class="titulo">Detalles del Envío</h2>
+
+        <div class="menu-botones">
+            <button class="tab act" onclick="mostrarSeccion('envio', this)">🚚 Envío</button>
+            <button class="tab" onclick="mostrarSeccion('remitente', this)">🧍 Remitente</button>
+            <button class="tab" onclick="mostrarSeccion('destinatario', this)">👥 Destinatario</button>
+            <button class="tab" onclick="mostrarSeccion('sucursal', this)">🏢 Sucursal</button>
+        </div>
+
+        <section id="envio" class="seccion">
+            <div class="grid2">
+                <div>
+                    <strong>No. de Guía:</strong>
+                    <span id="noGuia">[Número de guía Envío]</span>
+                </div>
+                <div>
+                    <strong>Conductor asignado:</strong>
+                    <span id="nombreConductor">[Nombre Completo Conductor]</span>
+                </div>
+                <div>
+                    <strong>Estatus actual:</strong>
+                    <span id="estatus">[Estatus Envío]</span>
+                </div>
+                <div>
+                    <strong>Fecha último cambio:</strong>
+                    <span id="fecha">[FechaHora Envío]</span>
+                </div>
+            </div>
+
+            <div class="grid-full">
+                <strong>Detalles del estatus / Motivo:</strong>
+                <span id="motivo">[Motivo Envío]</span>
+            </div>
+
+            <div class="centrado">
+                <button class="historial">⟳ Historial Completo</button>
+            </div>
+        </section>
+
+        <section id="remitente" class="seccion oculto">
+            <div class="grid3">
+                <div>
+                    <strong>Nombre:</strong>
+                    <span id="nombreCliente">[Nombre Cliente]</span>
+                </div>
+                <div>
+                    <strong>Teléfono:</strong>
+                    <span id="telefCliente">[Teléfono Cliente]</span>
+                </div>
+                <div>
+                    <strong>Correo:</strong>
+                    <span id="correoCliente">[Correo Cliente]</span>
+                </div>
+                <div>
+                    <strong>Colonia:</strong>
+                    <span id="colCliente">[Colonia Cliente]</span>
+                </div>
+                <div>
+                    <strong>Código Postal:</strong>
+                    <span id="cpCliente">[Código Postal]</span>
+                </div>
+                <div>
+                    <strong>Calle:</strong>
+                    <span id="calleCliente">[Calle Cliente]</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="destinatario" class="seccion oculto">
+            <div class="grid3">
+                <div>
+                    <strong>Nombre:</strong>
+                    <span id="nombreDest">[Nombre Destinatario]</span>
+                </div>
+                <div>
+                    <strong>Ciudad:</strong>
+                    <span id="cdDest">[Ciudad Destinatario]</span>
+                </div>
+                <div>
+                    <strong>Colonia:</strong>
+                    <span id="colDest">[Colonia Destinatario]</span>
+                </div>
+                <div>
+                    <strong>Código Postal:</strong>
+                    <span id="cpDest">[CP Destinatario]</span>
+                </div>
+                <div>
+                    <strong>Calle:</strong>
+                    <span id="calleDest">[Calle Destinatario]</span>
+                </div>
+                <div>
+                    <strong>Número:</strong>
+                    <span id="numeroDest">[Número Destinatario]</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="sucursal" class="seccion oculto">
+            <div class="grid3">
+                <div>
+                    <strong>Estado:</strong>
+                    <span id="estado">[Estado Sucursal]</span>
+                </div>
+                <div>
+                    <strong>Ciudad:</strong>
+                    <span id="cdSuc">[Ciudad Sucursal]</span>
+                </div>
+                <div>
+                    <strong>Colonia:</strong>
+                    <span id="colSuc">[Colonia Sucursal]</span>
+                </div>
+                <div>
+                    <strong>CP:</strong>
+                    <span id="cpSuc">[Código Postal]</span>
+                </div>
+                <div>
+                    <strong>Calle:</strong>
+                    <span id="calleSuc">[Calle Sucursal]</span>
+                </div>
+                <div>
+                    <strong>Número exterior:</strong>
+                    <span id="numeroSuc">[Número Sucursal]</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Barra lateral derecha -->
+    <aside class="side"></aside>
+
+</div>
+
+<script src="./js/funciones.js"></script>
+</body>
+</html>

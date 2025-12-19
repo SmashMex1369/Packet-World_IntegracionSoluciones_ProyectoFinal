@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  background: #fff;
+  padding: 10px 20px;
+  border-bottom: 2px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.search-box {
+  display: flex;
+  gap: 5px;
+}
+
+.search-box input {
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+}
+
+.search-btn {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 7.5% 85% 7.5%;
+  height: calc(100vh - 70px);
+}
+
+.side {
+  background: #e6e6e6;
+}
+
+.content {
+  padding: 30px;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.menu-botones {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.tab {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid #333;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.tab.act {
+  background-color: #99c1ff;
+}
+
+.seccion {
+  animation: fade 0.2s;
+}
+
+.oculto {
+  display: none;
+}
+
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  text-align: center;
+  gap: 80px;
+  margin-bottom: 30px;
+  margin-top: 50px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  gap: 100px;
+  margin-top: 50px;
+}
+
+.grid-full {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+strong{
+  display: block;
+  margin-bottom:1px;
+}
+
+.historial {
+  padding: 10px 25px;
+  font-size: 16px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.centrado {
+  text-align: center;
+}
+
+.mi-boton {
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  border: 2px solid #0A3AFF;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.mi-boton.activo {
+  background-color: #0A3AFF;
+  color: white;
+}
+
+
