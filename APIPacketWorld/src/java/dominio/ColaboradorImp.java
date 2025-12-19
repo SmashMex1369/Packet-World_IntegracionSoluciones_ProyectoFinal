@@ -31,44 +31,50 @@ public class ColaboradorImp {
         }
         return colaboradores;
     }
-    public static List<Colaborador> obtenerAdministradores(){
-        List<Colaborador> administradores = null;
+    
+    public static List<Conductor> buscarColaborador(String busqueda){
+        List<Conductor> colaboradores = null;
         SqlSession conexionBD = MyBatisUtil.getSession();
         if (conexionBD != null) {
             try {
-                administradores = conexionBD.selectList("colaborador.obtener-administradores");
+                colaboradores = conexionBD.selectList("colaborador.buscar-colaborador",busqueda);
                 conexionBD.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return administradores;
+        return colaboradores;
     }
-    public static List<Colaborador> obtenerEjecutivos(){
-        List<Colaborador> ejecutivos = null;
+    
+    public static List<Conductor> obtenerColaboradoresRol(Integer idRol){
+        List<Conductor> colaboradores = null;
         SqlSession conexionBD = MyBatisUtil.getSession();
         if (conexionBD != null) {
             try {
-                ejecutivos = conexionBD.selectList("colaborador.obtener-ejecutivos");
+                colaboradores = conexionBD.selectList("colaborador.obtener-colaboradores-rol", idRol);
                 conexionBD.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return ejecutivos;
+        return colaboradores;
     }
-    public static List<Conductor> obtenerConductores(){
-        List<Conductor> conductores = null;
+    
+    public static List<Conductor> buscarColaboradorRol(Integer idRol, String busqueda){
+        List<Conductor> colaboradores = null;
         SqlSession conexionBD = MyBatisUtil.getSession();
-        if (conexionBD != null) {
+        if(conexionBD!=null){
             try {
-                conductores = conexionBD.selectList("colaborador.obtener-conductores");
+                HashMap<String, Object> parametros = new LinkedHashMap<>();
+                parametros.put("idRol", idRol);
+                parametros.put("busqueda", busqueda);
+                colaboradores = conexionBD.selectList("colaborador.buscar-colaborador-rol", parametros);
                 conexionBD.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return conductores;
+        return colaboradores;
     }
     
     public static Respuesta registrarColaborador(Conductor colaborador){
@@ -182,20 +188,6 @@ public class ColaboradorImp {
             respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
         }
         return respuesta;
-    }
-    
-    public static List<Conductor> buscarColaborador(String busqueda){
-        List<Conductor> colaboradores = null;
-        SqlSession conexionBD = MyBatisUtil.getSession();
-        if (conexionBD != null) {
-            try {
-                colaboradores = conexionBD.selectList("colaborador.buscar-colaborador",busqueda);
-                conexionBD.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return colaboradores;
     }
     
     public static List<Conductor> obtenerConductoresSucursal(Integer idSucursal){

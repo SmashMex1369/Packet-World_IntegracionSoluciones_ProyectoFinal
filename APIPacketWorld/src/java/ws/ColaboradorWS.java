@@ -34,23 +34,37 @@ public class ColaboradorWS {
     public List<Conductor> obtenerColaboradores(){
         return ColaboradorImp.obtenerColaboradores();
     }
-    @Path("obtener-administradores")
+    
+    @Path("obtener-colaboradores-rol/{idRol}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Colaborador> obtenerAdministradores(){
-        return ColaboradorImp.obtenerAdministradores();
+    public List<Conductor> obtenerColaboradoresRol(@PathParam ("idRol") Integer idRol){
+        if (idRol!= null && idRol>0) {
+            return ColaboradorImp.obtenerColaboradoresRol(idRol);
+        }
+        throw new BadRequestException();
+    }    
+    
+    @Path("buscar-colaborador/{busqueda}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Conductor> buscarColaborador(@PathParam ("busqueda") String busqueda){
+        if (busqueda != null&& !busqueda.isEmpty()) {
+            return ColaboradorImp.buscarColaborador(busqueda);
+        }
+        throw new BadRequestException();
     }
-    @Path("obtener-ejecutivos")
+    
+    @Path("buscar-colaborador-rol/{idRol}/{busqueda}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Colaborador> obtenerEjecutivos(){
-        return ColaboradorImp.obtenerEjecutivos();
-    }
-    @Path("obtener-conductores")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Conductor> obtenerConductores(){
-        return ColaboradorImp.obtenerConductores();
+    public List<Conductor> buscarColaborador(
+            @PathParam ("idRol") Integer idRol,
+            @PathParam ("busqueda") String busqueda){
+        if ((busqueda != null&& !busqueda.isEmpty()) && (idRol!=null && idRol>0)) {
+            return ColaboradorImp.buscarColaboradorRol(idRol,busqueda);
+        }
+        throw new BadRequestException();
     }
     
     @Path("registrar-colaborador")
@@ -97,16 +111,6 @@ public class ColaboradorWS {
     public Respuesta subirFoto(@PathParam ("idColaborador") Integer idColaborador, byte[] fotografia){
         if (idColaborador != null && idColaborador > 0) {
             return ColaboradorImp.subirFoto(idColaborador, fotografia);
-        }
-        throw new BadRequestException();
-    }
-    
-    @Path("buscar-colaborador/{busqueda}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Conductor> buscarColaborador(@PathParam ("busqueda") String busqueda){
-        if (busqueda != null&& !busqueda.isEmpty()) {
-            return ColaboradorImp.buscarColaborador(busqueda);
         }
         throw new BadRequestException();
     }

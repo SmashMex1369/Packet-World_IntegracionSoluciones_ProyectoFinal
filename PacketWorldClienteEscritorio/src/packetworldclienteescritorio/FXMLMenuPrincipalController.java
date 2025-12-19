@@ -56,13 +56,6 @@ public class FXMLMenuPrincipalController implements Initializable {
            Utilidades.mostrarAlertaSimple("Error", "Por el momento no se puede mostrar la pantalla principal", Alert.AlertType.ERROR);
         }
     }
-
-    @FXML
-    private void clickCerrarSesion(javafx.scene.input.MouseEvent event) {
-        //Utilidades.mostrarAlertaConfirmacion(titulo, contenido);
-        Sesion.cerrarSesion();
-        irPantallaLogin();
-    }
     
     public void cargarInformacion(Colaborador colaborador){
         colaboradorSesion = colaborador;
@@ -102,6 +95,9 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnRegresar(ActionEvent event) {
+        //Utilidades.mostrarAlertaConfirmacion(titulo, contenido);
+        Sesion.cerrarSesion();
+        irPantallaLogin();
     }
     
     public void irAdmUnidades(){

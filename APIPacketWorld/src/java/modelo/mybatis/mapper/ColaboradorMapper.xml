@@ -13,31 +13,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE c.estatus = 1;
     </select>
     
-    <select id="obtener-administradores" resultType="pojo.Colaborador">
-        SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, r.idRol, r.rol, s.idSucursal, s.CUS
-        FROM colaborador c
-        INNER JOIN rol r ON c.idRol=r.idRol
-        INNER JOIN sucursal s ON c.idSucursal=s.idSucursal
-        WHERE c.idRol=1 AND c.estatus=1;
-    </select>
-    
-    <select id="obtener-ejecutivos" resultType="pojo.Colaborador">
-        SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, r.idRol, r.rol, s.idSucursal, s.CUS
-        FROM colaborador c
-        INNER JOIN rol r ON c.idRol=r.idRol
-        INNER JOIN sucursal s ON c.idSucursal=s.idSucursal
-        WHERE c.idRol=2 AND c.estatus=1;
-    </select>
-    
-    <select id="obtener-conductores" resultType="pojo.Conductor">
+    <select id="buscar-colaborador" parameterType="String" resultType="pojo.Conductor">
         SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, noLicencia, r.idRol, r.rol, s.idSucursal, s.CUS
         FROM colaborador c
         INNER JOIN rol r ON c.idRol=r.idRol
         INNER JOIN sucursal s ON c.idSucursal=s.idSucursal
         LEFT JOIN conductor con ON c.noPersonal=con.noPersonal
-        WHERE c.idRol=3 and c.estatus=1;
-    </select>
+        WHERE c.estatus = 1 AND
+        (c.noPersonal LIKE CONCAT('%', #{busqueda}, '%')
+        OR c.nombre LIKE CONCAT('%', #{busqueda}, '%')
+        OR apellidoPaterno LIKE CONCAT('%', #{busqueda}, '%')
+        OR apellidoMaterno LIKE CONCAT('%', #{busqueda}, '%'));
+    </select> 
     
+    <select id="obtener-colaboradores-rol" parameterType="int" resultType="pojo.Conductor">
+        SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, noLicencia, r.idRol, r.rol, s.idSucursal, s.CUS
+        FROM colaborador c
+        INNER JOIN rol r ON c.idRol=r.idRol
+        INNER JOIN sucursal s ON c.idSucursal=s.idSucursal
+        LEFT JOIN conductor con ON c.noPersonal=con.noPersonal
+        WHERE c.estatus = 1 AND c.idRol=#{idRol};
+    </select>  
+    
+    <select id="buscar-colaborador-rol" parameterType="map" resultType="pojo.Conductor">
+        SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, noLicencia, r.idRol, r.rol, s.idSucursal, s.CUS
+        FROM colaborador c
+        INNER JOIN rol r ON c.idRol=r.idRol
+        INNER JOIN sucursal s ON c.idSucursal=s.idSucursal
+        LEFT JOIN conductor con ON c.noPersonal=con.noPersonal
+        WHERE c.estatus = 1 AND c.idRol = #{idRol} AND
+        (c.noPersonal LIKE CONCAT('%', #{busqueda}, '%')
+        OR c.nombre LIKE CONCAT('%', #{busqueda}, '%')
+        OR apellidoPaterno LIKE CONCAT('%', #{busqueda}, '%')
+        OR apellidoMaterno LIKE CONCAT('%', #{busqueda}, '%'));
+    </select>  
     
     <insert id="registrar-colaborador" parameterType="pojo.Colaborador">
         INSERT INTO colaborador (noPersonal, nombre, apellidoPaterno, apellidoMaterno, correo, contraseña, CURP, idRol, idSucursal)
@@ -77,17 +86,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE idColaborador = #{idColaborador};
     </update>
     
-    <select id="buscar-colaborador" parameterType="String" resultType="pojo.Conductor">
-        SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, noLicencia, r.idRol, r.rol, s.idSucursal, s.CUS
-        FROM colaborador c
-        INNER JOIN rol r ON c.idRol=r.idRol
-        INNER JOIN sucursal s ON c.idSucursal=s.idSucursal
-        LEFT JOIN conductor con ON c.noPersonal=con.noPersonal
-        WHERE c.noPersonal LIKE CONCAT('%', #{busqueda}, '%')
-        OR c.nombre LIKE CONCAT('%', #{busqueda}, '%')
-        OR apellidoPaterno LIKE CONCAT('%', #{busqueda}, '%')
-        OR apellidoMaterno LIKE CONCAT('%', #{busqueda}, '%');
-    </select>
     
     <select id="obtener-conductores-sucursal" parameterType="int" resultType="pojo.Conductor">
         SELECT idConductor, col.noPersonal, noLicencia, nombre, apellidoPaterno, apellidoMaterno
