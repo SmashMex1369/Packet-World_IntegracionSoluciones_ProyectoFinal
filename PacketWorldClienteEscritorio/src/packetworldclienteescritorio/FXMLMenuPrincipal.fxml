@@ -169,9 +169,9 @@
          <children>
             <StackPane prefHeight="50.0" prefWidth="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnRegresar" style="-fx-base: #00000000;">
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnRegresar" prefHeight="61.0" prefWidth="72.0" style="-fx-base: #00000000;">
                      <graphic>
-                        <ImageView fx:id="imgCerrarSesion" fitHeight="52.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imgCerrarSesion" fitHeight="44.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../recursos/arrow-right-from-bracket-solid.png" />
                            </image>

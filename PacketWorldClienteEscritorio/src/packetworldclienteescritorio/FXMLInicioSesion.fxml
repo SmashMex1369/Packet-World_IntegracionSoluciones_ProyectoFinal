@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -8,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLInicioSesionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLInicioSesionController">
    <children>
       <Button layoutX="492.0" layoutY="431.0" mnemonicParsing="false" onAction="#btnIniciar" prefHeight="38.0" prefWidth="200.0" style="-fx-background-radius: 30px; -fx-base: #03658c;" text="Ingresar">
          <font>
@@ -29,7 +34,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="tfNoPersonal" layoutX="446.0" layoutY="240.0" prefHeight="38.0" prefWidth="292.0">
+      <TextField fx:id="tfNoPersonal" layoutX="446.0" layoutY="240.0" prefHeight="38.0" prefWidth="292.0" promptText="CRS6455">
          <font>
             <Font size="24.0" />
          </font></TextField>
@@ -38,10 +43,6 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="tfPassword" layoutX="446.0" layoutY="338.0" prefHeight="38.0" prefWidth="292.0">
-         <font>
-            <Font size="23.0" />
-         </font></TextField>
       <Label layoutX="439.0" layoutY="100.0" text="Bienvenido al centro de administración">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -50,5 +51,6 @@
          <font>
             <Font size="16.0" />
          </font></Label>
+      <PasswordField fx:id="pfPassword" layoutX="446.0" layoutY="338.0" prefHeight="50.0" prefWidth="292.0" promptText="*******" />
    </children>
 </AnchorPane>

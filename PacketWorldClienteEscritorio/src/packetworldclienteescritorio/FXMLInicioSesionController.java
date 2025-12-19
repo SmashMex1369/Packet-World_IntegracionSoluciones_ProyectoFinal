@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -26,7 +27,7 @@ public class FXMLInicioSesionController implements Initializable {
     @FXML
     private TextField tfNoPersonal;
     @FXML
-    private TextField tfPassword;
+    private PasswordField pfPassword;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -38,7 +39,7 @@ public class FXMLInicioSesionController implements Initializable {
     private void btnIniciar(ActionEvent event) {
         
         String noPersonal= tfNoPersonal.getText();
-        String contraseña= tfPassword.getText();
+        String contraseña= pfPassword.getText();
         
         if(!noPersonal.isEmpty() && !contraseña.isEmpty()){
             verificarCredenciales(noPersonal, contraseña);
