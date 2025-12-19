@@ -51,6 +51,9 @@
          <font>
             <Font size="16.0" />
          </font></Label>
-      <PasswordField fx:id="pfPassword" layoutX="446.0" layoutY="338.0" prefHeight="50.0" prefWidth="292.0" promptText="*******" />
+      <PasswordField fx:id="pfPassword" layoutX="446.0" layoutY="338.0" prefHeight="50.0" prefWidth="292.0" promptText="*******">
+         <font>
+            <Font size="24.0" />
+         </font></PasswordField>
    </children>
 </AnchorPane>

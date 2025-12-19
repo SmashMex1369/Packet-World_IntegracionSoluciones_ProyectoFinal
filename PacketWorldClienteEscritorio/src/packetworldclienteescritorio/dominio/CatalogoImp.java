@@ -9,11 +9,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import packetworldclienteescritorio.conexion.ConexionAPI;
 import packetworldclienteescritorio.dto.Respuesta;
+import packetworldclienteescritorio.pojo.CUS;
 import packetworldclienteescritorio.pojo.Direccion;
 import packetworldclienteescritorio.pojo.EstatusEnvio;
 import packetworldclienteescritorio.pojo.NoGuia;
 import packetworldclienteescritorio.pojo.NombreCliente;
 import packetworldclienteescritorio.pojo.RespuestaHTTP;
+import packetworldclienteescritorio.pojo.Rol;
 import packetworldclienteescritorio.pojo.TipoUnidad;
 import packetworldclienteescritorio.utilidad.Constantes;
 
@@ -152,4 +154,57 @@ public class CatalogoImp {
         }
         return respuesta;
     }
+    
+    public static HashMap<String, Object> obtenerSucursalesDisponibles(){
+        HashMap <String, Object> respuesta= new LinkedHashMap<>();
+        String URL= Constantes.URL_WS + "catalogo/obtener-sucursales-disponibles";
+        RespuestaHTTP respuestaAPI= ConexionAPI.peticionGET(URL);
+        if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
+        Gson gson= new Gson();
+        Type tipoLista= new TypeToken<List<CUS>>(){}.getType();
+        List<CUS> sucursales= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+        respuesta.put(Constantes.KEY_ERROR, false);
+        respuesta.put(Constantes.KEY_LISTA, sucursales);
+        }else{
+            respuesta.put(Constantes.KEY_ERROR, true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.put(Constantes.KEY_MENSAJE,Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put(Constantes.KEY_MENSAJE,Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put(Constantes.KEY_MENSAJE,"Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
+            }
+        }
+        return respuesta;
+    }
+    
+    public static HashMap<String, Object> obtenerRoles(){
+        HashMap <String, Object> respuesta= new LinkedHashMap<>();
+        String URL= Constantes.URL_WS + "catalogo/obtener-roles";
+        RespuestaHTTP respuestaAPI= ConexionAPI.peticionGET(URL);
+        if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
+        Gson gson= new Gson();
+        Type tipoLista= new TypeToken<List<Rol>>(){}.getType();
+        List<Rol> roles= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+        respuesta.put(Constantes.KEY_ERROR, false);
+        respuesta.put(Constantes.KEY_LISTA, roles);
+        }else{
+            respuesta.put(Constantes.KEY_ERROR, true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.put(Constantes.KEY_MENSAJE,Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put(Constantes.KEY_MENSAJE,Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put(Constantes.KEY_MENSAJE,"Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
+            }
+        }
+        return respuesta;
+    }
+    
 }

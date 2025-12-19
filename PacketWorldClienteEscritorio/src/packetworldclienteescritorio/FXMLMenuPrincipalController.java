@@ -59,7 +59,7 @@ public class FXMLMenuPrincipalController implements Initializable {
     
     public void cargarInformacion(Colaborador colaborador){
         colaboradorSesion = colaborador;
-        lbSaludo.setText(colaboradorSesion.getNombre() + " " + colaboradorSesion.getApellidoPaterno() + " " + colaboradorSesion.getApellidoMaterno());
+        lbSaludo.setText("Bienvenido(a) "+ colaboradorSesion.getNombre() + " " + colaboradorSesion.getApellidoPaterno() + " " + colaboradorSesion.getApellidoMaterno());
         lbTipoRol.setText("Rol: " + colaboradorSesion.getRol());
     }
 

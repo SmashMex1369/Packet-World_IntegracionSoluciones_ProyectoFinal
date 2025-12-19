@@ -236,7 +236,7 @@ public class FXMLFormularioPaquetesController implements Initializable {
 
     @FXML
     private void cbNoGuiaSeleccion(Event event) {
-        cbNoGuia.setStyle(null);
+        cbNoGuia.setStyle("-fx-font-size: 21");
     }
 
     @FXML

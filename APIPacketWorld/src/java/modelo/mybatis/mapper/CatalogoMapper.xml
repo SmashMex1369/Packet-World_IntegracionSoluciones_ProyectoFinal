@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="obtener-roles" resultType="pojo.Rol">
-        SELECT * from rol;
+        SELECT * from rol ORDER BY idRol;
     </select>
     
     <select id="obtener-sucursal-disponibles" resultType="pojo.CUS">

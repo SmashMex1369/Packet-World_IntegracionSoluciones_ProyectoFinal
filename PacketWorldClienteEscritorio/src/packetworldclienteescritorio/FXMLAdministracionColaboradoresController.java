@@ -28,6 +28,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.ColaboradorImp;
+import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Colaborador;
 import packetworldclienteescritorio.pojo.Conductor;
 import packetworldclienteescritorio.utilidad.Constantes;
@@ -38,7 +39,7 @@ import packetworldclienteescritorio.utilidad.Utilidades;
  *
  * @author alex4
  */
-public class FXMLAdministracionColaboradoresController implements Initializable {
+public class FXMLAdministracionColaboradoresController implements Initializable, INotificador {
 
     @FXML
     private TableView<Conductor> tvColaboradores;
@@ -142,7 +143,20 @@ public class FXMLAdministracionColaboradoresController implements Initializable 
     }    
 
     @FXML
-    private void btnEliminar(ActionEvent event) {
+    private void btnRegistrar(ActionEvent event) {
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLFormularioColaboradores.fxml"));
+            Parent vista= cargador.load();
+            FXMLFormularioColaboradoresController controlador= cargador.getController();
+            controlador.observador(this);
+            Scene escena= new Scene(vista);
+            Stage escenario= (Stage) tpColaboradores.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Formulario Colaboradores");             
+            escenario.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -150,7 +164,7 @@ public class FXMLAdministracionColaboradoresController implements Initializable 
     }
 
     @FXML
-    private void btnRegistrar(ActionEvent event) {
+    private void btnEliminar(ActionEvent event) {
     }
 
     @FXML
@@ -243,7 +257,7 @@ public class FXMLAdministracionColaboradoresController implements Initializable 
         colApellidoMaternoAdministradores.setCellValueFactory(new PropertyValueFactory("apellidoMaterno"));
         colSucursalAdministradores.setCellValueFactory(new PropertyValueFactory("CUS"));
         colCURPAdministradores.setCellValueFactory(new PropertyValueFactory("CURP"));
-        colCorreoAdministradores.setCellValueFactory(new PropertyValueFactory("noPersonal"));
+        colCorreoAdministradores.setCellValueFactory(new PropertyValueFactory("correo"));
     }
     
     private void configurarTablaEjecutivos(){
@@ -254,7 +268,7 @@ public class FXMLAdministracionColaboradoresController implements Initializable 
         colApellidoMaternoEjecutivo.setCellValueFactory(new PropertyValueFactory("apellidoMaterno"));
         colSucursalEjecutivo.setCellValueFactory(new PropertyValueFactory("CUS"));
         colCURPEjecutivo.setCellValueFactory(new PropertyValueFactory("CURP"));
-        colCorreoEjecutivo.setCellValueFactory(new PropertyValueFactory("noPersonal"));
+        colCorreoEjecutivo.setCellValueFactory(new PropertyValueFactory("correo"));
     }
     
     private void configurarTablaConductores(){
@@ -332,6 +346,12 @@ public class FXMLAdministracionColaboradoresController implements Initializable 
         }else{
             cargarInformacionColaboradoresRol(tpColaboradores.getSelectionModel().getSelectedIndex(), tpColaboradores.getSelectionModel().getSelectedItem());
         }
+    }
+
+    @Override
+    public void notificarOperacionExitosa(String operacion, String nombre) {
+        System.out.println("Operacion: "+ operacion + ", NoPersonal: " + nombre);
+        cargarInformacionColaboradores();
     }
     
 }

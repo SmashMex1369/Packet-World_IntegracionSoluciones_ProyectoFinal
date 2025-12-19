@@ -60,7 +60,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfNombre">
+                  <TextField fx:id="tfNombre" onKeyTyped="#tfNombreTexto">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -77,7 +77,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfApellidoPaterno">
+                  <TextField fx:id="tfApellidoPaterno" onKeyTyped="#tfApellidoPaternoTexto">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -111,7 +111,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfCURP">
+                  <TextField fx:id="tfCURP" onKeyTyped="#tfCURPTexto">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -128,7 +128,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfCorreo">
+                  <TextField fx:id="tfCorreo" onKeyTyped="#tfCorreoTexto">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -145,7 +145,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfNoPersonal">
+                  <TextField fx:id="tfNoPersonal" onKeyTyped="#tfNoPersonalTexto">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -162,7 +162,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cbSucursal" maxWidth="1.7976931348623157E308" prefWidth="150.0" style="-fx-font-size: 21;" />
+                  <ComboBox fx:id="cbSucursal" maxWidth="1.7976931348623157E308" onAction="#cbSucursalSeleccion" prefWidth="150.0" style="-fx-font-size: 21;" />
                </children>
             </VBox>
             <VBox maxHeight="-Infinity" minHeight="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -172,7 +172,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cbRol" maxWidth="1.7976931348623157E308" prefWidth="150.0" style="-fx-font-size: 21;" />
+                  <ComboBox fx:id="cbRol" maxWidth="1.7976931348623157E308" onAction="#cbRolSeleccion" prefWidth="150.0" style="-fx-font-size: 21;" />
                </children>
             </VBox>
             <VBox maxHeight="-Infinity" minHeight="-Infinity" GridPane.columnIndex="2" GridPane.rowIndex="2">
@@ -182,7 +182,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfContraseña">
+                  <TextField fx:id="tfContraseña" onKeyTyped="#tfContraseñaTexto">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -199,7 +199,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfNoLicencia" disable="true">
+                  <TextField fx:id="tfNoLicencia" disable="true" onKeyTyped="#tfNoLicenciaTexto">
                      <font>
                         <Font size="24.0" />
                      </font>
