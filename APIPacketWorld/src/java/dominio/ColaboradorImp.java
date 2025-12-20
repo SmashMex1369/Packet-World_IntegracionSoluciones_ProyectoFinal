@@ -142,6 +142,30 @@ public class ColaboradorImp {
         return respuesta;
     }
     
+    public static Respuesta eliminarColaborador(Integer idColaborador){
+        Respuesta respuesta = new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD != null) {
+            try {
+                int filasAfectadas = conexionBD.update("colaborador.eliminar-colaborador", idColaborador);
+                if (filasAfectadas == 1) {
+                    conexionBD.commit();
+                    respuesta.setError(false);
+                    respuesta.setMensaje("El colaborador ha sido eliminado");
+                }else{
+                    respuesta.setMensaje("Lo sentimos, el colaborador no pudo ser eliminado");
+                }
+                conexionBD.close();
+            } catch (Exception e) {
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
+    }
+    
     public static Colaborador obtenerFoto(int idColaborador){
         Colaborador colaborador = null;
         SqlSession conexionBD = MyBatisUtil.getSession();

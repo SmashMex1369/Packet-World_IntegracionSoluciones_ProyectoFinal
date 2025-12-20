@@ -80,6 +80,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE idColaborador = #{idColaborador};
     </update>
     
+    <update id="eliminar-colaborador" parameterType="int">
+        UPDATE colaborador
+        SET estatus = 0
+        WHERE idColaborador = #{idColaborador};
+    </update>    
     
     <select id="obtener-foto" parameterType="int" resultType="pojo.Colaborador">
         SELECT idColaborador, to_base64(fotografia) as fotoBase64

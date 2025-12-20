@@ -95,6 +95,17 @@ public class ColaboradorWS {
         }
     }
     
+    @Path("eliminar-colaborador/{idColaborador}")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta eliminarColaborador(@PathParam ("idColaborador") Integer idColaborador){
+        if (idColaborador != null && idColaborador > 0) {
+            return ColaboradorImp.eliminarColaborador(idColaborador);
+        }
+        throw new BadRequestException();
+        
+    }
+    
     @Path("obtener-foto/{idColaborador}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

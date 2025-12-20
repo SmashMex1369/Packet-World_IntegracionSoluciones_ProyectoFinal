@@ -28,6 +28,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.ColaboradorImp;
+import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Colaborador;
 import packetworldclienteescritorio.pojo.Conductor;
@@ -197,6 +198,52 @@ public class FXMLAdministracionColaboradoresController implements Initializable,
 
     @FXML
     private void btnEliminar(ActionEvent event) {
+        Colaborador colaborador = new Colaborador();
+        switch(tpColaboradores.getSelectionModel().getSelectedIndex()){
+            case 0:
+                colaborador = tvColaboradores.getSelectionModel().getSelectedItem();
+                break;
+            case 1:
+                colaborador = tvAdministradores.getSelectionModel().getSelectedItem();
+                break;
+            case 2:
+                colaborador = tvEjecutivos.getSelectionModel().getSelectedItem();
+                break;
+            case 3:
+                colaborador = tvConductores.getSelectionModel().getSelectedItem();
+                break;
+        }
+        if (colaborador != null) {
+            boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", "¿Esta seguro de eliminar el colaborador?\nEsta accion no se puede revertir");
+            if (confirmarOperacion) {
+                eliminarColaborador(colaborador.getIdColaborador());
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccione un colaborador", "Para eliminar un colaborador, debe seleccionar uno", Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void eliminarColaborador(Integer idColaborador){
+        Respuesta respuesta = ColaboradorImp.eliminarColaborador(idColaborador);
+        if (!respuesta.isError()) {
+            Utilidades.mostrarAlertaSimple("Colaborador eliminado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            switch(tpColaboradores.getSelectionModel().getSelectedIndex()){
+                case 0:
+                    cargarInformacionColaboradores();
+                    break;
+                case 1:
+                    cargarInformacionColaboradoresRol(1, tpColaboradores.getSelectionModel().getSelectedItem());
+                    break;
+                case 2:
+                    cargarInformacionColaboradoresRol(2, tpColaboradores.getSelectionModel().getSelectedItem());
+                    break;
+                case 3:
+                    cargarInformacionColaboradoresRol(3, tpColaboradores.getSelectionModel().getSelectedItem());
+                    break;
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al eliminar", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -381,11 +428,20 @@ public class FXMLAdministracionColaboradoresController implements Initializable,
 
     @FXML
     private void tfBuscarTexto(KeyEvent event) {
-        if(tpColaboradores.getSelectionModel().getSelectedIndex()==0){
-            cargarInformacionColaboradores();
-        }else{
-            cargarInformacionColaboradoresRol(tpColaboradores.getSelectionModel().getSelectedIndex(), tpColaboradores.getSelectionModel().getSelectedItem());
-        }
+        switch(tpColaboradores.getSelectionModel().getSelectedIndex()){
+                case 0:
+                    cargarInformacionColaboradores();
+                    break;
+                case 1:
+                    cargarInformacionColaboradoresRol(1, tpColaboradores.getSelectionModel().getSelectedItem());
+                    break;
+                case 2:
+                    cargarInformacionColaboradoresRol(2, tpColaboradores.getSelectionModel().getSelectedItem());
+                    break;
+                case 3:
+                    cargarInformacionColaboradoresRol(3, tpColaboradores.getSelectionModel().getSelectedItem());
+                    break;
+            }
     }
 
     @Override
