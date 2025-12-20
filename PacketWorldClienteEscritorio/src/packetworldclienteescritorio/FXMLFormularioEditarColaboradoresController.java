@@ -1,5 +1,9 @@
 package packetworldclienteescritorio;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -16,9 +20,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.CatalogoImp;
 import packetworldclienteescritorio.dominio.ColaboradorImp;
@@ -67,6 +73,7 @@ public class FXMLFormularioEditarColaboradoresController implements Initializabl
     private INotificador observador;
     private ObservableList<CUS> sucursales;
     private ObservableList<Rol> roles;
+    private File foto;
 
     /**
      * Initializes the controller class.
@@ -177,7 +184,7 @@ public class FXMLFormularioEditarColaboradoresController implements Initializabl
         Respuesta respuesta = ColaboradorImp.actualizarColaborador(colaborador);
         if(!respuesta.isError()){
             Utilidades.mostrarAlertaSimple("Colaborador actualizado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
-            observador.notificarOperacionExitosa("Actualizar colaborador", colaborador.getNoPersonal());
+            observador.notificarOperacionExitosa("Actualizar colaborador", colaboradorEdicion.getNoPersonal());
             regresarVentana();
         }else{
             Utilidades.mostrarAlertaSimple("Error al actualizar", respuesta.getMensaje(), Alert.AlertType.ERROR);
@@ -186,6 +193,36 @@ public class FXMLFormularioEditarColaboradoresController implements Initializabl
 
     @FXML
     private void btnSeleccionarImagen(ActionEvent event) {
+        seleccionarFoto();
+    }
+    
+    private void seleccionarFoto(){
+        FileChooser dialogo = new FileChooser();
+        dialogo.setTitle("Selecciona una foto");
+        FileChooser.ExtensionFilter filtroImg = new FileChooser.ExtensionFilter("Archivos de imagenes", "*.jpg", "*.png");
+        dialogo.getExtensionFilters().add(filtroImg);
+        foto =dialogo.showOpenDialog(imgvFotoPerfil.getScene().getWindow());
+        if (foto != null) {
+            try {
+                InputStream is = new FileInputStream (foto);
+                Image image = new Image(is, 0, 108, true, true);
+                imgvFotoPerfil.setImage(image);
+                Circle clip = new Circle(imgvFotoPerfil.getImage().getWidth()/2, imgvFotoPerfil.getImage().getHeight()/2, 54);
+                imgvFotoPerfil.setClip(clip);
+                boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Actualizar foto (Vista previa)", "¿Estas seguro de actualizar la foto del colaborador con la seleccionada?");
+                if(confirmarOperacion){
+                    //LLamado al metodo de guardar foto
+                }else{
+                    is = getClass().getResourceAsStream("/recursos/circle-user-solid.png");
+                    image = new Image(is, 108, 108, true, true);
+                    imgvFotoPerfil.setImage(image); //Cambiar a metodo de obtener foto colaborador
+                    imgvFotoPerfil.setClip(null);
+                    seleccionarFoto();
+                }
+            } catch (IOException e) {
+                Utilidades.mostrarAlertaSimple("Error", "Error al cargar la foto", Alert.AlertType.ERROR);
+            }
+        }
     }
 
     @FXML

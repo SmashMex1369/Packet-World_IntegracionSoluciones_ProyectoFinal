@@ -51,7 +51,7 @@
             <Insets left="320.0" />
          </padding>
       </Label>
-      <GridPane hgap="30.0" layoutY="81.0" prefHeight="553.0" prefWidth="850.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="88.0">
+      <GridPane alignment="CENTER" hgap="30.0" layoutY="81.0" prefHeight="553.0" prefWidth="850.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="88.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -228,21 +228,21 @@
                   <Insets bottom="18.0" />
                </GridPane.margin>
             </Button>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0" GridPane.halignment="CENTER">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <children>
                   <StackPane>
                      <children>
-                        <ImageView fx:id="imgvFotoPerfil" fitHeight="104.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imgvFotoPerfil" fitHeight="108.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                            <image>
                               <Image url="@../recursos/circle-user-solid.png" />
                            </image>
                         </ImageView>
-                        <Circle fx:id="circulo" blendMode="SRC_ATOP" fill="#1f93ff00" radius="55.0" stroke="#02354a" strokeType="INSIDE" strokeWidth="4.0" />
+                        <Circle fx:id="circulo" blendMode="SRC_ATOP" fill="#1f93ff00" radius="54.0" stroke="#02354a" strokeType="INSIDE" strokeWidth="4.0" StackPane.alignment="CENTER" />
                      </children>
                   </StackPane>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnSeleccionarImagen" prefWidth="90.0" text="Seleccionar Imagen" textAlignment="CENTER" wrapText="true">
                      <VBox.margin>
-                        <Insets left="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </Button>
                </children>
