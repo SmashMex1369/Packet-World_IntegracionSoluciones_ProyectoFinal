@@ -16,21 +16,23 @@
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <StackPane AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="13.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1" />
-                  <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../recursos/angle-left-solid.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Editar colaborador" textFill="#e1e1e1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
+            <StackPane AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="13.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../recursos/angle-left-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+               </children>
+            </StackPane>
          </children>
       </AnchorPane>
       <Label alignment="CENTER" layoutX="279.0" layoutY="72.0" text="Favor de completar los campos disponibles" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="88.0">
@@ -69,7 +71,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfNombre">
+                  <TextField fx:id="tfNombre" onKeyTyped="#tfNombreTexto">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -86,7 +88,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfApellidoPaterno">
+                  <TextField fx:id="tfApellidoPaterno" onKeyTyped="#tfApellidoPaternoTexto">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -120,7 +122,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfCURP">
+                  <TextField fx:id="tfCURP" onKeyTyped="#tfCURPTexto">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -137,7 +139,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfCorreo">
+                  <TextField fx:id="tfCorreo" onKeyTyped="#tfCorreoTexto">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -171,7 +173,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cbSucursal" maxWidth="1.7976931348623157E308" prefWidth="150.0" style="-fx-font-size: 21;" />
+                  <ComboBox fx:id="cbSucursal" maxWidth="1.7976931348623157E308" onAction="#cbSucursalSeleccion" prefWidth="150.0" style="-fx-font-size: 21;" />
                </children>
             </VBox>
             <VBox maxHeight="-Infinity" minHeight="-Infinity" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -218,7 +220,7 @@
                   </TextField>
                </children>
             </VBox>
-            <Button alignment="CENTER" contentDisplay="TEXT_ONLY" mnemonicParsing="false" onAction="#btnActualizar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Actualizar" textFill="#e1e1e1" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <Button alignment="CENTER" contentDisplay="TEXT_ONLY" mnemonicParsing="false" onAction="#btnActualizar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Actualizar" textFill="#e1e1e1" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

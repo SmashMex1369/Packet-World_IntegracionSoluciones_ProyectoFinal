@@ -15,6 +15,7 @@ public class PacketWorldClienteEscritorio extends Application {
         Scene scene = new Scene(root);
         stage.setResizable(false);
         stage.setScene(scene);
+        stage.setTitle("Packet-World Login");
         stage.show();
     }
 

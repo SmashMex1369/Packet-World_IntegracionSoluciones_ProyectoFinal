@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         VALUES (#{noPersonal}, #{noLicencia});
     </insert>     
     
-    <update id="actualizar-colaborador" parameterType="pojo.Conductor">
+    <update id="actualizar-colaborador" parameterType="pojo.Colaborador">
         UPDATE colaborador
         SET nombre =#{nombre},
         apellidoPaterno = #{apellidoPaterno},
@@ -68,11 +68,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE idColaborador = #{idColaborador};
     </update>
     
-    <update id="actualizar-conductor" parameterType="pojo.Conductor">
-        UPDATE conductor
-        SET noLicencia = #{noLicencia}
-        WHERE noPersonal = #{noPersonal};
+    <update id="actualizar-colaborador-contraseña" parameterType="pojo.Colaborador">
+        UPDATE colaborador
+        SET nombre =#{nombre},
+        apellidoPaterno = #{apellidoPaterno},
+        apellidoMaterno = #{apellidoMaterno},
+        correo = #{correo},
+        CURP = #{CURP},
+        idSucursal = #{idSucursal},
+        contraseña = #{contraseña}
+        WHERE idColaborador = #{idColaborador};
     </update>
+    
     
     <select id="obtener-foto" parameterType="int" resultType="pojo.Colaborador">
         SELECT idColaborador, to_base64(fotografia) as fotoBase64

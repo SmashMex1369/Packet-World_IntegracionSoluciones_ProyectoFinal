@@ -152,7 +152,7 @@ public class FXMLAdministracionColaboradoresController implements Initializable,
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tpColaboradores.getScene().getWindow();
             escenario.setScene(escena);
-            escenario.setTitle("Formulario Colaboradores");             
+            escenario.setTitle("Registrar Colaborador");             
             escenario.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,6 +161,38 @@ public class FXMLAdministracionColaboradoresController implements Initializable,
 
     @FXML
     private void btnEditar(ActionEvent event) {
+        Conductor colaborador = new Conductor();
+        switch(tpColaboradores.getSelectionModel().getSelectedIndex()){
+            case 0:
+                colaborador = tvColaboradores.getSelectionModel().getSelectedItem();
+                break;
+            case 1:
+                colaborador = tvAdministradores.getSelectionModel().getSelectedItem();
+                break;
+            case 2:
+                colaborador = tvEjecutivos.getSelectionModel().getSelectedItem();
+                break;
+            case 3:
+                colaborador = tvConductores.getSelectionModel().getSelectedItem();
+                break;
+        }
+        if (colaborador!=null) {
+            try {
+                FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLFormularioEditarColaboradores.fxml"));
+                Parent vista= cargador.load();
+                FXMLFormularioEditarColaboradoresController controlador= cargador.getController();
+                controlador.inicializarDatos(colaborador, this);
+                Scene escena= new Scene(vista);
+                Stage escenario= (Stage) tpColaboradores.getScene().getWindow();
+                escenario.setScene(escena);
+                escenario.setTitle("Editar Colaborador");             
+                escenario.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Selecciona un colaborador", "Para editar un colaborador, debe seleccionar uno", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
@@ -302,6 +334,14 @@ public class FXMLAdministracionColaboradoresController implements Initializable,
         boolean esError = (boolean) respuesta.get(Constantes.KEY_ERROR);
         if(!esError){
             List<Conductor> colaboradoresAPI = (List<Conductor>) respuesta.get(Constantes.KEY_LISTA);
+            for(int i = 0; i<colaboradoresAPI.size(); i++){
+                if (colaboradoresAPI.get(i).getIdRol()!=3) {
+                    colaboradoresAPI.get(i).setNoLicencia("N/A");
+                }
+                if (colaboradoresAPI.get(i).getApellidoMaterno()==null){
+                    colaboradoresAPI.get(i).setApellidoMaterno("");
+                }
+            }
             colaboradores = FXCollections.observableArrayList();
             colaboradores.addAll(colaboradoresAPI);
             tvColaboradores.setItems(colaboradores);

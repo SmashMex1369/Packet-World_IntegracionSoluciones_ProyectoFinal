@@ -113,29 +113,22 @@ public class ColaboradorImp {
         return respuesta;
     }
     
-    public static Respuesta actualizarColaborador(Conductor colaborador) {
+    public static Respuesta actualizarColaborador(Colaborador colaborador) {
         Respuesta respuesta = new Respuesta();
         respuesta.setError(true);
         SqlSession conexionBD = MyBatisUtil.getSession();
         if(conexionBD!=null){
             try {
-                int filasAfectadas = conexionBD.update("colaborador.actualizar-colaborador", colaborador);
+                int filasAfectadas;
+                if (colaborador.getContraseña()==null) {
+                    filasAfectadas = conexionBD.update("colaborador.actualizar-colaborador", colaborador);   
+                }else{
+                    filasAfectadas = conexionBD.update("colaborador.actualizar-colaborador-contraseña", colaborador);   
+                }
                 if(filasAfectadas==1){
-                    if (colaborador.getNoLicencia() != null) {
-                        filasAfectadas=conexionBD.update("colaborador.actualizar-conductor", colaborador);
-                        if (filasAfectadas == 1) {
-                            conexionBD.commit();
-                            respuesta.setError(false);
-                            respuesta.setMensaje("El conductor ha sido actualizado correctamente");
-                        }else{
-                            conexionBD.rollback();
-                            respuesta.setMensaje("Lo sentimos, el conductor no pudo ser actualizado.");
-                        }
-                    }else{
-                        conexionBD.commit();
-                        respuesta.setError(false);
-                        respuesta.setMensaje("El colaborador ha sido actualizado corectamente.");
-                    }
+                    conexionBD.commit();
+                    respuesta.setError(false);
+                    respuesta.setMensaje("El colaborador ha sido actualizado corectamente.");
                 }else{
                     respuesta.setMensaje("Lo sentimos, el colaborador no pudo ser actualizado.");
                 }

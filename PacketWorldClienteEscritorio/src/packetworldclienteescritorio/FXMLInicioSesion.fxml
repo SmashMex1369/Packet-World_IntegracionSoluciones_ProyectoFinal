@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLInicioSesionController">
    <children>
-      <Button layoutX="492.0" layoutY="431.0" mnemonicParsing="false" onAction="#btnIniciar" prefHeight="38.0" prefWidth="200.0" style="-fx-background-radius: 30px; -fx-base: #03658c;" text="Ingresar">
+      <Button defaultButton="true" layoutX="492.0" layoutY="431.0" mnemonicParsing="false" onAction="#btnIniciar" prefHeight="38.0" prefWidth="200.0" style="-fx-background-radius: 30px; -fx-base: #03658c;" text="Ingresar">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

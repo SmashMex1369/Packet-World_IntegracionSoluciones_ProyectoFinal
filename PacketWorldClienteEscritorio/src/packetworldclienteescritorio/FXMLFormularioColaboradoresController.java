@@ -100,7 +100,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
     private void registrar(Conductor colaborador){
         Respuesta respuesta = ColaboradorImp.registrarColaborador(colaborador);
         if(!respuesta.isError()){
-            Utilidades.mostrarAlertaSimple("Colaborador resgitrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
             observador.notificarOperacionExitosa("Crear colaborador", colaborador.getNoPersonal());
             regresarVentana();
         }else{

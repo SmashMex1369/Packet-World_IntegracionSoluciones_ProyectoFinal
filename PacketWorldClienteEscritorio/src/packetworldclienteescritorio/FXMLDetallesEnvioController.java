@@ -166,7 +166,7 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
         lbNumeroDestinatario.setText(String.valueOf(envio.getNumDest()));
         lbNombreSucursal.setText(envio.getNombreSucursal());
         lbCUS.setText(envio.getCUSSucursal());
-        lbEstadoSucursal.setText(envio.getEstadoDest());
+        lbEstadoSucursal.setText(envio.getEstadoSucursal());
         lbCiudadSucursal.setText(envio.getCiudadSucursal());
         lbColoniaSucursal.setText(envio.getColoniaSucursal());
         lbCodigoPostalSucursal.setText(String.valueOf(envio.getCodigoPostalSucursal()));

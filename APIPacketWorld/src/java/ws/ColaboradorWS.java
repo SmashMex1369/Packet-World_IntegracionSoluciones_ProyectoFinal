@@ -88,7 +88,7 @@ public class ColaboradorWS {
     public Respuesta actualizarColaborador(String json){
         Gson gson = new Gson();
         try {
-            Conductor colaborador = gson.fromJson(json, Conductor.class);
+            Colaborador colaborador = gson.fromJson(json, Colaborador.class);
             return ColaboradorImp.actualizarColaborador(colaborador);
         } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
