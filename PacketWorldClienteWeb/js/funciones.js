@@ -1,32 +1,38 @@
-function buscarEnvio(){
-    const noGuia= document.getElementById("inputNoGuia").value;
-    consultarDetallesEnvio(noGuia);
-    //window.location.href = "DetallesEnvio.html";
-}
-
-async function consultarDetallesEnvio(noGuia) {
+function buscarEnvio() {
+    const noGuia = document.getElementById("inputNoGuia")?.value;
 
     if (!noGuia) {
         alert("No. de guía inválido");
         return;
     }
 
+    consultarDetallesEnvio(noGuia);
+}
+
+async function consultarDetallesEnvio(noGuia) {
+
     const URL_WS_Detalles_Envio =
         `http://localhost:8084/APIPacketWorld/api/envio/buscar-envio-web/${noGuia}`;
 
     try {
         const respuesta = await fetch(URL_WS_Detalles_Envio, {
-            method: 'GET'
+            method: "GET"
         });
 
         if (!respuesta.ok) {
             throw new Error(`Error ${respuesta.status}`);
         }
 
-        const envio = await respuesta.json();
-        console.log(envio);
+        const data = await respuesta.json();
+        console.log("Respuesta WS:", data);
 
-        mostrarDetallesEnvio(envio);
+        if (data.error) {
+            alert(data.mensaje);
+            return;
+        }
+
+        localStorage.setItem("envioSeleccionado", JSON.stringify(data.envio));
+        window.location.href = "DetallesEnvio.html";
 
     } catch (error) {
         console.error("Error al consultar envío:", error);
@@ -34,77 +40,61 @@ async function consultarDetallesEnvio(noGuia) {
     }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    const envioJSON = localStorage.getItem("envioSeleccionado");
+
+    if (!envioJSON) {
+        console.warn("No hay información del envío.");
+        return;
+    }
+
+    const envio = JSON.parse(envioJSON);
+
+    mostrarDetallesEnvio(envio);
+});
 
 function mostrarDetallesEnvio(envio) {
 
-    /* ===== ENVÍO ===== */
+    //conductor
     document.getElementById("noGuia").textContent = envio.noGuia;
     document.getElementById("estatus").textContent = envio.estatus;
-    document.getElementById("fecha").textContent = envio.fechaUltimoCambio;
-    document.getElementById("motivo").textContent = envio.motivo;
+    document.getElementById("fecha").textContent = envio.tiempo;
+    document.getElementById("motivo").textContent = envio.estatus;
 
     document.getElementById("nombreConductor").textContent =
-        envio.conductor?.nombreCompleto || "No asignado";
-
-    /* ===== REMITENTE ===== */
+        envio.nombreConductor
+            ? `${envio.nombreConductor} ${envio.apellidoPatConductor} ${envio.apellidoMatConductor}`
+            : "No asignado";
+    
+    //cliente
     document.getElementById("nombreCliente").textContent =
-        envio.remitente.nombre;
+        `${envio.nombreCliente} ${envio.apellidoPatCliente} ${envio.apellidoMatCliente}`;
 
-    document.getElementById("telefCliente").textContent =
-        envio.remitente.telefono;
+    document.getElementById("telefCliente").textContent = envio.telefonoCliente;
+    document.getElementById("correoCliente").textContent = envio.correoCliente;
+    document.getElementById("colCliente").textContent = envio.coloniaCliente;
+    document.getElementById("cpCliente").textContent = envio.codigoPostalCliente;
+    document.getElementById("calleCliente").textContent = envio.calleCliente;
 
-    document.getElementById("correoCliente").textContent =
-        envio.remitente.correo;
-
-    document.getElementById("colCliente").textContent =
-        envio.remitente.direccion.colonia;
-
-    document.getElementById("cpCliente").textContent =
-        envio.remitente.direccion.codigoPostal;
-
-    document.getElementById("calleCliente").textContent =
-        envio.remitente.direccion.calle;
-
-    /* ===== DESTINATARIO ===== */
+    //destinario
     document.getElementById("nombreDest").textContent =
-        envio.destinatario.nombre;
+        `${envio.nombreDest} ${envio.apellidoPatDest} ${envio.apellidoMatDest}`;
 
-    document.getElementById("cdDest").textContent =
-        envio.destinatario.ciudad;
+    document.getElementById("cdDest").textContent = envio.ciudadDest;
+    document.getElementById("colDest").textContent = envio.coloniaDest;
+    document.getElementById("cpDest").textContent = envio.codigoPostalDest;
+    document.getElementById("calleDest").textContent = envio.calleDest;
+    document.getElementById("numeroDest").textContent = envio.numDest;
 
-    document.getElementById("colDest").textContent =
-        envio.destinatario.colonia;
-
-    document.getElementById("cpDest").textContent =
-        envio.destinatario.codigoPostal;
-
-    document.getElementById("calleDest").textContent =
-        envio.destinatario.calle;
-
-    document.getElementById("numeroDest").textContent =
-        envio.destinatario.numero;
-
-    /* ===== SUCURSAL ===== */
-    document.getElementById("estado").textContent =
-        envio.sucursal.estado;
-
-    document.getElementById("cdSuc").textContent =
-        envio.sucursal.ciudad;
-
-    document.getElementById("colSuc").textContent =
-        envio.sucursal.colonia;
-
-    document.getElementById("cpSuc").textContent =
-        envio.sucursal.codigoPostal;
-
-    document.getElementById("calleSuc").textContent =
-        envio.sucursal.calle;
-
-    document.getElementById("numeroSuc").textContent =
-        envio.sucursal.numeroExterior;
+    //sucursal
+    document.getElementById("estado").textContent = envio.estadoSucursal;
+    document.getElementById("cdSuc").textContent = envio.ciudadSucursal;
+    document.getElementById("colSuc").textContent = envio.coloniaSucursal;
+    document.getElementById("cpSuc").textContent = envio.codigoPostalSucursal;
+    document.getElementById("calleSuc").textContent = envio.calleSucursal;
+    document.getElementById("numeroSuc").textContent = envio.numeroSucursal;
 }
-
-
 
 function mostrarSeccion(id, boton) {
 
@@ -116,11 +106,11 @@ function mostrarSeccion(id, boton) {
     // Mostrar la sección seleccionada
     document.getElementById(id).classList.remove("oculto");
 
-    // Quitar clase activa de todos los botones
+    // Quitar clase activa
     document.querySelectorAll(".tab").forEach(btn => {
         btn.classList.remove("act");
     });
 
-    // Activar solo el botón clicado
+    // Activar botón
     boton.classList.add("act");
 }
