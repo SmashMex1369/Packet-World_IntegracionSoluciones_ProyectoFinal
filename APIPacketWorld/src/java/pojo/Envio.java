@@ -28,7 +28,7 @@ public class Envio {
     private Integer idSucursal;
     private String nombreSucursal;
     private String CUSSucursal;
-    private String numeroSucursal;
+    private Integer numeroSucursal;
     private String calleSucursal;
     private Integer idColoniaSucursal;
     private Integer codigoPostalSucursal;
@@ -62,7 +62,7 @@ public class Envio {
     public Envio() {
     }
 
-    public Envio(Integer idEnvio, String noGuia, String nombreDest, String apellidoPatDest, String apellidoMatDest, Integer numDest, String calleDest, Integer idCliente, String nombreCliente, String apellidoPatCliente, String apellidoMatCliente, String correoCliente, String telefonoCliente, Integer numeroCliente, String calleCliente, Integer idColoniaCliente, Integer codigoPostalCliente, String coloniaCliente, Integer idSucursal, String nombreSucursal, String CUSSucursal, String numeroSucursal, String calleSucursal, Integer idColoniaSucursal, Integer codigoPostalSucursal, String coloniaSucursal, String ciudadSucursal, String estadoSucursal, int idConductor, String noLicenciaConductor, String nombreConductor, String apellidoPatConductor, String apellidoMatConductor, Integer idColoniaDest, Integer codigoPostalDest, String coloniaDest, String ciudadDest, String estadoDest, Integer idHistorialEstatusEnvio, Integer idEstatusEnvio, String estatus, String motivo, String tiempo, Integer idColaborador, String nombreColaborador, String apellidoPatColaborador, String apellidoMatColaborador) {
+    public Envio(Integer idEnvio, String noGuia, String nombreDest, String apellidoPatDest, String apellidoMatDest, Integer numDest, String calleDest, Integer idCliente, String nombreCliente, String apellidoPatCliente, String apellidoMatCliente, String correoCliente, String telefonoCliente, Integer numeroCliente, String calleCliente, Integer idColoniaCliente, Integer codigoPostalCliente, String coloniaCliente, Integer idSucursal, String nombreSucursal, String CUSSucursal, Integer numeroSucursal, String calleSucursal, Integer idColoniaSucursal, Integer codigoPostalSucursal, String coloniaSucursal, String ciudadSucursal, String estadoSucursal, int idConductor, String noLicenciaConductor, String nombreConductor, String apellidoPatConductor, String apellidoMatConductor, Integer idColoniaDest, Integer codigoPostalDest, String coloniaDest, String ciudadDest, String estadoDest, Integer idHistorialEstatusEnvio, Integer idEstatusEnvio, String estatus, String motivo, String tiempo, Integer idColaborador, String nombreColaborador, String apellidoPatColaborador, String apellidoMatColaborador) {
         this.idEnvio = idEnvio;
         this.noGuia = noGuia;
         this.nombreDest = nombreDest;
@@ -280,11 +280,11 @@ public class Envio {
         this.CUSSucursal = CUSSucursal;
     }
 
-    public String getNumeroSucursal() {
+    public Integer getNumeroSucursal() {
         return numeroSucursal;
     }
 
-    public void setNumeroSucursal(String numeroSucursal) {
+    public void setNumeroSucursal(Integer numeroSucursal) {
         this.numeroSucursal = numeroSucursal;
     }
 
