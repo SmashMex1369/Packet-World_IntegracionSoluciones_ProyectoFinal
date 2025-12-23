@@ -56,16 +56,16 @@
       </MenuButton>
       <AnchorPane prefHeight="84.0" prefWidth="950.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button contentDisplay="CENTER" ellipsisString="" layoutX="796.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnAsignacion" prefWidth="140.0" style="-fx-background-radius: 30px;" text="Opciones de&#10;Asignación" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="16.0">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Button>
             <Label alignment="CENTER" layoutX="388.0" layoutY="13.0" text="Unidades" textAlignment="CENTER" textFill="#e1e1e1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
+            <Button contentDisplay="CENTER" ellipsisString="" layoutX="796.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnAsignacion" prefWidth="140.0" style="-fx-background-radius: 30px;" text="Opciones de&#10;Asignación" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="16.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
             <Button layoutX="14.0" layoutY="16.0" maxHeight="-Infinity" mnemonicParsing="false" onAction="#btnRegresar" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1">
                <graphic>
                   <ImageView fitHeight="47.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">

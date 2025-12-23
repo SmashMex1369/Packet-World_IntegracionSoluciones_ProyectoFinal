@@ -17,6 +17,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import pojo.Conductor;
 import pojo.Unidad;
 
 /**
@@ -92,4 +93,53 @@ public class UnidadWS {
         }               
     }
     
+    @Path("buscar-historial/{busqueda}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad> buscarHistorialUnidad(@PathParam("busqueda") String busqueda ){
+        if (busqueda!=null && !busqueda.isEmpty()){
+            return UnidadImp.buscarHistorialUnidad(busqueda);
+        }
+        throw new BadRequestException();
+    }
+    
+    @Path("asignar-unidad-conductor")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta asignarUnidadAConductor(
+            @FormParam("idConductor") Integer idConductor,
+            @FormParam("idUnidad") Integer idUnidad
+    ){
+        if((idConductor!=null && idConductor>0) && (idUnidad!=null && idUnidad>0)){
+            return UnidadImp.asignarUnidadAConductor(idConductor, idUnidad);
+        }
+        throw new BadRequestException();
+    }
+    
+    @Path("conductores-sin-unidad")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Conductor> conductoresSinUnidad(){
+        return UnidadImp.conductoresSinUnidad();
+    }
+    
+    @Path("desasignar-conductor/{idUnidad}")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta desasignarConductor(@PathParam("idUnidad") Integer idUnidad){
+        if(idUnidad!=null && idUnidad>0){
+            return UnidadImp.desasignarConductor(idUnidad);
+        }
+        throw new BadRequestException();
+    }
+    
+    @Path("buscar-conductores/{busqueda}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Conductor> buscarConductores(@PathParam("busqueda") String busqueda){
+        if(busqueda!=null && !busqueda.isEmpty()){
+            return UnidadImp.buscarConductores(busqueda);
+        }
+        throw new BadRequestException();
+    }
 }

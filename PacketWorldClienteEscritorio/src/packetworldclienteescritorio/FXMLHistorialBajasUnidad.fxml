@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -21,21 +20,11 @@
                   <Font name="System Bold" size="35.0" />
                </font>
             </Label>
-            <StackPane prefWidth="66.0" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="13.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1" />
-                  <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../recursos/angle-left-solid.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
          </children>
       </AnchorPane>
       <StackPane alignment="CENTER_LEFT" layoutX="16.0" layoutY="101.0">
          <children>
-            <TextField fx:id="tfBuscar" onAction="#buscarUnidad" prefHeight="36.0" prefWidth="392.0" promptText="Buscar unidad" style="-fx-background-radius: 18px;">
+            <TextField fx:id="tfBuscar" onKeyReleased="#buscarUnidad" prefHeight="36.0" prefWidth="392.0" promptText="Buscar unidad" style="-fx-background-radius: 18px;">
                <font>
                   <Font size="20.0" />
                </font>

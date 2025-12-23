@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             FROM historialestatusunidad
         )
         SELECT u.idUnidad, VIN, NII, año, modelo, marca, u.idTipoUnidad, u.idConductor, noLicencia, tipo,
-        estatus, motivo, tiempo, heu.idColaborador, 
+        heu.estatus, motivo, tiempo, heu.idColaborador, 
         c.nombre AS nombreColaborador, c.apellidoPaterno AS apellidoPatColaborador, c.apellidoMaterno AS apellidoMatColaborador, 
         ccon.nombre AS nombreConductor, ccon.apellidoPaterno AS apellidoPatConductor, ccon.apellidoMaterno AS apellidoMatConductor
         FROM unidad u
@@ -27,32 +27,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INNER JOIN colaborador c ON c.idColaborador=heu.idColaborador
         LEFT JOIN conductor con ON con.idConductor=u.idConductor
         LEFT JOIN colaborador ccon ON con.noPersonal=ccon.noPersonal
-        WHERE estatus=1;
+        WHERE heu.estatus=1;
     </select>
     
     <select id="obtener-unidades-inactivas" resultType="pojo.Unidad">
-        WITH UltimoEstatusID AS (
-            SELECT 
-                idUnidad,
-                idHistorialEstatusUnidad,
-                ROW_NUMBER() OVER(
-                    PARTITION BY idUnidad
-                    ORDER BY tiempo DESC
-                ) as FilaNumero
-            FROM historialestatusunidad
-        )
-        SELECT u.idUnidad, VIN, NII, año, modelo, marca, u.idTipoUnidad, u.idConductor, noLicencia, tipo,
-        estatus, motivo, tiempo, heu.idColaborador, 
-        c.nombre AS nombreColaborador, c.apellidoPaterno AS apellidoPatColaborador, c.apellidoMaterno AS apellidoMatColaborador, 
-        ccon.nombre AS nombreConductor, ccon.apellidoPaterno AS apellidoPatConductor, ccon.apellidoMaterno AS apellidoMatConductor
+        SELECT VIN, motivo, tiempo, 
+        c.nombre AS nombreColaborador, c.apellidoPaterno AS apellidoPatColaborador, c.apellidoMaterno AS apellidoMatColaborador
         FROM unidad u
-        INNER JOIN UltimoEstatusID uei ON uei.idUnidad = u.idUnidad AND uei.FilaNumero = 1
-        INNER JOIN historialestatusunidad heu ON uei.idHistorialEstatusUnidad = heu.idHistorialEstatusUnidad 
-        INNER JOIN tipounidad tu ON tu.idTipoUnidad= u.idTipoUnidad
+        INNER JOIN historialestatusunidad heu ON u.idUnidad = heu.idUnidad
         INNER JOIN colaborador c ON c.idColaborador=heu.idColaborador
-        LEFT JOIN conductor con ON con.idConductor=u.idConductor
-        LEFT JOIN colaborador ccon ON con.noPersonal=ccon.noPersonal
-        WHERE estatus=0;
+        WHERE heu.estatus=0;
     </select>
     
     <insert id="registrar" parameterType="pojo.Unidad" useGeneratedKeys="true" keyProperty="idUnidad">
@@ -83,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             FROM historialestatusunidad
         )
         SELECT u.idUnidad, VIN, NII, año, modelo, marca, u.idTipoUnidad, u.idConductor, noLicencia, tipo,
-        estatus, motivo, tiempo, heu.idColaborador, 
+        heu.estatus, motivo, tiempo, heu.idColaborador, 
         c.nombre AS nombreColaborador, c.apellidoPaterno AS apellidoPatColaborador, c.apellidoMaterno AS apellidoMatColaborador, 
         ccon.nombre AS nombreConductor, ccon.apellidoPaterno AS apellidoPatConductor, ccon.apellidoMaterno AS apellidoMatConductor
         FROM unidad u
@@ -93,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INNER JOIN colaborador c ON c.idColaborador=heu.idColaborador
         LEFT JOIN conductor con ON con.idConductor=u.idConductor
         LEFT JOIN colaborador ccon ON con.noPersonal=ccon.noPersonal
-        WHERE estatus=1 AND
+        WHERE heu.estatus=1 AND
         (VIN LIKE CONCAT('%', #{busqueda}, '%')
         OR marca LIKE CONCAT('%', #{busqueda}, '%')
         OR NII LIKE CONCAT('%', #{busqueda}, '%'));
@@ -103,5 +87,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INSERT INTO historialestatusunidad (estatus, motivo, tiempo, idUnidad, idColaborador)
         VALUES (0, #{motivo}, now(), #{idUnidad}, #{idColaborador});
     </insert>
+    
+    <select id="buscar-historial-unidad" parameterType="String" resultType="pojo.Unidad">
+        SELECT VIN, motivo, tiempo, 
+        c.nombre AS nombreColaborador, c.apellidoPaterno AS apellidoPatColaborador, c.apellidoMaterno AS apellidoMatColaborador
+        FROM unidad u
+        INNER JOIN historialestatusunidad heu ON u.idUnidad = heu.idUnidad
+        INNER JOIN colaborador c ON c.idColaborador=heu.idColaborador
+        WHERE heu.estatus=0 AND
+        VIN LIKE CONCAT('%', #{busqueda}, '%');
+    </select>
+    
+    <update id="asignar-unidad-conductor" parameterType="map">
+        UPDATE unidad 
+        SET idConductor= #{idConductor}
+        WHERE idUnidad= #{idUnidad};
+    </update>
+    
+    <select id="conductores-sin-unidad" resultType="pojo.Conductor">
+        SELECT c.idConductor, c.noLicencia, col.noPersonal, 
+        col.nombre, col.apellidoPaterno,
+        col.apellidoMaterno
+        FROM conductor c
+        INNER JOIN colaborador col ON col.noPersonal = c.noPersonal
+        LEFT JOIN unidad u ON u.idConductor = c.idConductor
+        WHERE col.estatus = 1 AND u.idUnidad IS NULL;
+    </select>
+    
+    <update id="desasignar-conductor" parameterType="int">
+        UPDATE unidad 
+        SET idConductor= NULL
+        WHERE idUnidad= #{idUnidad};
+    </update>
+    
+    <select id="buscar-asociacion" resultType="pojo.Conductor" parameterType="String">
+        SELECT c.noPersonal, noLicencia, col.nombre, col.apellidoPaterno, col.apellidoMaterno 
+        FROM conductor c 
+        INNER JOIN colaborador col ON c.noPersonal= col.noPersonal
+        WHERE col.estatus = 1
+        AND c.noPersonal LIKE CONCAT('%', #{busqueda}, '%')
+        OR col.nombre LIKE CONCAT('%', #{busqueda}, '%');
+    </select>
     
 </mapper>

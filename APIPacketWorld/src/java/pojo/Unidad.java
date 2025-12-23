@@ -26,13 +26,12 @@ public class Unidad {
     private String apellidoMatColaborador;
     private String nombreConductor;
     private String apellidoPatConductor;
-    private String apellidoMatConductor;
-    
+    private String apellidoMatConductor;    
 
     public Unidad() {
     }
 
-    public Unidad(Integer idUnidad, String VIN, String NII, Integer año, String modelo, String marca, Integer idTipoUnidad, int idConductor, String noLicencia, String tipo, Integer idEstatusUnidad, Integer estatus, String motivo, String tiempo, Integer idColaborador, String nombreColaborador, String apellidoPatColaborador, String apellidoMatColaborador, String nombreConductor, String apellidoPatConductor, String apellidoMatConductor) {
+    public Unidad(Integer idUnidad, String VIN, String NII, Integer año, String modelo, String marca, Integer idTipoUnidad, int idConductor, String noLicencia, String tipo, Integer idEstatusUnidad, Integer estatus, String motivo, String tiempo, Integer idColaborador, String nombreColaborador, String apellidoPatColaborador, String apellidoMatColaborador, String nombreConductor, String apellidoPatConductor, String apellidoMatConductor, String noPersonal) {
         this.idUnidad = idUnidad;
         this.VIN = VIN;
         this.NII = NII;
@@ -223,6 +222,6 @@ public class Unidad {
     public void setApellidoMatConductor(String apellidoMatConductor) {
         this.apellidoMatConductor = apellidoMatConductor;
     }
-    
-    
+
+
 }

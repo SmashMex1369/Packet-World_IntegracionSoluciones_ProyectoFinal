@@ -123,6 +123,30 @@ public class FXMLAdministracionUnidadesController implements Initializable, INot
 
     @FXML
     private void btnAsignacion(ActionEvent event) {
+        Unidad unidad= tvUnidad.getSelectionModel().getSelectedItem();
+        if(unidad!=null){
+            irAsociacionUnidadConductor(unidad);
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccione una unidad", "Para asignar un conductor, debe seleccionar una unidad.", Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void irAsociacionUnidadConductor(Unidad unidad){
+        try {
+            FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLAsociacionUnidadConductor.fxml"));
+            Parent vista= cargador.load();
+            FXMLAsociacionUnidadConductorController controlador= cargador.getController();
+            controlador.cargarInfConductoresSinUnidad(unidad, this);
+            Scene escena = new Scene(vista);
+            Stage escenario = (Stage) tfBuscar.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.setResizable(false);
+            escenario.setTitle("Asignar Conductor");
+            escenario.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

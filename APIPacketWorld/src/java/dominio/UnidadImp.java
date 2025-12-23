@@ -7,6 +7,7 @@ import java.util.List;
 import javax.ws.rs.BadRequestException;
 import modelo.mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
+import pojo.Conductor;
 import pojo.Unidad;
 import utilidades.Constantes;
 
@@ -137,6 +138,100 @@ public class UnidadImp {
             respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
         }
         return respuesta;
+    }
+    
+    public static List<Unidad> buscarHistorialUnidad(String busqueda){
+        List<Unidad> unidades= null;
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if(conexionBD!=null){
+            try {              
+                unidades= conexionBD.selectList("unidad.buscar-historial-unidad", busqueda);               
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }           
+        }
+        return unidades;
+    }
+    
+    public static Respuesta asignarUnidadAConductor(Integer idConductor, Integer idUnidad){
+        Respuesta respuesta = new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD!=null) {
+            try {
+                HashMap<String, Integer> parametros = new LinkedHashMap<>();
+                parametros.put("idConductor", idConductor);
+                parametros.put("idUnidad", idUnidad);
+                int filasAfectadas= conexionBD.update("unidad.asignar-unidad-conductor", parametros);
+                if(filasAfectadas>0){
+                    conexionBD.commit();
+                    respuesta.setError(false);
+                    respuesta.setMensaje("La unidad ha sido asociada al conductor seleccionado.");
+                }else{
+                    conexionBD.rollback();
+                    respuesta.setMensaje("Lo sentimos, la unidad no pudo ser asignada.");
+                }
+                conexionBD.close();
+            } catch (Exception e) {
+                conexionBD.rollback();
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);    
+        }
+       return respuesta; 
+    }
+    
+    public static List<Conductor> conductoresSinUnidad(){
+        List<Conductor> conductores=null;
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if(conexionBD!=null){
+            try {
+                conductores= conexionBD.selectList("unidad.conductores-sin-unidad");
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return conductores;
+    }
+    
+    public static Respuesta desasignarConductor(int idUnidad){
+        Respuesta respuesta= new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if(conexionBD!=null){
+            try {
+                int filasAfectadas= conexionBD.update("unidad.desasignar-conductor", idUnidad);
+                if(filasAfectadas>0){
+                    conexionBD.commit();
+                    respuesta.setError(false);
+                    respuesta.setMensaje("El conductor ha sido desasignado.");
+                }else{
+                    respuesta.setMensaje("Lo sentimos, el conductor no pudo ser desasignado.");
+                }
+            } catch (Exception e) {
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
+    }
+    
+    public static List<Conductor> buscarConductores(String busqueda){
+        List<Conductor> conductores=null;
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if (conexionBD!=null){
+            try {
+                conductores= conexionBD.selectList("unidad.buscar-asociacion", busqueda);
+                conexionBD.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return conductores;
     }
     
 }

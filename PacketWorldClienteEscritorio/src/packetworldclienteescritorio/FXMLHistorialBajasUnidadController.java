@@ -15,6 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import packetworldclienteescritorio.dominio.UnidadImp;
 import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Unidad;
@@ -67,15 +68,18 @@ public class FXMLHistorialBajasUnidadController implements Initializable {
     }
     
     private void cargarHistorialUnidadesInactivas(){
-        HashMap<String, Object> respuesta= UnidadImp.obtenerUnidadesInactivas();
+        HashMap<String, Object> respuesta;
+        if(tfBuscar.getText().isEmpty()){
+            respuesta= UnidadImp.obtenerUnidadesInactivas();
+        }else{
+            respuesta = UnidadImp.buscarHistorialUnidad(tfBuscar.getText());
+        }
         boolean esError= (boolean)respuesta.get(Constantes.KEY_ERROR);
         if(!esError){
             List<Unidad> unidadesAPI= (List<Unidad>) respuesta.get(Constantes.KEY_LISTA);
             for(int i=0;i<unidadesAPI.size();i++){
-                if(unidadesAPI.get(i).getIdConductor()==0){
-                    unidadesAPI.get(i).setNombreConductor("N/A");
-                    unidadesAPI.get(i).setApellidoPatConductor("");
-                    unidadesAPI.get(i).setApellidoMatConductor("");
+                if(unidadesAPI.get(i).getApellidoMatColaborador()==null){
+                    unidadesAPI.get(i).setApellidoMatColaborador("");
                 }
             }
             unidades= FXCollections.observableArrayList();
@@ -86,12 +90,13 @@ public class FXMLHistorialBajasUnidadController implements Initializable {
         }
     }
 
-    @FXML
-    private void btnRegresar(ActionEvent event) {
-    }
+
 
     @FXML
-    private void buscarUnidad(ActionEvent event) {
+    private void buscarUnidad(KeyEvent event) {
+        cargarHistorialUnidadesInactivas();
     }
+    
+    
     
 }

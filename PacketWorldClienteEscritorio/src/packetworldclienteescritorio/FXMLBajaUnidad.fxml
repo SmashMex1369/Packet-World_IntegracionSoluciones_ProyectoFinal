@@ -28,7 +28,10 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></CheckBox>
-      <TextArea fx:id="taMotivo" disable="true" layoutX="28.0" layoutY="257.0" prefHeight="200.0" prefWidth="322.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <TextArea fx:id="taMotivo" disable="true" layoutX="28.0" layoutY="257.0" prefHeight="200.0" prefWidth="322.0" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <font>
+            <Font size="24.0" />
+         </font></TextArea>
       <Label layoutX="164.0" layoutY="227.0" text="Agregue un motivo">
          <font>
             <Font size="20.0" />
