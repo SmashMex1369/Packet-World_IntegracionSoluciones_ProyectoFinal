@@ -4,9 +4,9 @@ body {
 }
 
 .header {
-  background: #fff;
+  background: #630505;
   padding: 10px 20px;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid #c4c4c4;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,6 +20,7 @@ body {
 .logo h1 {
   margin: 0;
   font-size: 30px;
+  color: #e1e1e1;
 }
 
 .search-box {
@@ -29,7 +30,7 @@ body {
 
 .search-box input {
   padding: 8px;
-  border: 2px solid #ccc;
+  border: 2px solid #c4c4c4;
   border-radius: 6px;
 }
 
@@ -45,7 +46,7 @@ body {
 }
 
 .side {
-  background: #e6e6e6;
+  background: #03658c;
 }
 
 .content {
@@ -68,8 +69,8 @@ body {
 .tab {
   padding: 10px 20px;
   border-radius: 8px;
-  border: 2px solid #333;
-  background-color: #fff;
+  border: 2px solid #444444;
+  background-color: #e1e1e1;
   cursor: pointer;
   font-size: 16px;
 }
@@ -142,6 +143,29 @@ strong{
 .mi-boton.activo {
   background-color: #0A3AFF;
   color: white;
+}
+
+/*TABLA*/
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #03658C;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 

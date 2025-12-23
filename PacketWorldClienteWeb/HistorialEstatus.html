@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de estatus</title>
+    <link rel="stylesheet" href="./css/estilos.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>Packet-World</h1>
+        </div> 
+        <div class="search-box">
+            <input id= "inputNoGuia" type="text" placeholder="No. de Guía">
+            <button onclick="buscarEnvio()" class="search-btn">🔍</button>
+        </div>
+    </header>
+    <div class="layout">
+    <aside class="side"></aside>
+
+    <main class="content">
+
+        <h2 class="titulo">Historial de Estatus</h2>
+
+        <table>
+            <thead>
+              <tr>
+                <th>No. Guía</th>
+                <th>Estatus</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+          
+            <tbody>
+              <tr>
+                <td>MSVSCY2</td>
+                <td>Detenido</td>
+                <td>2025-12-07</td>
+              </tr>
+            </tbody>
+          </table>
+    </main> 
+    
+    <aside class="side"></aside>
+    </div>
+<script src="js/funciones.js"></script>
+</body>
+</html>
