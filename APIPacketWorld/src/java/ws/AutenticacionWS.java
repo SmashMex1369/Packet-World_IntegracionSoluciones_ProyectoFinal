@@ -2,6 +2,7 @@ package ws;
 
 import dominio.AutenticacionImp;
 import dto.RSAutenticacionColaborador;
+import dto.RSAutenticacionConductor;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -19,6 +20,18 @@ public class AutenticacionWS {
             @FormParam("contraseña") String contraseña){
         if ((noPersonal != null && !noPersonal.isEmpty()) && (contraseña != null && !contraseña.isEmpty())){
             return AutenticacionImp.autenticarColaborador(noPersonal, contraseña);       
+        }
+        throw  new BadRequestException();
+    }
+    
+    @Path("conductor")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public RSAutenticacionConductor autenticarConductor(
+            @FormParam("noPersonal") String noPersonal,
+            @FormParam("contraseña") String contraseña){
+        if ((noPersonal != null && !noPersonal.isEmpty()) && (contraseña != null && !contraseña.isEmpty())){
+            return AutenticacionImp.autenticarConductor(noPersonal, contraseña);       
         }
         throw  new BadRequestException();
     }
