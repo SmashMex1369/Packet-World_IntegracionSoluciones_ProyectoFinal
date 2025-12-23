@@ -53,6 +53,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.swiperefreshlayout)
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.koushikdutta.ion:ion:2.+")
+    implementation("com.google.code.gson:gson:2.10")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
