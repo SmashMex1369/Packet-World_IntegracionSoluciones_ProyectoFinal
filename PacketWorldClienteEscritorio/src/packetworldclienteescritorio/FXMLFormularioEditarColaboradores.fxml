@@ -240,7 +240,7 @@
                         <Circle fx:id="circulo" blendMode="SRC_ATOP" fill="#1f93ff00" radius="54.0" stroke="#02354a" strokeType="INSIDE" strokeWidth="4.0" StackPane.alignment="CENTER" />
                      </children>
                   </StackPane>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnSeleccionarImagen" prefWidth="90.0" text="Seleccionar Imagen" textAlignment="CENTER" wrapText="true">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnSeleccionarImagen" prefHeight="52.0" prefWidth="95.0" text="Seleccionar Imagen" textAlignment="CENTER" wrapText="true">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
