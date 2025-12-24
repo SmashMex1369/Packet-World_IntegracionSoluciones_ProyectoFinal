@@ -10,8 +10,6 @@ data class Conductor(
     var correo: String,
     var contraseña: String,
     var estatus: Int,
-    var idRol: Int,
-    var rol: String,
     var idSucursal: Int,
     var CUS: String,
     var idConductor: Int,

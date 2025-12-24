@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -84,7 +85,8 @@ class LoginActivity : AppCompatActivity() {
                     serealizarRespuesta(result)
                 }else{
                     habilitarCampos()
-                    Toast.makeText(this@LoginActivity, "Error: ${e}", Toast.LENGTH_LONG).show()
+                    Log.e("Error", "Inicio sesion: "+e.toString())
+                    Toast.makeText(this@LoginActivity, "Error: $e", Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -123,7 +125,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun guardarSesion(noPersonal: String?, contraseña: String?, guardado: Boolean){
-        val editor = getPreferences(Context.MODE_PRIVATE)
+        val editor = getSharedPreferences("Sesion",Context.MODE_PRIVATE)
         editor.edit{
             putString("noPersonal", noPersonal)
             putString("contraseña", contraseña)
@@ -132,7 +134,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun cargarUsuario(){
-        val preferencias = getPreferences(Context.MODE_PRIVATE)
+        val preferencias = getSharedPreferences("Sesion",Context.MODE_PRIVATE)
         if (preferencias.getBoolean("guardado", false)){
             binding.etNoPersonal.setText(preferencias.getString("noPersonal",""))
             binding.etContraseA.setText(preferencias.getString("contraseña",""))
