@@ -283,4 +283,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SET idConductor = #{idConductor}
         WHERE idEnvio = #{idEnvio};
     </update>
+    
+    <select id="obtener-envios-conductor" parameterType="int" resultType="pojo.Envio">
+        WITH UltimoEstatusID AS (
+            SELECT 
+                idEnvio,
+                idHistorialEstatusEnvio,
+                ROW_NUMBER() OVER(
+                    PARTITION BY idEnvio
+                    ORDER BY tiempo DESC
+                ) as FilaNumero
+            FROM historialestatusenvio
+        )
+        SELECT 
+            e.idEnvio, 
+            e.noGuia, 
+            ee.idEstatusEnvio,
+            ee.estatus,
+            hee.motivo,
+            s.nombre AS nombreSucursal,
+            s.CUS AS CUSSucursal,
+            s.numero AS numeroSucursal,
+            s.calle AS calleSucursal,
+            cs.codigoPostal AS codigoPostalSucursal,
+            cs.colonia AS coloniaSucursal,
+            cis.ciudad AS ciudadSucursal,
+            ess.estado AS estadoSucursal,
+            e.nombreDest, 
+            e.apellidoPatDest, 
+            e.apellidoMatDest, 
+            e.numDest, 
+            e.calleDest, 
+            c.codigoPostal AS codigoPostalDest,
+            c.colonia AS coloniaDest,
+            ci.ciudad AS ciudadDest,
+            es.estado AS estadoDest,
+            cli.nombre AS nombreCliente,
+            cli.apellidoPaterno AS apellidoPatCliente,
+            cli.apellidoMaterno AS apellidoMatCliente,
+            cli.correo AS correoCliente,
+            cli.telefono AS telefonoCliente,
+            con.idConductor
+        FROM envio e
+        INNER JOIN UltimoEstatusID u ON e.idEnvio = u.idEnvio AND u.FilaNumero = 1
+        INNER JOIN historialestatusenvio hee ON u.idHistorialEstatusEnvio = hee.idHistorialEstatusEnvio
+        INNER JOIN estatusenvio ee ON hee.idEstatusEnvio = ee.idEstatusEnvio
+        INNER JOIN colonia c ON e.idColonia = c.idColonia
+        INNER JOIN ciudad ci ON c.idCiudad = ci.idCiudad
+        INNER JOIN estado es ON ci.idEstado = es.idEstado
+        INNER JOIN cliente cli ON e.idCliente = cli.idCliente
+        INNER JOIN sucursal s ON s.idSucursal = e.idSucursal
+        INNER JOIN colonia cs ON s.idColonia = cs.idColonia
+        INNER JOIN ciudad cis ON cs.idCiudad = cis.idCiudad
+        INNER JOIN estado ess ON cis.idEstado = ess.idEstado
+        LEFT JOIN conductor con ON e.idConductor = con.idConductor
+        WHERE con.idConductor =  #{idConductor}
+        AND (ee.idEstatusEnvio != 4 AND ee.idEstatusEnvio != 5 AND ee.idEstatusEnvio != 6)
+        ORDER BY idEstatusEnvio DESC;
+    </select>
+    
+    <select id="obtener-paquetes" parameterType="int" resultType="pojo.Paquete">
+        SELECT descripcion FROM paquete p
+        INNER JOIN envio e ON p.idEnvio = e.idEnvio
+        WHERE e.idEnvio = #{idEnvio};
+    </select>
 </mapper>

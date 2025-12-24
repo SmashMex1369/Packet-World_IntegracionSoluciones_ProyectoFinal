@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="conductor" parameterType="map" resultType="pojo.Conductor">
-        SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, c.idSucursal, CUS, noLicencia
+        SELECT idColaborador, c.noPersonal, c.nombre, apellidoPaterno, apellidoMaterno, correo, CURP, c.idSucursal, idConductor, CUS, noLicencia
         FROM colaborador c
         INNER JOIN rol r ON r.idRol=c.idRol
         INNER JOIN sucursal s ON s.idSucursal=c.idSucursal

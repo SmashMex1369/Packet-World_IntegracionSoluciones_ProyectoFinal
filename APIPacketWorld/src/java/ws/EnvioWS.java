@@ -127,4 +127,14 @@ public class EnvioWS {
         throw new BadRequestException();
     }
     
+    @Path("obtener-envios-conductor/{idConductor}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio> obtenerEnvioColaborador(@PathParam ("idConductor") Integer idConductor){
+        if (idConductor != null &&idConductor>0) {
+            return EnvioImp.obtenerEnviosConductor(idConductor);
+        }
+        throw new BadRequestException();
+    }
+    
 }

@@ -101,6 +101,9 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
                 if(enviosAPI.get(i).getApellidoMatDest()==null){
                     enviosAPI.get(i).setApellidoMatDest("");
                 }
+                if (enviosAPI.get(i).getApellidoMatConductor()==null){
+                    enviosAPI.get(i).setApellidoMatConductor("");
+                }
             }
             envios = FXCollections.observableArrayList();
             envios.addAll(enviosAPI);

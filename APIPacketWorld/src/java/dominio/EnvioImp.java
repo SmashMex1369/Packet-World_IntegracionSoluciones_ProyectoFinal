@@ -8,6 +8,7 @@ import java.util.List;
 import modelo.mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.Envio;
+import pojo.Paquete;
 import utilidades.Constantes;
 
 /**
@@ -211,6 +212,29 @@ public class EnvioImp {
             respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
         }
         return respuesta;
+    }
+    
+    public static List<Envio> obtenerEnviosConductor(Integer idConductor){
+        List<Envio> envios = null;  
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if(conexionBD != null){
+            try{
+                envios = conexionBD.selectList("envio.obtener-envios-conductor", idConductor);
+                if (envios != null) {
+                    List<Paquete> paquetes = null;
+                    for(int i = 0; i < envios.size(); i++){
+                        paquetes = conexionBD.selectList("envio.obtener-paquetes", envios.get(i).getIdEnvio());
+                        if (paquetes != null) {
+                            envios.get(i).setPaquetes(paquetes);
+                        }
+                    }
+                }
+                conexionBD.close();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        return envios;
     }
     
 }
