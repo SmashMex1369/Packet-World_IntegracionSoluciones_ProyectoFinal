@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM colaborador c
         INNER JOIN rol r ON r.idRol=c.idRol
         INNER JOIN sucursal s ON s.idSucursal = c.idSucursal
-        WHERE c.etstaus = 1 AND noPersonal= #{noPersonal} AND contraseña= #{contraseña};
+        WHERE c.estatus = 1 AND noPersonal= #{noPersonal} AND contraseña= #{contraseña};
     </select>
     
     <select id="conductor" parameterType="map" resultType="pojo.Conductor">
