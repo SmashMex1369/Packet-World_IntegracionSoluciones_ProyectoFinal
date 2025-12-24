@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.CatalogoImp;
 import packetworldclienteescritorio.dominio.ClienteImp;
@@ -74,6 +75,10 @@ public class FXMLFormularioClientesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       tfCodigoPostalFocusListener();
+      
+        soloNumeros(tfTelefono, 10);       // Teléfono 10 dígitos
+        soloNumeros(tfCodigoPostal, 5);    // Código postal
+        soloNumeros(tfNumeroExterior, 6);  // Número exterior
     }    
     
     public void inicializarDatosClientes(Cliente clienteEdicion, INotificador observador){
@@ -96,6 +101,40 @@ public class FXMLFormularioClientesController implements Initializable {
         }
     }
     
+        // VALIDACIONES DE CORREO Y NUMEROS (DIRECCION Y TELEFONICO)
+    private void soloNumeros(TextField textField, int longitudMaxima) {
+    textField.setTextFormatter(new TextFormatter<>(change -> {
+        if (change.getControlNewText().matches("\\d{0," + longitudMaxima + "}")) {
+            return change;
+        }
+        Utilidades.mostrarAlertaSimple(
+                "Formato incorrecto",
+                "Este campo solo acepta números.",
+                Alert.AlertType.WARNING
+        );
+        return null;
+    }));
+}
+    private static final String REGEX_CORREO =
+        "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+
+    private boolean validarCorreo() {
+    String correo = tfCorreo.getText();
+
+    if (correo == null || correo.isEmpty() || correo.length() > 254) {
+        tfCorreo.setStyle("-fx-border-color: #bf0b0b;");
+        return false;
+    }
+
+    if (!correo.matches(REGEX_CORREO)) {
+        tfCorreo.setStyle("-fx-border-color: #bf0b0b;");
+        return false;
+    }
+
+    tfCorreo.setStyle(null);
+    return true;
+}
+    
     private boolean sonCamposValidos(){
         boolean camposValidos = true;
         if(tfNombre.getText()==null || tfNombre.getText().isEmpty()){
@@ -113,6 +152,17 @@ public class FXMLFormularioClientesController implements Initializable {
         if(tfApellidoMaterno.getText()==null || tfApellidoMaterno.getText().isEmpty()){
             camposValidos = false;
             tfApellidoMaterno.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+        }
+        if(tfCorreo.getText()==null || tfCorreo.getText().isEmpty()){
+            camposValidos = false;
+            tfCorreo.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+        }
+        if (!validarCorreo()) {
+        camposValidos = false;
+    }
+        if(tfTelefono.getText()==null || tfTelefono.getText().isEmpty()){
+            camposValidos = false;
+            tfTelefono.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
         if(tfCodigoPostal.getText()!=null || !tfCodigoPostal.getText().isEmpty()){
             try {

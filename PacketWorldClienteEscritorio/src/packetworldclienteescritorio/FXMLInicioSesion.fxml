@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLInicioSesionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLInicioSesionController">
    <children>
-      <Button defaultButton="true" layoutX="492.0" layoutY="431.0" mnemonicParsing="false" onAction="#btnIniciar" prefHeight="38.0" prefWidth="200.0" style="-fx-background-radius: 30px; -fx-base: #03658c;" text="Ingresar">
+      <Button defaultButton="true" layoutX="492.0" layoutY="448.0" mnemonicParsing="false" onAction="#btnIniciar" prefHeight="38.0" prefWidth="200.0" style="-fx-background-radius: 30px; -fx-base: #03658c;" text="Ingresar">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -38,7 +38,7 @@
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="446.0" layoutY="303.0" prefHeight="35.0" prefWidth="239.0" text="Contraseña:">
+      <Label layoutX="446.0" layoutY="314.0" prefHeight="35.0" prefWidth="239.0" text="Contraseña:">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -51,9 +51,11 @@
          <font>
             <Font size="16.0" />
          </font></Label>
-      <PasswordField fx:id="pfPassword" layoutX="446.0" layoutY="338.0" prefHeight="50.0" prefWidth="292.0" promptText="*******">
+      <PasswordField fx:id="pfPassword" layoutX="446.0" layoutY="349.0" prefHeight="50.0" prefWidth="292.0" promptText="*******">
          <font>
             <Font size="24.0" />
          </font></PasswordField>
+      <Label fx:id="lblErrorNoPersonal" layoutX="446.0" layoutY="293.0" prefHeight="21.0" prefWidth="179.0" textFill="RED" />
+      <Label fx:id="lblErrorPass" layoutX="446.0" layoutY="400.0" prefHeight="21.0" prefWidth="179.0" textFill="RED" />
    </children>
 </AnchorPane>

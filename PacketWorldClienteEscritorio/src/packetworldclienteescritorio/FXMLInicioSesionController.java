@@ -28,6 +28,10 @@ public class FXMLInicioSesionController implements Initializable {
     private TextField tfNoPersonal;
     @FXML
     private PasswordField pfPassword;
+    @FXML
+    private Label lblErrorNoPersonal;
+    @FXML
+    private Label lblErrorPass;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -41,11 +45,27 @@ public class FXMLInicioSesionController implements Initializable {
         String noPersonal= tfNoPersonal.getText();
         String contraseña= pfPassword.getText();
         
-        if(!noPersonal.isEmpty() && !contraseña.isEmpty()){
+        if(!noPersonal.isEmpty() && !contraseña.isEmpty() || validarCampos(noPersonal, contraseña)){
             verificarCredenciales(noPersonal, contraseña);
-        }else{        
+        }/*else{        
             Utilidades.mostrarAlertaSimple("Campos requeridos", "El no. Personal y/o contraseña son obligatorios", Alert.AlertType.WARNING);
+        }*/
+    }
+    
+    // LBL's para error en el inicio de sesion
+    private boolean validarCampos(String noPersonal, String contraseña){
+        boolean camposValidos = true;
+        lblErrorNoPersonal.setText("");
+        lblErrorPass.setText("");
+        if(noPersonal.isEmpty()){
+           camposValidos = false;
+           lblErrorNoPersonal.setText("No.Personal Obligatorio");
         }
+        if(contraseña.isEmpty()){
+            camposValidos = false;
+            lblErrorPass.setText("Contraseña Obligatoria");
+        }
+        return camposValidos;
     }
     
     private void verificarCredenciales(String noPersonal, String contraseña){
