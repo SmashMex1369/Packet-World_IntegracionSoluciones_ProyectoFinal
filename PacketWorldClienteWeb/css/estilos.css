@@ -4,13 +4,15 @@ body {
 }
 
 .header {
-  background: #630505;
-  padding: 10px 20px;
-  border-bottom: 2px solid #c4c4c4;
+  background: linear-gradient(135deg, #630505, #8b0000);
+  padding: 14px 30px;
+  border-bottom: 2px solid rgba(255,255,255,0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
 }
+
 
 .logo {
   display: flex;
@@ -67,16 +69,24 @@ body {
 }
 
 .tab {
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 2px solid #444444;
-  background-color: #e1e1e1;
+  padding: 12px 26px;
+  border-radius: 12px;
+  border: none;
+  background: #e1e1e1;
   cursor: pointer;
   font-size: 16px;
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.tab:hover {
+  transform: translateY(-3px);
+  background: #c4d9ff;
 }
 
 .tab.act {
-  background-color: #99c1ff;
+  background: linear-gradient(135deg, #03658C, #0A3AFF);
+  color: white;
 }
 
 .seccion {
@@ -88,9 +98,16 @@ body {
 }
 
 @keyframes fade {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
 
 .grid2 {
   display: grid;
@@ -120,12 +137,20 @@ strong{
 }
 
 .historial {
-  padding: 10px 25px;
+  padding: 12px 35px;
   font-size: 16px;
-  border: 2px solid #000;
-  border-radius: 10px;
+  border: none;
+  border-radius: 30px;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 25px;
+  background: linear-gradient(135deg, #03658C, #0A3AFF);
+  color: white;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+  transition: 0.3s;
+}
+
+.historial:hover {
+  transform: scale(1.07);
 }
 .centrado {
   text-align: center;
@@ -168,4 +193,35 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
+.grid2 div,
+.grid3 div {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transition: 0.3s;
+}
 
+.grid2 div:hover,
+.grid3 div:hover {
+  transform: translateY(-6px);
+}
+
+
+/* ===============================
+   ERROR INPUT - MICROANIMACION
+================================ */
+
+.input-error {
+  border: 2px solid #ff3b3b !important;
+  animation: shake 0.35s;
+  box-shadow: 0 0 12px rgba(255, 59, 59, 0.6);
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
