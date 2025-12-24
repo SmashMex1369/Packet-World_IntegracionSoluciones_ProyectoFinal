@@ -3,16 +3,23 @@ package uv.tc.packetworldclientemovil
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.gson.Gson
 import uv.tc.packetworldclientemovil.adaptadores.DetallesAdapter
 import uv.tc.packetworldclientemovil.databinding.ActivityDetallesBinding
+import uv.tc.packetworldclientemovil.poko.Envio
+import uv.tc.packetworldclientemovil.utilidades.EnvioViewModel
 import uv.tc.packetworldclientemovil.utilidades.ajustarAInsets
 
 class DetallesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetallesBinding
+    private val viewModel: EnvioViewModel by viewModels()
+    val gson = Gson()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +30,12 @@ class DetallesActivity : AppCompatActivity() {
         binding.root.ajustarAInsets()
         window.statusBarColor = ContextCompat.getColor(this, R.color.rojoOscuro)
         window.navigationBarColor = ContextCompat.getColor(this, R.color.azulOscuro)
+
+        val json = intent.getStringExtra("envio")
+        if (json != null) {
+            viewModel.envioSeleccionado = gson.fromJson(json, Envio::class.java)
+        }
+
         // 1. Asignamos el adaptador
         val adapter = DetallesAdapter(this)
         binding.vpContenido.adapter = adapter

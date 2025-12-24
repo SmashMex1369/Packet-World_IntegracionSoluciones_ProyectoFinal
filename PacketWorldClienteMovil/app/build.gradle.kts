@@ -55,6 +55,7 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.koushikdutta.ion:ion:2.+")
     implementation("com.google.code.gson:gson:2.10")
+    implementation("androidx.fragment:fragment-ktx:1.8.9")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -45,6 +45,8 @@ class EnviosActivity : AppCompatActivity() {
         binding.srlRecargar.setOnRefreshListener {
             recargarEnvios()
         }
+        binding.srlRecargar.isRefreshing = true
+        recargarEnvios()
 
         binding.imgbtnLogout.setOnClickListener {
             MaterialAlertDialogBuilder(this@EnviosActivity)
@@ -76,15 +78,9 @@ class EnviosActivity : AppCompatActivity() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        recargarEnvios()
-    }
-
     private fun recargarEnvios(){
         binding.srlRecargar.isRefreshing = true
         obtenerEnvios()
-        binding.srlRecargar.isRefreshing = false
     }
 
     private fun obtenerEnvios(){
@@ -97,6 +93,7 @@ class EnviosActivity : AppCompatActivity() {
                 }else{
                     Log.e("Error", "Obtener Envios: "+e.toString())
                     Toast.makeText(this@EnviosActivity, "Error: $e", Toast.LENGTH_LONG).show()
+                    binding.srlRecargar.isRefreshing = false
                 }
             }
     }
@@ -110,11 +107,13 @@ class EnviosActivity : AppCompatActivity() {
                     configurarRecyclerView(envios)
                 }else{
                     Toast.makeText(this@EnviosActivity, "Actualmente no tiene envios pendientes", Toast.LENGTH_LONG).show()
+                    binding.srlRecargar.isRefreshing = false
                 }
             }
         }catch (e: Exception) {
             Log.e("Error", "Serealizar Respuesta Envios: "+e.toString())
             Toast.makeText(this@EnviosActivity, "Error $e", Toast.LENGTH_LONG).show()
+            binding.srlRecargar.isRefreshing = false
         }
 
     }
@@ -122,10 +121,13 @@ class EnviosActivity : AppCompatActivity() {
     private fun configurarRecyclerView(envios: List<Envio>){
         binding.rvEnvios.layoutManager = LinearLayoutManager(this@EnviosActivity)
         val adapter = EnviosAdapter(envios) { envioSeleccionado ->
-
-            Toast.makeText(this@EnviosActivity, "Seleccionaste el envio ${envioSeleccionado.noGuia}", Toast.LENGTH_LONG).show()
+            val jsonEnvio = gson.toJson(envioSeleccionado)
+            val intent = Intent(this@EnviosActivity, DetallesActivity::class.java)
+            intent.putExtra("envio", jsonEnvio)
+            startActivity(intent)
         }
         binding.rvEnvios.adapter =adapter
+        binding.srlRecargar.isRefreshing = false
     }
 
 

@@ -39,7 +39,7 @@
         android:textAlignment="center"
         android:textSize="24sp"/>
         <TextView
-            android:id="@+id/tv_sucursal_valor"
+            android:id="@+id/tv_nombre_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="[Nombre Completo]"
@@ -91,7 +91,7 @@
                 android:textAlignment="center"
                 android:text="Ciudad:"/>
             <TextView
-                android:id="@+id/tv_estatus_valor"
+                android:id="@+id/tv_ciudad_valor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"

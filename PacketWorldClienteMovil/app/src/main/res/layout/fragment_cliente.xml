@@ -34,7 +34,7 @@
             android:textSize="24sp"
             android:textStyle="bold"/>
         <TextView
-            android:id="@+id/tv_no_guia_valor"
+            android:id="@+id/tv_nombre_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="[Nombre Completo]"
@@ -58,7 +58,7 @@
             android:textAlignment="center"
             android:textSize="24sp"/>
         <TextView
-            android:id="@+id/tv_estatus_valor"
+            android:id="@+id/tv_correo_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="[Correo]"
@@ -82,7 +82,7 @@
             android:textAlignment="center"
             android:textSize="24sp"/>
         <TextView
-            android:id="@+id/tv_motivo_valor"
+            android:id="@+id/tv_telefono_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="[Telefono]"

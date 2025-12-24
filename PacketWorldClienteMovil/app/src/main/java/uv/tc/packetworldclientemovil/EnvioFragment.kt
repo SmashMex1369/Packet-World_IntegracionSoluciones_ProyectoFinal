@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import uv.tc.packetworldclientemovil.databinding.FragmentEnvioBinding
+import uv.tc.packetworldclientemovil.utilidades.EnvioViewModel
 
 class EnvioFragment : Fragment() {
     // 1. Variable privada anulable (_binding).
@@ -17,7 +20,7 @@ class EnvioFragment : Fragment() {
     // El 'get() = _binding!!' significa: "Dame el valor de _binding y asegúrate que no sea null".
     private val binding get() = _binding!!
 
-
+    private val viewModelCompartido : EnvioViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +33,22 @@ class EnvioFragment : Fragment() {
 
         // 4. Retornamos la raíz (root) que es tu Layout principal (Constraint, Frame, etc.)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val envio = viewModelCompartido.envioSeleccionado
+        if (envio != null) {
+            binding.tvNoGuiaValor.text = envio.noGuia
+            binding.tvEstatusValor.text = envio.estatus
+            if (binding.tvMotivoValor!=null){
+                binding.tvMotivoValor.text = envio.motivo
+            }else{
+                binding.tvMotivoValor.text = ""
+            }
+        }else{
+            Toast.makeText(requireContext(), "Error al cargar datos", Toast.LENGTH_SHORT).show()
+        }
     }
 
     // 5. ¡MUY IMPORTANTE! Limpiar el binding
