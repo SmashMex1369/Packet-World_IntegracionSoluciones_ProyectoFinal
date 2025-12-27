@@ -22,6 +22,7 @@ public class Constantes {
     public static final String KEY_MENSAJE = "mensaje";
     public static final String KEY_LISTA = "lista_valores";
     public static final String KEY_OBJETO = "objeto";
+    public static final String KEY_FOTO = "foto";
     
     //Peticiones
    public static final String PETICION_GET = "GET";

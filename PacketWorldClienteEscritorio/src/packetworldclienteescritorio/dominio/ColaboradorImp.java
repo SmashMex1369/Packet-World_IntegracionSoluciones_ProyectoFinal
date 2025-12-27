@@ -1,12 +1,21 @@
 package packetworldclienteescritorio.dominio;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import packetworldclienteescritorio.conexion.ConexionAPI;
 import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.pojo.Colaborador;
@@ -273,4 +282,85 @@ public class ColaboradorImp {
         return respuesta;
     }
     
+    // nuevo para la foto, método para obtener la foto del colaborador (byte[])
+    public static HashMap<String, Object> obtenerFotoColaborador(Integer idColaborador) {
+        HashMap<String, Object> respuesta = new LinkedHashMap<>();
+        String URL = Constantes.URL_WS + "colaborador/obtener-foto/" + idColaborador;
+        
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+        
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            try {
+                Gson gson = new Gson();
+                Colaborador colaborador = gson.fromJson(respuestaAPI.getContenido(), Colaborador.class);
+                
+                if (colaborador != null && colaborador.getFotografia() != null) {
+                    respuesta.put(Constantes.KEY_ERROR, false);
+                    respuesta.put(Constantes.KEY_FOTO, colaborador.getFotografia());
+                } else {
+                    respuesta.put(Constantes.KEY_ERROR, false);
+                    respuesta.put(Constantes.KEY_FOTO, null);
+                }
+            } catch (Exception e) {
+                respuesta.put(Constantes.KEY_ERROR, true);
+                respuesta.put(Constantes.KEY_MENSAJE, "Error al procesar la respuesta: " + e.getMessage());
+            }
+        } else if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_NOT_FOUND) {
+        // Si no encuentra foto, no es error, solo devuelve null
+        respuesta.put(Constantes.KEY_ERROR, false);
+        respuesta.put(Constantes.KEY_FOTO, null);
+    } else {
+        respuesta.put(Constantes.KEY_ERROR, true);
+        respuesta.put(Constantes.KEY_MENSAJE, "Error HTTP: " + respuestaAPI.getCodigo());
+    }
+        
+        return respuesta;
+    } 
+    
+    // el endpoint espera los bytes directamente (sin Base64)
+    public static Respuesta subirFotoColaboradorDirecto(Integer idColaborador, byte[] fotoBytes) {
+        Respuesta respuesta = new Respuesta();
+        String URL = Constantes.URL_WS + "colaborador/subir-foto/" + idColaborador;
+        
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(URL).openConnection();
+            connection.setRequestMethod("PUT");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", "application/octet-stream");
+            connection.setRequestProperty("Content-Length", String.valueOf(fotoBytes.length));
+            
+            // Enviar los bytes directamente
+            try (OutputStream os = connection.getOutputStream()) {
+                os.write(fotoBytes);
+                os.flush();
+            }
+            
+            // Leer la respuesta
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                try (BufferedReader reader = new BufferedReader(
+                     new InputStreamReader(connection.getInputStream()))) {
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                    
+                    Gson gson = new Gson();
+                    respuesta = gson.fromJson(response.toString(), Respuesta.class);
+                }
+            } else {
+                respuesta.setError(true);
+                respuesta.setMensaje("Error HTTP: " + responseCode);
+            }
+            
+            connection.disconnect();
+            
+        } catch (Exception e) {
+            respuesta.setError(true);
+            respuesta.setMensaje("Error al subir la foto: " + e.getMessage());
+        }
+        
+        return respuesta;
+    }
 }
