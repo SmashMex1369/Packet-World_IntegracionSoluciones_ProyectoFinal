@@ -1,3 +1,4 @@
+//Consultar detalles de envio
 function buscarEnvio() {
     const noGuia = document.getElementById("inputNoGuia")?.value;
 
@@ -60,7 +61,7 @@ function mostrarDetallesEnvio(envio) {
     document.getElementById("noGuia").textContent = envio.noGuia;
     document.getElementById("estatus").textContent = envio.estatus;
     document.getElementById("fecha").textContent = envio.tiempo;
-    document.getElementById("motivo").textContent = envio.estatus;
+    document.getElementById("motivo").textContent = envio.motivo;
 
     document.getElementById("nombreConductor").textContent =
         envio.nombreConductor
