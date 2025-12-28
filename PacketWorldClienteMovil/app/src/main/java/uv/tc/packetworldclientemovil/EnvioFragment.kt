@@ -1,5 +1,6 @@
 package uv.tc.packetworldclientemovil
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -48,6 +49,12 @@ class EnvioFragment : Fragment() {
             }
         }else{
             Toast.makeText(requireContext(), "Error al cargar datos", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnActualizarEstatus.setOnClickListener {
+            val intent= Intent(requireContext(), ActualizarEstatusActivity::class.java)
+            intent.putExtra("idEnvio", envio?.idEnvio ?: 0)
+            startActivity(intent)
         }
     }
 
