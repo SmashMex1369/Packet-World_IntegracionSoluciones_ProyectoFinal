@@ -282,7 +282,6 @@ public class ColaboradorImp {
         return respuesta;
     }
     
-    // nuevo para la foto, método para obtener la foto del colaborador (byte[])
     public static HashMap<String, Object> obtenerFotoColaborador(Integer idColaborador) {
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
         String URL = Constantes.URL_WS + "colaborador/obtener-foto/" + idColaborador;
@@ -294,9 +293,9 @@ public class ColaboradorImp {
                 Gson gson = new Gson();
                 Colaborador colaborador = gson.fromJson(respuestaAPI.getContenido(), Colaborador.class);
                 
-                if (colaborador != null && colaborador.getFotografia() != null) {
+                if (colaborador != null && colaborador.getFotoBase64()!= null) {
                     respuesta.put(Constantes.KEY_ERROR, false);
-                    respuesta.put(Constantes.KEY_FOTO, colaborador.getFotografia());
+                    respuesta.put(Constantes.KEY_FOTO, colaborador.getFotoBase64());
                 } else {
                     respuesta.put(Constantes.KEY_ERROR, false);
                     respuesta.put(Constantes.KEY_FOTO, null);
@@ -306,61 +305,38 @@ public class ColaboradorImp {
                 respuesta.put(Constantes.KEY_MENSAJE, "Error al procesar la respuesta: " + e.getMessage());
             }
         } else if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_NOT_FOUND) {
-        // Si no encuentra foto, no es error, solo devuelve null
         respuesta.put(Constantes.KEY_ERROR, false);
         respuesta.put(Constantes.KEY_FOTO, null);
     } else {
         respuesta.put(Constantes.KEY_ERROR, true);
         respuesta.put(Constantes.KEY_MENSAJE, "Error HTTP: " + respuestaAPI.getCodigo());
     }
-        
         return respuesta;
-    } 
+    }
     
-    // el endpoint espera los bytes directamente (sin Base64)
-    public static Respuesta subirFotoColaboradorDirecto(Integer idColaborador, byte[] fotoBytes) {
+    public static Respuesta subirFotoColaborador(Integer idColaborador, byte[] foto) {
         Respuesta respuesta = new Respuesta();
         String URL = Constantes.URL_WS + "colaborador/subir-foto/" + idColaborador;
-        
-        try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(URL).openConnection();
-            connection.setRequestMethod("PUT");
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/octet-stream");
-            connection.setRequestProperty("Content-Length", String.valueOf(fotoBytes.length));
-            
-            // Enviar los bytes directamente
-            try (OutputStream os = connection.getOutputStream()) {
-                os.write(fotoBytes);
-                os.flush();
-            }
-            
-            // Leer la respuesta
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                try (BufferedReader reader = new BufferedReader(
-                     new InputStreamReader(connection.getInputStream()))) {
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
-                    
-                    Gson gson = new Gson();
-                    respuesta = gson.fromJson(response.toString(), Respuesta.class);
-                }
-            } else {
-                respuesta.setError(true);
-                respuesta.setMensaje("Error HTTP: " + responseCode);
-            }
-            
-            connection.disconnect();
-            
-        } catch (Exception e) {
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, Constantes.PETICION_PUT, foto, Constantes.APPLICATION_OCTET_STREAM);
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        } else {
             respuesta.setError(true);
-            respuesta.setMensaje("Error al subir la foto: " + e.getMessage());
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case HttpURLConnection.HTTP_BAD_REQUEST:
+                    respuesta.setMensaje("El formato de la imagen no es correcto o es muy pesada.");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos, hubo un error al subir la foto. Inténtelo más tarde.");
+            } 
         }
-        
         return respuesta;
     }
 }

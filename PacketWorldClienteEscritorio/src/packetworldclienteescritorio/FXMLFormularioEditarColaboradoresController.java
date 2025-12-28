@@ -1,6 +1,10 @@
 package packetworldclienteescritorio;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -31,6 +35,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import packetworldclienteescritorio.dominio.CatalogoImp;
 import packetworldclienteescritorio.dominio.ColaboradorImp;
 import packetworldclienteescritorio.dto.Respuesta;
@@ -108,124 +113,27 @@ public class FXMLFormularioEditarColaboradoresController implements Initializabl
         }else{
             tfNoLicencia.setText(null);
         }
-        // nuevo
         cargarFotoActual();
         
     }
     
-    // nuevo
     private void cargarFotoActual() {
         if (colaboradorEdicion != null && colaboradorEdicion.getIdColaborador() != null) {
             HashMap<String, Object> respuesta = ColaboradorImp.obtenerFotoColaborador(
                 colaboradorEdicion.getIdColaborador());
             
             if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
-                byte[] fotoBytesRecuperada = (byte[]) respuesta.get(Constantes.KEY_FOTO);
-                if (fotoBytesRecuperada != null && fotoBytesRecuperada.length > 0) {
-                    mostrarImagen(fotoBytesRecuperada);
-                    // Guardar la foto actual para comparar luego
-                    this.fotoBytes = fotoBytesRecuperada;
-                } else {
-                    cargarImagenPorDefecto();
-                    this.fotoBytes = null;
+                String stringBase64 = (String) respuesta.get(Constantes.KEY_FOTO);
+                if (stringBase64 != null && stringBase64.length() > 0) {
+                    Utilidades.colocarImagen(stringBase64, imgvFotoPerfil, getClass());
                 }
             } else {
-                cargarImagenPorDefecto();
-                this.fotoBytes = null;
+                Utilidades.cargarImagenPorDefecto(imgvFotoPerfil, getClass());
             }
         } else {
-            cargarImagenPorDefecto();
-            this.fotoBytes = null;
+            Utilidades.cargarImagenPorDefecto(imgvFotoPerfil, getClass());
         }
-    }
-
-    private void mostrarImagen(byte[] bytes) {
-    try {
-        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
-        Image image = new Image(bis, 108, 108, true, true); // Cambiado a preserveRatio=true
-        
-        imgvFotoPerfil.setImage(image);
-        imgvFotoPerfil.setPreserveRatio(true);
-        imgvFotoPerfil.setSmooth(true);
-        
-        // Aplicar clip circular después de que la imagen se cargue
-        image.progressProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal.doubleValue() == 1.0) {
-                aplicarClipCircular(imgvFotoPerfil);
-            }
-        });
-        
-        // Si ya está cargada
-        if (image.getProgress() == 1.0) {
-            aplicarClipCircular(imgvFotoPerfil);
-        }
-        
-    } catch (Exception e) {
-        e.printStackTrace();
-        cargarImagenPorDefecto();
-    }
-}
-    private void aplicarClipCircular(ImageView imageView) {
-    try {
-        if (imageView.getImage() == null) return;
-        
-        // Obtener dimensiones reales de la imagen
-        double imageWidth = imageView.getImage().getWidth();
-        double imageHeight = imageView.getImage().getHeight();
-        double fitWidth = imageView.getFitWidth();
-        double fitHeight = imageView.getFitHeight();
-        
-        // Calcular escala
-        double scaleX = fitWidth / imageWidth;
-        double scaleY = fitHeight / imageHeight;
-        double scale = Math.max(scaleX, scaleY); // Para mantener relación de aspecto
-        
-        // Calcular dimensiones escaladas
-        double scaledWidth = imageWidth * scale;
-        double scaledHeight = imageHeight * scale;
-        
-        // Calcular centro del ImageView
-        double centerX = fitWidth / 2;
-        double centerY = fitHeight / 2;
-        
-        // Calcular radio (usar el menor entre ancho y alto)
-        double radius = Math.min(fitWidth, fitHeight) / 2;
-        
-        // Aplicar clip
-        Circle clip = new Circle(centerX, centerY, radius);
-        imageView.setClip(clip);
-        
-        // Ajustar viewport si es necesario para centrar la imagen
-        if (scaledWidth > fitWidth || scaledHeight > fitHeight) {
-            // Calcular viewport para centrar la imagen
-            double viewportX = (scaledWidth - fitWidth) / (2 * scale);
-            double viewportY = (scaledHeight - fitHeight) / (2 * scale);
-            double viewportWidth = fitWidth / scale;
-            double viewportHeight = fitHeight / scale;
-            
-            imageView.setViewport(new Rectangle2D(viewportX, viewportY, viewportWidth, viewportHeight));
-        } else {
-            imageView.setViewport(null); // Restablecer viewport
-        }
-        
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-    
-    private void cargarImagenPorDefecto() {
-        try {
-            InputStream is = getClass().getResourceAsStream("/recursos/circle-user-solid.png");
-            if (is != null) {
-                Image image = new Image(is, 108, 108, true, true);
-                imgvFotoPerfil.setImage(image);
-                imgvFotoPerfil.setClip(null);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
+    }    
     
     private void cargarSucursalesDisponibles(){
         HashMap<String, Object> respuesta = CatalogoImp.obtenerSucursalesDisponibles();
@@ -270,44 +178,10 @@ public class FXMLFormularioEditarColaboradoresController implements Initializabl
             }else{
                 colaborador.setContraseña(tfContraseña.getText());
             }
-            // nuevo
-           // actualizar colaborador
-            // PRIMERO: Actualizar los datos del colaborador
-            Respuesta respuesta = ColaboradorImp.actualizarColaborador(colaborador);
-            
-            if (!respuesta.isError()) {
-                // SEGUNDO: Si hay una nueva foto, se sube
-                if (fotoBytes != null && fotoFueCambiada()) {
-                    Respuesta respuestaFoto = ColaboradorImp.subirFotoColaboradorDirecto(
-                        colaboradorEdicion.getIdColaborador(), fotoBytes);
-                    
-                    if (respuestaFoto.isError()) {
-                        Utilidades.mostrarAlertaSimple("Advertencia", 
-                            "Los datos se actualizaron, pero la foto no se pudo subir: " + 
-                            respuestaFoto.getMensaje(), Alert.AlertType.WARNING);
-                    } else {
-                        Utilidades.mostrarAlertaSimple("Éxito completo", 
-                            "Datos y foto actualizados correctamente", Alert.AlertType.INFORMATION);
-                    }
-                } else {
-                    Utilidades.mostrarAlertaSimple("Colaborador actualizado", 
-                        respuesta.getMensaje(), Alert.AlertType.INFORMATION);
-                }
-                
-                observador.notificarOperacionExitosa("Actualizar colaborador", colaboradorEdicion.getNoPersonal());
-                regresarVentana();
-            } else {
-                Utilidades.mostrarAlertaSimple("Error al actualizar", 
-                    respuesta.getMensaje(), Alert.AlertType.ERROR);
-            }
+            actualizarColaborador(colaborador);
         }
     }
     
-    // Método para verificar si la foto fue cambiada
-    private boolean fotoFueCambiada() {
-        // Si se seleccionó una nueva foto, asumo que fue cambiada
-        return fotoBytes != null;
-    }
     
 
     
@@ -355,55 +229,7 @@ public class FXMLFormularioEditarColaboradoresController implements Initializabl
         seleccionarFoto();
     }
     
-    // cambiar al metodo de Chris de antes si no funciona...
     private void seleccionarFoto(){
-        FileChooser dialogo = new FileChooser();
-        dialogo.setTitle("Selecciona una foto");
-        FileChooser.ExtensionFilter filtroImg = new FileChooser.ExtensionFilter(
-            "Archivos de imágenes", "*.jpg", "*.png", "*.jpeg");
-        dialogo.getExtensionFilters().add(filtroImg);
-        foto = dialogo.showOpenDialog(imgvFotoPerfil.getScene().getWindow());
-        
-        if (foto != null) {
-            try {
-                // Verificar el tamaño del archivo (máximo 2MB)
-                long fileSize = foto.length();
-                if (fileSize > 2 * 1024 * 1024) { // 2MB
-                    Utilidades.mostrarAlertaSimple("Archivo muy grande", 
-                        "La imagen no debe superar los 2MB", Alert.AlertType.WARNING);
-                    return;
-                }
-                
-                // Leer la imagen como bytes
-                fotoBytes = Files.readAllBytes(foto.toPath());
-                
-                // Mostrar vista previa
-                Image image = new Image(foto.toURI().toString(), 108, 108, true, true);
-                imgvFotoPerfil.setImage(image);
-                
-                // Crear clip circular
-                Circle clip = new Circle(54, 54, 54);
-                imgvFotoPerfil.setClip(clip);
-                
-                // Mostrar confirmación inmediata
-                boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion(
-                    "Nueva foto seleccionada", 
-                    "¿Deseas guardar esta foto para el colaborador?\n" +
-                    "La foto se actualizará al guardar los cambios.");
-                    
-                if(!confirmarOperacion){
-                    // Si no confirma, restaurar la foto anterior
-                    cargarFotoActual();
-                }
-                
-            } catch (IOException e) {
-                Utilidades.mostrarAlertaSimple("Error", 
-                    "Error al cargar la foto: " + e.getMessage(), Alert.AlertType.ERROR);
-                cargarFotoActual();
-            }
-        }
-    }
-    /*private void seleccionarFoto(){
         FileChooser dialogo = new FileChooser();
         dialogo.setTitle("Selecciona una foto");
         FileChooser.ExtensionFilter filtroImg = new FileChooser.ExtensionFilter("Archivos de imagenes", "*.jpg", "*.png");
@@ -411,26 +237,69 @@ public class FXMLFormularioEditarColaboradoresController implements Initializabl
         foto =dialogo.showOpenDialog(imgvFotoPerfil.getScene().getWindow());
         if (foto != null) {
             try {
+                byte[] fotoEnBytes = procesarImagenCuadrada(foto);
                 InputStream is = new FileInputStream (foto);
-                Image image = new Image(is, 0, 108, true, true);
+                Image image = new Image(is, 0, 100, true, true);
                 imgvFotoPerfil.setImage(image);
-                Circle clip = new Circle(imgvFotoPerfil.getImage().getWidth()/2, imgvFotoPerfil.getImage().getHeight()/2, 54);
+                Circle clip = new Circle(imgvFotoPerfil.getImage().getWidth()/2, 50, 50);
                 imgvFotoPerfil.setClip(clip);
                 boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Actualizar foto (Vista previa)", "¿Estas seguro de actualizar la foto del colaborador con la seleccionada?");
                 if(confirmarOperacion){
-                    //LLamado al metodo de guardar foto
+                    int idColaborador = colaboradorEdicion.getIdColaborador(); 
+                    Respuesta respuesta = ColaboradorImp.subirFotoColaborador(idColaborador, fotoEnBytes);
+                    if (!respuesta.isError()) {
+                        Utilidades.mostrarAlertaSimple(
+                            "Foto actualizada", 
+                            respuesta.getMensaje(), 
+                            Alert.AlertType.INFORMATION
+                        );
+                    } else {
+                        Utilidades.mostrarAlertaSimple(
+                            "Error", 
+                            respuesta.getMensaje(), 
+                            Alert.AlertType.ERROR
+                        );
+                        cargarFotoActual();
+                    }
                 }else{
-                    is = getClass().getResourceAsStream("/recursos/circle-user-solid.png");
-                    image = new Image(is, 108, 108, true, true);
-                    imgvFotoPerfil.setImage(image); //Cambiar a metodo de obtener foto colaborador
-                    imgvFotoPerfil.setClip(null);
+                    cargarFotoActual();
                     seleccionarFoto();
                 }
             } catch (IOException e) {
                 Utilidades.mostrarAlertaSimple("Error", "Error al cargar la foto", Alert.AlertType.ERROR);
             }
         }
-    }*/
+    }
+    
+    private byte[] procesarImagenCuadrada(File archivoFoto) throws IOException {
+        BufferedImage imagenOriginal = ImageIO.read(archivoFoto);
+
+        int ancho = imagenOriginal.getWidth();
+        int alto = imagenOriginal.getHeight();
+        int lado = Math.min(ancho, alto);
+
+        int x = (ancho - lado) / 2;
+        int y = (alto - lado) / 2;
+
+        BufferedImage imagenRecortada = imagenOriginal.getSubimage(x, y, lado, lado);
+        
+        int tamañoObjetivo = 500;
+        BufferedImage imagenFinal = new BufferedImage(tamañoObjetivo, tamañoObjetivo, BufferedImage.TYPE_INT_RGB);
+
+        Graphics2D g2d = imagenFinal.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        g2d.drawImage(imagenRecortada, 0, 0, tamañoObjetivo, tamañoObjetivo, null);
+        g2d.dispose();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        String extension = archivoFoto.getName().substring(archivoFoto.getName().lastIndexOf(".") + 1);
+        ImageIO.write(imagenFinal, extension, baos);
+
+        return baos.toByteArray();
+    }
     
     @FXML
     private void btnRegresar(ActionEvent event) {

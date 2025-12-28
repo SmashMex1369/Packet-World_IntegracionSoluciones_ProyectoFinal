@@ -73,19 +73,17 @@ public class FXMLInicioSesionController implements Initializable {
         if(!respuesta.isError()){
             Utilidades.mostrarAlertaSimple("Credenciales correctas", "Bienvenido(a) colaborador(a) "+respuesta.getColaborador().getNombre()+" al sistema", Alert.AlertType.INFORMATION);
             Sesion.iniciarSesion(respuesta.getColaborador());
-            irMenuPrincipal(Sesion.getColaborador());
+            irMenuPrincipal();
         }else{
             System.out.println("error VC");
            Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }           
     }
     
-    private void irMenuPrincipal(Colaborador colaborador){
+    private void irMenuPrincipal(){
         try {
             FXMLLoader cargador= new FXMLLoader(getClass().getResource("FXMLMenuPrincipal.fxml"));
             Parent vista= cargador.load();
-            FXMLMenuPrincipalController controlador= cargador.getController();
-            controlador.cargarInformacion(colaborador);
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tfNoPersonal.getScene().getWindow();
             escenario.setScene(escena);

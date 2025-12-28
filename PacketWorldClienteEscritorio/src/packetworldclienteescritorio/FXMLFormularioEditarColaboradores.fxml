@@ -232,12 +232,12 @@
                <children>
                   <StackPane>
                      <children>
-                        <ImageView fx:id="imgvFotoPerfil" fitHeight="108.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                        <ImageView fx:id="imgvFotoPerfil" fitHeight="100.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                            <image>
                               <Image url="@../recursos/circle-user-solid.png" />
                            </image>
                         </ImageView>
-                        <Circle fx:id="circulo" blendMode="SRC_ATOP" fill="#1f93ff00" radius="54.0" stroke="#02354a" strokeType="INSIDE" strokeWidth="4.0" StackPane.alignment="CENTER" />
+                        <Circle fx:id="circulo" blendMode="SRC_ATOP" fill="#1f93ff00" radius="54.0" stroke="#02354a" strokeType="OUTSIDE" strokeWidth="5.0" StackPane.alignment="CENTER" />
                      </children>
                   </StackPane>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnSeleccionarImagen" prefHeight="52.0" prefWidth="95.0" text="Seleccionar Imagen" textAlignment="CENTER" wrapText="true">

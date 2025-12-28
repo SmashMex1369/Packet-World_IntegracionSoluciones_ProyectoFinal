@@ -165,8 +165,28 @@
             </StackPane>
          </children>
       </GridPane>
-      <AnchorPane layoutX="584.0" layoutY="-25.0" prefHeight="82.0" prefWidth="200.0" style="-fx-background-color: #a4147b;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="584.0" layoutY="-25.0" prefHeight="82.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <Label fx:id="lbSaludo" layoutX="100.0" layoutY="7.0" text="Bienvenido(a)" textFill="#e1e1e1">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbTipoRol" layoutX="100.0" layoutY="41.0" prefHeight="27.0" prefWidth="200.0" text="Rol:" textFill="#e1e1e1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <StackPane layoutX="14.0" layoutY="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fx:id="ivFoto" disable="true" fitHeight="64.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../recursos/circle-user-solid.png" />
+                     </image>
+                  </ImageView>
+                  <Circle fill="#1f93ff00" radius="35.0" stroke="#02354a" strokeType="OUTSIDE" strokeWidth="4.0" StackPane.alignment="CENTER" />
+               </children>
+            </StackPane>
             <StackPane prefHeight="50.0" prefWidth="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnRegresar" prefHeight="61.0" prefWidth="72.0" style="-fx-background-color: #00000000;">
@@ -179,21 +199,6 @@
                      </graphic></Button>
                </children>
             </StackPane>
-            <Label fx:id="lbSaludo" layoutX="100.0" layoutY="7.0" text="Bienvenido(a)">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="ivFoto" disable="true" fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="6.0">
-               <image>
-                  <Image url="@../recursos/circle-user-solid.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="lbTipoRol" layoutX="100.0" layoutY="41.0" prefHeight="27.0" prefWidth="200.0" text="Rol:">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
          </children>
       </AnchorPane>
    </children>
