@@ -52,7 +52,6 @@
         android:src="@drawable/baseline_account_circle_24"
         app:civ_border_width="10dp"
         app:civ_border_color="@color/azulOscuro"
-        app:civ_border_overlay="true"
         app:layout_constraintBottom_toTopOf="@id/ll_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -190,7 +189,7 @@
                 android:text="No. de Personal:"
                 android:textSize="24sp" />
             <TextView
-                android:id="@+id/tv__valor"
+                android:id="@+id/tv_no_personal_valor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="[No. de Personal]"

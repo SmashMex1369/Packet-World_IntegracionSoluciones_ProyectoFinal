@@ -46,14 +46,15 @@
         app:layout_constraintEnd_toStartOf="@id/tv_nombre_app"
         app:layout_constraintTop_toTopOf="@id/v_header"
         app:layout_constraintBottom_toBottomOf="@id/v_header"/>
-    <com.google.android.material.imageview.ShapeableImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgbtn_perfil"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:focusable="true"
-        android:padding="5dp"
-        android:tint="@color/grisFondo"
+        android:padding="4dp"
         android:clickable="true"
+        app:civ_border_width="4dp"
+        app:civ_border_color="@color/azulOscuro"
         android:src="@drawable/baseline_account_circle_24"
         app:shapeAppearanceOverlay="@style/circleImageView"
         app:layout_constraintStart_toEndOf="@id/tv_nombre_app"

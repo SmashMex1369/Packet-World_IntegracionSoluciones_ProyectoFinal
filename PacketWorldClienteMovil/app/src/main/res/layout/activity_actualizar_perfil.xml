@@ -13,9 +13,7 @@
         android:layout_height="60dp"
         android:background="@color/rojoOscuro"
         app:layout_constraintBottom_toBottomOf="@id/tv_actualizar_perfil"
-        app:layout_constraintBottom_toTopOf="@id/imgv_perfil"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/tv_actualizar_perfil"
         android:layout_width="match_parent"
@@ -47,13 +45,12 @@
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:src="@drawable/baseline_account_circle_24"
-        app:layout_constraintTop_toBottomOf="@id/v_header"
+        app:civ_border_color="@color/azulOscuro"
+        app:civ_border_width="10dp"
+        app:layout_constraintEnd_toStartOf="@id/btn_seleccionar_imagen"
         app:layout_constraintBottom_toTopOf="@id/til_nombre"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_seleccionar_imagen"
-        app:civ_border_overlay="true"
-        app:civ_border_width="10dp"
-        app:civ_border_color="@color/azulOscuro"/>
+        app:layout_constraintTop_toBottomOf="@id/v_header"/>
     <Button
         android:id="@+id/btn_seleccionar_imagen"
         android:layout_width="wrap_content"
@@ -70,21 +67,24 @@
         app:layout_constraintEnd_toEndOf="parent"/>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_nombre"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/azul"
         android:hint="Nombre"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/azul"
+        app:boxStrokeColor="@color/color_linea_input"
+        app:boxStrokeErrorColor="@color/rojoClaro"
+        app:errorTextColor="@color/rojoClaro"
+        app:errorIconTint="@color/rojo"
         app:boxStrokeWidth="2dp"
         app:boxStrokeWidthFocused="4dp"
-        app:boxStrokeColor="@color/color_linea_input"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/EstiloTextoFlotante"
         app:hintTextColor="@color/azulOscuro"
-        app:boxStrokeErrorColor="@color/rojoClaro"
-        app:layout_constraintTop_toBottomOf="@id/imgv_perfil"
-        app:layout_constraintStart_toStartOf="@id/gl_inicio"
-        app:layout_constraintEnd_toEndOf="@id/gl_fin"
         app:layout_constraintBottom_toTopOf="@id/til_apellido_paterno"
-        app:hintTextAppearance="@style/EstiloTextoFlotante">
+        app:layout_constraintEnd_toEndOf="@id/gl_fin"
+        app:layout_constraintStart_toStartOf="@id/gl_inicio"
+        app:layout_constraintTop_toBottomOf="@id/v_superior">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_nombre"
             android:layout_width="match_parent"
@@ -99,7 +99,11 @@
         android:layout_height="wrap_content"
         android:textColorHint="@color/azul"
         android:hint="Apellido Paterno"
+        app:errorEnabled="true"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        app:errorTextColor="@color/rojoClaro"
+        app:boxStrokeErrorColor="@color/rojoClaro"
+        app:errorIconTint="@color/rojo"
         app:boxStrokeWidth="2dp"
         app:boxStrokeWidthFocused="4dp"
         app:boxStrokeColor="@color/color_linea_input"
@@ -124,6 +128,7 @@
         android:textColorHint="@color/azul"
         android:hint="Apellido Materno"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        app:errorEnabled="true"
         app:boxStrokeWidth="2dp"
         app:boxStrokeWidthFocused="4dp"
         app:boxStrokeColor="@color/color_linea_input"
@@ -148,10 +153,14 @@
         android:textColorHint="@color/azul"
         android:hint="CURP"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        app:errorEnabled="true"
         app:boxStrokeWidth="2dp"
         app:boxStrokeWidthFocused="4dp"
         app:boxStrokeColor="@color/color_linea_input"
         app:hintTextColor="@color/azulOscuro"
+        app:boxStrokeErrorColor="@color/rojoClaro"
+        app:errorTextColor="@color/rojoClaro"
+        app:errorIconTint="@color/rojo"
         app:layout_constraintStart_toStartOf="@id/gl_inicio"
         app:layout_constraintEnd_toEndOf="@id/gl_fin"
         app:layout_constraintTop_toBottomOf="@id/til_apellido_materno"
@@ -161,7 +170,7 @@
             android:id="@+id/et_curp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
+            android:inputType="textCapCharacters"
             android:textColor="@color/grisOscuro"
             android:textSize="24sp"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -172,6 +181,10 @@
         android:textColorHint="@color/azul"
         android:hint="Correo Electrónico"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        app:boxStrokeErrorColor="@color/rojoClaro"
+        app:errorTextColor="@color/rojoClaro"
+        app:errorIconTint="@color/rojo"
+        app:errorEnabled="true"
         app:boxStrokeWidth="2dp"
         app:boxStrokeWidthFocused="4dp"
         app:boxStrokeColor="@color/color_linea_input"
@@ -185,7 +198,7 @@
             android:id="@+id/et_correo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:textColor="@color/grisOscuro"
             android:textSize="24sp"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -196,44 +209,22 @@
         android:textColorHint="@color/azul"
         android:hint="Contraseña"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        app:passwordToggleTint="@color/azulOscuro"
         app:boxStrokeWidth="2dp"
+        app:passwordToggleEnabled="true"
         app:boxStrokeWidthFocused="4dp"
         app:boxStrokeColor="@color/color_linea_input"
         app:hintTextColor="@color/azulOscuro"
         app:layout_constraintStart_toStartOf="@id/gl_inicio"
         app:layout_constraintEnd_toEndOf="@id/gl_fin"
         app:layout_constraintTop_toBottomOf="@id/til_correo"
-        app:layout_constraintBottom_toTopOf="@id/til_no_licencia"
+        app:layout_constraintBottom_toTopOf="@id/v_inferior"
         app:hintTextAppearance="@style/EstiloTextoFlotante">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_contraseña"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
-            android:textColor="@color/grisOscuro"
-            android:textSize="24sp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_no_licencia"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/azul"
-        android:hint="No. de Licencia"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        app:boxStrokeWidth="2dp"
-        app:boxStrokeWidthFocused="4dp"
-        app:boxStrokeColor="@color/color_linea_input"
-        app:hintTextColor="@color/azulOscuro"
-        app:layout_constraintStart_toStartOf="@id/gl_inicio"
-        app:layout_constraintEnd_toEndOf="@id/gl_fin"
-        app:layout_constraintTop_toBottomOf="@id/til_contraseña"
-        app:layout_constraintBottom_toTopOf="@id/btn_guardar"
-        app:hintTextAppearance="@style/EstiloTextoFlotante">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_no_licencia"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:textColor="@color/grisOscuro"
             android:textSize="24sp"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -242,15 +233,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Guardar"
-        app:layout_constraintTop_toBottomOf="@id/til_no_licencia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_contraseña"
         android:textSize="24sp"
-        android:layout_marginBottom="16dp"
         android:textStyle="bold"
         android:textColor="@color/grisFondo"
         android:backgroundTint="@color/azul"
         android:paddingHorizontal="50dp"
         android:paddingVertical="18dp"/>
+    <View
+        android:id="@+id/v_superior"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        app:layout_constraintBottom_toTopOf="@id/til_nombre"
+        app:layout_constraintTop_toBottomOf="@id/imgv_perfil"
+        app:layout_constraintVertical_chainStyle="packed" />
+    <View
+        android:id="@+id/v_inferior"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_guardar"
+        app:layout_constraintTop_toBottomOf="@id/til_contraseña"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

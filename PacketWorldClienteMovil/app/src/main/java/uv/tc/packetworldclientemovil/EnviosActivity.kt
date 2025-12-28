@@ -2,6 +2,7 @@ package uv.tc.packetworldclientemovil
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -26,7 +27,9 @@ import uv.tc.packetworldclientemovil.utilidades.ajustarAInsets
 class EnviosActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnviosBinding
     private lateinit var conductor: Conductor
-    val gson = Gson()
+    private val gson = Gson()
+
+    private lateinit var prefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +41,11 @@ class EnviosActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.rojoOscuro)
         window.navigationBarColor = ContextCompat.getColor(this, R.color.azulOscuro)
 
+        prefs = getSharedPreferences("DatosConductor", MODE_PRIVATE)
         val respuestaLogin: RSAutenticacionConductor = gson.fromJson(
             intent.getStringExtra("conductor"), RSAutenticacionConductor::class.java)
         conductor = respuestaLogin.conductor!!
+        prefs.edit().putString("conductor", gson.toJson(conductor)).apply()
 
         binding.srlRecargar.setOnRefreshListener {
             recargarEnvios()
@@ -54,7 +59,7 @@ class EnviosActivity : AppCompatActivity() {
                 .setMessage("¿Desea cerrar la sesion actual?\nDebera volver a iniciar sesión")
                 .setCancelable(false)
                 .setPositiveButton("Si"){_, _ ->
-                    val preferencias = getSharedPreferences("Sesion", Context.MODE_PRIVATE)
+                    val preferencias = getSharedPreferences("Sesion", MODE_PRIVATE)
                     preferencias.edit {
                         clear()
                         apply()
@@ -70,12 +75,17 @@ class EnviosActivity : AppCompatActivity() {
         }
 
         binding.imgbtnPerfil.setOnClickListener {
-            val jsonConductor : String? = intent.getStringExtra("conductor")
+            val jsonConductor = gson.toJson(conductor)
             val intent= Intent(this, PerfilActivity::class.java)
             intent.putExtra("conductor", jsonConductor)
             startActivity(intent)
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        conductor = gson.fromJson(prefs.getString("conductor", null), Conductor::class.java)
     }
 
     private fun recargarEnvios(){
@@ -129,6 +139,4 @@ class EnviosActivity : AppCompatActivity() {
         binding.rvEnvios.adapter =adapter
         binding.srlRecargar.isRefreshing = false
     }
-
-
 }

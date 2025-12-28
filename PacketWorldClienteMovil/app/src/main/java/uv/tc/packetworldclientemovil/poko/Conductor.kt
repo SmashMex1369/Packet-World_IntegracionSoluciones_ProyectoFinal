@@ -8,7 +8,7 @@ data class Conductor(
     var apellidoMaterno: String?,
     var CURP: String,
     var correo: String,
-    var contraseña: String,
+    var contraseña: String?,
     var estatus: Int,
     var idSucursal: Int,
     var CUS: String,
