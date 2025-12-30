@@ -23,6 +23,7 @@ import uv.tc.packetworldclientemovil.poko.Conductor
 import uv.tc.packetworldclientemovil.poko.Envio
 import uv.tc.packetworldclientemovil.utilidades.Constantes
 import uv.tc.packetworldclientemovil.utilidades.ajustarAInsets
+import uv.tc.packetworldclientemovil.utilidades.descargarFoto
 
 class EnviosActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnviosBinding
@@ -45,6 +46,7 @@ class EnviosActivity : AppCompatActivity() {
         val respuestaLogin: RSAutenticacionConductor = gson.fromJson(
             intent.getStringExtra("conductor"), RSAutenticacionConductor::class.java)
         conductor = respuestaLogin.conductor!!
+        descargarFoto(conductor.idColaborador, this@EnviosActivity, binding.imgbtnPerfil)
         prefs.edit().putString("conductor", gson.toJson(conductor)).apply()
 
         binding.srlRecargar.setOnRefreshListener {
@@ -86,6 +88,7 @@ class EnviosActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         conductor = gson.fromJson(prefs.getString("conductor", null), Conductor::class.java)
+        descargarFoto(conductor.idColaborador, this@EnviosActivity, binding.imgbtnPerfil)
     }
 
     private fun recargarEnvios(){
