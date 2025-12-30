@@ -19,12 +19,15 @@ import com.koushikdutta.ion.Ion
 import uv.tc.packetworldclientemovil.databinding.ActivityLoginBinding
 import uv.tc.packetworldclientemovil.dto.RSAutenticacionConductor
 import uv.tc.packetworldclientemovil.utilidades.Constantes
+import uv.tc.packetworldclientemovil.utilidades.DialogoCarga
 import uv.tc.packetworldclientemovil.utilidades.ajustarAInsets
 
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+
+    private val loading = DialogoCarga(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnIngresar.setOnClickListener {
             if (sonCamposValidos()) {
                 deshabilitarCampos()
+                loading.startLoading("Validando usuario,\npor favor espere ...")
                 consumirAPI(binding.etNoPersonal.text.toString(), binding.etContraseA.text.toString())
             }else{
                 Toast.makeText(this, "Campos faltante, favor de completarlos", Toast.LENGTH_SHORT).show()
@@ -84,6 +88,7 @@ class LoginActivity : AppCompatActivity() {
                 if (e == null) {
                     serealizarRespuesta(result)
                 }else{
+                    loading.stopLoading()
                     habilitarCampos()
                     Log.e("Error", "Inicio sesion: "+e.toString())
                     Toast.makeText(this@LoginActivity, "Error: $e", Toast.LENGTH_LONG).show()
@@ -111,10 +116,12 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }else{
+                loading.stopLoading()
                 habilitarCampos()
                 Toast.makeText(this@LoginActivity, "Usuario no valido, favor de verificar las credenciales", Toast.LENGTH_LONG).show()
             }
         }catch (e: Exception) {
+            loading.stopLoading()
             habilitarCampos()
             Toast.makeText(
                 this@LoginActivity,
@@ -140,6 +147,7 @@ class LoginActivity : AppCompatActivity() {
             binding.etContraseA.setText(preferencias.getString("contraseña",""))
             binding.cbMantenerSesion.isChecked = true
             deshabilitarCampos()
+            loading.startLoading("Validando usuario,\npor favor espere ...")
             consumirAPI(preferencias.getString("noPersonal",""),preferencias.getString("contraseña",""))
         }else{
             binding.cbMantenerSesion.isChecked = false

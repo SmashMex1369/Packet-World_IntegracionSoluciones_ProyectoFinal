@@ -16,6 +16,7 @@ import uv.tc.packetworldclientemovil.databinding.ActivityPerfilBinding
 import uv.tc.packetworldclientemovil.dto.RSAutenticacionConductor
 import uv.tc.packetworldclientemovil.poko.Conductor
 import uv.tc.packetworldclientemovil.utilidades.ajustarAInsets
+import uv.tc.packetworldclientemovil.utilidades.descargarFoto
 
 class PerfilActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPerfilBinding
@@ -34,6 +35,7 @@ class PerfilActivity : AppCompatActivity() {
         window.navigationBarColor = ContextCompat.getColor(this, R.color.azulOscuro)
 
         cargarDatosConductor(intent.getStringExtra("conductor"))
+        descargarFoto(conductor.idColaborador, this@PerfilActivity, binding.imgvPerfil)
 
         binding.imgbtnEditar.setOnClickListener {
             val intent = Intent(this, ActualizarPerfilActivity::class.java)
@@ -46,6 +48,7 @@ class PerfilActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         recargarDatos()
+        descargarFoto(conductor.idColaborador, this@PerfilActivity, binding.imgvPerfil)
     }
 
     private fun recargarDatos(){
