@@ -184,7 +184,7 @@
                         <Image url="@../recursos/circle-user-solid.png" />
                      </image>
                   </ImageView>
-                  <Circle fill="#1f93ff00" radius="35.0" stroke="#02354a" strokeType="OUTSIDE" strokeWidth="4.0" StackPane.alignment="CENTER" />
+                  <Circle fill="#1f93ff00" radius="35.0" stroke="#13a9e4" strokeType="OUTSIDE" strokeWidth="4.0" StackPane.alignment="CENTER" />
                </children>
             </StackPane>
             <StackPane prefHeight="50.0" prefWidth="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">

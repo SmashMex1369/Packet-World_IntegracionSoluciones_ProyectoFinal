@@ -110,16 +110,31 @@ public class FXMLAdministracionSucursalesController implements Initializable, IN
 
     @FXML
     private void clicBajaSucursal(ActionEvent event) {
-        Sucursal sucursal = tvSucursales.getSelectionModel().getSelectedItem();
-        if(sucursal != null){
-            boolean confirmarOperacion= Utilidades.mostrarAlertaConfirmacion("Dar de baja sucursal", "¿Estás seguro de dar de baja a la sucursal seleccionada?");
+    Sucursal sucursal = tvSucursales.getSelectionModel().getSelectedItem();    
+    if(sucursal != null){
+
+        if(sucursal.getEstatus() == 0){
+            Utilidades.mostrarAlertaSimple(
+                "Sucursal ya inactiva", 
+                "La sucursal seleccionada ya se encuentra inactiva. No es posible dar de baja nuevamente.", 
+                Alert.AlertType.WARNING);
+        } else {
+
+            boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion(
+                "Dar de baja sucursal", 
+                "¿Estás seguro de dar de baja a la sucursal seleccionada?");
             if(confirmarOperacion){
                 bajaSucursal(sucursal.getIdSucursal());
             }
-        }else{
-            Utilidades.mostrarAlertaSimple("Seleccione una sucursal", "Para dar de baja una sucursal debes seleccionar una de la tabla", Alert.AlertType.WARNING);
         }
+    } else {
+        Utilidades.mostrarAlertaSimple(
+            "Seleccione una sucursal", 
+            "Para dar de baja una sucursal debes seleccionar una de la tabla", 
+            Alert.AlertType.WARNING
+        );
     }
+}
     
     private void bajaSucursal(int idSucursal){
         Respuesta respuesta= SucursalImp.darBajaSucursal(idSucursal);

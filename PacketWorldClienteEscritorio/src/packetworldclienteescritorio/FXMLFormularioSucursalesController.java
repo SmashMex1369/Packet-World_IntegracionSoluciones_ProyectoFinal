@@ -94,9 +94,68 @@ public class FXMLFormularioSucursalesController implements Initializable {
         }
     }
     
-    // FALTA AGREGAR LAS VALIDACIONES
+    //VALIDACIONES de campos faltantes
     private boolean sonCamposValidos(){
         boolean camposValidos = true;
+        if(tfCodigoUnico.getText()==null || tfCodigoUnico.getText().isEmpty()){
+            camposValidos = false;
+            tfCodigoUnico.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+        }
+        if(tfNombreCorto.getText()==null || tfNombreCorto.getText().isEmpty()){
+            camposValidos = false;
+            tfNombreCorto.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+        }
+        if(tfNombreCorto.getText()==null || tfNombreCorto.getText().isEmpty()){
+            camposValidos = false;
+            tfNombreCorto.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+        }
+        if(tfCodigoPostal.getText()!=null || !tfCodigoPostal.getText().isEmpty()){
+            try {
+                if(Integer.parseInt(tfCodigoPostal.getText())<1000 || Integer.parseInt(tfCodigoPostal.getText())>99999 ){
+                    camposValidos=false;
+                    tfCodigoPostal.setStyle("-fx-border-color: #ff0000; -fx-border-insets: -1");
+                }
+            } catch (NumberFormatException e) {
+                camposValidos=false;
+                tfCodigoPostal.setStyle("-fx-border-color: #ff0000; -fx-border-insets: -1");
+            }
+        }else{
+            camposValidos=false;
+            tfCodigoPostal.setStyle("-fx-border-color: #ff0000; -fx-border-insets: -1");
+        }
+        if(cbEstado.getSelectionModel().getSelectedIndex()== -1){
+            camposValidos=false;
+            cbEstado.setStyle("-fx-border-color: #bf0b0b; -fx-font-size: 21; -fx-border-insets: -1");
+        }
+        if(cbCiudad.getSelectionModel().getSelectedIndex()== -1){
+            camposValidos=false;
+            cbCiudad.setStyle("-fx-border-color: #bf0b0b; -fx-font-size: 21; -fx-border-insets: -1");
+        }
+        if(cbColonia.getSelectionModel().getSelectedIndex()== -1){
+            camposValidos=false;
+            cbColonia.setStyle("-fx-border-color: #bf0b0b; -fx-font-size: 21; -fx-border-insets: -1");
+        }
+        if(tfCalle.getText()==null || tfCalle.getText().isEmpty()){
+            camposValidos = false;
+            tfCalle.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+        }
+        if (tfNumeroExterior.getText()!=null || !tfNumeroExterior.getText().isEmpty()){
+            try {
+                if(Integer.parseInt(tfNumeroExterior.getText())<=0){
+                    camposValidos=false;
+                    tfNumeroExterior.setStyle("-fx-border-color: #ff0000; -fx-border-insets: -1");
+                }
+            } catch (NumberFormatException e) {
+                camposValidos=false;
+                tfNumeroExterior.setStyle("-fx-border-color: #ff0000; -fx-border-insets: -1");
+            }
+        }else{
+            camposValidos=false;
+            tfNumeroExterior.setStyle("-fx-border-color: #ff0000; -fx-border-insets: -1");
+        }
+        if(!camposValidos){
+            Utilidades.mostrarAlertaSimple("Campos incorrectos", "Hay datos faltantes o no tienen el formato adecuado.", Alert.AlertType.ERROR);
+        }
         return camposValidos;
     }
     
