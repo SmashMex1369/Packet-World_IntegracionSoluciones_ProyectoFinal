@@ -268,6 +268,7 @@ CREATE TABLE IF NOT EXISTS `envio` (
   `idSucursal` INT NOT NULL,
   `idConductor` INT NULL,
   `idColonia` INT NOT NULL,
+  `costo` DECIMAL (7,2),
   PRIMARY KEY (`idEnvio`),
   UNIQUE INDEX `noGuia_UNIQUE` (`noGuia` ASC) VISIBLE,
   CONSTRAINT `fk_envio_idCliente`
@@ -146810,4 +146811,3 @@ INSERT INTO `estatusEnvio` (`idEstatusEnvio`, `estatus`) VALUES (5, 'Entregado')
 INSERT INTO `estatusEnvio` (`idEstatusEnvio`, `estatus`) VALUES (6, 'Cancelado');
 
 COMMIT;
-

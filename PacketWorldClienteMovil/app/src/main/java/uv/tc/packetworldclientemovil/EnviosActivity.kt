@@ -135,7 +135,9 @@ class EnviosActivity : AppCompatActivity() {
         binding.rvEnvios.layoutManager = LinearLayoutManager(this@EnviosActivity)
         val adapter = EnviosAdapter(envios) { envioSeleccionado ->
             val jsonEnvio = gson.toJson(envioSeleccionado)
+            envioSeleccionado.idColaborador= conductor.idColaborador
             val intent = Intent(this@EnviosActivity, DetallesActivity::class.java)
+            intent.putExtra("idColaborador", conductor.idColaborador)
             intent.putExtra("envio", jsonEnvio)
             startActivity(intent)
         }

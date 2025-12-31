@@ -1,11 +1,12 @@
 package uv.tc.packetworldclientemovil.poko
 
 data class Envio(
-    val idEnvio: Int,
+    var idEnvio: Int,
     val noGuia: String,
-    val idEstatusEnvio: Int,
+    var idEstatusEnvio: Int,
     val estatus: String?,
-    val motivo: String,
+    var motivo: String,
+    var idColaborador: Int?,
 
     val nombreSucursal: String,
     val CUSSucursal: String,
