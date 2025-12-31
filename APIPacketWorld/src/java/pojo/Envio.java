@@ -14,6 +14,7 @@ public class Envio {
     private String apellidoMatDest;
     private Integer numDest;
     private String calleDest;
+    private Float costo;
     
     private Integer idCliente;
     private String nombreCliente;
@@ -66,7 +67,7 @@ public class Envio {
     public Envio() {
     }
 
-    public Envio(Integer idEnvio, String noGuia, String nombreDest, String apellidoPatDest, String apellidoMatDest, Integer numDest, String calleDest, Integer idCliente, String nombreCliente, String apellidoPatCliente, String apellidoMatCliente, String correoCliente, String telefonoCliente, Integer numeroCliente, String calleCliente, Integer idColoniaCliente, Integer codigoPostalCliente, String coloniaCliente, Integer idSucursal, String nombreSucursal, String CUSSucursal, Integer numeroSucursal, String calleSucursal, Integer idColoniaSucursal, Integer codigoPostalSucursal, String coloniaSucursal, String ciudadSucursal, String estadoSucursal, int idConductor, String noLicenciaConductor, String nombreConductor, String apellidoPatConductor, String apellidoMatConductor, Integer idColoniaDest, Integer codigoPostalDest, String coloniaDest, String ciudadDest, String estadoDest, Integer idHistorialEstatusEnvio, Integer idEstatusEnvio, String estatus, String motivo, String tiempo, Integer idColaborador, String nombreColaborador, String apellidoPatColaborador, String apellidoMatColaborador, List<Paquete> paquetes) {
+    public Envio(Integer idEnvio, String noGuia, String nombreDest, String apellidoPatDest, String apellidoMatDest, Integer numDest, String calleDest, Float costo, Integer idCliente, String nombreCliente, String apellidoPatCliente, String apellidoMatCliente, String correoCliente, String telefonoCliente, Integer numeroCliente, String calleCliente, Integer idColoniaCliente, Integer codigoPostalCliente, String coloniaCliente, Integer idSucursal, String nombreSucursal, String CUSSucursal, Integer numeroSucursal, String calleSucursal, Integer idColoniaSucursal, Integer codigoPostalSucursal, String coloniaSucursal, String ciudadSucursal, String estadoSucursal, int idConductor, String noLicenciaConductor, String nombreConductor, String apellidoPatConductor, String apellidoMatConductor, Integer idColoniaDest, Integer codigoPostalDest, String coloniaDest, String ciudadDest, String estadoDest, Integer idHistorialEstatusEnvio, Integer idEstatusEnvio, String estatus, String motivo, String tiempo, Integer idColaborador, String nombreColaborador, String apellidoPatColaborador, String apellidoMatColaborador, List<Paquete> paquetes) {
         this.idEnvio = idEnvio;
         this.noGuia = noGuia;
         this.nombreDest = nombreDest;
@@ -74,6 +75,7 @@ public class Envio {
         this.apellidoMatDest = apellidoMatDest;
         this.numDest = numDest;
         this.calleDest = calleDest;
+        this.costo = costo;
         this.idCliente = idCliente;
         this.nombreCliente = nombreCliente;
         this.apellidoPatCliente = apellidoPatCliente;
@@ -115,7 +117,7 @@ public class Envio {
         this.apellidoPatColaborador = apellidoPatColaborador;
         this.apellidoMatColaborador = apellidoMatColaborador;
         this.paquetes = paquetes;
-    }
+    }  
 
     public Integer getIdEnvio() {
         return idEnvio;
@@ -499,6 +501,14 @@ public class Envio {
 
     public void setPaquetes(List<Paquete> paquetes) {
         this.paquetes = paquetes;
+    }
+
+    public Float getCosto() {
+        return costo;
+    }
+
+    public void setCosto(Float costo) {
+        this.costo = costo;
     }
     
 }

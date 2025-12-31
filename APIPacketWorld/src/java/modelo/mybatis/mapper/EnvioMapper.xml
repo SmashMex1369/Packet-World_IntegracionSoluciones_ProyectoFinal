@@ -23,7 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             e.apellidoPatDest, 
             e.apellidoMatDest, 
             e.numDest, 
-            e.calleDest, 
+            e.calleDest,
+            e.costo,
             c.idColonia AS idColoniaDest,
             c.codigoPostal AS codigoPostalDest,
             c.colonia AS coloniaDest,
@@ -84,8 +85,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <insert id="crear-envio" parameterType="pojo.Envio" useGeneratedKeys="true" keyProperty="idEnvio">
-        INSERT INTO envio (noGuia, nombreDest, apellidoPatDest, apellidoMatDest, numDest, calleDest, idCliente, idSucursal, idColonia)
-        VALUES(#{noGuia}, #{nombreDest}, #{apellidoPatDest}, #{apellidoMatDest}, #{numDest}, #{calleDest}, #{idCliente}, #{idSucursal}, #{idColoniaDest});
+        INSERT INTO envio (noGuia, nombreDest, apellidoPatDest, apellidoMatDest, numDest, calleDest, idCliente, idSucursal, idColonia, costo)
+        VALUES(#{noGuia}, #{nombreDest}, #{apellidoPatDest}, #{apellidoMatDest}, #{numDest}, #{calleDest}, #{idCliente}, #{idSucursal}, #{idColoniaDest}, #{costo});
     </insert>
     
     <insert id="crear-estatus" parameterType="pojo.Envio">
@@ -103,6 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         idCliente = #{idCliente},
         idSucursal = #{idSucursal},
         idColonia = #{idColoniaDest}
+        costo = #{costo}
         WHERE idEnvio = #{idEnvio}
     </update>
     
@@ -130,6 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             e.apellidoMatDest, 
             e.numDest, 
             e.calleDest, 
+            e.costo,
             c.idColonia AS idColoniaDest,
             c.codigoPostal AS codigoPostalDest,
             c.colonia AS coloniaDest,
