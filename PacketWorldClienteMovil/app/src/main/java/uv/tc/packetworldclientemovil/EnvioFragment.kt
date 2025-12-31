@@ -1,5 +1,6 @@
 package uv.tc.packetworldclientemovil
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
+import com.google.gson.Gson
 import uv.tc.packetworldclientemovil.databinding.FragmentEnvioBinding
+import uv.tc.packetworldclientemovil.poko.Envio
 import uv.tc.packetworldclientemovil.utilidades.EnvioViewModel
 
 class EnvioFragment : Fragment() {
@@ -22,6 +26,16 @@ class EnvioFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModelCompartido : EnvioViewModel by activityViewModels()
+    private val launcherEdicion = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()){ result ->
+        if (result.resultCode == RESULT_OK){
+            val envioSeleccionado = result.data?.getStringExtra("estatusEnvioActualizado")
+            if (envioSeleccionado != null){
+                val gson = Gson()
+                viewModelCompartido.envioSeleccionado= gson.fromJson(envioSeleccionado, Envio::class.java)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +67,11 @@ class EnvioFragment : Fragment() {
 
         binding.btnActualizarEstatus.setOnClickListener {
             val intent= Intent(requireContext(), ActualizarEstatusActivity::class.java)
-            intent.putExtra("idEnvio", envio?.idEnvio ?: 0)
-            startActivity(intent)
+            val gson = Gson()
+            val idColaborador = requireActivity().intent.getIntExtra("idColaborador", 0)
+            intent.putExtra("envio", gson.toJson(viewModelCompartido.envioSeleccionado))
+            intent.putExtra("idColaborador", idColaborador)
+            launcherEdicion.launch(intent)
         }
     }
 
