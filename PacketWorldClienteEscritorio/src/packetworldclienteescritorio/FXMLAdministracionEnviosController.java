@@ -56,6 +56,10 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
     private ObservableList<Envio> envios;
     @FXML
     private AnchorPane apFondo;
+    @FXML
+    private TableColumn colNoPaquetes;
+    @FXML
+    private TableColumn colCosto;
 
     /**
      * Initializes the controller class.
