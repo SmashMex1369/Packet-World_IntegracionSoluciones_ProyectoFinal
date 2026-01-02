@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.UnidadImp;
 import packetworldclienteescritorio.dto.Respuesta;
@@ -74,12 +75,11 @@ public class FXMLBajaUnidadController implements Initializable {
             unidad.setIdUnidad(unidadEdicion.getIdUnidad());
             unidad.setMotivo(taMotivo.getText());
             unidad.setIdColaborador(c.getIdColaborador());   
-            darBaja(unidad); 
+            UnidadImp.desasignarConductor(unidadEdicion.getIdUnidad());
+            darBaja(unidad);
         }else{
-            //alerta
             taMotivo.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
             Utilidades.mostrarAlertaSimple("Escriba un motivo", "Para dar de baja una unidad es obligatorio escribir un motivo.", Alert.AlertType.ERROR);
-            //FALTA LIMPIAR EL CUADRO
         }
         
         
@@ -88,14 +88,17 @@ public class FXMLBajaUnidadController implements Initializable {
     private void darBaja(Unidad unidad){
         Respuesta respuesta= UnidadImp.darBajaUnidad(unidad);
         if(!respuesta.isError()){
-            //alerta correcta
+            Utilidades.mostrarAlertaSimple("Baja completada", "La unidad se dio de baja correctamente", Alert.AlertType.INFORMATION);
             observador.notificarOperacionExitosa("Baja", unidadEdicion.getVIN());
             ((Stage)taMotivo.getScene().getWindow()).close();
-            
         }else{
-            //alerta incorrecta
+            Utilidades.mostrarAlertaSimple("Error al dar de baja", "Hubo un error al dar de baja la unidad", Alert.AlertType.ERROR);
             ((Stage)taMotivo.getScene().getWindow()).close();
         }
     }
-    
+
+    @FXML
+    private void tfMotivoTexto(KeyEvent event) {
+        taMotivo.setStyle(null);
+    }
 }

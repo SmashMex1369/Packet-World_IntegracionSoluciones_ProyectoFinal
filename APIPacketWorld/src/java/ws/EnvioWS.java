@@ -74,6 +74,20 @@ public class EnvioWS {
         }
     }
     
+    @Path("actualizar-costo")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Respuesta actualizarCosto(String json){
+        Gson gson = new Gson();
+        try {
+            Envio envio = gson.fromJson(json, Envio.class);
+            return  EnvioImp.actualizarCosto(envio);
+        } catch (Exception e) {
+            throw new BadRequestException();
+        }
+    }
+    
     @Path("buscar-envio/{noGuia}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

@@ -75,4 +75,10 @@ public class CatalogoWS {
     public List<EstatusEnvio> obtenerEstatusEnvio(){
         return CatalogoImp.obtenerEstatusEnvio();
     }
+    
+    @Path("obtener-codigo-postal-origen/{idSucursal}")
+    @GET
+    public Integer obtenerCodigoPostalOrigen(@PathParam ("idSucursal") Integer idSucursal){
+        return CatalogoImp.obtenerCodigoPostalOrigen(idSucursal);
+    }
 }

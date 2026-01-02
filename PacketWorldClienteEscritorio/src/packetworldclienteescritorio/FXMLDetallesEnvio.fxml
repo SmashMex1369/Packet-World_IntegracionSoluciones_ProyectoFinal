@@ -146,30 +146,41 @@
                   </Label>
                </children>
             </GridPane>
-            <GridPane hgap="20.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+            <GridPane hgap="15.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
                <children>
-                  <Label text="Estatus actual:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                  <Label text="Estatus actual:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label text="Fecha y hora del ultimo cambio:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                  <Label ellipsisString="" text="Fecha y hora del ultimo cambio:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                      <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font name="System Bold" size="23.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbEstatus" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Estatus Envio]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Label fx:id="lbEstatus" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Estatus Envio]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbTiempo" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Tiempo Envio]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Label fx:id="lbTiempo" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Tiempo Envio]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Costo total de envio:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbCosto" alignment="CENTER" ellipsisString="" maxWidth="1.7976931348623157E308" text="[Costo]" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
                </children>
                <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
                </columnConstraints>

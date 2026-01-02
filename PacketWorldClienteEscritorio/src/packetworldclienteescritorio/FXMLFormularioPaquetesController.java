@@ -23,9 +23,11 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.CatalogoImp;
+import packetworldclienteescritorio.dominio.EnvioImp;
 import packetworldclienteescritorio.dominio.PaqueteImp;
 import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.interfaz.INotificador;
+import packetworldclienteescritorio.pojo.Envio;
 import packetworldclienteescritorio.pojo.NoGuia;
 import packetworldclienteescritorio.pojo.Paquete;
 import packetworldclienteescritorio.utilidad.Constantes;
@@ -196,8 +198,23 @@ public class FXMLFormularioPaquetesController implements Initializable {
         Respuesta respuesta= PaqueteImp.registrar(paquete);
         if(!respuesta.isError()){
             Utilidades.mostrarAlertaSimple("Paquete registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
-            observador.notificarOperacionExitosa("registro", paquete.getDescripcion());
-            regresarVentana();
+            HashMap<String, Object> respuestaEnvio = null;
+            respuestaEnvio = EnvioImp.buscarEnvio(cbNoGuia.getSelectionModel().getSelectedItem().getNoGuia());
+            boolean esError = (boolean) respuestaEnvio.get(Constantes.KEY_ERROR);
+            if (!esError) {                
+                List<Envio> envioBusqueda = (List<Envio>) respuestaEnvio.get(Constantes.KEY_LISTA);
+                envioBusqueda.get(0).setCosto(Utilidades.calcularCosto(envioBusqueda.get(0), envioBusqueda.get(0).getCodigoPostalDest().toString()));
+                Respuesta respuestaCosto = EnvioImp.actualizarCosto(envioBusqueda.get(0));
+                if (!respuestaCosto.isError()) {
+                    Utilidades.mostrarAlertaSimple("Costo actualizado", respuestaCosto.getMensaje(), Alert.AlertType.INFORMATION);
+                    observador.notificarOperacionExitosa("registro", paquete.getDescripcion());
+                    regresarVentana();
+                }else{
+                    Utilidades.mostrarAlertaSimple("Problemas al actulizar costo", "Ocurrio un problema al actualizar el costo del envio, favor de actualizar el envio", Alert.AlertType.WARNING);
+                    observador.notificarOperacionExitosa("registro", paquete.getDescripcion());
+                    regresarVentana();
+                }
+            }
         }else{
             Utilidades.mostrarAlertaSimple("Error al registrar", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }    

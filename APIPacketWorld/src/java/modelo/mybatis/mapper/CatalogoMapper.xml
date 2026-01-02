@@ -57,4 +57,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT * FROM estatusenvio ORDER BY idEstatusEnvio;
     </select>
     
+    <select id="obtener-codigo-postal-origen" parameterType="int" resultType="int">
+        SELECT codigoPostal FROM colonia c
+        INNER JOIN sucursal s ON c.idColonia = s.idColonia
+        WHERE s.idSucursal = #{idSucursal};
+    </select>
+    
 </mapper>

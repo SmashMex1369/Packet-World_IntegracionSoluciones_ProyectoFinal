@@ -160,11 +160,11 @@ public class CatalogoImp {
         String URL= Constantes.URL_WS + "catalogo/obtener-sucursales-disponibles";
         RespuestaHTTP respuestaAPI= ConexionAPI.peticionGET(URL);
         if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
-        Gson gson= new Gson();
-        Type tipoLista= new TypeToken<List<CUS>>(){}.getType();
-        List<CUS> sucursales= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
-        respuesta.put(Constantes.KEY_ERROR, false);
-        respuesta.put(Constantes.KEY_LISTA, sucursales);
+            Gson gson= new Gson();
+            Type tipoLista= new TypeToken<List<CUS>>(){}.getType();
+            List<CUS> sucursales= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, sucursales);
         }else{
             respuesta.put(Constantes.KEY_ERROR, true);
             switch(respuestaAPI.getCodigo()){
@@ -186,11 +186,11 @@ public class CatalogoImp {
         String URL= Constantes.URL_WS + "catalogo/obtener-roles";
         RespuestaHTTP respuestaAPI= ConexionAPI.peticionGET(URL);
         if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
-        Gson gson= new Gson();
-        Type tipoLista= new TypeToken<List<Rol>>(){}.getType();
-        List<Rol> roles= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
-        respuesta.put(Constantes.KEY_ERROR, false);
-        respuesta.put(Constantes.KEY_LISTA, roles);
+            Gson gson= new Gson();
+            Type tipoLista= new TypeToken<List<Rol>>(){}.getType();
+            List<Rol> roles= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, roles);
         }else{
             respuesta.put(Constantes.KEY_ERROR, true);
             switch(respuestaAPI.getCodigo()){
@@ -205,6 +205,16 @@ public class CatalogoImp {
             }
         }
         return respuesta;
+    }
+    
+    public static Integer obtenerCodigoPostalOrigen(Integer idSucursal){
+        Integer codigoPostal = 0;
+        String URL = Constantes.URL_WS + "catalogo/obtener-codigo-postal-origen/" + idSucursal;
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+        if (respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK) {
+            codigoPostal = Integer.parseInt(respuestaAPI.getContenido());
+        }
+        return codigoPostal;
     }
     
 }

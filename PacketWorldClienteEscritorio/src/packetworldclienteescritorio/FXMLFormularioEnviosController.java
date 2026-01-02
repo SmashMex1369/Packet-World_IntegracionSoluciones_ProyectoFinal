@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.CatalogoImp;
 import packetworldclienteescritorio.dominio.EnvioImp;
 import packetworldclienteescritorio.dto.Respuesta;
+import packetworldclienteescritorio.dto.RespuestaCosto;
 import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Colaborador;
 import packetworldclienteescritorio.pojo.Direccion;
@@ -174,7 +175,11 @@ public class FXMLFormularioEnviosController implements Initializable{
             Envio envio = new Envio();
             envio.setNombreDest(tfNombreDestinatario.getText());
             envio.setApellidoPatDest(tfApellidoPaternoDestinatario.getText());
-            envio.setApellidoMatDest(tfApellidoMaternoDestinatario.getText());
+            if (tfApellidoMaternoDestinatario.getText().isEmpty()&&tfApellidoMaternoDestinatario.getText()==null) {
+                envio.setApellidoMatDest("");
+            }else{
+                envio.setApellidoMatDest(tfApellidoMaternoDestinatario.getText());
+            }
             envio.setNumDest(Integer.parseInt(tfNumeroDestinatario.getText()));
             envio.setCalleDest(tfCalleDestinatario.getText());
             NombreCliente idClienteSeleccionado = cbCliente.getSelectionModel().getSelectedItem();
@@ -184,6 +189,7 @@ public class FXMLFormularioEnviosController implements Initializable{
             envio.setIdColoniaDest(idColoniaSeleccionado.getIdColonia());
             envio.setIdColaborador(c.getIdColaborador());
             if (envioEdicion == null) {
+                envio.setCosto(Utilidades.calcularCosto(envio, tfCodigoPostalDestinatario.getText()));
                 String noGuia = generarNoGuia();
                 while(verificarNoGuia(noGuia)){
                     noGuia = generarNoGuia();
@@ -191,10 +197,13 @@ public class FXMLFormularioEnviosController implements Initializable{
                 envio.setNoGuia(noGuia);
                 crearEnvio(envio);
             }else{
+                envio.setPaquetes(envioEdicion.getPaquetes());
+                envio.setCosto(Utilidades.calcularCosto(envio, tfCodigoPostalDestinatario.getText()));
                 actualizarEnvio(envio);
             }
         }
     }
+    
 
     @FXML
     private void btnRegresar(ActionEvent event) {
@@ -215,25 +224,12 @@ public class FXMLFormularioEnviosController implements Initializable{
             camposValidos = false;
             tfApellidoPaternoDestinatario.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
-        if(tfApellidoMaternoDestinatario.getText()==null || tfApellidoMaternoDestinatario.getText().isEmpty()){
-            camposValidos = false;
-            tfApellidoMaternoDestinatario.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
-        }
-        if(tfApellidoMaternoDestinatario.getText()==null || tfApellidoMaternoDestinatario.getText().isEmpty()){
-            camposValidos = false;
-            tfApellidoMaternoDestinatario.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
-        }
-        if(tfCodigoPostalDestinatario.getText()!=null || !tfCodigoPostalDestinatario.getText().isEmpty()){
-            try {
-                if(Integer.parseInt(tfCodigoPostalDestinatario.getText())<1000 || Integer.parseInt(tfCodigoPostalDestinatario.getText())>99999 ){
-                    camposValidos=false;
-                    tfCodigoPostalDestinatario.setStyle("-fx-border-color: #ff0000; -fx-border-insets: -1");
-                }
-            } catch (NumberFormatException e) {
+        try {
+            if(Integer.parseInt(tfCodigoPostalDestinatario.getText())<1000 || Integer.parseInt(tfCodigoPostalDestinatario.getText())>99999 ){
                 camposValidos=false;
                 tfCodigoPostalDestinatario.setStyle("-fx-border-color: #ff0000; -fx-border-insets: -1");
             }
-        }else{
+        } catch (NumberFormatException e) {
             camposValidos=false;
             tfCodigoPostalDestinatario.setStyle("-fx-border-color: #ff0000; -fx-border-insets: -1");
         }
@@ -253,17 +249,12 @@ public class FXMLFormularioEnviosController implements Initializable{
             camposValidos = false;
             tfCalleDestinatario.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
-        if (tfNumeroDestinatario.getText()!=null || !tfNumeroDestinatario.getText().isEmpty()){
-            try {
-                if(Integer.parseInt(tfNumeroDestinatario.getText())<=0){
-                    camposValidos=false;
-                    tfNumeroDestinatario.setStyle("-fx-border-color: #ff0000; -fx-border-insets: -1");
-                }
-            } catch (NumberFormatException e) {
+        try {
+            if(Integer.parseInt(tfNumeroDestinatario.getText())<=0){
                 camposValidos=false;
                 tfNumeroDestinatario.setStyle("-fx-border-color: #ff0000; -fx-border-insets: -1");
             }
-        }else{
+        } catch (NumberFormatException e) {
             camposValidos=false;
             tfNumeroDestinatario.setStyle("-fx-border-color: #ff0000; -fx-border-insets: -1");
         }
@@ -294,7 +285,6 @@ public class FXMLFormularioEnviosController implements Initializable{
                 }
                 
             }
-            
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) cbColoniaDestinatario.getScene().getWindow();
             escenario.setScene(escena);
@@ -398,6 +388,7 @@ public class FXMLFormularioEnviosController implements Initializable{
         envio.setIdEnvio(envioEdicion.getIdEnvio());
         Respuesta respuesta = EnvioImp.actualizarEnvio(envio);
         if(!respuesta.isError()){
+            envioEdicion.setCosto(envio.getCosto());
             Utilidades.mostrarAlertaSimple("Envio editado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
             regresarVentana(true);
         }else{

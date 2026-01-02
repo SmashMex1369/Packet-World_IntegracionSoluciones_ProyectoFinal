@@ -9,6 +9,7 @@ import java.util.Base64;
 import java.util.Optional;
 import java.util.function.Function;
 import javafx.collections.ObservableList;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -16,10 +17,15 @@ import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javax.naming.Context;
 import packetworldclienteescritorio.FXMLFormularioEditarColaboradoresController;
 import packetworldclienteescritorio.FXMLMenuPrincipalController;
+import packetworldclienteescritorio.dominio.CatalogoImp;
+import packetworldclienteescritorio.dominio.EnvioImp;
+import packetworldclienteescritorio.dto.RespuestaCosto;
 import packetworldclienteescritorio.pojo.Direccion;
+import packetworldclienteescritorio.pojo.Envio;
 
 /**
  *
@@ -124,4 +130,103 @@ public class Utilidades {
         imagenPerfil.setClip(clip);
     }
     
+    public static Float calcularCosto(Envio envio, String codigoPostalDestinatario){
+        Float costo = 0f;
+        Integer codigoOrigen = CatalogoImp.obtenerCodigoPostalOrigen(envio.getIdSucursal());
+        Integer codigoDestinatario = Integer.parseInt(codigoPostalDestinatario);
+        String codigoPostalOrigen = "";
+        String codigoPostalDest = "";
+        if (codigoOrigen<10000) {
+            codigoPostalOrigen = "0"+ codigoOrigen;
+        }else{
+            codigoPostalOrigen = codigoOrigen.toString();
+        }
+        if (codigoDestinatario<10000) {
+            codigoPostalDest = "0"+ codigoDestinatario;
+        }else{
+            codigoPostalDest = codigoDestinatario.toString();
+        }
+        RespuestaCosto respuesta = EnvioImp.calcularDistancia(codigoPostalOrigen, codigoPostalDest);
+        if (!respuesta.isError()){
+            if (respuesta.getDistanciaKM()>0 && respuesta.getDistanciaKM()<201) {
+                costo = respuesta.getDistanciaKM()*4;
+            }else if(respuesta.getDistanciaKM()>=201&&respuesta.getDistanciaKM()<501){
+                costo = respuesta.getDistanciaKM()*3;
+            }else if(respuesta.getDistanciaKM()>=501&&respuesta.getDistanciaKM()<1001){
+                costo = respuesta.getDistanciaKM()*2;
+            }else if(respuesta.getDistanciaKM()>=1001&&respuesta.getDistanciaKM()<2001){
+                costo = respuesta.getDistanciaKM()*1;
+            }else if (respuesta.getDistanciaKM()>=2001) {
+                costo = respuesta.getDistanciaKM()*0.5f;
+            }else{
+                costo = 0f;
+            }
+        }else{
+            costo = 0f;
+        }
+        if (costo==0) {
+            Utilidades.mostrarAlertaSimple("Problemas al calcular", "Se detecto un problema al calcular la distancia, el costo por distancia sera gratuito.", Alert.AlertType.INFORMATION);
+        }else{
+            Utilidades.mostrarAlertaSimple("Costo por distancia", "El costo por distancia sera de $"+costo, Alert.AlertType.INFORMATION);
+        }
+        if (envio.getPaquetes()==null) {
+            return costo;
+        }
+        switch(envio.getPaquetes().size()){
+            case 0:
+                costo = costo + 0;
+                break;
+            case 1:
+                costo = costo + 0;
+                break;
+            case 2:
+                costo = costo + 50;
+                break;
+            case 3:
+                costo = costo + 80;
+                break;
+            case 4:
+                costo = costo + 110;
+                break;
+            default:
+                costo = costo + 150;
+                break;
+        }
+        mostrarAlertaSimple("Total de costo", "El total a pagar con " +envio.getPaquetes().size()+" paquetes es de $"+costo, Alert.AlertType.INFORMATION);
+
+//        if (costo > 0) {
+//        }else{
+//            switch(envio.getPaquetes().size()){
+//                case 0:
+//                    costo = 0f;
+//                    break;
+//                case 1:
+//                    costo = 50f;
+//                    break;
+//                case 2: 
+//                    costo = 100f;
+//                    break;
+//                case 3:
+//                    costo = 160f;
+//                    break;
+//                case 4:
+//                    costo = 220f;
+//                    break;
+//                default:
+//                    costo = 300f;
+//                    break;
+//            }
+//            mostrarAlertaSimple("Total de costo", "El total a pagar de con " +envio.getPaquetes().size()+" paquetes son $"+costo, Alert.AlertType.INFORMATION);
+//        }
+        
+        return costo;
+    }
+    
+    public static void remaximizar(Stage stage, Scene scene){
+        stage.setScene(scene);
+        if (stage.isMaximized()){
+            stage.setMaximized(false); 
+            stage.setMaximized(true);
+        }
+    }
 }

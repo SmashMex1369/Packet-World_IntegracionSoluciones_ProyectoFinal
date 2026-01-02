@@ -67,7 +67,9 @@ public class FXMLMenuPrincipalController implements Initializable {
             Stage escenarioBase = (Stage) imgCerrarSesion.getScene().getWindow();
             Parent login = FXMLLoader.load(getClass().getResource("FXMLInicioSesion.fxml"));
             Scene escenaLogin = new Scene(login);
+            escenarioBase.setMaximized(false);
             escenarioBase.setScene(escenaLogin);
+            escenarioBase.centerOnScreen();
             escenarioBase.setTitle("Packet-World Login");
             escenarioBase.setResizable(false);
             escenarioBase.show();
@@ -146,9 +148,11 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnRegresar(ActionEvent event) {
-        //Utilidades.mostrarAlertaConfirmacion(titulo, contenido);
-        Sesion.cerrarSesion();
-        irPantallaLogin();
+        boolean confirmarOperacion=Utilidades.mostrarAlertaConfirmacion("Cerrar sesion", "¿Esta seguro que desea cerrar la sesion actual?\nDebera volver a iniciar sesion");
+        if (confirmarOperacion) {
+            Sesion.cerrarSesion();
+            irPantallaLogin();
+        }        
     }
     
     public void irAdmUnidades(){
@@ -157,7 +161,7 @@ public class FXMLMenuPrincipalController implements Initializable {
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) lbSaludo.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Administración Unidades");
             escenario.show();
         } catch (Exception e) {
@@ -171,7 +175,7 @@ public class FXMLMenuPrincipalController implements Initializable {
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) lbSaludo.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Administración Clientes");
             escenario.show();
         } catch (Exception e) {
@@ -185,7 +189,7 @@ public class FXMLMenuPrincipalController implements Initializable {
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) lbSaludo.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Administración Sucursales");
             escenario.show();
         } catch (Exception e) {
@@ -199,7 +203,7 @@ public class FXMLMenuPrincipalController implements Initializable {
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) lbSaludo.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Administración Paquetes");
             escenario.show();
         } catch (Exception e) {
@@ -213,7 +217,7 @@ public class FXMLMenuPrincipalController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);
             Stage escenario = (Stage) lbSaludo.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Administracion Envios");
             escenario.show();
         } catch (Exception e) {
@@ -227,7 +231,7 @@ public class FXMLMenuPrincipalController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);
             Stage escenario = (Stage) lbSaludo.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Administracion Colaboradores");
             escenario.show();
         } catch (Exception e) {

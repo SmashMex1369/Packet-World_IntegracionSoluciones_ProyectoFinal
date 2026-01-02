@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import packetworldclienteescritorio.conexion.ConexionAPI;
 import packetworldclienteescritorio.dto.Respuesta;
+import packetworldclienteescritorio.dto.RespuestaCosto;
 import packetworldclienteescritorio.pojo.Envio;
 import packetworldclienteescritorio.pojo.RespuestaHTTP;
 import packetworldclienteescritorio.utilidad.Constantes;
@@ -95,6 +96,56 @@ public class EnvioImp {
                     break;
                 default:
                     respuesta.setMensaje("Lo sentimos, hay problemas para modificar la informacion en este momento");
+            }
+        }
+        return respuesta;
+    }
+    
+    public static RespuestaCosto calcularDistancia(String codigoPostalSucursal, String codigoPostalDestino){
+        RespuestaCosto respuesta = new RespuestaCosto();
+        String URL = "http://sublimas.com.mx:8080/calculadora/api/envios/distancia/"+codigoPostalSucursal+","+codigoPostalDestino;
+        Gson gson = new Gson();
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            respuesta = gson.fromJson(respuestaAPI.getContenido(), RespuestaCosto.class);
+        }else{
+            respuesta.setError(true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
+            } 
+        }
+        return respuesta;
+    }
+    
+    public static Respuesta actualizarCosto(Envio envio){
+        Respuesta respuesta = new Respuesta();
+        String URL = Constantes.URL_WS+"envio/actualizar-costo";
+        Gson gson = new Gson();
+        String parametrosJson = gson.toJson(envio);
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, Constantes.PETICION_PUT, parametrosJson, Constantes.APPLICATION_JSON);
+        if (respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK) {
+            respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        }else{
+            respuesta.setError(true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case HttpURLConnection.HTTP_BAD_REQUEST:
+                    respuesta.setMensaje("Campos en formato incorrecto, verifique la información");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para editar la información, porfavor inténtelo más tarde.");
             }
         }
         return respuesta;

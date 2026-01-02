@@ -79,11 +79,18 @@ public class EnvioImp {
         if (conexionBD!= null ) {
             try {
                 int filasAfectadas= conexionBD.update("envio.actualizar-envio", envio);
-                conexionBD.commit();
                 if(filasAfectadas==1){
-                    respuesta.setError(false);
-                    respuesta.setMensaje("Se ha actualizado el envio.");
+                    filasAfectadas = conexionBD.update("envio.actualizar-costo", envio);
+                    if (filasAfectadas == 1) {
+                        conexionBD.commit();
+                        respuesta.setError(false);
+                        respuesta.setMensaje("Se ha actualizado el envio.");
+                    }else{
+                        conexionBD.rollback();
+                        respuesta.setMensaje("Lo sentimos, el envio no pudo ser actualizado.");
+                    }
                 }else{
+                    conexionBD.rollback();
                     respuesta.setMensaje("Lo sentimos, el envio no pudo ser actualizado.");
                 }
                 conexionBD.close();
@@ -109,6 +116,30 @@ public class EnvioImp {
                     respuesta.setMensaje("Se ha actualizado el estatus del envio.");
                 }else{
                     respuesta.setMensaje("Lo sentimos, el estatus del envio no pudo ser actualizado.");
+                }
+                conexionBD.close();
+            } catch (Exception e) {
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
+    }
+    
+    public static Respuesta actualizarCosto(Envio envio){
+        Respuesta respuesta = new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if(conexionBD!=null){
+            try {
+                int filasAfectadas = conexionBD.insert("envio.actualizar-costo", envio);
+                if (filasAfectadas == 1) {
+                    conexionBD.commit();
+                    respuesta.setError(false);
+                    respuesta.setMensaje("El costo se ha actualizado correctamente");
+                }else{
+                    respuesta.setMensaje("Lo sentimos, el costo no pudo ser actualizado");
                 }
                 conexionBD.close();
             } catch (Exception e) {

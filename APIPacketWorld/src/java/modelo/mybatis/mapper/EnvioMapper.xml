@@ -104,8 +104,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         idCliente = #{idCliente},
         idSucursal = #{idSucursal},
         idColonia = #{idColoniaDest}
-        costo = #{costo}
         WHERE idEnvio = #{idEnvio}
+    </update>
+    
+    <update id="actualizar-costo" parameterType="pojo.Envio">
+        UPDATE envio
+        SET costo = #{costo}
+        WHERE idEnvio = #{idEnvio};
     </update>
     
     <insert id="actualizar-estatus" parameterType="pojo.Envio">

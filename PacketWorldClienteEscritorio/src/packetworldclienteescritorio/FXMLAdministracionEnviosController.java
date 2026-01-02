@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -55,9 +56,7 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
     
     private ObservableList<Envio> envios;
     @FXML
-    private AnchorPane apFondo;
-    @FXML
-    private TableColumn colNoPaquetes;
+    private TableColumn <Envio, Integer> colNoPaquetes;
     @FXML
     private TableColumn colCosto;
 
@@ -84,6 +83,12 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
             String datos = e.getNombreConductor() + " " + e.getApellidoPatConductor() + " " + e.getApellidoMatConductor();
             return new ReadOnlyStringWrapper(datos);
         });
+        colNoPaquetes.setCellValueFactory(cellData -> {
+            Envio e = cellData.getValue();
+            Integer paquetes = e.getPaquetes().size();
+            return new ReadOnlyObjectWrapper<>(paquetes);
+        });
+        colCosto.setCellValueFactory(new PropertyValueFactory("costo"));
     }
     
     private void cargarInformacionEnvios(){

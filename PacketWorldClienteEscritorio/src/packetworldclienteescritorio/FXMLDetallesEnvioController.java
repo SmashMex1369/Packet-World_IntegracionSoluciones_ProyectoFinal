@@ -122,6 +122,8 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
     
     private Envio envio;
     private INotificador observador;
+    @FXML
+    private Label lbCosto;
     
 
     /**
@@ -172,6 +174,7 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
         lbCodigoPostalSucursal.setText(String.valueOf(envio.getCodigoPostalSucursal()));
         lbCalleSucursal.setText(envio.getCalleSucursal());
         lbNumeroSucursal.setText(String.valueOf(envio.getNumeroSucursal()));
+        lbCosto.setText("$ "+envio.getCosto());
     }
 
     @FXML

@@ -23,9 +23,11 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import packetworldclienteescritorio.dominio.EnvioImp;
 import packetworldclienteescritorio.dominio.PaqueteImp;
 import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.interfaz.INotificador;
+import packetworldclienteescritorio.pojo.Envio;
 import packetworldclienteescritorio.pojo.Paquete;
 import packetworldclienteescritorio.utilidad.Constantes;
 import packetworldclienteescritorio.utilidad.Utilidades;
@@ -159,7 +161,20 @@ public class FXMLAdministracionPaquetesController implements Initializable, INot
         System.out.println("funcion elim"+idPaquete);
         if(!respuesta.isError()){
             Utilidades.mostrarAlertaSimple("Paquete eliminado", "El registro del paquete fue eliminado correctamente.", Alert.AlertType.WARNING);
+            HashMap<String, Object> respuestaEnvio = null;
+            respuestaEnvio = EnvioImp.buscarEnvio(tvPaquete.getSelectionModel().getSelectedItem().getNoGuia());
             cargarInformacionPaquetes();
+            boolean esError = (boolean) respuestaEnvio.get(Constantes.KEY_ERROR);
+            if (!esError) {                
+                List<Envio> envioBusqueda = (List<Envio>) respuestaEnvio.get(Constantes.KEY_LISTA);
+                envioBusqueda.get(0).setCosto(Utilidades.calcularCosto(envioBusqueda.get(0), envioBusqueda.get(0).getCodigoPostalDest().toString()));
+                Respuesta respuestaCosto = EnvioImp.actualizarCosto(envioBusqueda.get(0));
+                if (!respuestaCosto.isError()) {
+                    Utilidades.mostrarAlertaSimple("Costo actualizado", respuestaCosto.getMensaje(), Alert.AlertType.INFORMATION);
+                }else{
+                    Utilidades.mostrarAlertaSimple("Problemas al actulizar costo", "Ocurrio un problema al actualizar el costo del envio, favor de actualizar el envio", Alert.AlertType.WARNING);
+                }
+            }
         }else{
             Utilidades.mostrarAlertaSimple("Error al eliminar", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }

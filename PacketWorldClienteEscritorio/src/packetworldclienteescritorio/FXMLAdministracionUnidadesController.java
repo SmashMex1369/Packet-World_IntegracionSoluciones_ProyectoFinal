@@ -76,7 +76,12 @@ public class FXMLAdministracionUnidadesController implements Initializable, INot
         tcTipoUnidad.setCellValueFactory(new PropertyValueFactory("tipo"));
         tcConductorAsignado.setCellValueFactory(cellData ->{
             Unidad u = cellData.getValue();
-            String datos = u.getNombreConductor()+ " " + u.getApellidoPatConductor()+ " " + u.getApellidoMatConductor();
+            String datos = "";
+            if (u.getApellidoMatConductor()==null) {
+                datos = u.getNombreConductor()+ " " + u.getApellidoPatConductor();
+            }else{
+                datos = u.getNombreConductor()+ " " + u.getApellidoPatConductor()+ " " + u.getApellidoMatConductor();
+            }
             return new ReadOnlyStringWrapper(datos);
         });
     }
@@ -140,10 +145,9 @@ public class FXMLAdministracionUnidadesController implements Initializable, INot
             Scene escena = new Scene(vista);
             Stage escenario = (Stage) tfBuscar.getScene().getWindow();
             escenario.setScene(escena);
-            escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.setResizable(false);
             escenario.setTitle("Asignar Conductor");
-            escenario.showAndWait();
+            escenario.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

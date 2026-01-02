@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -12,14 +17,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLFormularioUnidadesController">
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLFormularioUnidadesController">
    <children>
       <Label layoutX="338.0" layoutY="110.0" text="Favor de rellenar todos los campos">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="233.0" layoutY="148.0" text="El Número de Identificación Interno se añadirá automáticamnete ">
+      <Label layoutX="233.0" layoutY="148.0" text="El Número de Identificación Interno se añadirá automáticamente ">
          <font>
             <Font size="20.0" />
          </font>
@@ -60,12 +65,12 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfMarca" onKeyTyped="#tfMarcaTexto" prefHeight="51.0" prefWidth="260.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="tfModel" onKeyTyped="#tfModeloTexto" prefHeight="51.0" prefWidth="260.0" GridPane.rowIndex="1">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="tfModel" onKeyTyped="#tfModeloTexto" prefHeight="51.0" prefWidth="260.0" GridPane.rowIndex="1">
+                  <TextField fx:id="tfMarca" onKeyTyped="#tfMarcaTexto" prefHeight="51.0" prefWidth="260.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="24.0" />
                      </font>

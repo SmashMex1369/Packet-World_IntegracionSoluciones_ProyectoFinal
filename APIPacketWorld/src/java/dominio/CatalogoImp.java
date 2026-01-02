@@ -117,4 +117,17 @@ public class CatalogoImp {
         return estatus;
     }
     
+    public static Integer obtenerCodigoPostalOrigen(Integer idSucursal){
+        Integer codigoPostal = 0;
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD!=null) {
+            try {
+                codigoPostal = conexionBD.selectOne("catalogo.obtener-codigo-postal-origen", idSucursal);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return codigoPostal;
+    }
+    
 }
