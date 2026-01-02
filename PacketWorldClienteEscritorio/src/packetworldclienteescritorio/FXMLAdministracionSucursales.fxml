@@ -23,15 +23,15 @@
             <DropShadow />
          </effect>
       </TableView>
-      <Button layoutX="285.0" layoutY="104.0" mnemonicParsing="false" onAction="#clicIrRegistrarSucursal" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Registrar">
+      <Button layoutX="285.0" layoutY="110.0" mnemonicParsing="false" onAction="#clicIrRegistrarSucursal" prefHeight="37.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Registrar">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button layoutX="486.0" layoutY="104.0" mnemonicParsing="false" onAction="#clicIrEditarSucursal" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Editar">
+      <Button layoutX="486.0" layoutY="110.0" mnemonicParsing="false" onAction="#clicIrEditarSucursal" prefHeight="37.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Editar">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button layoutX="686.0" layoutY="104.0" mnemonicParsing="false" onAction="#clicBajaSucursal" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Dar de baja">
+      <Button layoutX="686.0" layoutY="110.0" mnemonicParsing="false" onAction="#clicBajaSucursal" prefHeight="37.0" prefWidth="134.0" style="-fx-background-radius: 25px;" text="Dar de baja">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>

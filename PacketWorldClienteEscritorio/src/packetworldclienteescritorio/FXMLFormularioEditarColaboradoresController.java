@@ -232,7 +232,7 @@ public class FXMLFormularioEditarColaboradoresController implements Initializabl
     private void seleccionarFoto(){
         FileChooser dialogo = new FileChooser();
         dialogo.setTitle("Selecciona una foto");
-        FileChooser.ExtensionFilter filtroImg = new FileChooser.ExtensionFilter("Archivos de imagenes", "*.jpg", "*.png");
+        FileChooser.ExtensionFilter filtroImg = new FileChooser.ExtensionFilter("Archivos de imagenes", "*.jpg", "*.png", ".jpeg", ".avif");
         dialogo.getExtensionFilters().add(filtroImg);
         foto =dialogo.showOpenDialog(imgvFotoPerfil.getScene().getWindow());
         if (foto != null) {
