@@ -33,6 +33,16 @@ class EnvioFragment : Fragment() {
             if (envioSeleccionado != null){
                 val gson = Gson()
                 viewModelCompartido.envioSeleccionado= gson.fromJson(envioSeleccionado, Envio::class.java)
+                binding.tvNoGuiaValor.text = viewModelCompartido.envioSeleccionado?.noGuia
+                binding.tvEstatusValor.text = viewModelCompartido.envioSeleccionado?.estatus
+                if (binding.tvMotivoValor!=null){
+                    binding.tvMotivoValor.text = viewModelCompartido.envioSeleccionado?.motivo
+                }else{
+                    binding.tvMotivoValor.text = ""
+                }
+                val intentDetalles = Intent()
+                intentDetalles.putExtra("envioEditado", envioSeleccionado)
+                requireActivity().setResult(RESULT_OK, intentDetalles)
             }
         }
     }
@@ -72,22 +82,6 @@ class EnvioFragment : Fragment() {
             intent.putExtra("envio", gson.toJson(viewModelCompartido.envioSeleccionado))
             intent.putExtra("idColaborador", idColaborador)
             launcherEdicion.launch(intent)
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val envio = viewModelCompartido.envioSeleccionado
-        if (envio != null) {
-            binding.tvNoGuiaValor.text = envio.noGuia
-            binding.tvEstatusValor.text = envio.estatus
-            if (binding.tvMotivoValor!=null){
-                binding.tvMotivoValor.text = envio.motivo
-            }else{
-                binding.tvMotivoValor.text = ""
-            }
-        }else{
-            Toast.makeText(requireContext(), "Error al cargar datos", Toast.LENGTH_SHORT).show()
         }
     }
 
