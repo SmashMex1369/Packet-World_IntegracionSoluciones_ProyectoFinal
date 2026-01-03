@@ -28,8 +28,12 @@ class EnviosAdapter (
         val envio = envios[position]
         holder.bind(envio)
         holder.itemView.setOnClickListener {
-            onItemClicked(envio)
+            //onItemClicked(envio, position)
         }
+    }
+
+    fun actualizarItem(position: Int, envioActualizado : Envio){
+        envios[position]
     }
 
     override fun getItemCount(): Int {

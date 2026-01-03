@@ -4,7 +4,7 @@ data class Envio(
     var idEnvio: Int,
     val noGuia: String,
     var idEstatusEnvio: Int,
-    val estatus: String?,
+    var estatus: String?,
     var motivo: String,
     var idColaborador: Int?,
 

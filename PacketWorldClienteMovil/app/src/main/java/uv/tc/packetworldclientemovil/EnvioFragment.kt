@@ -75,6 +75,22 @@ class EnvioFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        val envio = viewModelCompartido.envioSeleccionado
+        if (envio != null) {
+            binding.tvNoGuiaValor.text = envio.noGuia
+            binding.tvEstatusValor.text = envio.estatus
+            if (binding.tvMotivoValor!=null){
+                binding.tvMotivoValor.text = envio.motivo
+            }else{
+                binding.tvMotivoValor.text = ""
+            }
+        }else{
+            Toast.makeText(requireContext(), "Error al cargar datos", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     // 5. ¡MUY IMPORTANTE! Limpiar el binding
     //Debes tener cuidado con la memoria, es obligatorio limpiar el binding
     // cuando la vista se destruye (onDestroyView) para evitar fugas de memoria.

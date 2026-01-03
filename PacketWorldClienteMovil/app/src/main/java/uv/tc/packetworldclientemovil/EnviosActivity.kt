@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -31,6 +32,7 @@ class EnviosActivity : AppCompatActivity() {
     private val gson = Gson()
 
     private lateinit var prefs: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,6 +121,7 @@ class EnviosActivity : AppCompatActivity() {
                 if (envios.isNotEmpty()){
                     configurarRecyclerView(envios)
                 }else{
+                    configurarRecyclerView(envios)
                     Toast.makeText(this@EnviosActivity, "Actualmente no tiene envios pendientes", Toast.LENGTH_LONG).show()
                     binding.srlRecargar.isRefreshing = false
                 }
