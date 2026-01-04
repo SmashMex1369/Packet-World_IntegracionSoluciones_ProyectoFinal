@@ -33,6 +33,16 @@ class EnvioFragment : Fragment() {
             if (envioSeleccionado != null){
                 val gson = Gson()
                 viewModelCompartido.envioSeleccionado= gson.fromJson(envioSeleccionado, Envio::class.java)
+                binding.tvNoGuiaValor.text = viewModelCompartido.envioSeleccionado?.noGuia
+                binding.tvEstatusValor.text = viewModelCompartido.envioSeleccionado?.estatus
+                if (binding.tvMotivoValor!=null){
+                    binding.tvMotivoValor.text = viewModelCompartido.envioSeleccionado?.motivo
+                }else{
+                    binding.tvMotivoValor.text = ""
+                }
+                val intentDetalles = Intent()
+                intentDetalles.putExtra("envioEditado", envioSeleccionado)
+                requireActivity().setResult(RESULT_OK, intentDetalles)
             }
         }
     }

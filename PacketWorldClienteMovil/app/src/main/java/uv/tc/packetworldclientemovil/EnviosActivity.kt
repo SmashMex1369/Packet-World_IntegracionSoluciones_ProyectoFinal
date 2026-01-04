@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -31,6 +32,19 @@ class EnviosActivity : AppCompatActivity() {
     private val gson = Gson()
 
     private lateinit var prefs: SharedPreferences
+
+    private var posicionSeleccionada : Int = -1
+    private lateinit var adapter: EnviosAdapter
+
+    private val launcherEditar = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK){
+            val envioEditado = gson.fromJson(result.data?.getStringExtra("envioEditado"), Envio::class.java)
+            if (envioEditado != null && posicionSeleccionada != -1) {
+                adapter.actualizarItem(posicionSeleccionada, envioEditado)
+            }
+            recargarEnvios()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,6 +133,7 @@ class EnviosActivity : AppCompatActivity() {
                 if (envios.isNotEmpty()){
                     configurarRecyclerView(envios)
                 }else{
+                    configurarRecyclerView(envios)
                     Toast.makeText(this@EnviosActivity, "Actualmente no tiene envios pendientes", Toast.LENGTH_LONG).show()
                     binding.srlRecargar.isRefreshing = false
                 }
@@ -133,13 +148,14 @@ class EnviosActivity : AppCompatActivity() {
 
     private fun configurarRecyclerView(envios: List<Envio>){
         binding.rvEnvios.layoutManager = LinearLayoutManager(this@EnviosActivity)
-        val adapter = EnviosAdapter(envios) { envioSeleccionado ->
+        adapter = EnviosAdapter(envios.toMutableList()) { envioSeleccionado, position ->
+            posicionSeleccionada = position
             val jsonEnvio = gson.toJson(envioSeleccionado)
             envioSeleccionado.idColaborador= conductor.idColaborador
             val intent = Intent(this@EnviosActivity, DetallesActivity::class.java)
             intent.putExtra("idColaborador", conductor.idColaborador)
             intent.putExtra("envio", jsonEnvio)
-            startActivity(intent)
+            launcherEditar.launch(intent)
         }
         binding.rvEnvios.adapter =adapter
         binding.srlRecargar.isRefreshing = false

@@ -59,6 +59,7 @@ class ActualizarEstatusActivity : AppCompatActivity() {
                 binding.tilMotivo.hint = "Opcional"
             }
             idEstatusEnvio = estatusSeleccionado.idEstatusEnvio
+            envio.estatus = estatusSeleccionado.estatus
         }
 
         binding.btnActualizar.setOnClickListener {

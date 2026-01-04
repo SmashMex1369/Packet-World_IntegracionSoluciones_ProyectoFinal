@@ -10,8 +10,8 @@ import uv.tc.packetworldclientemovil.databinding.ItemRecyclerEnvioBinding
 import uv.tc.packetworldclientemovil.poko.Envio
 
 class EnviosAdapter (
-    private val envios: List<Envio>,
-    private val onItemClicked: (Envio) -> Unit
+    private val envios: MutableList<Envio>,
+    private val onItemClicked: (Envio, Int) -> Unit
 ) : RecyclerView.Adapter<EnviosAdapter.EnviosViewHolder>(){
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -28,8 +28,13 @@ class EnviosAdapter (
         val envio = envios[position]
         holder.bind(envio)
         holder.itemView.setOnClickListener {
-            onItemClicked(envio)
+            onItemClicked(envio, position)
         }
+    }
+
+    fun actualizarItem(position: Int, envioActualizado : Envio){
+        envios[position] = envioActualizado
+        notifyItemChanged(position)
     }
 
     override fun getItemCount(): Int {
