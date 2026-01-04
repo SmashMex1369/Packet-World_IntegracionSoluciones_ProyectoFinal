@@ -13,7 +13,7 @@
    <children>
       <VBox alignment="CENTER" layoutX="262.0" layoutY="153.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="75.0" prefWidth="688.0" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="169.0">
          <children>
-            <Label text="Cliente que envia (Remitente)">
+            <Label text="Cliente que envía (Remitente)">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -21,14 +21,14 @@
             <ComboBox fx:id="cbCliente" maxWidth="1.7976931348623157E308" onShowing="#cbClienteSeleccion" prefWidth="150.0" style="-fx-font-size: 21;" />
          </children>
       </VBox>
-      <Label alignment="CENTER" layoutY="123.0" text="Para Estado, Ciudad y Colonia buscar el Codigo Postal" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="123.0">
+      <Label alignment="CENTER" layoutY="123.0" text="Para Estado, Ciudad y Colonia buscar el Código Postal" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="123.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <Label alignment="CENTER" layoutX="289.0" layoutY="82.0" text="Favor de rellenar todos los campos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="88.0">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
       <GridPane alignment="CENTER" hgap="30.0" layoutX="221.0" layoutY="413.0" prefHeight="390.0" prefWidth="850.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="260.0">
@@ -97,7 +97,7 @@
             </VBox>
             <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" GridPane.rowIndex="1">
                <children>
-                  <Label text="Codigo Postal">
+                  <Label text="Código Postal">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -202,7 +202,7 @@
       </GridPane>
       <AnchorPane layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="lbTitulo" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Crear envio" textFill="#e1e1e1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Label fx:id="lbTitulo" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Crear envío" textFill="#e1e1e1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>

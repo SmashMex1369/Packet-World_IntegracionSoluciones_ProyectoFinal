@@ -32,7 +32,7 @@
       </AnchorPane>
       <Label alignment="CENTER" layoutX="279.0" layoutY="72.0" text="Favor de rellenar todos los campos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="88.0">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
       <Label alignment="CENTER" layoutY="123.0" text="Para el rol CONDUCTOR agregar No. de Licencia" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

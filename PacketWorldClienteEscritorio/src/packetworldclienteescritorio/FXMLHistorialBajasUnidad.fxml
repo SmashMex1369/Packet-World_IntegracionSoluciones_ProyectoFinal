@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -48,7 +54,7 @@
          </columnResizePolicy>
          <columns>
             <TableColumn fx:id="tcVIN" editable="false" prefWidth="-1.0" text="VIN" />
-            <TableColumn fx:id="tcColaborador" editable="false" prefWidth="-1.0" text="Colaborador quien&#10;dio de baja" />
+            <TableColumn fx:id="tcColaborador" editable="false" prefWidth="-1.0" text="Colaborador quien&#10;dió de baja" />
             <TableColumn fx:id="tcTiempo" editable="false" prefWidth="-1.0" text="Fecha y hora" />
             <TableColumn fx:id="tcMotivo" editable="false" prefWidth="-1.0" text="Motivo" />
          </columns>

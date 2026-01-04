@@ -108,6 +108,25 @@ public class FXMLFormularioColaboradoresController implements Initializable {
         }
     }
     
+
+    private boolean CURPValido(String curp) {
+        if (curp == null || curp.length() != 18) {
+        return false;
+    }
+
+    String rango = "^[A-Z]{4}[0-9]{6}[HM]{1}[A-Z]{5}[A-Z0-9]{1}[0-9]{1}$";
+    return curp.toUpperCase().matches(rango);
+}
+
+    private boolean EmailValido(String email) {
+        if (email == null || email.isEmpty()) {
+        return false;
+    }
+
+    String rango = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        return email.matches(rango);
+}
+    
     private boolean sonCamposValidos(){
         boolean camposValidos = true;
         if(tfNombre.getText()==null || tfNombre.getText().isEmpty()){
@@ -122,10 +141,26 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             camposValidos=false;
             tfCURP.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
+        String curp = tfCURP.getText();
+            if(curp == null || curp.trim().isEmpty()){
+        camposValidos = false;
+        tfCURP.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+    } else if (!CURPValido(curp.toUpperCase())) {
+        camposValidos = false;
+        tfCURP.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+    }
         if(tfCorreo.getText()==null || tfCorreo.getText().isEmpty()){
             camposValidos=false;
             tfCorreo.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
+        String correo = tfCorreo.getText();
+            if(correo == null || correo.trim().isEmpty()){
+        camposValidos = false;
+        tfCorreo.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+    } else if (!EmailValido(correo)) {
+        camposValidos = false;
+        tfCorreo.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+    }
         if(tfNoPersonal.getText()==null || tfNoPersonal.getText().isEmpty()){
             camposValidos=false;
             tfNoPersonal.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
@@ -150,7 +185,13 @@ public class FXMLFormularioColaboradoresController implements Initializable {
         }
         
         if(!camposValidos){
-            Utilidades.mostrarAlertaSimple("Campos incorrectos", "Hay datos faltantes o no tienen el formato adecuado.", Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple(
+            "Campos incorrectos", 
+            "Hay datos faltantes o no tienen el formato adecuado:\n" +
+            "• CURP debe tener 18 caracteres en formato válido\n" +
+            "• Correo debe tener formato válido (ejemplo@dominio.com)", 
+            Alert.AlertType.ERROR
+        );
         }
         return camposValidos;
     }

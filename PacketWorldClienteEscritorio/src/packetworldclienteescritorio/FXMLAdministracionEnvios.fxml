@@ -22,7 +22,7 @@
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Envios" textFill="#e1e1e1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Envíos" textFill="#e1e1e1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
@@ -43,7 +43,7 @@
       </AnchorPane>
       <StackPane alignment="CENTER_LEFT" layoutX="36.0" layoutY="92.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="92.0">
          <children>
-            <TextField fx:id="tfBuscar" onKeyReleased="#buscarEnvio" prefHeight="36.0" prefWidth="392.0" promptText="Buscar envio" style="-fx-background-radius: 18px;">
+            <TextField fx:id="tfBuscar" onKeyReleased="#buscarEnvio" prefHeight="36.0" prefWidth="392.0" promptText="Buscar envío" style="-fx-background-radius: 18px;">
                <font>
                   <Font size="20.0" />
                </font>
@@ -87,7 +87,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
          <columns>
-            <TableColumn fx:id="colNoGuia" editable="false" prefWidth="-1.0" text="No. de Guia" />
+            <TableColumn fx:id="colNoGuia" editable="false" prefWidth="-1.0" text="No. de Guía" />
             <TableColumn fx:id="colNombreDestinatario" editable="false" prefWidth="-1.0" text="Nombre del Destinatario" />
             <TableColumn fx:id="colEstado" editable="false" prefWidth="-1.0" text="Estado" />
             <TableColumn fx:id="colCodigoPostal" editable="false" prefWidth="-1.0" text="Código Postal" />

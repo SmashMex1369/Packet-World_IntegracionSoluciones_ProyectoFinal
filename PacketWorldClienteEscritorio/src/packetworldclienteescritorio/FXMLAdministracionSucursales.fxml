@@ -14,10 +14,10 @@
    <children>
       <TableView fx:id="tvSucursales" layoutX="35.0" layoutY="182.0" prefHeight="423.0" prefWidth="1035.0">
          <columns>
-            <TableColumn fx:id="colCodigo" prefWidth="177.0" text="Codigo" />
+            <TableColumn fx:id="colCodigo" prefWidth="177.0" text="Código" />
             <TableColumn fx:id="colNombre" prefWidth="212.0" text="Nombre" />
             <TableColumn fx:id="colEstatus" prefWidth="171.0" text="Estatus" />
-            <TableColumn fx:id="colDireccion" prefWidth="474.0" text="Direccion" />
+            <TableColumn fx:id="colDireccion" prefWidth="474.0" text="Dirección" />
          </columns>
          <effect>
             <DropShadow />

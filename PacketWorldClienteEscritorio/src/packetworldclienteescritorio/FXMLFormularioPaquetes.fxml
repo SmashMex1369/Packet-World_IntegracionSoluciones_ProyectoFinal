@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLFormularioPaquetesController">
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="950.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLFormularioPaquetesController">
    <children>
       <AnchorPane layoutX="3.0" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -39,35 +39,35 @@
                </padding></Button>
          </children>
       </AnchorPane>
-      <Label layoutX="120.0" layoutY="320.0" prefHeight="35.0" prefWidth="116.0" text="Peso:" textAlignment="JUSTIFY">
+      <Label layoutX="118.0" layoutY="300.0" prefHeight="35.0" prefWidth="116.0" text="Peso:" textAlignment="JUSTIFY">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="116.0" layoutY="206.0" prefHeight="35.0" prefWidth="116.0" text="No. Guía:" textAlignment="JUSTIFY">
+      <Label alignment="CENTER" layoutX="114.0" layoutY="186.0" prefHeight="35.0" prefWidth="116.0" text="No. Guía:" textAlignment="JUSTIFY">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="382.0" layoutY="442.0" prefHeight="35.0" prefWidth="83.0" text="Ancho:" textOverrun="CLIP">
+      <Label alignment="CENTER" layoutX="380.0" layoutY="422.0" prefHeight="35.0" prefWidth="83.0" text="Ancho:" textOverrun="CLIP">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="643.0" layoutY="444.0" text="Profundidad:">
+      <Label alignment="CENTER" layoutX="641.0" layoutY="424.0" text="Profundidad:">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cbNoGuia" layoutX="116.0" layoutY="253.0" onShowing="#cbNoGuiaSeleccion" prefHeight="51.0" prefWidth="244.0" style="-fx-font-size: 21;" />
-      <TextField fx:id="tfPeso" layoutX="120.0" layoutY="363.0" onKeyTyped="#tfPesoTexto" prefHeight="51.0" prefWidth="195.0">
+      <ComboBox fx:id="cbNoGuia" layoutX="114.0" layoutY="233.0" onShowing="#cbNoGuiaSeleccion" prefHeight="51.0" prefWidth="244.0" style="-fx-font-size: 21;" />
+      <TextField fx:id="tfPeso" layoutX="118.0" layoutY="343.0" onKeyTyped="#tfPesoTexto" prefHeight="51.0" prefWidth="195.0">
          <font>
             <Font size="24.0" />
          </font>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding></TextField>
-      <TextField fx:id="tfAlto" layoutX="116.0" layoutY="479.0" onKeyTyped="#tfAltoTexto" prefHeight="51.0" prefWidth="195.0">
+      <TextField fx:id="tfAlto" layoutX="114.0" layoutY="459.0" onKeyTyped="#tfAltoTexto" prefHeight="51.0" prefWidth="195.0">
          <font>
             <Font size="24.0" />
          </font>
@@ -75,7 +75,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </TextField>
-      <TextField fx:id="tfAncho" layoutX="382.0" layoutY="479.0" onKeyTyped="#tfAnchoTexto" prefHeight="51.0" prefWidth="195.0">
+      <TextField fx:id="tfAncho" layoutX="380.0" layoutY="459.0" onKeyTyped="#tfAnchoTexto" prefHeight="51.0" prefWidth="195.0">
          <font>
             <Font size="24.0" />
          </font>
@@ -83,7 +83,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </TextField>
-      <TextField fx:id="tfProfundidad" layoutX="643.0" layoutY="479.0" onKeyTyped="#tfProfundidadTexto" prefHeight="51.0" prefWidth="195.0">
+      <TextField fx:id="tfProfundidad" layoutX="641.0" layoutY="459.0" onKeyTyped="#tfProfundidadTexto" prefHeight="51.0" prefWidth="195.0">
          <font>
             <Font size="24.0" />
          </font>
@@ -91,54 +91,54 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </TextField>
-      <TextArea fx:id="taDescripcion" layoutX="382.0" layoutY="253.0" onKeyTyped="#taDescripcionTexto" prefHeight="150.0" prefWidth="456.0" wrapText="true">
+      <TextArea fx:id="taDescripcion" layoutX="380.0" layoutY="233.0" onKeyTyped="#taDescripcionTexto" prefHeight="150.0" prefWidth="456.0" wrapText="true">
          <font>
             <Font size="24.0" />
          </font>
       </TextArea>
-      <Button defaultButton="true" layoutX="788.0" layoutY="556.0" mnemonicParsing="false" onAction="#btnGuardar" prefHeight="39.0" prefWidth="101.0" style="-fx-background-radius: 30px;" text="Guardar">
+      <Label layoutX="311.0" layoutY="93.0" text="Favor de rellenar todos los campos">
          <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Label layoutX="313.0" layoutY="113.0" text="Favor de rellenar todos los campos">
-         <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="240.0" layoutY="148.0" prefHeight="30.0" prefWidth="516.0" text="Para el No. de Guía se debe crear un envío anteriormente">
+      <Label layoutX="238.0" layoutY="128.0" prefHeight="30.0" prefWidth="516.0" text="Para el No. de Guía se debe crear un envío anteriormente">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label alignment="BOTTOM_LEFT" layoutX="120.0" layoutY="439.0" prefHeight="35.0" prefWidth="83.0" text="Alto:" textOverrun="CLIP">
+      <Label alignment="BOTTOM_LEFT" layoutX="118.0" layoutY="419.0" prefHeight="35.0" prefWidth="83.0" text="Alto:" textOverrun="CLIP">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="382.0" layoutY="206.0" text="Descripción:">
+      <Label alignment="CENTER" layoutX="380.0" layoutY="186.0" text="Descripción:">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="272.0" layoutY="371.0" text="Kg">
+      <Label layoutX="270.0" layoutY="351.0" text="Kg">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Label layoutX="264.0" layoutY="487.0" text="Cm">
+      <Label layoutX="262.0" layoutY="467.0" text="Cm">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="526.0" layoutY="487.0" text="Cm">
+      <Label layoutX="524.0" layoutY="467.0" text="Cm">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="788.0" layoutY="487.0" text="Cm">
+      <Label layoutX="786.0" layoutY="467.0" text="Cm">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
+      <Button alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="750.0" layoutY="548.0" mnemonicParsing="false" onAction="#btnGuardar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Guardar" textFill="#e1e1e1">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
