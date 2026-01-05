@@ -63,6 +63,7 @@
             android:paddingBottom="11dp"
             app:endIconTint="@color/color_linea_input"
             app:boxStrokeWidth="2dp"
+            app:errorEnabled="true"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:boxCornerRadiusBottomStart="10dp"
@@ -118,8 +119,12 @@
                 app:boxStrokeColor="@color/color_linea_input"
                 app:hintTextAppearance="@style/EstiloTextoFlotante"
                 app:boxStrokeErrorColor="@color/rojoClaro"
+                app:errorTextColor="@color/rojoClaro"
+                app:errorIconTint="@color/rojo"
                 app:boxStrokeWidth="2dp"
                 android:hint="Opcional"
+                app:errorEnabled="true"
+
                 app:boxStrokeWidthFocused="4dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -142,19 +147,6 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <Button
-                android:id="@+id/btn_cancelar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="18dp"
-                android:textSize="24sp"
-                android:textColor="@color/grisFondo"
-                android:backgroundTint="@color/rojo"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:layout_marginHorizontal="5dp"
-                android:text="Cancelar" />
-
-            <Button
                 android:id="@+id/btn_actualizar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -163,7 +155,7 @@
                 android:backgroundTint="@color/azul"
                 android:textColor="@color/grisFondo"
                 android:textStyle="bold"
-                android:layout_marginHorizontal="5dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_weight="1"
                 android:text="Actualizar" />
         </LinearLayout>

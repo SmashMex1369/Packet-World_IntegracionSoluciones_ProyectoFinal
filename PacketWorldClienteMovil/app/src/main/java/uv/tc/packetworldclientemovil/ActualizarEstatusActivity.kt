@@ -12,6 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -44,6 +45,16 @@ class ActualizarEstatusActivity : AppCompatActivity() {
         envio = gson.fromJson(intent.getStringExtra("envio"), Envio::class.java)
         window.statusBarColor = ContextCompat.getColor(this, R.color.rojoOscuro)
         window.navigationBarColor = ContextCompat.getColor(this, R.color.azulOscuro)
+        binding.spnEstatus.addTextChangedListener { text ->
+            if (text.toString().isNotEmpty()) {
+                binding.tilSpinner.error = null
+            }
+        }
+        binding.etMotivo.addTextChangedListener { text ->
+            if (text.toString().isNotEmpty()) {
+                binding.tilMotivo.error = null
+            }
+        }
     }
 
     override fun onStart() {
@@ -63,9 +74,10 @@ class ActualizarEstatusActivity : AppCompatActivity() {
         }
 
         binding.btnActualizar.setOnClickListener {
-                envio.idColaborador = intent.getIntExtra("idColaborador", 0)
-                envio.idEstatusEnvio = idEstatusEnvio
-                envio.motivo = binding.etMotivo.text.toString()
+
+            envio.idColaborador = intent.getIntExtra("idColaborador", 0)
+            envio.idEstatusEnvio = idEstatusEnvio
+            envio.motivo = binding.etMotivo.text.toString()
             if(validarCampos()) {
                 val jsonEnvio = gson.toJson(envio)
                 actualizarEstatusAPI(jsonEnvio)
@@ -79,6 +91,7 @@ class ActualizarEstatusActivity : AppCompatActivity() {
                 if (envio.motivo.isNotEmpty()){
                     return true
                 }else{
+                    binding.tilMotivo.error = "Faltante"
                     Toast.makeText(this@ActualizarEstatusActivity, "Obligatorio un motivo", Toast.LENGTH_LONG).show()
                     return false
                 }
@@ -86,6 +99,7 @@ class ActualizarEstatusActivity : AppCompatActivity() {
                 return true
             }
         }else{
+            binding.tilSpinner.error = "Faltante"
             Toast.makeText(this@ActualizarEstatusActivity, "Seleccione un estatus", Toast.LENGTH_LONG).show()
             return false
         }
