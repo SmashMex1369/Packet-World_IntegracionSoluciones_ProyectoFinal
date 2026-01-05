@@ -118,6 +118,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         OR apellidoMaterno LIKE CONCAT('%', #{busqueda}, '%'));
     </select>
     
-    
+    <select id="verificar-no-personal" parameterType="String" resultType="pojo.Colaborador">
+        SELECT noPersonal
+        FROM colaborador
+        WHERE noPersonal=#{noPersonal};
+    </select>
     
 </mapper>

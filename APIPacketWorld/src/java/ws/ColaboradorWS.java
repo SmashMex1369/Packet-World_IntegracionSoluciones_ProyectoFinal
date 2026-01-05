@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ws;
 
 import com.google.gson.Gson;
@@ -149,4 +144,13 @@ public class ColaboradorWS {
         throw new BadRequestException();
     }
     
+    @Path("verificar-no-personal/{noPersonal}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta noPersonal(@PathParam("noPersonal") String noPersonal){
+        if(noPersonal!=null && !noPersonal.isEmpty()){
+            return ColaboradorImp.verificarNoPersonal(noPersonal);
+        }     
+        throw new BadRequestException();     
+    }   
 }

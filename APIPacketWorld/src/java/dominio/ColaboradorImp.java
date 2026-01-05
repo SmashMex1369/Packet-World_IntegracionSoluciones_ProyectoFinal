@@ -238,4 +238,26 @@ public class ColaboradorImp {
         return conductores;
     }
     
+    public static Respuesta verificarNoPersonal(String noPersonal){
+        Respuesta respuesta= new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if (conexionBD!=null){
+            try {
+                if(conexionBD.selectOne("colaborador.verificar-no-personal", noPersonal)==null){
+                    respuesta.setError(false);
+                    respuesta.setMensaje("El noPersonal esta disponible.");
+                }else{               
+                    respuesta.setMensaje("El noPersonal que ingreso ya está en uso.");
+                }
+                conexionBD.close();
+            } catch (Exception e) {
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
+    }
+    
 }

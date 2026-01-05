@@ -98,16 +98,20 @@ public class FXMLFormularioColaboradoresController implements Initializable {
     }
     
     private void registrar(Conductor colaborador){
-        Respuesta respuesta = ColaboradorImp.registrarColaborador(colaborador);
-        if(!respuesta.isError()){
-            Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
-            observador.notificarOperacionExitosa("Crear colaborador", colaborador.getNoPersonal());
-            regresarVentana();
+        Respuesta respuestaNoPersonal= ColaboradorImp.verificarNoPersonal(colaborador.getNoPersonal());
+        if(!respuestaNoPersonal.isError()){
+            Respuesta respuesta = ColaboradorImp.registrarColaborador(colaborador);
+            if(!respuesta.isError()){
+                Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+                observador.notificarOperacionExitosa("Crear colaborador", colaborador.getNoPersonal());
+                regresarVentana();
+            }else{
+                Utilidades.mostrarAlertaSimple("Error al registrar", respuesta.getMensaje(), Alert.AlertType.ERROR);
+            }
         }else{
-            Utilidades.mostrarAlertaSimple("Error al registrar", respuesta.getMensaje(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("NoPersonal en uso", respuestaNoPersonal.getMensaje(), Alert.AlertType.WARNING);
         }
     }
-    
 
     private boolean CURPValido(String curp) {
         if (curp == null || curp.length() != 18) {
