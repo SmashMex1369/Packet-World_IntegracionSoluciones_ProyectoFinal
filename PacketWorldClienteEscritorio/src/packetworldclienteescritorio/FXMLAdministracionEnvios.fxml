@@ -27,18 +27,15 @@
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <StackPane AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="13.0">
-               <children>
-                  <Button alignment="CENTER" cancelButton="true" mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1">
-                     <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../recursos/angle-left-solid.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Button>
-               </children>
-            </StackPane>
+            <Button alignment="CENTER" cancelButton="true" layoutX="20.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/angle-left-solid.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
       <StackPane alignment="CENTER_LEFT" layoutX="36.0" layoutY="92.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="92.0">

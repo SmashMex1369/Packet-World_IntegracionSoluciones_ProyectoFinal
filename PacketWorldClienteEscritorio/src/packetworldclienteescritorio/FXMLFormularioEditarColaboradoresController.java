@@ -3,35 +3,30 @@ package packetworldclienteescritorio;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Files;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -76,8 +71,6 @@ public class FXMLFormularioEditarColaboradoresController implements Initializabl
     private TextField tfNoLicencia;
     @FXML
     private ImageView imgvFotoPerfil;
-    @FXML
-    private Circle circulo;
     
     private Conductor colaboradorEdicion;
     private INotificador observador;
@@ -373,7 +366,7 @@ private boolean esEmailValido(String email) {
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tfNombre.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Administracion Colaboradores");             
             escenario.show();
         } catch (Exception e) {
@@ -404,6 +397,11 @@ private boolean esEmailValido(String email) {
     @FXML
     private void cbSucursalSeleccion(ActionEvent event) {
         cbSucursal.setStyle("-fx-font-size: 21");
+    }
+
+    @FXML
+    private void perderFoco(MouseEvent event) {
+        tfNombre.getParent().requestFocus();
     }
     
 }

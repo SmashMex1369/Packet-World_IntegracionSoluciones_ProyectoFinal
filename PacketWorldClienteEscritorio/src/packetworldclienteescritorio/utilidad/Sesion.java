@@ -2,7 +2,6 @@ package packetworldclienteescritorio.utilidad;
 
 import packetworldclienteescritorio.pojo.Colaborador;
 
-
 /**
  *
  * @author alex4

@@ -1,6 +1,5 @@
 package packetworldclienteescritorio;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -15,17 +14,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.UnidadImp;
 import packetworldclienteescritorio.interfaz.INotificador;
-import packetworldclienteescritorio.pojo.Colaborador;
 import packetworldclienteescritorio.pojo.Unidad;
 import packetworldclienteescritorio.utilidad.Constantes;
 import packetworldclienteescritorio.utilidad.Utilidades;
@@ -144,8 +142,7 @@ public class FXMLAdministracionUnidadesController implements Initializable, INot
             controlador.cargarInfConductoresSinUnidad(unidad, this);
             Scene escena = new Scene(vista);
             Stage escenario = (Stage) tfBuscar.getScene().getWindow();
-            escenario.setScene(escena);
-            escenario.setResizable(false);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Asignar Conductor");
             escenario.show();
         } catch (Exception e) {
@@ -161,7 +158,7 @@ public class FXMLAdministracionUnidadesController implements Initializable, INot
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tfBuscar.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Menú principal");
             escenario.show();
         } catch (Exception e) {
@@ -177,7 +174,7 @@ public class FXMLAdministracionUnidadesController implements Initializable, INot
             controlador.iniciarDatos(unidad, this);
             Scene escena= new Scene(vista);
             Stage escenario= (Stage)tvUnidad.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Formulario unidades");
             escenario.show();
         } catch (Exception e) {
@@ -241,5 +238,11 @@ public class FXMLAdministracionUnidadesController implements Initializable, INot
     @FXML
     private void buscarUnidad(KeyEvent event) {
         cargarInformacionUnidades();
+    }
+
+    @FXML
+    private void perderFoco(MouseEvent event) {
+        tvUnidad.getParent().requestFocus();
+        tvUnidad.getSelectionModel().clearSelection();
     }
 }

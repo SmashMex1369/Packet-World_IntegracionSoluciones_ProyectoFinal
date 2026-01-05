@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.ColaboradorImp;
 import packetworldclienteescritorio.dominio.EnvioImp;
@@ -121,7 +122,12 @@ public class FXMLAsignarConductorEnvioController implements Initializable {
     }
     
     private void regresarVentana(){
-        Stage escenario = (Stage) tvConductores.getScene().getWindow();
-        escenario.close();
+        ((Stage) tvConductores.getScene().getWindow()).close();
+    }
+
+    @FXML
+    private void perderFoco(MouseEvent event) {
+        tvConductores.getParent().requestFocus();
+        tvConductores.getSelectionModel().clearSelection();
     }
 }

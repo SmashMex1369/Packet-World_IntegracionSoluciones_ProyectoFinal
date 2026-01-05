@@ -15,11 +15,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.CatalogoImp;
@@ -56,6 +54,8 @@ public class FXMLFormularioPaquetesController implements Initializable {
     private Paquete paqueteEdicion;
     private ObservableList<NoGuia> envios; 
     private INotificador observador;
+    @FXML
+    private Label lbTitulo;
 
     /**
      * Initializes the controller class.
@@ -75,7 +75,12 @@ public class FXMLFormularioPaquetesController implements Initializable {
             tfProfundidad.setText(String.valueOf(paqueteEdicion.getProfundidad()));
             taDescripcion.setText(paqueteEdicion.getDescripcion());
             int posicionIdEnvio= obtenerPosicionIdEnvio(paqueteEdicion.getIdEnvio());
-            cbNoGuia.getSelectionModel().select(posicionIdEnvio);
+            if (posicionIdEnvio!=-1) {
+                cbNoGuia.getSelectionModel().select(posicionIdEnvio);
+            }else{
+                cbNoGuia.setPromptText(paqueteEdicion.getNoGuia());
+            }
+            lbTitulo.setText("Editar Paquetes");
             cbNoGuia.setDisable(true);
         }
     }
@@ -238,7 +243,7 @@ public class FXMLFormularioPaquetesController implements Initializable {
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tfAlto.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Administración Paquetes");
             escenario.show();
         } catch (Exception e) {

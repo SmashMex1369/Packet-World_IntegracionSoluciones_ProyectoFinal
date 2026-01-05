@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -152,7 +150,7 @@ public class FXMLAdministracionColaboradoresController implements Initializable,
             controlador.observador(this);
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tpColaboradores.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Registrar Colaborador");             
             escenario.show();
         } catch (Exception e) {
@@ -185,7 +183,7 @@ public class FXMLAdministracionColaboradoresController implements Initializable,
                 controlador.inicializarDatos(colaborador, this);
                 Scene escena= new Scene(vista);
                 Stage escenario= (Stage) tpColaboradores.getScene().getWindow();
-                escenario.setScene(escena);
+                Utilidades.remaximizar(escenario, escena);
                 escenario.setTitle("Editar Colaborador");             
                 escenario.show();
             } catch (Exception e) {
@@ -253,7 +251,7 @@ public class FXMLAdministracionColaboradoresController implements Initializable,
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tfBuscar.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Menú Principal");
             escenario.show();
         } catch (Exception e) {
@@ -274,7 +272,6 @@ public class FXMLAdministracionColaboradoresController implements Initializable,
             for (int i = 0; i < tabNodes.size(); i++) {
                 Node tabNode = tabNodes.get(i);
                 Tab tab = tabs.get(i);
-
                 tabNode.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
                     switch(tab.getId()){
                         case "tabTodos":
@@ -313,7 +310,6 @@ public class FXMLAdministracionColaboradoresController implements Initializable,
                 });
             }
         });
-
     }
     
     private void configurarTablaColaboradores(){

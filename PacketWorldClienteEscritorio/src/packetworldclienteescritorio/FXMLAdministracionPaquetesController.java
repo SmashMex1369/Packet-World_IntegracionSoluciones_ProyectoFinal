@@ -1,6 +1,5 @@
 package packetworldclienteescritorio;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -14,14 +13,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.EnvioImp;
 import packetworldclienteescritorio.dominio.PaqueteImp;
@@ -112,7 +108,7 @@ public class FXMLAdministracionPaquetesController implements Initializable, INot
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tfBuscar.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Menú principal");
             escenario.show();
         } catch (Exception e) {
@@ -128,9 +124,8 @@ public class FXMLAdministracionPaquetesController implements Initializable, INot
             controlador.inicializarDatos(paquete, this);
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tvPaquete.getScene().getWindow();
-            escenario.setScene(escena);
-            escenario.setTitle("Formulario paquetes");  
-            //escenario.initModality(Modality.APPLICATION_MODAL);            
+            Utilidades.remaximizar(escenario, escena);
+            escenario.setTitle("Formulario paquetes");          
             escenario.show();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,21 +1,12 @@
 package packetworldclienteescritorio.dominio;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import packetworldclienteescritorio.conexion.ConexionAPI;
 import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.pojo.Colaborador;

@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="950.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLFormularioColaboradoresController">
+<AnchorPane id="AnchorPane" onMouseClicked="#perderFoco" prefHeight="650.0" prefWidth="950.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLFormularioColaboradoresController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -20,12 +20,14 @@
             </Label>
             <StackPane AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="13.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1" />
-                  <ImageView disable="true" fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../recursos/angle-left-solid.png" />
-                     </image>
-                  </ImageView>
+                  <Button cancelButton="true" mnemonicParsing="false" onAction="#btnRegresar" prefHeight="47.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-radius: 10; -fx-border-insets: -1;" textFill="#e1e1e1">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../recursos/angle-left-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </StackPane>
          </children>
@@ -209,7 +211,7 @@
                   </TextField>
                </children>
             </VBox>
-            <Button alignment="CENTER" contentDisplay="TEXT_ONLY" mnemonicParsing="false" onAction="#btnRegistrar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Registrar" textFill="#e1e1e1" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <Button alignment="CENTER" contentDisplay="TEXT_ONLY" defaultButton="true" mnemonicParsing="false" onAction="#btnRegistrar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Registrar" textFill="#e1e1e1" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

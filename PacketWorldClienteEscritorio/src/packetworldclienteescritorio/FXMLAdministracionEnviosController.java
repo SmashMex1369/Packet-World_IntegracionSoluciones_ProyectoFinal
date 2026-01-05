@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -22,7 +21,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -129,7 +127,7 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tfBuscar.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Menú Principal");
             escenario.show();
         } catch (Exception e) {
@@ -185,7 +183,7 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
             controlador.inicializarDatos(null, this);
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tvEnvios.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Crear Envio");
             escenario.show();
         } catch (Exception e) {
@@ -201,10 +199,9 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
             controlador.inicializarDatos(envio, this);
             Scene escena = new Scene(vista);
             Stage escenario = (Stage) tvEnvios.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Detalles Envio");
             escenario.show();
-            escenario.centerOnScreen();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -223,6 +220,7 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
             escenario.setResizable(false);
             escenario.setTitle("Asignacion Conductor");
             escenario.initStyle(StageStyle.DECORATED);
+            escenario.centerOnScreen();
             escenario.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();

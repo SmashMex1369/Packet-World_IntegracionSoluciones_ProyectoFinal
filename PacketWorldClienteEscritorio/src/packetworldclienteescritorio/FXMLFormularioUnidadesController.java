@@ -15,13 +15,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.CatalogoImp;
-import packetworldclienteescritorio.dominio.PaqueteImp;
 import packetworldclienteescritorio.dominio.UnidadImp;
 import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.interfaz.INotificador;
@@ -55,6 +54,8 @@ public class FXMLFormularioUnidadesController implements Initializable {
     private Unidad unidadEdicion;
     private INotificador observador;
     private ObservableList<TipoUnidad> tipos;
+    @FXML
+    private Label lbTitulo;
 
     /**
      * Initializes the controller class.
@@ -75,6 +76,7 @@ public class FXMLFormularioUnidadesController implements Initializable {
             tfVIN.setText(unidadEdicion.getVIN());
             int posicionTipoUnidad= obtenerPosicionTipoUnidad(unidadEdicion.getIdTipoUnidad());
             cbTipoUnidad.getSelectionModel().select(posicionTipoUnidad);
+            lbTitulo.setText("Actualizar Unidad");
         }
     }
     
@@ -199,7 +201,7 @@ public class FXMLFormularioUnidadesController implements Initializable {
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tfModel.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Administración Unidades");
             escenario.show();
         } catch (Exception e) {
@@ -230,6 +232,11 @@ public class FXMLFormularioUnidadesController implements Initializable {
     @FXML
     private void tfVINTexto(KeyEvent event) {
         tfVIN.setStyle(null);
+    }
+
+    @FXML
+    private void perderFoco(MouseEvent event) {
+        tfMarca.getParent().requestFocus();
     }
 
 }

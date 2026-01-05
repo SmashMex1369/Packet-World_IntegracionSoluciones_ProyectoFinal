@@ -4,7 +4,6 @@ import dto.Respuesta;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import javax.ws.rs.BadRequestException;
 import modelo.mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.Conductor;

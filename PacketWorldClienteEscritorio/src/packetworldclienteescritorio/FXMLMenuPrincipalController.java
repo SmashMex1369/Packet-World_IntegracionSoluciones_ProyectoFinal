@@ -1,30 +1,18 @@
 package packetworldclienteescritorio;
 
-import java.awt.Canvas;
-import java.awt.Font;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.ColaboradorImp;
@@ -50,8 +38,6 @@ public class FXMLMenuPrincipalController implements Initializable {
     private Colaborador colaboradorSesion;
     @FXML
     private ImageView imgCerrarSesion;
-    @FXML
-    private Circle circuloFoto;
 
     /**
      * Initializes the controller class.
@@ -59,7 +45,6 @@ public class FXMLMenuPrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarInformacion(Sesion.getColaborador());
-        
     }
     
     private void irPantallaLogin(){
@@ -82,20 +67,15 @@ public class FXMLMenuPrincipalController implements Initializable {
         colaboradorSesion = colaborador;
         lbSaludo.setText("Bienvenido(a) "+ colaboradorSesion.getNombre() + " " + colaboradorSesion.getApellidoPaterno() + " " + colaboradorSesion.getApellidoMaterno());
         lbTipoRol.setText("Rol: " + colaboradorSesion.getRol());
-        
-        // nuevo
         cargarFotoPerfil();
     }
     
-    // nuevo
     private void cargarFotoPerfil() {
         try {
             if (colaboradorSesion != null && colaboradorSesion.getIdColaborador() != null) {
                 HashMap<String, Object> respuesta = ColaboradorImp.obtenerFotoColaborador(
                     colaboradorSesion.getIdColaborador());
-
                 if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
-
                     String stringBase64  = (String) respuesta.get(Constantes.KEY_FOTO);
                     colaboradorSesion.setFotoBase64(stringBase64);
 

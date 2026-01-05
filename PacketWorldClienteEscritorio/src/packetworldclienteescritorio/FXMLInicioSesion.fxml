@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLInicioSesionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#perderFoco" prefHeight="535.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLInicioSesionController">
    <children>
       <Button defaultButton="true" layoutX="492.0" layoutY="448.0" mnemonicParsing="false" onAction="#btnIniciar" prefHeight="38.0" prefWidth="200.0" style="-fx-background-radius: 30px; -fx-base: #03658c;" text="Ingresar">
          <font>
@@ -29,12 +29,12 @@
          <image>
             <Image url="@../recursos/LogoPacketWorld.png" />
          </image></ImageView>
-      <Label layoutX="446.0" layoutY="203.0" prefHeight="35.0" prefWidth="239.0" text="No Personal:">
+      <Label layoutX="446.0" layoutY="203.0" prefHeight="35.0" prefWidth="239.0" text="No. Personal:">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="tfNoPersonal" layoutX="446.0" layoutY="240.0" prefHeight="38.0" prefWidth="292.0" promptText="CRS6455">
+      <TextField fx:id="tfNoPersonal" layoutX="446.0" layoutY="240.0" onKeyTyped="#tfNoPersonalTexto" prefHeight="38.0" prefWidth="292.0" promptText="CRS6455">
          <font>
             <Font size="24.0" />
          </font></TextField>
@@ -51,7 +51,7 @@
          <font>
             <Font size="16.0" />
          </font></Label>
-      <PasswordField fx:id="pfPassword" layoutX="446.0" layoutY="349.0" prefHeight="50.0" prefWidth="292.0" promptText="*******">
+      <PasswordField fx:id="pfPassword" layoutX="446.0" layoutY="349.0" onKeyTyped="#pfPasswordTexto" prefHeight="50.0" prefWidth="292.0">
          <font>
             <Font size="24.0" />
          </font></PasswordField>

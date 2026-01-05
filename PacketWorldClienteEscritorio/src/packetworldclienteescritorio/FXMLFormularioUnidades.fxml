@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -17,19 +18,19 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="950.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLFormularioUnidadesController">
+<AnchorPane id="AnchorPane" onMouseClicked="#perderFoco" prefHeight="625.0" prefWidth="950.0" style="-fx-background-color: #e1e1e1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLFormularioUnidadesController">
    <children>
-      <Label layoutX="338.0" layoutY="110.0" text="Favor de rellenar todos los campos">
+      <Label alignment="CENTER" layoutY="72.0" text="Favor de rellenar todos los campos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="88.0">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="233.0" layoutY="148.0" text="El Número de Identificación Interno se añadirá automáticamente ">
+      <Label alignment="CENTER" layoutY="123.0" text="El Número de Identificación Interno se añadirá automáticamente " AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <GridPane alignment="CENTER" prefHeight="430.0" prefWidth="918.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="196.0">
+      <GridPane alignment="CENTER" prefHeight="430.0" prefWidth="918.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="196.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -47,38 +48,47 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="116.0" text="Modelo:" GridPane.halignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="116.0" text="Modelo:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="116.0" text="Marca:" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="116.0" text="Marca:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="83.0" text="Año:" textOverrun="CLIP" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="83.0" text="Año:" textOverrun="CLIP" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfModel" onKeyTyped="#tfModeloTexto" prefHeight="51.0" prefWidth="260.0" GridPane.rowIndex="1">
+                  <TextField fx:id="tfModel" onKeyTyped="#tfModeloTexto" prefWidth="260.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </TextField>
-                  <TextField fx:id="tfMarca" onKeyTyped="#tfMarcaTexto" prefHeight="51.0" prefWidth="260.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="tfMarca" onKeyTyped="#tfMarcaTexto" prefHeight="51.0" prefWidth="260.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </TextField>
-                  <TextField fx:id="tfAnio" onKeyTyped="#tfAñoTexto" prefHeight="51.0" prefWidth="306.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <TextField fx:id="tfAnio" onKeyTyped="#tfAñoTexto" prefHeight="51.0" prefWidth="306.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </TextField>
                </children>
             </GridPane>
@@ -92,22 +102,25 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="477.0" text="Número de Identificación Vehicular (VIN):" wrapText="true" GridPane.halignment="CENTER">
+                  <Label alignment="BOTTOM_LEFT" text="Número de Identificación&#10;Vehicular (VIN):" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                      <font>
-                        <Font size="24.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfVIN" onKeyTyped="#tfVINTexto" prefHeight="31.0" prefWidth="445.0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <TextField fx:id="tfVIN" onKeyTyped="#tfVINTexto" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </TextField>
-                  <Label alignment="CENTER" text="Tipo de unidad" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                  <Label alignment="CENTER" text="Tipo de unidad:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                      <font>
-                        <Font size="24.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cbTipoUnidad" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onShowing="#cbTipoUnidadSeleccion" prefWidth="195.0" style="-fx-font-size: 21;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cbTipoUnidad" maxWidth="1.7976931348623157E308" onShowing="#cbTipoUnidadSeleccion" prefWidth="195.0" style="-fx-font-size: 21;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                </children>
             </GridPane>
             <GridPane hgap="20.0" GridPane.rowIndex="2">
@@ -117,10 +130,9 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button alignment="CENTER" contentDisplay="TEXT_ONLY" defaultButton="true" mnemonicParsing="false" onAction="#btnGuardar" prefWidth="150.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Crear" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Button alignment="CENTER" contentDisplay="TEXT_ONLY" defaultButton="true" mnemonicParsing="false" onAction="#btnGuardar" prefWidth="150.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Crear" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -131,7 +143,7 @@
       </GridPane>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="309.0" layoutY="7.0" text="Registrar Unidades" textFill="#e1e1e1">
+            <Label fx:id="lbTitulo" alignment="CENTER" layoutX="309.0" layoutY="7.0" text="Registrar Unidades" textFill="#e1e1e1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>

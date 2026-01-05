@@ -8,15 +8,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
@@ -206,7 +202,6 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
         imgvDestinatario.setFill(Color.web("000"));
         btnSucursal.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
         imgvSucursal.setFill(Color.web("000"));
-        
         btnActualizar.setText("Actualizar\nEstatus");
         btnActualizar.setVisible(true);
     }
@@ -225,7 +220,6 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
         imgvDestinatario.setFill(Color.web("000"));
         btnSucursal.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
         imgvSucursal.setFill(Color.web("000"));
-        
         btnActualizar.setText("Actualizar\nDatos");
         btnActualizar.setVisible(true);
     }
@@ -244,7 +238,6 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
         imgvRemitente.setFill(Color.web("000"));
         btnSucursal.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
         imgvSucursal.setFill(Color.web("000"));
-        
         btnActualizar.setText("Actualizar\nDatos");
         btnActualizar.setVisible(true);
     }
@@ -263,7 +256,6 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
         imgvDestinatario.setFill(Color.web("000"));
         btnRemitente.setStyle("-fx-border-color: #02354a; -fx-text-fill: #000000; -fx-border-width: 4; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-insets: -1;");
         imgvRemitente.setFill(Color.web("000"));
-        
         btnActualizar.setVisible(false);
     }
     
@@ -279,6 +271,7 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
             escenario.setTitle("Actualizar Estatus");    
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.setResizable(false);
+            escenario.centerOnScreen();
             escenario.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
@@ -293,7 +286,7 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
             controlador.inicializarDatos(envio, this);
             Scene escena= new Scene(vista);
             Stage escenario= (Stage )grdpDestinatario.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Actualizar Envio");
             escenario.show();
         } catch (Exception e) {
@@ -313,7 +306,7 @@ public class FXMLDetallesEnvioController implements Initializable, INotificador{
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) grdpEnvio.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Administracion Envios");          
             escenario.show();
         } catch (Exception e) {

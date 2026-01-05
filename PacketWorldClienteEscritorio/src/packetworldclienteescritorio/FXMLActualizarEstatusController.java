@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.CatalogoImp;
 import packetworldclienteescritorio.dominio.EnvioImp;
@@ -150,6 +151,11 @@ public class FXMLActualizarEstatusController implements Initializable {
         }else{
             lbMotivo.setText("Detalles / Motivo (Opcional)");
         }
+    }
+
+    @FXML
+    private void perderFoco(MouseEvent event) {
+        taMotivo.getParent().requestFocus();
     }
     
 }

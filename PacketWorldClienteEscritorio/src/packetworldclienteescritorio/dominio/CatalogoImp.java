@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import packetworldclienteescritorio.conexion.ConexionAPI;
-import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.pojo.CUS;
 import packetworldclienteescritorio.pojo.Direccion;
 import packetworldclienteescritorio.pojo.EstatusEnvio;

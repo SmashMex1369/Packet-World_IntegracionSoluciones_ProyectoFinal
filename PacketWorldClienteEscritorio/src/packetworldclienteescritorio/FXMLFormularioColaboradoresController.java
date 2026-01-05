@@ -16,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.CatalogoImp;
 import packetworldclienteescritorio.dominio.ColaboradorImp;
@@ -232,7 +233,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tfNombre.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Administración Colaboradores");
             escenario.show();
         } catch (Exception e) {
@@ -290,6 +291,11 @@ public class FXMLFormularioColaboradoresController implements Initializable {
     @FXML
     private void tfNoLicenciaTexto(KeyEvent event) {
         tfNoLicencia.setStyle(null);
+    }
+
+    @FXML
+    private void perderFoco(MouseEvent event) {
+        tfNombre.getParent().requestFocus();
     }
     
 }

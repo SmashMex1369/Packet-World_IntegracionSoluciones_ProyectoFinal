@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="425.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLActualizarEstatusController">
+<AnchorPane id="AnchorPane" onMouseClicked="#perderFoco" prefHeight="425.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldclienteescritorio.FXMLActualizarEstatusController">
    <children>
       <AnchorPane layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="200.0" style="-fx-background-color: #630505;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -64,7 +64,7 @@
                   <Font size="24.0" />
                </font>
             </TextArea>
-            <Button alignment="CENTER" contentDisplay="TEXT_ONLY" mnemonicParsing="false" onAction="#btnActualizar" prefWidth="150.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Actualizar" textFill="#e1e1e1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="TEXT_ONLY" defaultButton="true" mnemonicParsing="false" onAction="#btnActualizar" prefWidth="150.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Actualizar" textFill="#e1e1e1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

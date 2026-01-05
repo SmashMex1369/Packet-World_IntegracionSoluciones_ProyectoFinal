@@ -18,13 +18,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javax.naming.Context;
 import packetworldclienteescritorio.FXMLFormularioEditarColaboradoresController;
 import packetworldclienteescritorio.FXMLMenuPrincipalController;
 import packetworldclienteescritorio.dominio.CatalogoImp;
 import packetworldclienteescritorio.dominio.EnvioImp;
 import packetworldclienteescritorio.dto.RespuestaCosto;
-import packetworldclienteescritorio.pojo.Direccion;
 import packetworldclienteescritorio.pojo.Envio;
 
 /**
@@ -193,40 +191,17 @@ public class Utilidades {
                 break;
         }
         mostrarAlertaSimple("Total de costo", "El total a pagar con " +envio.getPaquetes().size()+" paquetes es de $"+costo, Alert.AlertType.INFORMATION);
-
-//        if (costo > 0) {
-//        }else{
-//            switch(envio.getPaquetes().size()){
-//                case 0:
-//                    costo = 0f;
-//                    break;
-//                case 1:
-//                    costo = 50f;
-//                    break;
-//                case 2: 
-//                    costo = 100f;
-//                    break;
-//                case 3:
-//                    costo = 160f;
-//                    break;
-//                case 4:
-//                    costo = 220f;
-//                    break;
-//                default:
-//                    costo = 300f;
-//                    break;
-//            }
-//            mostrarAlertaSimple("Total de costo", "El total a pagar de con " +envio.getPaquetes().size()+" paquetes son $"+costo, Alert.AlertType.INFORMATION);
-//        }
-        
         return costo;
     }
     
     public static void remaximizar(Stage stage, Scene scene){
         stage.setScene(scene);
         if (stage.isMaximized()){
-            stage.setMaximized(false); 
+            stage.setMaximized(false);
+            stage.centerOnScreen();
             stage.setMaximized(true);
+        }else{
+            stage.centerOnScreen();
         }
     }
 }

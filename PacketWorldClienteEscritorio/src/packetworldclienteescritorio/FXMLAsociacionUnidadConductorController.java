@@ -111,9 +111,6 @@ public class FXMLAsociacionUnidadConductorController implements Initializable {
         regresarVentana();
     }
 
-    @FXML
-    private void buscarConductor(ActionEvent event) {
-    }
 
     @FXML
     private void btnAsignar(ActionEvent event) {
@@ -141,7 +138,7 @@ public class FXMLAsociacionUnidadConductorController implements Initializable {
             Parent vista= cargador.load();
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tfBuscarCond.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle("Administración unidades");
             escenario.show();
         } catch (Exception e) {

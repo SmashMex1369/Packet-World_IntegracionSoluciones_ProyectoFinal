@@ -27,7 +27,6 @@ import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.CatalogoImp;
 import packetworldclienteescritorio.dominio.EnvioImp;
 import packetworldclienteescritorio.dto.Respuesta;
-import packetworldclienteescritorio.dto.RespuestaCosto;
 import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Colaborador;
 import packetworldclienteescritorio.pojo.Direccion;
@@ -287,7 +286,7 @@ public class FXMLFormularioEnviosController implements Initializable{
             }
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) cbColoniaDestinatario.getScene().getWindow();
-            escenario.setScene(escena);
+            Utilidades.remaximizar(escenario, escena);
             escenario.setTitle(titulo);
             escenario.show();
             

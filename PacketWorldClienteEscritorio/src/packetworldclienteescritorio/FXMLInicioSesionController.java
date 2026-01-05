@@ -13,10 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.InicioSesionImp;
 import packetworldclienteescritorio.dto.RSAutenticacionColaborador;
-import packetworldclienteescritorio.pojo.Colaborador;
 import packetworldclienteescritorio.utilidad.Sesion;
 import packetworldclienteescritorio.utilidad.Utilidades;
 
@@ -35,8 +36,7 @@ public class FXMLInicioSesionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-       
+        pfPassword.setPromptText("\u2022\u2022\u2022\u2022\u2022");
     }
 
     @FXML
@@ -47,9 +47,9 @@ public class FXMLInicioSesionController implements Initializable {
         
         if(!noPersonal.isEmpty() && !contraseña.isEmpty() || validarCampos(noPersonal, contraseña)){
             verificarCredenciales(noPersonal, contraseña);
-        }/*else{        
+        }else{        
             Utilidades.mostrarAlertaSimple("Campos requeridos", "El no. Personal y/o contraseña son obligatorios", Alert.AlertType.WARNING);
-        }*/
+        }
     }
     
     // LBL's para error en el inicio de sesion
@@ -58,12 +58,14 @@ public class FXMLInicioSesionController implements Initializable {
         lblErrorNoPersonal.setText("");
         lblErrorPass.setText("");
         if(noPersonal.isEmpty()){
-           camposValidos = false;
-           lblErrorNoPersonal.setText("No.Personal Obligatorio");
+            camposValidos = false;
+            lblErrorNoPersonal.setText("No.Personal Obligatorio");
+            tfNoPersonal.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
         if(contraseña.isEmpty()){
             camposValidos = false;
             lblErrorPass.setText("Contraseña Obligatoria");
+            pfPassword.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
         return camposValidos;
     }
@@ -75,8 +77,7 @@ public class FXMLInicioSesionController implements Initializable {
             Sesion.iniciarSesion(respuesta.getColaborador());
             irMenuPrincipal();
         }else{
-            System.out.println("error VC");
-           Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }           
     }
     
@@ -89,9 +90,27 @@ public class FXMLInicioSesionController implements Initializable {
             escenario.setScene(escena);
             escenario.setResizable(true);
             escenario.setTitle("Menú Principal");
+            escenario.centerOnScreen();
             escenario.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void perderFoco(MouseEvent event) {
+        tfNoPersonal.getParent().requestFocus();
+    }
+
+    @FXML
+    private void tfNoPersonalTexto(KeyEvent event) {
+        tfNoPersonal.setStyle(null);
+        lblErrorNoPersonal.setText("");
+    }
+
+    @FXML
+    private void pfPasswordTexto(KeyEvent event) {
+        pfPassword.setStyle(null);
+        lblErrorPass.setText("");
     }
 }
