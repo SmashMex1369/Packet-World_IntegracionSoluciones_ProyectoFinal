@@ -121,12 +121,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     <select id="buscar-asociacion" resultType="pojo.Conductor" parameterType="String">
-        SELECT c.noPersonal, noLicencia, col.nombre, col.apellidoPaterno, col.apellidoMaterno 
+        SELECT c.noPersonal, noLicencia, col.nombre, col.apellidoPaterno, col.apellidoMaterno, c.idConductor
         FROM conductor c 
         INNER JOIN colaborador col ON c.noPersonal= col.noPersonal
-        WHERE col.estatus = 1
-        AND c.noPersonal LIKE CONCAT('%', #{busqueda}, '%')
-        OR col.nombre LIKE CONCAT('%', #{busqueda}, '%');
+        LEFT JOIN unidad u ON u.idConductor = c.idConductor
+        WHERE col.estatus = 1 AND u.idUnidad IS NULL
+        AND (c.noPersonal LIKE CONCAT('%', #{busqueda}, '%')
+        OR col.nombre LIKE CONCAT('%', #{busqueda}, '%'));
     </select>
     
 </mapper>

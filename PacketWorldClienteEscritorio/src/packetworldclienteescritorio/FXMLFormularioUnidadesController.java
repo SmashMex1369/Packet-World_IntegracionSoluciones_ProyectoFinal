@@ -77,6 +77,7 @@ public class FXMLFormularioUnidadesController implements Initializable {
             int posicionTipoUnidad= obtenerPosicionTipoUnidad(unidadEdicion.getIdTipoUnidad());
             cbTipoUnidad.getSelectionModel().select(posicionTipoUnidad);
             lbTitulo.setText("Actualizar Unidad");
+            tfVIN.setDisable(true);
         }
     }
     
@@ -164,7 +165,7 @@ public class FXMLFormularioUnidadesController implements Initializable {
         }
         if(tfAnio.getText()!=null || !tfAnio.getText().isEmpty()){
             try {
-                if(Integer.parseInt(tfAnio.getText())<1800 || Integer.parseInt(tfAnio.getText())>2026){
+                if(Integer.parseInt(tfAnio.getText())<1901 || Integer.parseInt(tfAnio.getText())>2026){
                     camposValidos=false;
                     tfAnio.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
                 }
