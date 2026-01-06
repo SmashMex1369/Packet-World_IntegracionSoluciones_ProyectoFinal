@@ -130,4 +130,30 @@ public class SucursalImp {
         return respuesta;
     }
     
+    public static Respuesta verificarCUS(String CUS){
+        Respuesta respuesta = new Respuesta();
+        String URL = Constantes.URL_WS + "sucursal/verificar-CUS/" + CUS;
+        RespuestaHTTP respuestaAPI= ConexionAPI.peticionGET(URL);
+        Gson gson= new Gson();
+        if(respuestaAPI.getCodigo()==HttpURLConnection.HTTP_OK){
+            respuesta= gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        }else{
+            respuesta.setError(true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case HttpURLConnection.HTTP_BAD_REQUEST:
+                    respuesta.setMensaje("Campos en formato incorrecto, verifique la información");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para editar la información, porfavor inténtelo más tarde.");
+            }
+        }
+        return respuesta;
+    }
+    
 }

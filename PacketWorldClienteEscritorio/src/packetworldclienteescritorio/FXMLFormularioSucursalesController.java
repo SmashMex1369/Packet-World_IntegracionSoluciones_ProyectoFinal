@@ -286,14 +286,19 @@ public class FXMLFormularioSucursalesController implements Initializable {
     }
     
     private void registrarSucursal(Sucursal sucursal){
-        Respuesta respuesta= SucursalImp.registrarSucursal(sucursal);
-        if(!respuesta.isError()){
+        Respuesta respuestaCUS= SucursalImp.verificarCUS(sucursal.getCUS());
+        if(!respuestaCUS.isError()){
+            Respuesta respuesta = SucursalImp.registrarSucursal(sucursal);
+            if(!respuesta.isError()){
             Utilidades.mostrarAlertaSimple("Sucursal registrada con éxito", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
             observador.notificarOperacionExitosa("registro", sucursal.getNombre());
             regresarVentana();
         }else{
             Utilidades.mostrarAlertaSimple("Error al registrar", respuesta.getMensaje(), Alert.AlertType.ERROR);
-        }    
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("CUS ocupado", respuestaCUS.getMensaje(), Alert.AlertType.WARNING);   
+        }
     }
     
     private void editarSucursal(Sucursal sucursal){
