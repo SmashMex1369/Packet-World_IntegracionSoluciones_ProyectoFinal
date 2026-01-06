@@ -7,6 +7,8 @@ function buscarEnvio() {
         return;
     }
 
+    // Guardar el número de guía para futuras recargas
+    localStorage.setItem("ultimaGuiaBuscada", noGuia);
     consultarDetallesEnvio(noGuia);
 }
 
@@ -33,7 +35,13 @@ async function consultarDetallesEnvio(noGuia) {
         }
 
         localStorage.setItem("envioSeleccionado", JSON.stringify(data.envio));
-        window.location.href = "DetallesEnvio.html";
+        
+        // Si ya estamos en DetallesEnvio.html, solo actualizar la vista
+        if (window.location.pathname.includes("DetallesEnvio.html")) {
+            mostrarDetallesEnvio(data.envio);
+        } else {
+            window.location.href = "DetallesEnvio.html";
+        }
 
     } catch (error) {
         console.error("Error al consultar envío:", error);
@@ -43,16 +51,23 @@ async function consultarDetallesEnvio(noGuia) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const envioJSON = localStorage.getItem("envioSeleccionado");
-
-    if (!envioJSON) {
-        console.warn("No hay información del envío.");
+    // Solo ejecutar en DetallesEnvio.html
+    if (!window.location.pathname.includes("DetallesEnvio.html")) {
         return;
     }
 
-    const envio = JSON.parse(envioJSON);
+    // Primero intentar obtener el número de guía guardado
+    const ultimaGuia = localStorage.getItem("ultimaGuiaBuscada");
+    
+    if (!ultimaGuia) {
+        console.warn("No hay número de guía guardado.");
+        alert("No se encontró información del envío. Redirigiendo al inicio...");
+        window.location.href = "index.html";
+        return;
+    }
 
-    mostrarDetallesEnvio(envio);
+    // Consultar datos actualizados del servidor
+    consultarDetallesEnvio(ultimaGuia);
 });
 
 function mostrarDetallesEnvio(envio) {

@@ -7,9 +7,9 @@ function buscarHistorial() {
         return;
     }
 
-    consultarHistorial(noGuia)
-
-    
+    // Guardar el número de guía para futuras recargas
+    localStorage.setItem("ultimaGuiaHistorial", noGuia);
+    consultarHistorial(noGuia);
 }
 
 async function consultarHistorial(noGuia){
@@ -35,7 +35,13 @@ async function consultarHistorial(noGuia){
             }
 
             localStorage.setItem("historialEnvio", JSON.stringify(historial));
-            window.location.href = "HistorialEstatus.html";
+            
+            // Si ya estamos en HistorialEstatus.html, solo actualizar la vista
+            if (window.location.pathname.includes("HistorialEstatus.html")) {
+                mostrarHistorial(historial);
+            } else {
+                window.location.href = "HistorialEstatus.html";
+            }
 
         } catch (error) {
             console.error("Error al consultar envío:", error);
@@ -45,16 +51,23 @@ async function consultarHistorial(noGuia){
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const historialJSON = localStorage.getItem("historialEnvio");
-
-    if (!historialJSON) {
-        console.warn("No hay historial del envio");
+    // Solo ejecutar en HistorialEstatus.html
+    if (!window.location.pathname.includes("HistorialEstatus.html")) {
         return;
     }
 
-    const historial = JSON.parse(historialJSON)
+    // Intentar obtener el número de guía guardado
+    const ultimaGuia = localStorage.getItem("ultimaGuiaHistorial");
+    
+    if (!ultimaGuia) {
+        console.warn("No hay número de guía guardado para el historial.");
+        alert("No se encontró información del historial. Redirigiendo al inicio...");
+        window.location.href = "index.html";
+        return;
+    }
 
-    mostrarHistorial(historial);
+    // Consultar datos actualizados del servidor
+    consultarHistorial(ultimaGuia);
 });
 
 function mostrarHistorial(historial){
