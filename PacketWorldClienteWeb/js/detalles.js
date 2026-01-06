@@ -66,10 +66,11 @@ function mostrarDetallesEnvio(envio) {
         envio.nombreConductor
             ? `${envio.nombreConductor} ${envio.apellidoPatConductor} ${envio.apellidoMatConductor}`
             : "No asignado";
-    
-    const cantidadPaquetes = envio.paquetes.length;
-    document.getElementById("paquetes").textContent = envio.paquetes.length;
-
+    if (envio.paquetes==null){
+        document.getElementById("paquetes").textContent=0;
+    }else{
+        document.getElementById("paquetes").textContent = envio.paquetes.length;
+    }
     
     //cliente
     document.getElementById("nombreCliente").textContent =
