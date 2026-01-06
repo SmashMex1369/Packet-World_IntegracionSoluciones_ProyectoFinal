@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM colaborador c
         INNER JOIN rol r ON r.idRol=c.idRol
         INNER JOIN sucursal s ON s.idSucursal = c.idSucursal
-        WHERE c.estatus = 1 AND noPersonal= #{noPersonal} AND contraseña= #{contraseña};
+        WHERE c.estatus = 1 AND BINARY noPersonal= #{noPersonal} AND BINARY contraseña= #{contraseña};
     </select>
     
     <select id="conductor" parameterType="map" resultType="pojo.Conductor">
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INNER JOIN rol r ON r.idRol=c.idRol
         INNER JOIN sucursal s ON s.idSucursal=c.idSucursal
         INNER JOIN conductor con ON c.noPersonal=con.noPersonal
-        WHERE c.estatus = 1 AND c.noPersonal=#{noPersonal} AND contraseña=#{contraseña};
+        WHERE c.estatus = 1 AND BINARY c.noPersonal=#{noPersonal} AND BINARY contraseña=#{contraseña};
     </select>
       
 </mapper>
