@@ -59,7 +59,7 @@
                   <Insets left="60.0" right="60.0" />
                </GridPane.margin>
             </ComboBox>
-            <TextArea fx:id="taMotivo" wrapText="true" GridPane.rowIndex="4">
+            <TextArea fx:id="taMotivo" onKeyTyped="#taMotivoTexto" wrapText="true" GridPane.rowIndex="4">
                <font>
                   <Font size="24.0" />
                </font>

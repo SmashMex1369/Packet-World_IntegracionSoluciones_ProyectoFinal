@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.CatalogoImp;
@@ -156,6 +157,11 @@ public class FXMLActualizarEstatusController implements Initializable {
     @FXML
     private void perderFoco(MouseEvent event) {
         taMotivo.getParent().requestFocus();
+    }
+
+    @FXML
+    private void taMotivoTexto(KeyEvent event) {
+        taMotivo.setStyle(null);
     }
     
 }
