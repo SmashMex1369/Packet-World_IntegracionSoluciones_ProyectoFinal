@@ -157,10 +157,6 @@ public class FXMLFormularioPaquetesController implements Initializable {
             taDescripcion.setStyle("-fx-border-color: #ff0000");
             
         }
-        if(cbNoGuia.getSelectionModel().getSelectedIndex() == -1){
-            camposValidos=false;
-            cbNoGuia.setStyle("-fx-border-color: #ff0000");
-        }
         if(!camposValidos){
             Utilidades.mostrarAlertaSimple("Campos incorrectos", "Hay datos faltantes o no tienen el formato adecuado.", Alert.AlertType.ERROR);
         }
@@ -177,7 +173,6 @@ public class FXMLFormularioPaquetesController implements Initializable {
             paquete.setAncho(Float.parseFloat(tfAncho.getText()));
             paquete.setProfundidad(Float.parseFloat(tfProfundidad.getText()));
             NoGuia noGuiaSeleccionado= cbNoGuia.getSelectionModel().getSelectedItem();
-            paquete.setIdEnvio(noGuiaSeleccionado.getIdEnvio());
             if(paqueteEdicion==null){
                 registrarPaquete(paquete);
             }else{

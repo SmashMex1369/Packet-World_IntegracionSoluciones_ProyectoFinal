@@ -12,9 +12,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -87,6 +89,19 @@ public class FXMLAdministracionEnviosController implements Initializable, INotif
             return new ReadOnlyObjectWrapper<>(paquetes);
         });
         colCosto.setCellValueFactory(new PropertyValueFactory("costo"));
+        colCosto.setCellFactory(column -> new TableCell<Envio, Float>() {
+        @Override
+        protected void updateItem(Float costo, boolean empty) {
+            super.updateItem(costo, empty);
+            
+            if (empty || costo == null) {
+                setText(null);
+            } else {
+                setText(String.format("$%.2f", costo));
+                setAlignment(Pos.CENTER_LEFT);
+            }
+        }
+    });
     }
     
     private void cargarInformacionEnvios(){
