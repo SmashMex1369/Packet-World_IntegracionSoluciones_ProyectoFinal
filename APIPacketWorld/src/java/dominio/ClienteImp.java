@@ -102,13 +102,13 @@ public class ClienteImp {
         return respuesta;
     }
     
-    public static List<Cliente> buscarCliente(int idCliente){
+    public static List<Cliente> buscarCliente(String busqueda){
         List<Cliente> clientes=null;
         SqlSession conexionBD= MyBatisUtil.getSession();
         if(conexionBD!=null){
             try {
-                 clientes= conexionBD.selectList("cliente.buscar-cliente", idCliente);
-                 conexionBD.close();
+                clientes= conexionBD.selectList("cliente.buscar-cliente", busqueda);
+                conexionBD.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }          

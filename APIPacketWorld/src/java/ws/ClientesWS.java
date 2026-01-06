@@ -72,12 +72,12 @@ public Respuesta eliminar(String json){
         } 
     }
 
-@Path("buscar-cliente/{idCliente}")
+@Path("buscar-cliente/{busqueda}")
 @GET
 @Produces(MediaType.APPLICATION_JSON)
-public List<Cliente> buscarClientePorId(@PathParam("idCliente") int idCliente){
-    if(idCliente > 0){
-        return ClienteImp.buscarCliente(idCliente);
+public List<Cliente> buscarClientePorId(@PathParam("busqueda") String busqueda){
+    if(busqueda!=null && !busqueda.isEmpty()){
+        return ClienteImp.buscarCliente(busqueda);
     }
     throw new BadRequestException();
 }

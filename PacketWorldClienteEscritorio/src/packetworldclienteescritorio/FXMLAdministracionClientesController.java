@@ -24,7 +24,6 @@ import packetworldclienteescritorio.dominio.ClienteImp;
 import packetworldclienteescritorio.dto.Respuesta;
 import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Cliente;
-import packetworldclienteescritorio.utilidad.FiltradoTablas;
 import packetworldclienteescritorio.utilidad.Utilidades;
 
 /**
@@ -58,10 +57,8 @@ public class FXMLAdministracionClientesController implements Initializable, INot
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         configurarTabla();
         cargarInfoClientes();
-        configurarFiltrado();
     }    
     
     private void configurarTabla(){
@@ -76,31 +73,14 @@ public class FXMLAdministracionClientesController implements Initializable, INot
         colTelefono.setCellValueFactory(new PropertyValueFactory("Telefono"));
         colCorreo.setCellValueFactory(new PropertyValueFactory("Correo"));
     }
-    
-     private void configurarFiltrado() {
-        FiltradoTablas.configurarFiltradoGenerico(
-            tfBusqueda,
-            tvClientes,
-            clientes,
-            (cliente, filtro) -> {
-                Cliente c = (Cliente) cliente;
-                return c.getNombre().toLowerCase().contains(filtro) ||
-                       c.getApellidoPaterno().toLowerCase().contains(filtro) ||
-                       c.getApellidoMaterno().toLowerCase().contains(filtro) ||
-                       c.getCorreo().toLowerCase().contains(filtro) ||
-                       c.getTelefono().toLowerCase().contains(filtro);
-            }
-        );
-    }
      
     private void cargarInfoClientes(){
-        
         HashMap<String, Object> respuesta= ClienteImp.obtenerTodos();
-        /*if (tfBusqueda.getText().isEmpty()) {
+        if (tfBusqueda.getText().isEmpty()) {
             respuesta = ClienteImp.obtenerTodos();
         }else{
             respuesta = ClienteImp.obtenerClientes(tfBusqueda.getText());
-        }*/
+        }
         boolean esError= (boolean) respuesta.get("error");
         if (!esError){
             List<Cliente> clientesAPI= (List<Cliente>)respuesta.get("clientes");
@@ -176,8 +156,7 @@ public class FXMLAdministracionClientesController implements Initializable, INot
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tvClientes.getScene().getWindow();
             escenario.setScene(escena);
-            escenario.setTitle("Formulario clientes");  
-            //escenario.initModality(Modality.APPLICATION_MODAL);            
+            escenario.setTitle("Formulario clientes");            
             escenario.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -192,7 +171,7 @@ public class FXMLAdministracionClientesController implements Initializable, INot
 
     @FXML
     private void buscarCliente(KeyEvent event) {
-        //cargarInfoClientes();
+        cargarInfoClientes();
     }
        
 }

@@ -45,9 +45,9 @@ public class ClienteImp {
         return respuesta;
     }
     
-    public static HashMap<String, Object> obtenerClientes(String idCliente){
+    public static HashMap<String, Object> obtenerClientes(String busqueda){
         HashMap<String, Object> respuesta= new LinkedHashMap<>();
-        String URL= Constantes.URL_WS + "cliente/buscar-cliente" + idCliente;
+        String URL= Constantes.URL_WS + "cliente/buscar-cliente/" + busqueda;
         RespuestaHTTP respuestaAPI= ConexionAPI.peticionGET(URL);
         if(respuestaAPI.getCodigo()== HttpURLConnection.HTTP_OK){
             Gson gson= new Gson();

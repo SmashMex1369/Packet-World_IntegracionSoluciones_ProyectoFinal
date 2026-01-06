@@ -85,7 +85,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             colaborador.setNombre(tfNombre.getText());
             colaborador.setApellidoPaterno(tfApellidoPaterno.getText());
             colaborador.setApellidoMaterno(tfApellidoMaterno.getText());
-            colaborador.setCURP(tfCURP.getText());
+            colaborador.setCURP(tfCURP.getText().toUpperCase());
             colaborador.setCorreo(tfCorreo.getText());
             colaborador.setNoPersonal(tfNoPersonal.getText());
             colaborador.setIdSucursal(cbSucursal
@@ -116,21 +116,21 @@ public class FXMLFormularioColaboradoresController implements Initializable {
 
     private boolean CURPValido(String curp) {
         if (curp == null || curp.length() != 18) {
-        return false;
-    }
+            return false;
+        }
 
-    String rango = "^[A-Z]{4}[0-9]{6}[HM]{1}[A-Z]{5}[A-Z0-9]{1}[0-9]{1}$";
-    return curp.toUpperCase().matches(rango);
-}
+        String rango = "^[A-Z]{4}[0-9]{6}[HM]{1}[A-Z]{5}[A-Z0-9]{1}[0-9]{1}$";
+        return curp.toUpperCase().matches(rango);
+    }
 
     private boolean EmailValido(String email) {
         if (email == null || email.isEmpty()) {
-        return false;
-    }
+            return false;
+        }
 
-    String rango = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-        return email.matches(rango);
-}
+        String rango = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+            return email.matches(rango);
+    }
     
     private boolean sonCamposValidos(){
         boolean camposValidos = true;
@@ -147,25 +147,25 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             tfCURP.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
         String curp = tfCURP.getText();
-            if(curp == null || curp.trim().isEmpty()){
-        camposValidos = false;
-        tfCURP.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
-    } else if (!CURPValido(curp.toUpperCase())) {
-        camposValidos = false;
-        tfCURP.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
-    }
+        if(curp == null || curp.trim().isEmpty()){
+            camposValidos = false;
+            tfCURP.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+        } else if (!CURPValido(curp.toUpperCase())) {
+            camposValidos = false;
+            tfCURP.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+        }
         if(tfCorreo.getText()==null || tfCorreo.getText().isEmpty()){
             camposValidos=false;
             tfCorreo.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
         String correo = tfCorreo.getText();
-            if(correo == null || correo.trim().isEmpty()){
-        camposValidos = false;
-        tfCorreo.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
-    } else if (!EmailValido(correo)) {
-        camposValidos = false;
-        tfCorreo.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
-    }
+        if(correo == null || correo.trim().isEmpty()){
+            camposValidos = false;
+            tfCorreo.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+        } else if (!EmailValido(correo)) {
+            camposValidos = false;
+            tfCorreo.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+        }
         if(tfNoPersonal.getText()==null || tfNoPersonal.getText().isEmpty()){
             camposValidos=false;
             tfNoPersonal.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");

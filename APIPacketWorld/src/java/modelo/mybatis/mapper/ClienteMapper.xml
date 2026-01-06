@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     c.correo,
     c.calle,
     c.numero,
-    c.idColonia as idColonia,
+    c.idColonia,
     co.colonia,
     co.codigoPostal,
 
@@ -55,10 +55,31 @@ INNER JOIN estado e         ON e.idEstado = ci.idEstado WHERE estatus = 1;
         
     </update>
     
-    <select id="buscar-cliente" parameterType="int" resultType="pojo.Cliente">
-        
-         SELECT idCliente, nombre, apellidoPaterno, apellidoMaterno, telefono, correo FROM cliente WHERE idCliente = #{idCliente};
-        
+    <select id="buscar-cliente" parameterType="String" resultType="pojo.Cliente">
+        SELECT 
+        c.idCliente,
+        c.telefono,
+        c.nombre,
+        c.apellidoPaterno,
+        c.apellidoMaterno,
+        c.correo,
+        c.calle,
+        c.numero,
+        c.idColonia,
+        co.colonia,
+        co.codigoPostal,
+        ci.ciudad,
+        e.estado,
+        c.estatus
+
+        FROM cliente c
+        INNER JOIN colonia co       ON co.idColonia = c.idColonia
+        INNER JOIN ciudad ci        ON ci.idCiudad = co.idCiudad
+        INNER JOIN estado e         ON e.idEstado = ci.idEstado 
+        WHERE estatus = 1
+        AND (c.nombre LIKE CONCAT('%', #{busqueda}, '%')
+        OR c.telefono LIKE CONCAT('%', #{busqueda}, '%')
+        OR c.correo LIKE CONCAT('%', #{busqueda}, '%'));
     </select>
     
 </mapper>
