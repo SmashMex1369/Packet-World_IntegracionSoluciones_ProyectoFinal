@@ -182,9 +182,18 @@ public class EnvioImp {
             try{
                 Envio envio = conexionBD.selectOne("envio.buscar-envio-web", noGuia);
                 if (envio != null) {
-                    respuesta.setError(false);
-                    respuesta.setMensaje("El envio fue encontrado");
-                    respuesta.setEnvio(envio);
+                    List <Paquete> paquetes;
+                    paquetes = conexionBD.selectList("envio.obtener-paquetes", envio.getIdEnvio());
+                    if (paquetes != null && paquetes.size()>0){
+                        envio.setPaquetes(paquetes);
+                        respuesta.setError(false);
+                        respuesta.setMensaje("El envio fue encontrado");
+                        respuesta.setEnvio(envio);
+                    }else{
+                        respuesta.setError(false);
+                        respuesta.setMensaje("El envio fue encontrado, pero sin paquetes.");
+                        respuesta.setEnvio(envio);
+                    }
                 }else{
                     respuesta.setMensaje("El número de guia ingresado no existe, favor de verificarlo");
                 }
