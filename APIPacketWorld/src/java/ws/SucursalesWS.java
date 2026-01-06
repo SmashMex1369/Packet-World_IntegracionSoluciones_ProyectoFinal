@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import pojo.Sucursal;
@@ -70,5 +71,15 @@ public Respuesta darBajaSucursal(String json){
             throw new BadRequestException();
         }               
     }
+
+@Path("verificar-CUS/{CUS}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta noPersonal(@PathParam("CUS") String CUS){
+        if(CUS!=null && !CUS.isEmpty()){
+            return SucursalImp.verificarCUS(CUS);
+        }     
+        throw new BadRequestException();     
+    } 
     
 }

@@ -49,5 +49,11 @@ INNER JOIN estado e  ON e.idEstado = ci.idEstado;
         SET estatus = 0
         WHERE idSucursal = #{idSucursal}
     </update>
+    
+    <select id="verificar-CUS" parameterType="String" resultType="pojo.Sucursal">
+        SELECT CUS 
+        FROM sucursal 
+        WHERE CUS = #{CUS};
+    </select>
 
 </mapper>

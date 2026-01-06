@@ -118,4 +118,26 @@ public class SucursalImp {
         return respuesta;
     }
     
+    public static Respuesta verificarCUS(String CUS){
+        Respuesta respuesta= new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if (conexionBD!=null){
+            try {
+                if(conexionBD.selectOne("sucursal.verificar-CUS", CUS)==null){
+                    respuesta.setError(false);
+                    respuesta.setMensaje("El CUS esta disponible.");
+                }else{               
+                    respuesta.setMensaje("El Código único que ingreso YA está en uso.");
+                }
+                conexionBD.close();
+            } catch (Exception e) {
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje(Constantes.MSJ_ERROR_BD);
+        }
+        return respuesta;
+    }
+    
 }
