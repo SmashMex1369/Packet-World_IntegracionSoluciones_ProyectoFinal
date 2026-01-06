@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -56,6 +57,8 @@ public class FXMLFormularioUnidadesController implements Initializable {
     private ObservableList<TipoUnidad> tipos;
     @FXML
     private Label lbTitulo;
+    @FXML
+    private Button btnGuardar;
 
     /**
      * Initializes the controller class.
@@ -77,7 +80,11 @@ public class FXMLFormularioUnidadesController implements Initializable {
             int posicionTipoUnidad= obtenerPosicionTipoUnidad(unidadEdicion.getIdTipoUnidad());
             cbTipoUnidad.getSelectionModel().select(posicionTipoUnidad);
             lbTitulo.setText("Actualizar Unidad");
+            btnGuardar.setText("Actualizar");
             tfVIN.setDisable(true);
+        }else{
+            lbTitulo.setText("Registrar Unidad");
+            btnGuardar.setText("Crear");
         }
     }
     
