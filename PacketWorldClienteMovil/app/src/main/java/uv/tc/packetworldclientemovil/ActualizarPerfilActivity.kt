@@ -19,15 +19,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.content.edit
+import androidx.core.graphics.scale
+import androidx.core.widget.addTextChangedListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.gson.Gson
 import com.koushikdutta.ion.Ion
+import de.hdodenhof.circleimageview.CircleImageView
 import uv.tc.packetworldclientemovil.databinding.ActivityActualizarPerfilBinding
-import uv.tc.packetworldclientemovil.databinding.ActivityPerfilBinding
 import uv.tc.packetworldclientemovil.databinding.FragmentBottomSheetConfirmacionBinding
 import uv.tc.packetworldclientemovil.dto.Respuesta
 import uv.tc.packetworldclientemovil.poko.Conductor
@@ -35,11 +36,9 @@ import uv.tc.packetworldclientemovil.utilidades.Constantes
 import uv.tc.packetworldclientemovil.utilidades.DialogoCarga
 import uv.tc.packetworldclientemovil.utilidades.ajustarAInsets
 import uv.tc.packetworldclientemovil.utilidades.descargarFoto
-import androidx.core.content.edit
 import java.io.ByteArrayOutputStream
+import java.util.Locale
 import kotlin.math.min
-import androidx.core.graphics.scale
-import de.hdodenhof.circleimageview.CircleImageView
 
 class ActualizarPerfilActivity : AppCompatActivity() {
     private lateinit var binding: ActivityActualizarPerfilBinding
@@ -71,19 +70,43 @@ class ActualizarPerfilActivity : AppCompatActivity() {
         binding.etCurp.setText(conductor.CURP)
         binding.etCorreo.setText(conductor.correo)
 
+        binding.etNombre.addTextChangedListener { text ->
+            if (text.toString().isNotEmpty()) {
+                binding.tilNombre.error = null
+            }
+        }
+
+        binding.etApellidoPaterno.addTextChangedListener { text ->
+            if (text.toString().isNotEmpty()) {
+                binding.tilApellidoPaterno.error = null
+            }
+        }
+
+        binding.etCurp.addTextChangedListener { text ->
+            if (text.toString().isNotEmpty()) {
+                binding.tilCurp.error = null
+            }
+        }
+
+        binding.etCorreo.addTextChangedListener { text ->
+            if (text.toString().isNotEmpty()) {
+                binding.tilCorreo.error = null
+            }
+        }
+
         binding.btnGuardar.setOnClickListener {
             if (sonCamposValidos()){
                 desabilitarCampos()
                 loading.startLoading("Actualizando datos ...")
-                conductor.nombre = binding.etNombre.text.toString()
-                conductor.apellidoPaterno = binding.etApellidoPaterno.text.toString()
-                conductor.apellidoMaterno = binding.etApellidoMaterno.text.toString()
-                conductor.CURP = binding.etCurp.text.toString()
-                conductor.correo = binding.etCorreo.text.toString()
+                conductor.nombre = binding.etNombre.text.toString().trim()
+                conductor.apellidoPaterno = binding.etApellidoPaterno.text.toString().trim()
+                conductor.apellidoMaterno = binding.etApellidoMaterno.text.toString().trim()
+                conductor.CURP = binding.etCurp.text.toString().uppercase().trim()
+                conductor.correo = binding.etCorreo.text.toString().trim()
                 if (binding.etContraseA.text.toString().isEmpty()){
                     conductor.contraseña = null
                 }else{
-                    conductor.contraseña = binding.etContraseA.text.toString()
+                    conductor.contraseña = binding.etContraseA.text.toString().trim()
                 }
                 consumirAPI(conductor)
             }else{
@@ -192,12 +215,40 @@ class ActualizarPerfilActivity : AppCompatActivity() {
         if (binding.etCurp.text.toString().isEmpty()){
             binding.tilCurp.error = "Obligatorio"
             camposValidos = false
+        }else{
+            if (!CURPValido(binding.etCurp.text.toString())){
+                binding.tilCurp.error = "CURP no valido"
+                camposValidos = false
+            }
         }
         if (binding.etCorreo.text.toString().isEmpty()){
             binding.tilCorreo.error = "Obligatorio"
             camposValidos = false
+        }else{
+            if (!emailValido(binding.etCorreo.text.toString())){
+                binding.tilCorreo.error = "Correo no valido"
+                camposValidos = false
+            }
         }
         return camposValidos
+    }
+
+    private fun CURPValido(curp: String?): Boolean {
+        if (curp == null || curp.length != 18) {
+            return false
+        }
+
+        val rango = "^[A-Z]{4}[0-9]{6}[HM]{1}[A-Z]{5}[A-Z0-9]{1}[0-9]{1}$"
+        return curp.uppercase(Locale.getDefault()).matches(rango.toRegex())
+    }
+
+    private fun emailValido(email: String?): Boolean {
+        if (email == null || email.isEmpty()) {
+            return false
+        }
+
+        val rango = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+        return email.matches(rango.toRegex())
     }
 
     private fun consumirAPI(conductor: Conductor){

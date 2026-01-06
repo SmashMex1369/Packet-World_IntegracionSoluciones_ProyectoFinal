@@ -79,6 +79,7 @@ class ActualizarEstatusActivity : AppCompatActivity() {
             envio.idEstatusEnvio = idEstatusEnvio
             envio.motivo = binding.etMotivo.text.toString()
             if(validarCampos()) {
+                bloquearCampos()
                 val jsonEnvio = gson.toJson(envio)
                 actualizarEstatusAPI(jsonEnvio)
             }
@@ -152,6 +153,7 @@ class ActualizarEstatusActivity : AppCompatActivity() {
                     serializarRespuesta(result)
                 }else{
                     Toast.makeText(this@ActualizarEstatusActivity, "Error: $e", Toast.LENGTH_LONG).show()
+                    habilitarCampos()
                 }
             }
     }
@@ -169,9 +171,23 @@ class ActualizarEstatusActivity : AppCompatActivity() {
             }else{
                 Log.e("Error", respuestaEstatus.mensaje)
                 Toast.makeText(this@ActualizarEstatusActivity, respuestaEstatus.mensaje,Toast.LENGTH_LONG).show()
+                habilitarCampos()
             }
         }catch (e: Exception){
             Toast.makeText(this@ActualizarEstatusActivity, "Lo sentimos hubo un error en la solicitud",Toast.LENGTH_LONG).show()
+            habilitarCampos()
         }
+    }
+
+    fun bloquearCampos(){
+        binding.tilSpinner.isEnabled = false
+        binding.tilMotivo.isEnabled = false
+        binding.btnActualizar.isEnabled = false
+    }
+
+    fun habilitarCampos(){
+        binding.tilSpinner.isEnabled = true
+        binding.tilMotivo.isEnabled = true
+        binding.btnActualizar.isEnabled = true
     }
 }
