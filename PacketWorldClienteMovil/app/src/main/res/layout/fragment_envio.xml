@@ -11,7 +11,7 @@
         android:id="@+id/tv_envio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Envio"
+        android:text="Envío"
         android:textAlignment="center"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No. de Guia:"
+            android:text="No. de Guía:"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"/>
@@ -37,7 +37,7 @@
             android:id="@+id/tv_no_guia_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="[No. de Guia]"
+            android:text="[No. de Guía]"
             android:textColor="@color/grisOscuro"
             android:textAlignment="center"
             android:textSize="22sp"/>

@@ -9,7 +9,7 @@
         android:id="@+id/tv_descripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Descripcion del Paquete #:"
+        android:text="Descripción del Paquete #:"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textAlignment="center"/>
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="[Descripcion del paquete]"
+        android:text="[Descripción del paquete]"
         android:textColor="@color/grisOscuro"
         android:textSize="22sp"/>
 </LinearLayout>

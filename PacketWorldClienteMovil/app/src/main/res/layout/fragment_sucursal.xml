@@ -64,7 +64,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:text="Codigo Unico\nde Sucursal:"/>
+                android:text="Código Único\nde Sucursal:"/>
             <TextView
                 android:id="@+id/tv_cus_valor"
                 android:layout_width="match_parent"
@@ -170,7 +170,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:text="Codigo Postal:"/>
+                android:text="Código Postal:"/>
             <TextView
                 android:id="@+id/tv_codigo_postal_valor"
                 android:layout_width="match_parent"
@@ -179,7 +179,7 @@
                 android:textColor="@color/grisOscuro"
                 android:textAlignment="center"
                 android:paddingHorizontal="3dp"
-                android:text="[Codigo Postal]"/>
+                android:text="[Código Postal]"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -232,7 +232,7 @@
                 android:paddingHorizontal="3dp"
                 android:textColor="@color/grisOscuro"
                 android:textAlignment="center"
-                android:text="[Numero]"/>
+                android:text="[Número]"/>
         </LinearLayout>
     </LinearLayout>
 
