@@ -55,4 +55,10 @@ INNER JOIN estado e         ON e.idEstado = ci.idEstado WHERE estatus = 1;
         
     </update>
     
+    <select id="buscar-cliente" parameterType="int" resultType="pojo.Cliente">
+        
+         SELECT idCliente, nombre, apellidoPaterno, apellidoMaterno, telefono, correo FROM cliente WHERE idCliente = #{idCliente};
+        
+    </select>
+    
 </mapper>

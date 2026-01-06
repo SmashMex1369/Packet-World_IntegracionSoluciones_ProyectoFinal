@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import pojo.Cliente;
@@ -70,5 +71,15 @@ public Respuesta eliminar(String json){
             throw new BadRequestException();
         } 
     }
+
+@Path("buscar-cliente/{idCliente}")
+@GET
+@Produces(MediaType.APPLICATION_JSON)
+public List<Cliente> buscarClientePorId(@PathParam("idCliente") int idCliente){
+    if(idCliente > 0){
+        return ClienteImp.buscarCliente(idCliente);
+    }
+    throw new BadRequestException();
+}
     
 }
