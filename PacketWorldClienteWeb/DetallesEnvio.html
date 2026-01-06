@@ -54,13 +54,15 @@
                     <strong>Fecha último cambio:</strong>
                     <span id="fecha">[FechaHora Envío]</span>
                 </div>
+                <div>
+                    <strong>Detalles del estatus / Motivo:</strong>
+                    <span id="motivo">[Motivo Envío]</span>
+                </div>
+                <div>
+                    <strong>Cantidad de paquetes:</strong>
+                    <span id="paquetes">[Paquetes]</span>
+                </div>
             </div>
-
-            <div class="grid-full">
-                <strong>Detalles del estatus / Motivo:</strong>
-                <span id="motivo">[Motivo Envío]</span>
-            </div>
-
             <div class="centrado">
                 <button class="historial" onclick="buscarHistorial()">⟳ Historial Completo</button>
             </div>
@@ -125,7 +127,11 @@
         </section>
 
         <section id="sucursal" class="seccion oculto">
-            <div class="grid3">
+            <div class="grid-full">
+                <strong>Nombre:</strong>
+                <span id="nombreSucursal">[Nombre de sucursal]</span>
+            </div>
+            <div class="grid3">              
                 <div>
                     <strong>Estado:</strong>
                     <span id="estado">[Estado Sucursal]</span>

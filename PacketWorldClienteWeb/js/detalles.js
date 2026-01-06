@@ -57,16 +57,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function mostrarDetallesEnvio(envio) {
 
-    //conductor
+    //envio
     document.getElementById("noGuia").textContent = envio.noGuia;
     document.getElementById("estatus").textContent = envio.estatus;
     document.getElementById("fecha").textContent = envio.tiempo;
     document.getElementById("motivo").textContent = envio.motivo;
-
     document.getElementById("nombreConductor").textContent =
         envio.nombreConductor
             ? `${envio.nombreConductor} ${envio.apellidoPatConductor} ${envio.apellidoMatConductor}`
             : "No asignado";
+    
+    const cantidadPaquetes = envio.paquetes.length;
+    document.getElementById("paquetes").textContent = envio.paquetes.length;
+
     
     //cliente
     document.getElementById("nombreCliente").textContent =
@@ -89,12 +92,14 @@ function mostrarDetallesEnvio(envio) {
     document.getElementById("numeroDest").textContent = envio.numDest;
 
     //sucursal
+    document.getElementById("nombreSucursal").textContent = envio.nombreSucursal;
     document.getElementById("estado").textContent = envio.estadoSucursal;
     document.getElementById("cdSuc").textContent = envio.ciudadSucursal;
     document.getElementById("colSuc").textContent = envio.coloniaSucursal;
     document.getElementById("cpSuc").textContent = envio.codigoPostalSucursal;
     document.getElementById("calleSuc").textContent = envio.calleSucursal;
     document.getElementById("numeroSuc").textContent = envio.numeroSucursal;
+
 }
 
 function mostrarSeccion(id, boton) {
