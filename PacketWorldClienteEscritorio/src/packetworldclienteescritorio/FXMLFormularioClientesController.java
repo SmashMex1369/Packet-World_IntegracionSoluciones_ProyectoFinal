@@ -145,14 +145,7 @@ public class FXMLFormularioClientesController implements Initializable {
             camposValidos = false;
             tfApellidoPaterno.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
-        if(tfApellidoMaterno.getText()==null || tfApellidoMaterno.getText().isEmpty()){
-            camposValidos = false;
-            tfApellidoMaterno.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
-        }
-        if(tfApellidoMaterno.getText()==null || tfApellidoMaterno.getText().isEmpty()){
-            camposValidos = false;
-            tfApellidoMaterno.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
-        }
+        
         if(tfCorreo.getText()==null || tfCorreo.getText().isEmpty()){
             camposValidos = false;
             tfCorreo.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");

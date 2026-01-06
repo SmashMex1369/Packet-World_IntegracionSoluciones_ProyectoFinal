@@ -18,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import packetworldclienteescritorio.dominio.ClienteImp;
 import packetworldclienteescritorio.dto.Respuesta;
@@ -95,6 +96,11 @@ public class FXMLAdministracionClientesController implements Initializable, INot
     private void cargarInfoClientes(){
         
         HashMap<String, Object> respuesta= ClienteImp.obtenerTodos();
+        /*if (tfBusqueda.getText().isEmpty()) {
+            respuesta = ClienteImp.obtenerTodos();
+        }else{
+            respuesta = ClienteImp.obtenerClientes(tfBusqueda.getText());
+        }*/
         boolean esError= (boolean) respuesta.get("error");
         if (!esError){
             List<Cliente> clientesAPI= (List<Cliente>)respuesta.get("clientes");
@@ -182,6 +188,11 @@ public class FXMLAdministracionClientesController implements Initializable, INot
     public void notificarOperacionExitosa(String operacion, String descripcion){
         System.out.println("Operacion: "+operacion+", descripcion del profesor: "+descripcion);
         cargarInfoClientes();
+    }
+
+    @FXML
+    private void buscarCliente(KeyEvent event) {
+        //cargarInfoClientes();
     }
        
 }

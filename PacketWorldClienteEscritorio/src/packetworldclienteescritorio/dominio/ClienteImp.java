@@ -45,6 +45,32 @@ public class ClienteImp {
         return respuesta;
     }
     
+    public static HashMap<String, Object> obtenerClientes(String idCliente){
+        HashMap<String, Object> respuesta= new LinkedHashMap<>();
+        String URL= Constantes.URL_WS + "cliente/buscar-cliente" + idCliente;
+        RespuestaHTTP respuestaAPI= ConexionAPI.peticionGET(URL);
+        if(respuestaAPI.getCodigo()== HttpURLConnection.HTTP_OK){
+            Gson gson= new Gson();
+            Type tipoLista= new TypeToken<List<Cliente>>(){}.getType();
+            List <Cliente> clientes= gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put("error", false);
+            respuesta.put("clientes", clientes);
+        }else{
+            respuesta.put("error", true);
+            switch(respuestaAPI.getCodigo()){
+                case Constantes.ERROR_URL:
+                    respuesta.put("mensaje",Constantes.MSJ_ERROR_URL);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put("mensaje",Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put("mensaje","Lo sentimos hay problemas para obtener la información en este momento este momento, porfavor inténtelo más tarde.");
+            }  
+        }
+        return respuesta;
+    }
+    
     public static Respuesta registrar(Cliente cliente){
         Respuesta respuesta= new Respuesta();
         String URL= Constantes.URL_WS + "cliente/registrar-cliente";
