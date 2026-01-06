@@ -78,7 +78,11 @@ public class FXMLFormularioPaquetesController implements Initializable {
             if (posicionIdEnvio!=-1) {
                 cbNoGuia.getSelectionModel().select(posicionIdEnvio);
             }else{
-                cbNoGuia.setPromptText(paqueteEdicion.getNoGuia());
+                NoGuia noGuiaCombo = new NoGuia();
+                noGuiaCombo.setIdEnvio(paqueteEdicion.getIdEnvio());
+                noGuiaCombo.setNoGuia(paqueteEdicion.getNoGuia());
+                cbNoGuia.getItems().add(noGuiaCombo);
+                cbNoGuia.getSelectionModel().select(obtenerPosicionIdEnvio(noGuiaCombo.getIdEnvio()));
             }
             lbTitulo.setText("Editar Paquetes");
             cbNoGuia.setDisable(true);
@@ -157,6 +161,10 @@ public class FXMLFormularioPaquetesController implements Initializable {
             taDescripcion.setStyle("-fx-border-color: #ff0000");
             
         }
+        if(cbNoGuia.getSelectionModel().getSelectedIndex() == -1){
+            camposValidos=false;
+            cbNoGuia.setStyle("-fx-border-color: #bf0b0b; -fx-font-size: 21; -fx-border-insets: -1");
+        }
         if(!camposValidos){
             Utilidades.mostrarAlertaSimple("Campos incorrectos", "Hay datos faltantes o no tienen el formato adecuado.", Alert.AlertType.ERROR);
         }
@@ -173,6 +181,7 @@ public class FXMLFormularioPaquetesController implements Initializable {
             paquete.setAncho(Float.parseFloat(tfAncho.getText()));
             paquete.setProfundidad(Float.parseFloat(tfProfundidad.getText()));
             NoGuia noGuiaSeleccionado= cbNoGuia.getSelectionModel().getSelectedItem();
+            paquete.setIdEnvio(noGuiaSeleccionado.getIdEnvio());
             if(paqueteEdicion==null){
                 registrarPaquete(paquete);
             }else{
