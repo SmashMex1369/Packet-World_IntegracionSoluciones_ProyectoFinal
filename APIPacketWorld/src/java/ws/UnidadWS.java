@@ -139,4 +139,14 @@ public class UnidadWS {
         }
         throw new BadRequestException();
     }
+    
+    @Path("verificar-vin/{VIN}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta noPersonal(@PathParam("VIN") String VIN){
+        if(VIN!=null && !VIN.isEmpty()){
+            return UnidadImp.verificarVIN(VIN);
+        }     
+        throw new BadRequestException();     
+    } 
 }

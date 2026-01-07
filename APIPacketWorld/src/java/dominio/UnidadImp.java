@@ -233,4 +233,26 @@ public class UnidadImp {
         return conductores;
     }
     
+    public static Respuesta verificarVIN(String VIN){
+        Respuesta respuesta = new Respuesta();
+        respuesta.setError(true);
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD!=null) {
+            try {
+                if(conexionBD.selectOne("unidad.validar-vin", VIN)==null){
+                    respuesta.setError(false);
+                    respuesta.setMensaje("El VIN esta disponible");
+                }else{
+                    respuesta.setMensaje("El VIN ingresado ya esta en registrado");
+                }
+                conexionBD.close();
+            } catch (Exception e) {
+                respuesta.setMensaje(e.getMessage());
+            }
+        }else{
+            respuesta.setMensaje((Constantes.MSJ_ERROR_BD));
+        }
+        return respuesta;
+    }
+    
 }

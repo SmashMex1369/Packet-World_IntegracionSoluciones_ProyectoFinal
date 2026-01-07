@@ -135,13 +135,15 @@ public class FXMLFormularioUnidadesController implements Initializable {
 
     @FXML
     private void btnGuardar(ActionEvent event) {
-        if(sonCamposValidos()){
+        Respuesta respuestaVIN = UnidadImp.verificarVIN(tfVIN.getText());
+        boolean validos = sonCamposValidos();
+        if(validos&&(!respuestaVIN.isError()||unidadEdicion!=null)){
             Unidad unidad= new Unidad();
             unidad.setModelo(tfModel.getText());
             unidad.setMarca(tfMarca.getText());
             unidad.setAño(Integer.parseInt(tfAnio.getText()));
-            unidad.setVIN(tfVIN.getText());
-            unidad.setNII(generarNII(Integer.parseInt(tfAnio.getText()), tfVIN.getText()));
+            unidad.setVIN(tfVIN.getText().toUpperCase());
+            unidad.setNII(generarNII(Integer.parseInt(tfAnio.getText()), tfVIN.getText().toUpperCase()));
             System.out.println(unidad.getNII());
             TipoUnidad tipoUnidadSeleccionado= cbTipoUnidad.getSelectionModel().getSelectedItem();
             unidad.setIdTipoUnidad(tipoUnidadSeleccionado.getIdTipoUnidad());
@@ -151,6 +153,10 @@ public class FXMLFormularioUnidadesController implements Initializable {
             }else{
                 editarUnidad(unidad);
             }
+        }else if (!validos){
+            Utilidades.mostrarAlertaSimple("Campos incorrectos", "Hay datos faltantes o no tienen el formato adecuado.", Alert.AlertType.ERROR);
+        }else if (respuestaVIN.isError()) {
+            Utilidades.mostrarAlertaSimple("VIN registrado", respuestaVIN.getMensaje(), Alert.AlertType.WARNING);
         }
     }
     
@@ -191,9 +197,6 @@ public class FXMLFormularioUnidadesController implements Initializable {
         if(cbTipoUnidad.getSelectionModel().getSelectedIndex() == -1){
             camposValidos=false;
             cbTipoUnidad.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1; -fx-font-size: 21");
-        }
-        if(!camposValidos){
-            Utilidades.mostrarAlertaSimple("Campos incorrectos", "Hay datos faltantes o no tienen el formato adecuado.", Alert.AlertType.ERROR);
         }
         return camposValidos;
     }

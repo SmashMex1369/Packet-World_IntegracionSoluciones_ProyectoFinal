@@ -130,4 +130,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         OR col.nombre LIKE CONCAT('%', #{busqueda}, '%'));
     </select>
     
+    <select id="validar-vin" parameterType="String" resultType="pojo.Unidad">
+        SELECT VIN
+        FROM unidad
+        WHERE VIN = #{VIN}
+    </select>
+    
 </mapper>
