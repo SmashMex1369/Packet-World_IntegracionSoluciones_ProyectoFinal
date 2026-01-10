@@ -82,18 +82,20 @@ public class FXMLFormularioColaboradoresController implements Initializable {
     private void btnRegistrar(ActionEvent event) {
         if (sonCamposValidos()){
             Conductor colaborador = new Conductor();
-            colaborador.setNombre(tfNombre.getText());
-            colaborador.setApellidoPaterno(tfApellidoPaterno.getText());
-            colaborador.setApellidoMaterno(tfApellidoMaterno.getText());
-            colaborador.setCURP(tfCURP.getText().toUpperCase());
-            colaborador.setCorreo(tfCorreo.getText());
-            colaborador.setNoPersonal(tfNoPersonal.getText());
+            colaborador.setNombre(tfNombre.getText().trim());
+            colaborador.setApellidoPaterno(tfApellidoPaterno.getText().trim());
+            colaborador.setApellidoMaterno(tfApellidoMaterno.getText().trim());
+            colaborador.setCURP(tfCURP.getText().toUpperCase().trim());
+            colaborador.setCorreo(tfCorreo.getText().trim());
+            colaborador.setNoPersonal(tfNoPersonal.getText().trim());
             colaborador.setIdSucursal(cbSucursal
                     .getSelectionModel().getSelectedItem().getIdSucursal());
             colaborador.setIdRol(cbRol
                     .getSelectionModel().getSelectedItem().getIdRol());
-            colaborador.setContraseña(tfContraseña.getText());
-            colaborador.setNoLicencia(tfNoLicencia.getText());
+            colaborador.setContraseña(tfContraseña.getText().trim());
+            if (cbRol.getSelectionModel().getSelectedItem().getIdRol()==3) {
+                colaborador.setNoLicencia(tfNoLicencia.getText().trim());
+            }
             registrar(colaborador);
         }
     }
@@ -184,7 +186,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
                 tfNoLicencia.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
             }
         }
-        if(tfContraseña.getText()==null || tfContraseña.getText().isEmpty()){
+        if(tfContraseña.getText()==null || tfContraseña.getText().trim().isEmpty()){
             camposValidos=false;
             tfContraseña.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }

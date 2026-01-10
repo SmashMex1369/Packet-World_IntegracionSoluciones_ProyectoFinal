@@ -93,6 +93,8 @@ public class FXMLFormularioClientesController implements Initializable {
             tfTelefono.setText(clienteEdicion.getTelefono());
             tfCorreo.setText(clienteEdicion.getCorreo());
             tfCodigoPostal.setText(String.valueOf(clienteEdicion.getCodigoPostal()));
+            buscarCodigoPostal();
+            cbColonia.getSelectionModel().select(obtenerPosicionColonia(clienteEdicion.getIdColonia()));
             tfCalle.setText(clienteEdicion.getCalle());
             tfNumeroExterior.setText(String.valueOf(clienteEdicion.getNumero()));
         }else{
@@ -289,6 +291,15 @@ public class FXMLFormularioClientesController implements Initializable {
             } 
         });
     }
+    
+    private int obtenerPosicionColonia(int idColonia){
+        for (int i=0;i<colonias.size();i++){
+            if (colonias.get(i).getIdColonia()==idColonia) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     @FXML
     private void clicBtnGuardar(ActionEvent event) {
@@ -310,11 +321,6 @@ public class FXMLFormularioClientesController implements Initializable {
                 editarCliente(cliente);             
             }
         }
-    }
-
-    @FXML
-    private void clicBtnCancelar(ActionEvent event) {
-        regresarVentana();
     }
 
     @FXML
@@ -376,5 +382,11 @@ public class FXMLFormularioClientesController implements Initializable {
     @FXML
     private void btnBuscarCodigoPostal(ActionEvent event) {
         buscarCodigoPostal();
+    }
+
+    @FXML
+    private void tfCodigoPostalEnter(ActionEvent event) {
+        buscarCodigoPostal();
+        lblTitulo.getParent().requestFocus();
     }
 }

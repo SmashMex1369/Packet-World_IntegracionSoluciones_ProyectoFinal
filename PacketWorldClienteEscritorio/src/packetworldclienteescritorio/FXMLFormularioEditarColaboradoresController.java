@@ -159,17 +159,17 @@ public class FXMLFormularioEditarColaboradoresController implements Initializabl
         if (sonCamposValidos()) {
             Colaborador colaborador = new Colaborador();
             colaborador.setIdColaborador(colaboradorEdicion.getIdColaborador());
-            colaborador.setNombre(tfNombre.getText());
-            colaborador.setApellidoPaterno(tfApellidoPaterno.getText());
-            colaborador.setApellidoMaterno(tfApellidoMaterno.getText());
-            colaborador.setCURP(tfCURP.getText());
-            colaborador.setCorreo(tfCorreo.getText());
+            colaborador.setNombre(tfNombre.getText().trim());
+            colaborador.setApellidoPaterno(tfApellidoPaterno.getText().trim());
+            colaborador.setApellidoMaterno(tfApellidoMaterno.getText().trim());
+            colaborador.setCURP(tfCURP.getText().toUpperCase().trim());
+            colaborador.setCorreo(tfCorreo.getText().trim());
             colaborador.setIdSucursal(cbSucursal
                     .getSelectionModel().getSelectedItem().getIdSucursal());
-            if (tfContraseña.getText().isEmpty()) {
+            if (tfContraseña.getText().trim().isEmpty()) {
                 colaborador.setContraseña(null);
             }else{
-                colaborador.setContraseña(tfContraseña.getText());
+                colaborador.setContraseña(tfContraseña.getText().trim());
             }
             actualizarColaborador(colaborador);
         }

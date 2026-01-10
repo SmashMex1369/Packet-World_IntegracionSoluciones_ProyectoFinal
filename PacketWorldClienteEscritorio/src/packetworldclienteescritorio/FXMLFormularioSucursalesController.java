@@ -86,6 +86,8 @@ public class FXMLFormularioSucursalesController implements Initializable {
             tfCodigoUnico.setDisable(true);
             tfNombreCorto.setText(sucursalEdicion.getNombre());
             tfCodigoPostal.setText(String.valueOf(sucursalEdicion.getCodigoPostal()));
+            buscarCodigoPostal();
+            cbColonia.getSelectionModel().select(obtenerPosicionColonia(sucursalEdicion.getIdColonia()));
             tfCalle.setText(sucursalEdicion.getCalle());
             tfNumeroExterior.setText(String.valueOf(sucursalEdicion.getNumero()));
         }else{
@@ -241,11 +243,14 @@ public class FXMLFormularioSucursalesController implements Initializable {
             } 
         });
     }
-
-
-    @FXML
-    private void clicBtnCancelar(ActionEvent event) {
-        regresarVentana();
+    
+    private int obtenerPosicionColonia(int idColonia){
+        for (int i=0;i<colonias.size();i++){
+            if (colonias.get(i).getIdColonia()==idColonia) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @FXML
@@ -330,6 +335,12 @@ public class FXMLFormularioSucursalesController implements Initializable {
     @FXML
     private void btnBuscarCodigoPostal(ActionEvent event) {
         buscarCodigoPostal();
+    }
+
+    @FXML
+    private void tfCodigoPostalEnter(ActionEvent event) {
+        buscarCodigoPostal();
+        lblTitulo.getParent().requestFocus();
     }
     
 }

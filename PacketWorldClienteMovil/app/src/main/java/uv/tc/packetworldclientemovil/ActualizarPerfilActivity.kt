@@ -103,14 +103,14 @@ class ActualizarPerfilActivity : AppCompatActivity() {
                 conductor.apellidoMaterno = binding.etApellidoMaterno.text.toString().trim()
                 conductor.CURP = binding.etCurp.text.toString().uppercase().trim()
                 conductor.correo = binding.etCorreo.text.toString().trim()
-                if (binding.etContraseA.text.toString().isEmpty()){
+                if (binding.etContraseA.text.toString().trim().isEmpty()){
                     conductor.contraseña = null
                 }else{
                     conductor.contraseña = binding.etContraseA.text.toString().trim()
                 }
                 consumirAPI(conductor)
             }else{
-                Toast.makeText(this, "Campos faltante, favor de completarlos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Campos faltantes, favor de completarlos", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -217,7 +217,7 @@ class ActualizarPerfilActivity : AppCompatActivity() {
             camposValidos = false
         }else{
             if (!CURPValido(binding.etCurp.text.toString())){
-                binding.tilCurp.error = "CURP no valido"
+                binding.tilCurp.error = "CURP no válido"
                 camposValidos = false
             }
         }
@@ -226,7 +226,7 @@ class ActualizarPerfilActivity : AppCompatActivity() {
             camposValidos = false
         }else{
             if (!emailValido(binding.etCorreo.text.toString())){
-                binding.tilCorreo.error = "Correo no valido"
+                binding.tilCorreo.error = "Correo no válido"
                 camposValidos = false
             }
         }

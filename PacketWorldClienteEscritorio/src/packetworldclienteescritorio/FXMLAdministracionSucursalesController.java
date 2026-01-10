@@ -119,12 +119,15 @@ public class FXMLAdministracionSucursalesController implements Initializable, IN
                 "La sucursal seleccionada ya se encuentra inactiva. No es posible dar de baja nuevamente.", 
                 Alert.AlertType.WARNING);
         } else {
-
-            boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion(
-                "Dar de baja sucursal", 
-                "¿Estás seguro de dar de baja a la sucursal seleccionada?");
-            if(confirmarOperacion){
-                bajaSucursal(sucursal.getIdSucursal());
+            if(tvSucursales.getItems().size()!=1){
+                boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion(
+                    "Dar de baja sucursal", 
+                    "¿Estás seguro de dar de baja a la sucursal seleccionada?");
+                if(confirmarOperacion){
+                    bajaSucursal(sucursal.getIdSucursal());
+                }
+            }else{
+                Utilidades.mostrarAlertaSimple("Problemas al dar de baja", "No puedes dar de baja la ultima sucursal", Alert.AlertType.WARNING);
             }
         }
     } else {
@@ -171,8 +174,7 @@ public class FXMLAdministracionSucursalesController implements Initializable, IN
             Scene escena= new Scene(vista);
             Stage escenario= (Stage) tvSucursales.getScene().getWindow();
             escenario.setScene(escena);
-            escenario.setTitle("Formulario sucursales");  
-            //escenario.initModality(Modality.APPLICATION_MODAL);            
+            escenario.setTitle("Formulario sucursales");          
             escenario.show();
         } catch (Exception e) {
             e.printStackTrace();

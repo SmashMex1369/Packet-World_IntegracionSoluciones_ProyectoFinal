@@ -71,8 +71,8 @@ class EnviosActivity : AppCompatActivity() {
 
         binding.imgbtnLogout.setOnClickListener {
             MaterialAlertDialogBuilder(this@EnviosActivity)
-                .setTitle("Cerrar Sesion")
-                .setMessage("¿Desea cerrar la sesion actual?\nDebera volver a iniciar sesión")
+                .setTitle("Cerrar Sesión")
+                .setMessage("¿Desea cerrar la sesión actual?\nDeberá volver a iniciar sesión")
                 .setCancelable(false)
                 .setPositiveButton("Si"){_, _ ->
                     val preferencias = getSharedPreferences("Sesion", MODE_PRIVATE)

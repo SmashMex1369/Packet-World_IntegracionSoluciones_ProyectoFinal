@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -31,6 +32,7 @@ import packetworldclienteescritorio.interfaz.INotificador;
 import packetworldclienteescritorio.pojo.Colaborador;
 import packetworldclienteescritorio.pojo.Conductor;
 import packetworldclienteescritorio.utilidad.Constantes;
+import packetworldclienteescritorio.utilidad.Sesion;
 import packetworldclienteescritorio.utilidad.Utilidades;
 
 /**
@@ -130,12 +132,15 @@ public class FXMLAdministracionColaboradoresController implements Initializable,
     private TabPane tpColaboradores;
     
     private ObservableList<Conductor> colaboradores;
+    
+    private Colaborador c;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        c = Sesion.getColaborador();
         configurarTablaColaboradores();
         cargarInformacionColaboradores();
         agregarListenersATabs();
@@ -212,9 +217,13 @@ public class FXMLAdministracionColaboradoresController implements Initializable,
                 break;
         }
         if (colaborador != null) {
-            boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", "¿Esta seguro de eliminar el colaborador?\nEsta accion no se puede revertir");
-            if (confirmarOperacion) {
-                eliminarColaborador(colaborador.getIdColaborador());
+            if(!Objects.equals(colaborador.getIdColaborador(), c.getIdColaborador())){
+                boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", "¿Esta seguro de eliminar el colaborador?\nEsta accion no se puede revertir");
+                if (confirmarOperacion) {
+                    eliminarColaborador(colaborador.getIdColaborador());
+                }
+            }else{
+                Utilidades.mostrarAlertaSimple("Problemas al eliminar", "No te puedes eliminar a ti mismo :(", Alert.AlertType.WARNING);
             }
         }else{
             Utilidades.mostrarAlertaSimple("Seleccione un colaborador", "Para eliminar un colaborador, debe seleccionar uno", Alert.AlertType.WARNING);

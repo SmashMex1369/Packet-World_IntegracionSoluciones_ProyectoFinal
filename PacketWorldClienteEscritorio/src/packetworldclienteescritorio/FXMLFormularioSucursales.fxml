@@ -42,9 +42,9 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cbColonia" layoutX="63.0" layoutY="426.0" prefHeight="44.0" prefWidth="257.0" />
-      <ComboBox fx:id="cbCiudad" layoutX="808.0" layoutY="325.0" prefHeight="44.0" prefWidth="257.0" />
-      <ComboBox fx:id="cbEstado" layoutX="436.0" layoutY="325.0" prefHeight="44.0" prefWidth="257.0" />
+      <ComboBox fx:id="cbColonia" disable="true" layoutX="63.0" layoutY="426.0" prefWidth="257.0" style="-fx-font-size: 21;" />
+      <ComboBox fx:id="cbCiudad" disable="true" layoutX="808.0" layoutY="325.0" prefWidth="257.0" style="-fx-font-size: 21;" />
+      <ComboBox fx:id="cbEstado" disable="true" layoutX="436.0" layoutY="325.0" prefWidth="257.0" style="-fx-font-size: 21;" />
       <Label layoutX="66.0" layoutY="392.0" text="Colonia">
          <font>
             <Font size="23.0" />
@@ -80,7 +80,7 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="tfCodigoPostal" layoutX="63.0" layoutY="325.0" prefHeight="44.0" prefWidth="257.0">
+      <TextField fx:id="tfCodigoPostal" layoutX="63.0" layoutY="325.0" onAction="#tfCodigoPostalEnter" prefHeight="44.0" prefWidth="257.0">
          <font>
             <Font size="20.0" />
          </font>
@@ -110,12 +110,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="945.0" layoutY="552.0" mnemonicParsing="false" onAction="#clicBtnCancelar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #000000; -fx-border-width: 3; -fx-border-insets: -1; -fx-background-color: #630505;" text="Cancelar" textFill="#e1e1e1">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnGuardar" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="768.0" layoutY="552.0" mnemonicParsing="false" onAction="#clicBtnGuardar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Guardar" textFill="#e1e1e1">
+      <Button fx:id="btnGuardar" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="873.0" layoutY="551.0" mnemonicParsing="false" onAction="#clicBtnGuardar" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-base: #03658c; -fx-border-color: #02354a; -fx-border-width: 3; -fx-border-insets: -1;" text="Guardar" textFill="#e1e1e1">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
