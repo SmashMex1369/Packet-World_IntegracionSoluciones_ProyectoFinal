@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.gson.Gson
 import com.koushikdutta.ion.Ion
 import de.hdodenhof.circleimageview.CircleImageView
+import uv.tc.packetworldclientemovil.R
 import uv.tc.packetworldclientemovil.poko.Conductor
 
 fun View.ajustarAInsets() {
@@ -42,6 +43,8 @@ private fun serealizarRespuestaFoto(json: String, activity : AppCompatActivity, 
                 val imgBytes = Base64.decode(conductor.fotoBase64, Base64.DEFAULT)
                 val imgBitMap = BitmapFactory.decodeByteArray(imgBytes, 0, imgBytes.size)
                 imgView.setImageBitmap(imgBitMap)
+            }else{
+                imgView.setImageResource(R.drawable.baseline_account_circle_24)
             }
         }
     }catch (e : Exception){

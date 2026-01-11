@@ -119,6 +119,8 @@ public class FXMLFormularioEditarColaboradoresController implements Initializabl
                 String stringBase64 = (String) respuesta.get(Constantes.KEY_FOTO);
                 if (stringBase64 != null && stringBase64.length() > 0) {
                     Utilidades.colocarImagen(stringBase64, imgvFotoPerfil, getClass());
+                }else{
+                    Utilidades.cargarImagenPorDefecto(imgvFotoPerfil, getClass());
                 }
             } else {
                 Utilidades.cargarImagenPorDefecto(imgvFotoPerfil, getClass());
