@@ -186,7 +186,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
                 tfNoLicencia.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
             }
         }
-        if(tfContraseña.getText()==null || tfContraseña.getText().trim().isEmpty()){
+        if(tfContraseña.getText()==null || tfContraseña.getText().trim().isEmpty() || tfContraseña.getText().trim().length()<8||tfContraseña.getText().trim().length()>20){
             camposValidos=false;
             tfContraseña.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
@@ -196,7 +196,8 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             "Campos incorrectos", 
             "Hay datos faltantes o no tienen el formato adecuado:\n" +
             "• CURP debe tener 18 caracteres en formato válido\n" +
-            "• Correo debe tener formato válido (ejemplo@dominio.com)", 
+            "• Correo debe tener formato válido (ejemplo@dominio.com)\n" +
+            "• Contraseña debe tener entre 8 a 20 caracteres", 
             Alert.AlertType.ERROR
         );
         }

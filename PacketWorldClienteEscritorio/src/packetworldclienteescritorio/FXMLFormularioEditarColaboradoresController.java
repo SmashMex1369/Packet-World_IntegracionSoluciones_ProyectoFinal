@@ -238,13 +238,20 @@ private boolean esEmailValido(String email) {
         if(cbSucursal.getSelectionModel().getSelectedIndex()== -1){
             camposValidos=false;
             cbSucursal.setStyle("-fx-border-color: #bf0b0b; -fx-font-size: 21; -fx-border-insets: -1");
-        }        
+        }   
+        if (tfContraseña.getText()!=null || !tfContraseña.getText().isEmpty()) {
+            if(tfContraseña.getText().trim().length()<8||tfContraseña.getText().trim().length()>20){
+                camposValidos = false;
+                tfContraseña.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
+            }
+        }
         if(!camposValidos){
             Utilidades.mostrarAlertaSimple(
             "Campos incorrectos", 
             "Hay datos faltantes o no tienen el formato adecuado:\n" +
             "• CURP debe tener 18 caracteres en formato válido\n" +
-            "• Correo debe tener formato válido (ejemplo@dominio.com)", 
+            "• Correo debe tener formato válido (ejemplo@dominio.com)\n" +
+            "• Contraseña debe tener entre 8 a 20 caracteres (Opcional)", 
             Alert.AlertType.ERROR
         );
         }

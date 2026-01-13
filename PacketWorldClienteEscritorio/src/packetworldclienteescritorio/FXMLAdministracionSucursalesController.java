@@ -102,7 +102,11 @@ public class FXMLAdministracionSucursalesController implements Initializable, IN
     private void clicIrEditarSucursal(ActionEvent event) {
         Sucursal sucursal = tvSucursales.getSelectionModel().getSelectedItem();
         if(sucursal != null){
-            irFormularioSucursal(sucursal);
+            if (sucursal.getEstatus()!=0) {
+                irFormularioSucursal(sucursal);
+            }else{
+                Utilidades.mostrarAlertaSimple("Imposible editar", "No puede editar una sucursal que ya esta dada de baja", Alert.AlertType.WARNING);
+            }
         }else{
             Utilidades.mostrarAlertaSimple("Seleccione una sucursal", "Para editar una sucursal debes seleccionar una de la tabla", Alert.AlertType.WARNING);
         }

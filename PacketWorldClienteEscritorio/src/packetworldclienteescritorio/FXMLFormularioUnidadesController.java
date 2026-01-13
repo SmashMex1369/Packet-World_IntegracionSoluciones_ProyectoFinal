@@ -190,7 +190,7 @@ public class FXMLFormularioUnidadesController implements Initializable {
             camposValidos=false;
             tfAnio.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }       
-        if(tfVIN.getText()==null || tfVIN.getText().isEmpty()){
+        if((tfVIN.getText()==null || tfVIN.getText().isEmpty())||(tfVIN.getText().trim().length()>17||tfVIN.getText().trim().length()<17)){
             camposValidos=false;
             tfVIN.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
         }
