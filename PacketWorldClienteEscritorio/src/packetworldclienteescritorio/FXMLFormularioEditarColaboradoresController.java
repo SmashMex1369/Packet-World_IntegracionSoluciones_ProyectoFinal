@@ -239,7 +239,7 @@ private boolean esEmailValido(String email) {
             camposValidos=false;
             cbSucursal.setStyle("-fx-border-color: #bf0b0b; -fx-font-size: 21; -fx-border-insets: -1");
         }   
-        if (tfContraseña.getText()!=null || !tfContraseña.getText().isEmpty()) {
+        if (tfContraseña.getText()!=null && !tfContraseña.getText().isEmpty()) {
             if(tfContraseña.getText().trim().length()<8||tfContraseña.getText().trim().length()>20){
                 camposValidos = false;
                 tfContraseña.setStyle("-fx-border-color: #bf0b0b; -fx-border-insets: -1");
